@@ -9,7 +9,7 @@ AnimatorState:
   m_PrefabAsset: {fileID: 0}
   m_Name: Walk
   m_Speed: 0.6
-  m_CycleOffset: 0.6
+  m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8007294403411937078}
   m_StateMachineBehaviours: []
@@ -35,8 +35,8 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Idle
-  m_Speed: 0.4
-  m_CycleOffset: 0.4
+  m_Speed: 0.5
+  m_CycleOffset: 0
   m_Transitions:
   - {fileID: 144816415600143564}
   m_StateMachineBehaviours: []
@@ -118,7 +118,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -2745648679084903332}
-    m_Position: {x: 300, y: 110, z: 0}
+    m_Position: {x: 300, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3469539910168249315}
     m_Position: {x: 300, y: 200, z: 0}
