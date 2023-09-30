@@ -3,6 +3,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Vector2 movement;
+    public static Player instance {get; private set;}
     private Animator animator;
     private Rigidbody2D Rigidbody;
     [Header("캐릭터 파츠")]
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         movement = Vector2.zero;
         animator = GetComponent<Animator>();
         Rigidbody = GetComponent<Rigidbody2D>();
@@ -25,7 +27,7 @@ public class Player : MonoBehaviour
         if(movement != Vector2.zero)
         {
             animator.SetBool("isWalk", true);
-            Rigidbody.MovePosition(Rigidbody.position + movement * 10 * Time.deltaTime);
+            Rigidbody.MovePosition(Camera.instance.MovePosition(Rigidbody.position + movement * 3 * 10 * Time.deltaTime, 0));
             Rigidbody.velocity = Vector2.zero;
             SetFlipX();
         }else
