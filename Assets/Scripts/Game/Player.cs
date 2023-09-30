@@ -18,6 +18,11 @@ public class Player : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        animator.runtimeAnimatorController = Game.instance.playerData.controller;
+    }
+
     private void Update()
     {
         movement = new Vector2(
@@ -27,7 +32,7 @@ public class Player : MonoBehaviour
         if(movement != Vector2.zero)
         {
             animator.SetBool("isWalk", true);
-            Rigidbody.MovePosition(Camera.instance.MovePosition(Rigidbody.position + movement * 3 * 10 * Time.deltaTime, 0));
+            Rigidbody.MovePosition(Camera.instance.MovePosition(Rigidbody.position + movement * Game.instance.playerData.stats.MoveSpeed * Time.deltaTime, 0));
             Rigidbody.velocity = Vector2.zero;
             SetFlipX();
         }else
