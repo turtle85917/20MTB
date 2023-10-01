@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45fcb7c160abce48abf77d6a2759723, type: 3}
+  m_Name: Headpin
+  m_EditorClassIdentifier: 
+  WeaponId: Headpin
+  logo: {fileID: 302606900, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}

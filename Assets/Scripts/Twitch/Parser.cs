@@ -9,7 +9,8 @@ public static class Parser
                 string nickname = ParseNickname(chunk[0]);
                 string channel = chunk[2].Substring(1);
                 string messageContent = chunk[3].Substring(1);
-                return new Chat(){
+                return new Chat()
+                {
                     nickname = nickname,
                     channel = channel,
                     message = messageContent
