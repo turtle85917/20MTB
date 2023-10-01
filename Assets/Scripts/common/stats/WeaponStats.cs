@@ -1,7 +1,4 @@
-using System;
-
-[Serializable]
-public class ItemStats
+public class WeaponStats
 {
     public int Power;
     public int Charging;

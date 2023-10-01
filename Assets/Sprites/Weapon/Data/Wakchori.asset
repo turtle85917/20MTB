@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b45fcb7c160abce48abf77d6a2759723, type: 3}
-  m_Name: DiaGum
+  m_Script: {fileID: 11500000, guid: f31882fd8b3cb5f4bb018cef43a79d26, type: 3}
+  m_Name: Wakchori
   m_EditorClassIdentifier: 
-  WeaponId: DiaGum
-  logo: {fileID: 694369025, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
+  WeaponId: Wakchori
+  logo: {fileID: 1957048752, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ public class Game : MonoBehaviour
 {
     public Character character;
     public PlayerData playerData;
+    public static List<Weapon> playerItems;
     public static Game instance {get; private set;}
     [SerializeField] private PlayerData[] players;
     [SerializeField] private EnemyData[] enemies;
@@ -17,7 +19,6 @@ public class Game : MonoBehaviour
     [SerializeField] private Slider HealthBar;
     [SerializeField] private TMP_Text HealthText;
     private int timer = 20 * 60; // 기본 20분
-    private readonly int maxTime = 20 * 60; // 2분
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class Game : MonoBehaviour
     {
         HeadImage.sprite = playerData.headImage;
         StartCoroutine(Timer());
+        // NOTE: 임시
         GameObject enemy = Instantiate(enemies[0].Prefab, Enemies.transform, false);
         enemy.name = "Enemy1";
         enemy.transform.position = new(0, 10, 0);

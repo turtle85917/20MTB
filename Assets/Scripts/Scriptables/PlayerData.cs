@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     public string playerName;
-    public ItemData defaultWeapon;
+    public string defaultWeapon;
     public Sprite headImage;
     public RuntimeAnimatorController controller;
     public Stats stats;

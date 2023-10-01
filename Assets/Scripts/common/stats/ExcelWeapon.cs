@@ -1,4 +1,4 @@
-public class ExcelItem
+public class ExcelWeapon
 {
     public string Type;
     public int Power;

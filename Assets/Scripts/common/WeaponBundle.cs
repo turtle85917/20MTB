@@ -1,10 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemBundle : MonoBehaviour
+public class WeaponBundle : MonoBehaviour
 {
-    public List<Item> assets;
-    [SerializeField] private ItemData[] itemDatas;
+    public static List<Weapon> assets;
+    [SerializeField] private WeaponData[] weaponDatas;
+
+    private void Awake()
+    {
+        assets = new(){};
+    }
 
     private void Start()
     {
@@ -12,11 +17,11 @@ public class ItemBundle : MonoBehaviour
         for(int i = 0; i < excelDatas.Count; i++)
         {
             var excelData = excelDatas[i];
-            Item item = new Item()
+            Weapon weapon = new Weapon()
             {
                 type = (string)excelData["Type"],
-                item = itemDatas[i],
-                stats = new ItemStats()
+                weapon = weaponDatas[i],
+                stats = new WeaponStats()
                 {
                     Power = (int)excelData["Power"],
                     Charging = (int)excelData["Charging"],
@@ -30,7 +35,7 @@ public class ItemBundle : MonoBehaviour
                     ProjectileCount = (int)TryGetNumValue(excelData["ProjectileCount"])
                 }
             };
-            assets.Add(item);
+            assets.Add(weapon);
         }
     }
 

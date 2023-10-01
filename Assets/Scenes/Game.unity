@@ -1531,14 +1531,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b03b718e75f0e3488afc6a31595e444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDatas:
+  weaponDatas:
   - {fileID: 11400000, guid: 6e7f63e74f95dc04c97b72036712384a, type: 2}
-  - {fileID: 11400000, guid: ceb5c8ae11bb8fd478961d671cf53516, type: 2}
-  - {fileID: 11400000, guid: bab6d21ecfd534445ae17412d9e86b89, type: 2}
-  - {fileID: 11400000, guid: 2bb02ccf0b1d0d348aae1b0f6278149d, type: 2}
-  - {fileID: 11400000, guid: c911555b5c7a5d14190d5b2794c06020, type: 2}
-  - {fileID: 11400000, guid: 6f3b397895e7ecd4d92c0d93ee9da80e, type: 2}
-  - {fileID: 11400000, guid: b5374b03c7f1f2d4991f3b09cc385338, type: 2}
+  - {fileID: 11400000, guid: d187996911bc3dd4a8cb97161e23ad18, type: 2}
+  - {fileID: 11400000, guid: 3b5d128da1d59e34792d9512f9f97d3a, type: 2}
+  - {fileID: 11400000, guid: c4c8210b42a2e2348a5dffea2e05cdf0, type: 2}
+  - {fileID: 11400000, guid: 77c7e19fd2e423041b4ce67b86909c9c, type: 2}
+  - {fileID: 11400000, guid: babbeafbf7abefb4f95920ccbe1e8696, type: 2}
+  - {fileID: 11400000, guid: 99cc1877b4622b445bc8f5993a29e6e7, type: 2}
 --- !u!1 &1224177660
 GameObject:
   m_ObjectHideFlags: 0
