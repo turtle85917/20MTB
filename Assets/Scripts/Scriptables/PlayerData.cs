@@ -5,6 +5,7 @@ public class PlayerData : ScriptableObject
 {
     public string playerName;
     public string defaultWeapon;
+    public Sprite headImage;
     public RuntimeAnimatorController controller;
     public Stats stats;
 }
