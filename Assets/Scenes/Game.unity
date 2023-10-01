@@ -1483,6 +1483,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 11400000, guid: 211c5ff8f02f5ea48a453c86f96cf0bf, type: 2}
   HeadImage: {fileID: 210327020}
+  TimerText: {fileID: 1351960660}
 --- !u!4 &1210831719
 Transform:
   m_ObjectHideFlags: 0
