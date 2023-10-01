@@ -1501,6 +1501,8 @@ MonoBehaviour:
   Enemies: {fileID: 1145575509}
   HeadImage: {fileID: 210327020}
   TimerText: {fileID: 1351960660}
+  HealthBar: {fileID: 995665493}
+  HealthText: {fileID: 220858073}
 --- !u!4 &1210831719
 Transform:
   m_ObjectHideFlags: 0

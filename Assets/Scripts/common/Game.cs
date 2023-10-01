@@ -14,6 +14,8 @@ public class Game : MonoBehaviour
     [SerializeField] private GameObject Enemies;
     [SerializeField] private Image HeadImage;
     [SerializeField] private TMP_Text TimerText;
+    [SerializeField] private Slider HealthBar;
+    [SerializeField] private TMP_Text HealthText;
     private int timer = 20 * 60; // 기본 20분
     private readonly int maxTime = 20 * 60; // 2분
 
@@ -36,6 +38,8 @@ public class Game : MonoBehaviour
     private void Update()
     {
         TimerText.text = TimeSpan.FromSeconds(timer).ToString(@"mm\:ss");
+        HealthBar.value = (float)Player.health / playerData.stats.MaxHealth;
+        HealthText.text = Player.health + " / " + playerData.stats.MaxHealth;
     }
 
     IEnumerator Timer()
