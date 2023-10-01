@@ -76,12 +76,20 @@ PrefabInstance:
       value: Panzee
       objectReference: {fileID: 0}
     - target: {fileID: 7436819865670068624, guid: 2629699363907f140ae8cde127294155, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7436819865670068624, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 128442934, guid: 900df3cc451d30e4ba18fe3dc930fdff, type: 3}
     - target: {fileID: 7436819865670068624, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090658814711050018, guid: 2629699363907f140ae8cde127294155, type: 3}
+      propertyPath: m_FlipX
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8090658814711050018, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_Sprite

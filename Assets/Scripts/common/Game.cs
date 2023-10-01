@@ -29,6 +29,7 @@ public class Game : MonoBehaviour
         StartCoroutine(Timer());
         GameObject enemy = Instantiate(enemies[0].Prefab, Enemies.transform, false);
         enemy.name = "Enemy1";
+        enemy.transform.position = new(0, 10, 0);
         enemy.GetComponent<Enemy>().enemy = enemies[0];
     }
 

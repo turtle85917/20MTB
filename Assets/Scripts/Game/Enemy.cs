@@ -25,6 +25,10 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         LookAtPlayer();
+        bodySprite.flipX = transform.position.x > Player.instance.transform.position.x;
+        animator.SetBool("isWalk", true);
+        Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, Player.instance.transform.position, enemy.stats.MoveSpeed * Time.deltaTime));
+        Rigidbody.velocity = Vector2.zero;
     }
 
     private void LookAtPlayer()
