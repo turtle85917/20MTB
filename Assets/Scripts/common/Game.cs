@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
     public PlayerData playerData;
     public static Game instance {get; private set;}
     [SerializeField] private PlayerData[] players;
+    [SerializeField] private EnemyData[] enemies;
     [SerializeField] private Image HeadImage;
 
     private void Awake()
