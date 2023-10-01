@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -29,6 +30,15 @@ public class Enemy : MonoBehaviour
         animator.SetBool("isWalk", true);
         Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, Player.instance.transform.position, enemy.stats.MoveSpeed * Time.deltaTime));
         Rigidbody.velocity = Vector2.zero;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            Player.health -= 2;
+            Player.instance.Knockback(gameObject);
+        }
     }
 
     private void LookAtPlayer()

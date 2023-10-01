@@ -1,14 +1,24 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public Vector2 movement;
+    public static int health;
     public static Player instance {get; private set;}
     private Animator animator;
     private Rigidbody2D Rigidbody;
     [Header("캐릭터 파츠")]
     [SerializeField] private SpriteRenderer headSprite;
     [SerializeField] private SpriteRenderer bodySprite;
+    private int forceAdd = 20;
+
+    public void Knockback(GameObject target)
+    {
+        animator.SetBool("isWalk", false);
+        animator.SetBool("isKnockback", true);
+        StartCoroutine(Knockbacking(target));
+    }
 
     private void Awake()
     {
@@ -20,6 +30,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        health = Game.instance.playerData.stats.MaxHealth;
         animator.runtimeAnimatorController = Game.instance.playerData.controller;
     }
 
@@ -45,5 +56,14 @@ public class Player : MonoBehaviour
     {
         headSprite.flipX = movement.x < 0;
         bodySprite.flipX = movement.x < 0;
+    }
+
+    IEnumerator Knockbacking(GameObject target)
+    {
+        Vector2 direction = transform.position - target.transform.position;
+        Rigidbody.AddForce(direction.normalized * forceAdd, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.2f);
+        Rigidbody.velocity = Vector3.zero;
+        animator.SetBool("isKnockback", false);
     }
 }
