@@ -6,6 +6,11 @@ public class WeaponBundle : MonoBehaviour
     public static List<Weapon> assets;
     [SerializeField] private WeaponData[] weaponDatas;
 
+    public static Weapon GetWeapon(string weaponId)
+    {
+        return assets.Find(item => item.weapon.WeaponId == weaponId);
+    }
+
     private void Awake()
     {
         assets = new(){};

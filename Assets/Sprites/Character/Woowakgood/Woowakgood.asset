@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Woowakgood
   m_EditorClassIdentifier: 
   playerName: "\uC6B0\uC641\uAD73"
-  defaultWeapon: {fileID: 11400000, guid: 6e7f63e74f95dc04c97b72036712384a, type: 2}
+  defaultWeapon: Wakchori
   headImage: {fileID: 1822158963, guid: ced04215445d9eb4ba1804dbcfd7badc, type: 3}
   controller: {fileID: 9100000, guid: ef14608790c55bb4688e12d711709e93, type: 2}
   stats:

@@ -9,7 +9,7 @@ public class Game : MonoBehaviour
 {
     public Character character;
     public PlayerData playerData;
-    public static List<Weapon> playerItems;
+    public static List<Weapon> playerWeapons;
     public static Game instance {get; private set;}
     [SerializeField] private PlayerData[] players;
     [SerializeField] private EnemyData[] enemies;
@@ -18,17 +18,36 @@ public class Game : MonoBehaviour
     [SerializeField] private TMP_Text TimerText;
     [SerializeField] private Slider HealthBar;
     [SerializeField] private TMP_Text HealthText;
+    [SerializeField] private GameObject[] WeaponSlots;
+    [SerializeField] private GameObject WeaponSlotPanel;
     private int timer = 20 * 60; // 기본 20분
+
+    public void AddWeapon(string weaponId)
+    {
+        Weapon weapon = WeaponBundle.GetWeapon(weaponId);
+        playerWeapons.Add(weapon);
+        foreach(GameObject WeaponSlot in WeaponSlots)
+        {
+            if(WeaponSlot.transform.childCount == 0)
+            {
+                GameObject weaponSlot = Instantiate(WeaponSlotPanel, WeaponSlot.transform, false);
+                weaponSlot.GetComponent<Image>().sprite = weapon.weapon.logo;
+                break;
+            }
+        }
+    }
 
     private void Awake()
     {
         instance = this;
         playerData = players[(int)character];
+        playerWeapons = new(){};
     }
 
     private void Start()
     {
         HeadImage.sprite = playerData.headImage;
+        AddWeapon(playerData.defaultWeapon);
         StartCoroutine(Timer());
         // NOTE: 임시
         GameObject enemy = Instantiate(enemies[0].Prefab, Enemies.transform, false);

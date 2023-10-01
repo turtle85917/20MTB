@@ -1504,6 +1504,14 @@ MonoBehaviour:
   TimerText: {fileID: 1351960660}
   HealthBar: {fileID: 995665493}
   HealthText: {fileID: 220858073}
+  WeaponSlots:
+  - {fileID: 65024565}
+  - {fileID: 943050535}
+  - {fileID: 1623244566}
+  - {fileID: 114186991}
+  - {fileID: 1800012944}
+  - {fileID: 1822855544}
+  WeaponSlotPanel: {fileID: 2658271339453779870, guid: d1632b7cb80f189429c626de7f562ab3, type: 3}
 --- !u!4 &1210831719
 Transform:
   m_ObjectHideFlags: 0
@@ -2321,7 +2329,7 @@ GameObject:
   - component: {fileID: 2005731717}
   - component: {fileID: 2005731718}
   m_Layer: 5
-  m_Name: Items
+  m_Name: Weapons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
