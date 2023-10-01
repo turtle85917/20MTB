@@ -11,6 +11,7 @@ public class Game : MonoBehaviour
     public static Game instance {get; private set;}
     [SerializeField] private PlayerData[] players;
     [SerializeField] private EnemyData[] enemies;
+    [SerializeField] private GameObject Enemies;
     [SerializeField] private Image HeadImage;
     [SerializeField] private TMP_Text TimerText;
     private int timer = 20 * 60; // 기본 20분
@@ -26,6 +27,9 @@ public class Game : MonoBehaviour
     {
         HeadImage.sprite = playerData.headImage;
         StartCoroutine(Timer());
+        GameObject enemy = Instantiate(enemies[0].Prefab, Enemies.transform, false);
+        enemy.name = "Enemy1";
+        enemy.GetComponent<Enemy>().enemy = enemies[0];
     }
 
     private void Update()

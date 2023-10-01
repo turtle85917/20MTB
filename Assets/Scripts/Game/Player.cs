@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
         if(movement != Vector2.zero)
         {
             animator.SetBool("isWalk", true);
-            Rigidbody.MovePosition(Camera.instance.MovePosition(Rigidbody.position + movement * Game.instance.playerData.stats.MoveSpeed * Time.deltaTime, 0));
+            Rigidbody.MovePosition(Camera.instance.MovePosition(Rigidbody.position + movement * Game.instance.playerData.stats.MoveSpeed * Time.deltaTime, transform.position.z));
             Rigidbody.velocity = Vector2.zero;
             SetFlipX();
         }else
