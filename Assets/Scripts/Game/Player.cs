@@ -60,8 +60,8 @@ public class Player : MonoBehaviour
 
     IEnumerator Knockbacking(GameObject target)
     {
-        Vector2 direction = transform.position - target.transform.position;
-        Rigidbody.AddForce(direction.normalized * forceAdd, ForceMode2D.Impulse);
+        Vector2 direction = (transform.position - target.transform.position).normalized;
+        Rigidbody.AddForce(direction * forceAdd, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.2f);
         Rigidbody.velocity = Vector3.zero;
         animator.SetBool("isKnockback", false);
