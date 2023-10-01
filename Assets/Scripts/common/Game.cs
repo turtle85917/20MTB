@@ -31,6 +31,7 @@ public class Game : MonoBehaviour
             if(WeaponSlot.transform.childCount == 0)
             {
                 GameObject weaponSlot = Instantiate(WeaponSlotPanel, WeaponSlot.transform, false);
+                weaponSlot.name = "Logo";
                 weaponSlot.GetComponent<Image>().sprite = weapon.weapon.logo;
                 break;
             }

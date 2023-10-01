@@ -65,5 +65,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         Rigidbody.velocity = Vector3.zero;
         animator.SetBool("isKnockback", false);
+        Rigidbody.MovePosition(Camera.instance.MovePosition(Rigidbody.position, transform.position.z));
     }
 }

@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour
         {
             Player.health -= 2;
             Player.instance.Knockback(gameObject);
+            Damage.instance.WriteDamage(other.gameObject, 2);
         }
     }
 

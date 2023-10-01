@@ -14,10 +14,6 @@ public class WeaponBundle : MonoBehaviour
     private void Awake()
     {
         assets = new(){};
-    }
-
-    private void Start()
-    {
         var excelDatas = CSVReader.Read("Weapons");
         for(int i = 0; i < excelDatas.Count; i++)
         {
