@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponId: DiaGum
   logo: {fileID: 694369025, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
+  event_:
+    m_PersistentCalls:
+      m_Calls: []

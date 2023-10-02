@@ -25,9 +25,10 @@ public class WeaponBundle : MonoBehaviour
                 stats = new WeaponStats()
                 {
                     Power = (int)excelData["Power"],
-                    Charging = (int)excelData["Charging"],
+                    Cooldown = (int)excelData["Cooldown"],
                     Through = (int)excelData["Through"],
                     DecreasePower = (int)excelData["DecreasePower"],
+                    Life = (int)excelData["Life"],
                     CriticalHit = (float)excelData["CriticalHit"],
                     CriticalDamage = (int)excelData["CriticalDamage"],
                     ProjectileName = (string)excelData["ProjectileName"],

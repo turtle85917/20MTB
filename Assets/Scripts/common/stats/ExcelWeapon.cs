@@ -2,9 +2,10 @@ public class ExcelWeapon
 {
     public string Type;
     public int Power;
-    public int Charging;
+    public int Cooldown;
     public int Through;
     public int DecreasePower;
+    public int Life;
     public float CriticalHit;
     public int CriticalDamage;
     public string ProjectileName;
