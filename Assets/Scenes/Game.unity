@@ -1626,7 +1626,6 @@ MonoBehaviour:
   Enemies: {fileID: 1145575509}
   enemies:
   - {fileID: 11400000, guid: 211c5ff8f02f5ea48a453c86f96cf0bf, type: 2}
-  enemyPools: []
 --- !u!1 &1224177660
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,5 +18,5 @@ MonoBehaviour:
   controller: {fileID: 9100000, guid: ef14608790c55bb4688e12d711709e93, type: 2}
   stats:
     MaxHealth: 20
-    Power: 13
+    Power: 15
     MoveSpeed: 15

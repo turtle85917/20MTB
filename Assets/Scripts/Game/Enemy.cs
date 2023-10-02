@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private SpriteRenderer headSprite;
     [SerializeField] private SpriteRenderer bodySprite;
     private bool knockbacking;
+    private bool dying;
     private int forceAdd = 20;
 
     public void Knockback(GameObject target)
@@ -23,6 +24,11 @@ public class Enemy : MonoBehaviour
         StartCoroutine(Knockbacking(target));
     }
 
+    public void OnDie()
+    {
+        gameObject.SetActive(false);
+    }
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -31,11 +37,21 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        LookAtPlayer();
-        bodySprite.flipX = transform.position.x > Player.instance.transform.position.x;
-        animator.SetBool("isWalk", true);
-        if(!knockbacking)
+        if(!knockbacking || !dying)
+        {
+            LookAtPlayer();
+            bodySprite.flipX = transform.position.x > Player.instance.transform.position.x;
+            animator.SetBool("isWalk", true);
             Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, Player.instance.transform.position, enemy.stats.MoveSpeed * Time.deltaTime));
+        }
+        if(EnemyManager.instance.GetEnemy(gameObject).health <= 0 && !dying)
+        {
+            dying = true;
+            headSprite.flipX = false;
+            bodySprite.flipX = false;
+            transform.Rotate(transform.position.x > Player.instance.transform.position.x ? new Vector3(0, 180, 0) : Vector3.zero);
+            animator.SetTrigger("isDie");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
