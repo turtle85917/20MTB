@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
             ? playerPosition - transform.position
             : transform.position - playerPosition
         ;
-        float angle = (float)(Math.Atan2(distance.y, distance.x) * 180 / Math.PI);
+        float angle = (float)(Math.Atan2(distance.y, distance.x) * Mathf.Rad2Deg);
         headSprite.flipX = transform.position.x > playerPosition.x;
         if(Math.Abs(angle) < 80)
             Head.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);

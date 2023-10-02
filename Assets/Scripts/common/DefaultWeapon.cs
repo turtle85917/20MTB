@@ -24,11 +24,13 @@ public class DefaultWeapon : MonoBehaviour
         while(true)
         {
             yield return wait;
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 distance = Player.instance.transform.position - (Vector3)mousePosition;
             GameObject blow = Instantiate(Blow, PlayerEffects.transform, false);
             blow.name = "Blow";
             Blow script = blow.GetComponent<Blow>();
             script.stats = weapon.stats;
-            script.movement = Player.instance.lastMovement;
+            script.movement = distance.normalized * -1;
             script.Reset();
             yield return new WaitForSeconds(weapon.stats.Life);
             blow.SetActive(false);

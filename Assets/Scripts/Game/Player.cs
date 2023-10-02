@@ -46,13 +46,12 @@ public class Player : MonoBehaviour
         if(movement != Vector2.zero)
         {
             animator.SetBool("isWalk", true);
-            Rigidbody.MovePosition(Camera.instance.MovePosition(Rigidbody.position + movement * Game.instance.playerData.stats.MoveSpeed * Time.deltaTime, transform.position.z));
+            Rigidbody.MovePosition(FollowCamera.instance.MovePosition(Rigidbody.position + movement * Game.instance.playerData.stats.MoveSpeed * Time.deltaTime, transform.position.z));
             Rigidbody.velocity = Vector2.zero;
             SetFlipX();
         }else
         {
             animator.SetBool("isWalk", false);
-            Rigidbody.MovePosition(Camera.instance.MovePosition(Rigidbody.position, transform.position.z));
         }
     }
 
@@ -69,5 +68,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         Rigidbody.velocity = Vector3.zero;
         animator.SetBool("isKnockback", false);
+        Rigidbody.MovePosition(FollowCamera.instance.MovePosition(Rigidbody.position, transform.position.z));
     }
 }

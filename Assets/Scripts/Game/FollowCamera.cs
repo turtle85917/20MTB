@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-public class Camera : MonoBehaviour
+public class FollowCamera : MonoBehaviour
 {
-    public static Camera instance {get; private set;}
+    public static FollowCamera instance {get; private set;}
     [SerializeField] private Vector2 maxPoint;
     [SerializeField] private Vector2 minPoint;
 
