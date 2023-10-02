@@ -28,7 +28,7 @@ public class DefaultWeapon : MonoBehaviour
             blow.name = "Blow";
             Blow script = blow.GetComponent<Blow>();
             script.stats = weapon.stats;
-            script.movement = Player.instance.movement;
+            script.movement = Player.instance.lastMovement;
             script.Reset();
             yield return new WaitForSeconds(weapon.stats.Life);
             blow.SetActive(false);

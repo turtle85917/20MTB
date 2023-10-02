@@ -27,4 +27,13 @@ public class Blow : MonoBehaviour
             Rigidbody.AddForce(movement * 30);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Enemy"))
+        {
+            gameObject.SetActive(false);
+            other.GetComponent<Enemy>().Knockback(Player.instance.gameObject);
+        }
+    }
 }

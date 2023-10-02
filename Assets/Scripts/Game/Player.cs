@@ -4,6 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Vector2 movement;
+    public Vector2 lastMovement;
     public static int health;
     public static Player instance {get; private set;}
     private Animator animator;
@@ -41,6 +42,8 @@ public class Player : MonoBehaviour
             Input.GetAxisRaw("Vertical")
         );
         if(movement != Vector2.zero)
+            lastMovement = movement;
+        if(movement != Vector2.zero)
         {
             animator.SetBool("isWalk", true);
             Rigidbody.MovePosition(Camera.instance.MovePosition(Rigidbody.position + movement * Game.instance.playerData.stats.MoveSpeed * Time.deltaTime, transform.position.z));
@@ -49,6 +52,7 @@ public class Player : MonoBehaviour
         }else
         {
             animator.SetBool("isWalk", false);
+            Rigidbody.MovePosition(Camera.instance.MovePosition(Rigidbody.position, transform.position.z));
         }
     }
 
@@ -65,6 +69,5 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         Rigidbody.velocity = Vector3.zero;
         animator.SetBool("isKnockback", false);
-        Rigidbody.MovePosition(Camera.instance.MovePosition(Rigidbody.position, transform.position.z));
     }
 }

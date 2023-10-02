@@ -11,6 +11,17 @@ public class Enemy : MonoBehaviour
     [Header("캐릭터 파츠")]
     [SerializeField] private SpriteRenderer headSprite;
     [SerializeField] private SpriteRenderer bodySprite;
+    private bool knockbacking;
+    private int forceAdd = 20;
+
+    public void Knockback(GameObject target)
+    {
+        knockbacking = true;
+        animator.SetBool("isWalk", false);
+        animator.SetBool("isKnockback", true);
+        Rigidbody.velocity = Vector2.zero;
+        StartCoroutine(Knockbacking(target));
+    }
 
     private void Awake()
     {
@@ -18,18 +29,13 @@ public class Enemy : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
-    {
-        animator.runtimeAnimatorController = enemy.controller;
-    }
-
     private void Update()
     {
         LookAtPlayer();
         bodySprite.flipX = transform.position.x > Player.instance.transform.position.x;
         animator.SetBool("isWalk", true);
-        Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, Player.instance.transform.position, enemy.stats.MoveSpeed * Time.deltaTime));
-        Rigidbody.velocity = Vector2.zero;
+        if(!knockbacking)
+            Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, Player.instance.transform.position, enemy.stats.MoveSpeed * Time.deltaTime));
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -55,5 +61,15 @@ public class Enemy : MonoBehaviour
             Head.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         else
             Head.transform.rotation = Quaternion.identity;
+    }
+
+    IEnumerator Knockbacking(GameObject target)
+    {
+        Vector2 direction = (transform.position - target.transform.position).normalized;
+        Rigidbody.AddForce(direction * forceAdd, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.2f);
+        knockbacking = false;
+        Rigidbody.velocity = Vector3.zero;
+        animator.SetBool("isKnockback", false);
     }
 }

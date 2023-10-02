@@ -5,6 +5,5 @@ public class EnemyData : ScriptableObject
 {
     public string enemyId;
     public GameObject Prefab;
-    public RuntimeAnimatorController controller;
     public Stats stats;
 }

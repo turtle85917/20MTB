@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyId: Panzee
   Prefab: {fileID: 9127897591107940937, guid: f16ea47333006e949a634f8f08a68a23, type: 3}
-  controller: {fileID: 9100000, guid: b4e5354f2e8cc4b4198c4c0af57a28c0, type: 2}
   stats:
     MaxHealth: 25
     Power: 8
-    MoveSpeed: 12
+    MoveSpeed: 7
