@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [Header("캐릭터 파츠")]
     [SerializeField] private SpriteRenderer headSprite;
     [SerializeField] private SpriteRenderer bodySprite;
+    private EnemyPool enemyPool;
     private bool knockbacking;
     private bool dying;
     private int forceAdd = 20;
@@ -27,6 +28,7 @@ public class Enemy : MonoBehaviour
     public void OnDie()
     {
         gameObject.SetActive(false);
+        EnemyManager.instance.RemoveEnemy(enemyPool);
     }
 
     private void Awake()
@@ -37,15 +39,17 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if(!knockbacking || !dying)
+        enemyPool = EnemyManager.instance.GetEnemy(gameObject);
+        if(!(knockbacking || dying))
         {
             LookAtPlayer();
             bodySprite.flipX = transform.position.x > Player.instance.transform.position.x;
             animator.SetBool("isWalk", true);
             Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, Player.instance.transform.position, enemy.stats.MoveSpeed * Time.deltaTime));
         }
-        if(EnemyManager.instance.GetEnemy(gameObject).health <= 0 && !dying)
+        if(enemyPool.health <= 0 && !dying)
         {
+            ObjectPool.SpawnExp(transform);
             dying = true;
             headSprite.flipX = false;
             bodySprite.flipX = false;

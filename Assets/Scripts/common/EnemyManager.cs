@@ -28,6 +28,11 @@ public class EnemyManager : MonoBehaviour
         return enemyPools.Find(item => item.target.Equals(Object));
     }
 
+    public void RemoveEnemy(EnemyPool pool)
+    {
+        enemyPools.Remove(pool);
+    }
+
     private void Awake()
     {
         instance = this;

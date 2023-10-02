@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class ObjectPool
 {
-    public static GameObject Get(GameObject Parent, Func<GameObject> CreateFunc, Action<GameObject> ProcessChild = null)
+    public static GameObject Get(GameObject Parent, Func<GameObject> CreateFunc)
     {
         for(int i = 0; i < Parent.transform.childCount; i++)
         {
@@ -11,11 +11,17 @@ public static class ObjectPool
             if(!child.activeSelf)
             {
                 child.SetActive(true);
-                if(ProcessChild != null)
-                    ProcessChild(child);
                 return child;
             }
         }
         return CreateFunc();
+    }
+
+    public static GameObject SpawnExp(Transform target)
+    {
+        GameObject exp = UnityEngine.Object.Instantiate(Game.instance.Exp, Game.instance.PoolManager.transform, false);
+        exp.name = "Exp";
+        exp.transform.position = target.position;
+        return exp;
     }
 }

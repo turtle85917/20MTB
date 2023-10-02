@@ -9,6 +9,8 @@ public class Game : MonoBehaviour
 {
     public Character character;
     public PlayerData playerData;
+    public GameObject PoolManager;
+    public GameObject Exp;
     public static List<Weapon> playerWeapons;
     public static Game instance {get; private set;}
     [SerializeField] private PlayerData[] players;

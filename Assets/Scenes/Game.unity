@@ -1548,6 +1548,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: 0
   playerData: {fileID: 0}
+  PoolManager: {fileID: 2039443999}
+  Exp: {fileID: 6774499916034219985, guid: 86e418ff4e317694da5bad3a7514086b, type: 3}
   players:
   - {fileID: 11400000, guid: 439513c4e4f6bd94d93ea41b2bd8fe9e, type: 2}
   HeadImage: {fileID: 210327020}
@@ -1609,7 +1611,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0808731ea55bf5444992eb261c53ec4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerEffects: {fileID: 2039443999}
   Blow: {fileID: 4021328352662059622, guid: b672a3c600916854fb8618f997b906cf, type: 3}
 --- !u!114 &1210831722
 MonoBehaviour:
@@ -2568,7 +2569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2039444000}
   m_Layer: 0
-  m_Name: Effects
+  m_Name: PoolManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class DefaultWeapon : MonoBehaviour
 {
-    [SerializeField] private GameObject PlayerEffects;
     [SerializeField] private GameObject Blow;
     private Weapon weapon;
 
@@ -27,8 +26,8 @@ public class DefaultWeapon : MonoBehaviour
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 distance = Player.instance.transform.position - (Vector3)mousePosition;
             GameObject blow = ObjectPool.Get(
-                PlayerEffects,
-                () => Instantiate(Blow, PlayerEffects.transform, false)
+                Game.instance.PoolManager,
+                () => Instantiate(Blow, Game.instance.PoolManager.transform, false)
             );
             blow.name = "Blow";
             Blow script = blow.GetComponent<Blow>();
