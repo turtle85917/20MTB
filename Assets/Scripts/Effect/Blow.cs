@@ -32,8 +32,12 @@ public class Blow : MonoBehaviour
     {
         if(other.CompareTag("Enemy"))
         {
-            gameObject.SetActive(false);
             other.GetComponent<Enemy>().Knockback(Player.instance.gameObject);
+            var enemy = EnemyManager.instance.GetEnemy(other.gameObject);
+            int deal = stats.Power + (Game.instance.playerData.stats.Power / stats.Power);
+            enemy.health -= deal;
+            gameObject.SetActive(false);
+            Damage.instance.WriteDamage(other.gameObject, deal);
         }
     }
 }

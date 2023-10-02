@@ -18,8 +18,14 @@ public class EnemyManager : MonoBehaviour
         enemy.GetComponent<Enemy>().enemy = enemyData;
         enemyPools.Add(new EnemyPool(){
             target = enemy,
+            health = enemyData.stats.MaxHealth,
             data = enemyData
         });
+    }
+
+    public EnemyPool GetEnemy(GameObject Object)
+    {
+        return enemyPools.Find(item => item.target.Equals(Object));
     }
 
     private void Awake()

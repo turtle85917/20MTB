@@ -26,7 +26,10 @@ public class DefaultWeapon : MonoBehaviour
             yield return wait;
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 distance = Player.instance.transform.position - (Vector3)mousePosition;
-            GameObject blow = Instantiate(Blow, PlayerEffects.transform, false);
+            GameObject blow = ObjectPool.Get(
+                PlayerEffects,
+                () => Instantiate(Blow, PlayerEffects.transform, false)
+            );
             blow.name = "Blow";
             Blow script = blow.GetComponent<Blow>();
             script.stats = weapon.stats;
