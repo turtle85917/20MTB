@@ -12,8 +12,6 @@ public class Game : MonoBehaviour
     public static List<Weapon> playerWeapons;
     public static Game instance {get; private set;}
     [SerializeField] private PlayerData[] players;
-    [SerializeField] private EnemyData[] enemies;
-    [SerializeField] private GameObject Enemies;
     [SerializeField] private Image HeadImage;
     [SerializeField] private TMP_Text TimerText;
     [SerializeField] private Slider HealthBar;
@@ -50,11 +48,11 @@ public class Game : MonoBehaviour
         HeadImage.sprite = playerData.headImage;
         AddWeapon(playerData.defaultWeapon);
         StartCoroutine(Timer());
-        // NOTE: 임시
-        GameObject enemy = Instantiate(enemies[0].Prefab, Enemies.transform, false);
-        enemy.name = "Enemy1";
-        enemy.transform.position = new(0, 10, 0);
-        enemy.GetComponent<Enemy>().enemy = enemies[0];
+        EnemyManager.instance.NewEnemy("Panzee");
+        EnemyManager.instance.NewEnemy("Panzee");
+        EnemyManager.instance.NewEnemy("Panzee");
+        EnemyManager.instance.NewEnemy("Panzee");
+        EnemyManager.instance.NewEnemy("Panzee");
     }
 
     private void Update()

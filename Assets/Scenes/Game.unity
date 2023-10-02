@@ -1368,6 +1368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {x: 0, y: 0}
+  lastMovement: {x: 0, y: 0}
   headSprite: {fileID: 685697177}
   bodySprite: {fileID: 522529760}
 --- !u!50 &1062170211
@@ -1524,6 +1525,7 @@ GameObject:
   - component: {fileID: 1210831719}
   - component: {fileID: 1210831718}
   - component: {fileID: 1210831720}
+  - component: {fileID: 1210831722}
   - component: {fileID: 1210831721}
   m_Layer: 0
   m_Name: Game
@@ -1548,9 +1550,6 @@ MonoBehaviour:
   playerData: {fileID: 0}
   players:
   - {fileID: 11400000, guid: 439513c4e4f6bd94d93ea41b2bd8fe9e, type: 2}
-  enemies:
-  - {fileID: 11400000, guid: 211c5ff8f02f5ea48a453c86f96cf0bf, type: 2}
-  Enemies: {fileID: 1145575509}
   HeadImage: {fileID: 210327020}
   TimerText: {fileID: 1351960660}
   HealthBar: {fileID: 995665493}
@@ -1612,6 +1611,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerEffects: {fileID: 2039443999}
   Blow: {fileID: 4021328352662059622, guid: b672a3c600916854fb8618f997b906cf, type: 3}
+--- !u!114 &1210831722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210831717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53ee7232cd3b9c641880ff03b625d95d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemies: {fileID: 1145575509}
+  enemies:
+  - {fileID: 11400000, guid: 211c5ff8f02f5ea48a453c86f96cf0bf, type: 2}
 --- !u!1 &1224177660
 GameObject:
   m_ObjectHideFlags: 0
