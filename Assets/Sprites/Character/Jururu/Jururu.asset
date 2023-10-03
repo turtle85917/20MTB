@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc5026286f1f01499003fb138ccefec, type: 3}
+  m_Name: Jururu
+  m_EditorClassIdentifier: 
+  playerName: "\uC8FC\uB974\uB974"
+  defaultWeapon: StampPlump
+  headImage: {fileID: -2145882027, guid: 2d755fd08d0c1d6439cb5825af73d740, type: 3}
+  controller: {fileID: 9100000, guid: 8ce04c61eabc0bb4a9b54e389691958f, type: 2}
+  stats:
+    MaxHealth: 20
+    Power: 13
+    MoveSpeed: 14
