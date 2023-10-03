@@ -88,7 +88,7 @@ public class DefaultWeapon : MonoBehaviour
                 enemy = enemy.OrderBy(item => Vector3.Distance(item.transform.position, Player.instance.transform.position)).ToList();
                 for(int i = 0; i < weapon.stats.Through; i++)
                 {
-                    if(enemy.Count < i) break; // BUG: ...
+                    if(enemy.Count <= i) break;
                     EnemyPool enemyPool = EnemyManager.instance.GetEnemy(enemy[i]);
                     int deal = Game.instance.GetDamage(weapon.stats.Power) - i * weapon.stats.DecreasePower;
                     enemyPool.health -= deal;
