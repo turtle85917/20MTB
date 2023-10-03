@@ -16,7 +16,7 @@ public class DamageText : MonoBehaviour
         StartCoroutine(Hide());
     }
 
-    IEnumerator Hide()
+    private IEnumerator Hide()
     {
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);

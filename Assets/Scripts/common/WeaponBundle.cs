@@ -33,7 +33,7 @@ public class WeaponBundle : MonoBehaviour
                     CriticalDamage = (int)excelData["CriticalDamage"],
                     ProjectileName = (string)excelData["ProjectileName"],
                     ProjectileSize = (int)TryGetNumValue(excelData["ProjectileSize"]),
-                    ProjectileSpeed = float.Parse(TryGetNumValue(excelData["ProjectileSpeed"]).ToString()),
+                    ProjectileSpeed = (int)TryGetNumValue(excelData["ProjectileSpeed"]),
                     ProjectileCount = (int)TryGetNumValue(excelData["ProjectileCount"])
                 }
             };

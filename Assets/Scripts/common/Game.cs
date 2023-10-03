@@ -68,7 +68,7 @@ public class Game : MonoBehaviour
         LevelText.text = "Lv " + Player.level;
     }
 
-    IEnumerator Timer()
+    private IEnumerator Timer()
     {
         while(timer > 0)
         {

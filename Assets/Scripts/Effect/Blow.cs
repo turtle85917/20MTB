@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class Blow : MonoBehaviour
 {
-    public WeaponStats stats;
-    public Vector2 movement;
+    private WeaponStats stats;
+    private Vector2 movement;
     private Rigidbody2D Rigidbody;
     private SpriteRenderer spriteRenderer;
 
-    public void Reset()
+    public void Reset(WeaponStats statsVal, Vector2 movementVal)
     {
+        stats = statsVal;
+        movement = movementVal;
         Rigidbody.velocity = Vector2.zero;
         spriteRenderer.flipX = movement.x < 0;
         transform.localPosition = Player.instance.transform.position;

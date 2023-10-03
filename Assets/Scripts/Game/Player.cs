@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
         bodySprite.flipX = movement.x < 0;
     }
 
-    IEnumerator Knockbacking(GameObject target)
+    private IEnumerator Knockbacking(GameObject target)
     {
         Vector2 direction = (transform.position - target.transform.position).normalized;
         Rigidbody.AddForce(direction * forceAdd, ForceMode2D.Impulse);

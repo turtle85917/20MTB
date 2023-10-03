@@ -9,6 +9,6 @@ public class WeaponStats
     public int CriticalDamage;
     public string ProjectileName;
     public int ProjectileSize;
-    public float ProjectileSpeed;
+    public int ProjectileSpeed;
     public int ProjectileCount;
 }

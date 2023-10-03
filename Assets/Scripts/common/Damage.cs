@@ -10,6 +10,7 @@ public class Damage : MonoBehaviour
     {
         GameObject text = ObjectPool.Get(
             gameObject,
+            "Text",
             () => Instantiate(Text, transform, false)
         );
         Vector3 targetPosition = new Vector3(target.transform.position.x, target.transform.position.y, 0);

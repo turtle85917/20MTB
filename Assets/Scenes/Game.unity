@@ -2691,6 +2691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Blow: {fileID: 4021328352662059622, guid: b672a3c600916854fb8618f997b906cf, type: 3}
+  Star: {fileID: 8843331417007882623, guid: e84f20940bb7f414aaf10c62cb136a84, type: 3}
 --- !u!114 &1210831722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3417,7 +3418,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 707863006}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
