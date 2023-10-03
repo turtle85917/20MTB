@@ -9,6 +9,7 @@ public class DefaultWeapon : MonoBehaviour
     [SerializeField] private GameObject Blow;
     [SerializeField] private GameObject Star;
     [SerializeField] private GameObject Ring;
+    [SerializeField] private GameObject MagicCircle;
     private Weapon weapon;
 
     private void Start()
@@ -27,6 +28,9 @@ public class DefaultWeapon : MonoBehaviour
                 break;
             case "Lilpaaaaaa":
                 StartCoroutine(Lilpaaaaaa());
+                break;
+            case "StampPlump":
+                StartCoroutine(StampPlump());
                 break;
         }
     }
@@ -124,7 +128,7 @@ public class DefaultWeapon : MonoBehaviour
             );
             ring.name = "Ring";
             ring.transform.position = Player.instance.transform.position - Vector3.forward * 0.8f;
-            List<GameObject> enemy = Scanner.ScanAll(Player.instance.transform.position, 40, "Enemy");
+            List<GameObject> enemy = Scanner.ScanAll(Player.instance.transform.position, 6, "Enemy");
             for(int i = 0; i < enemy.Count; i++)
             {
                 EnemyPool enemyPool = EnemyManager.instance.GetEnemy(enemy[i]);
@@ -134,6 +138,22 @@ public class DefaultWeapon : MonoBehaviour
             }
             yield return new WaitForSeconds(weapon.stats.Life);
             ring.SetActive(false);
+        }
+    }
+
+    private IEnumerator StampPlump()
+    {
+        List<GameObject> targets = new(){};
+        WaitForSeconds wait = new(weapon.stats.Cooldown);
+        while(true)
+        {
+            yield return wait;
+            List<GameObject> enemy = Scanner.ScanAll(Player.instance.transform.position, 40, "Enemy", 2);
+            for(int i = 0; i < enemy.Count; i++)
+            {
+                EnemyPool enemyPool = EnemyManager.instance.GetEnemy(enemy[i]);
+                // enemyPool.target
+            }
         }
     }
 
