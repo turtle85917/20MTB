@@ -60,6 +60,7 @@ public class Star : MonoBehaviour
         {
             StopAllCoroutines();
             gameObject.SetActive(false);
+            targets.Remove(target);
         }
     }
 
@@ -91,7 +92,7 @@ public class Star : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             EnemyPool pool = EnemyManager.instance.GetEnemy(target);
-            int deal = stats.Power + through * stats.DecreasePower;
+            int deal = stats.Power - through * stats.DecreasePower;
             pool.health -= deal;
             if(pool.health <= 0)
                 targets.Remove(target);
@@ -104,5 +105,6 @@ public class Star : MonoBehaviour
     {
         yield return new WaitForSeconds(stats.Life);
         gameObject.SetActive(false);
+        targets.Remove(target);
     }
 }
