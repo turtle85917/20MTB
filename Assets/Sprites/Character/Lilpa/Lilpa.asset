@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc5026286f1f01499003fb138ccefec, type: 3}
+  m_Name: Lilpa
+  m_EditorClassIdentifier: 
+  playerName: "\uB9B4\uD30C"
+  defaultWeapon: Lilpaaaaaa
+  headImage: {fileID: -794333072, guid: 35f5852c1a84d884eae50b444b4fac09, type: 3}
+  controller: {fileID: 9100000, guid: 8776f2997d701ea41a723be0124410a9, type: 2}
+  stats:
+    MaxHealth: 21
+    Power: 13
+    MoveSpeed: 14
