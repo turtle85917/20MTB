@@ -92,7 +92,7 @@ public class Star : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             EnemyPool pool = EnemyManager.instance.GetEnemy(target);
-            int deal = stats.Power - through * stats.DecreasePower;
+            int deal = Game.instance.GetDamage(stats.Power) - through * stats.DecreasePower;
             pool.health -= deal;
             if(pool.health <= 0)
                 targets.Remove(target);

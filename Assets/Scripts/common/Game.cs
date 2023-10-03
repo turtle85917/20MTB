@@ -40,6 +40,11 @@ public class Game : MonoBehaviour
         }
     }
 
+    public int GetDamage(int Power)
+    {
+        return Power + playerData.stats.Power / Power;
+    }
+
     private void Awake()
     {
         instance = this;

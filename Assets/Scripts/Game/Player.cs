@@ -23,6 +23,11 @@ public class Player : MonoBehaviour
         StartCoroutine(Knockbacking(target));
     }
 
+    public void Attack()
+    {
+        animator.SetTrigger("Attack");
+    }
+
     private void Awake()
     {
         instance = this;

@@ -6,9 +6,11 @@ public class Blow : MonoBehaviour
     private Vector2 movement;
     private Rigidbody2D Rigidbody;
     private SpriteRenderer spriteRenderer;
+    private int through;
 
     public void Reset(WeaponStats statsVal, Vector2 movementVal)
     {
+        through = 0;
         stats = statsVal;
         movement = movementVal;
         Rigidbody.velocity = Vector2.zero;
@@ -20,6 +22,14 @@ public class Blow : MonoBehaviour
     {
         Rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void Update()
+    {
+        if(through == stats.Through)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void FixedUpdate()
@@ -37,7 +47,7 @@ public class Blow : MonoBehaviour
             Enemy script = other.GetComponent<Enemy>();
             script.Knockback(Player.instance.gameObject);
             var enemy = EnemyManager.instance.GetEnemy(other.gameObject);
-            int deal = stats.Power + (Game.instance.playerData.stats.Power / stats.Power);
+            int deal = Game.instance.GetDamage(stats.Power) - through * stats.DecreasePower;
             enemy.health -= deal;
             gameObject.SetActive(false);
             Damage.instance.WriteDamage(other.gameObject, deal);

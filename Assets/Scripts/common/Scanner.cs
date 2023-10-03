@@ -23,6 +23,20 @@ public static class Scanner
         return result;
     }
 
+    public static List<GameObject> ScanAll(Vector2 origin, float radius, string tag)
+    {
+        List<GameObject> result = new(){};
+        RaycastHit2D[] raycasts = Physics2D.CircleCastAll(origin, radius, Vector2.right);
+        foreach(RaycastHit2D raycast in raycasts)
+        {
+            if(raycast.collider.CompareTag(tag))
+            {
+                result.Add(raycast.collider.gameObject);
+            }
+        }
+        return result;
+    }
+
     public static GameObject Scan(Vector2 origin, float radius, string tag)
     {
         float r = radius;
