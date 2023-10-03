@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
     public Vector2 movement;
     public Vector2 lastMovement;
     public static int health;
+    public static int level;
+    public static int exp;
     public static Player instance {get; private set;}
     private Animator animator;
     private Rigidbody2D Rigidbody;

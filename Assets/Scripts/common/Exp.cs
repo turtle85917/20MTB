@@ -4,6 +4,12 @@ public class Exp : MonoBehaviour
 {
     private Animator animator;
     private Rigidbody2D Rigidbody;
+    private int exp;
+
+    public void SetExp(int expVal)
+    {
+        exp = expVal;
+    }
 
     private void Awake()
     {
@@ -29,7 +35,7 @@ public class Exp : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             gameObject.SetActive(false);
-            // TODO: Give exp.
+            Player.exp += exp;
         }
     }
 }

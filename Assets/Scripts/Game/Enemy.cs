@@ -54,7 +54,8 @@ public class Enemy : MonoBehaviour
             bodySprite.flipX = false;
             transform.Rotate(transform.position.x > Player.instance.transform.position.x ? new Vector3(0, 180, 0) : Vector3.zero);
             animator.SetTrigger("isDie");
-            ObjectPool.SpawnExp(transform);
+            GameObject exp = ObjectPool.SpawnExp(transform);
+            exp.GetComponent<Exp>().SetExp(enemyPool.data.stats.Exp);
         }
     }
 
