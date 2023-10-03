@@ -25,6 +25,15 @@ public class Enemy : MonoBehaviour
         StartCoroutine(Knockbacking(target));
     }
 
+    public void Sturn()
+    {
+        if(knockbacking || dying) return;
+        animator.SetBool("isWalk", false);
+        animator.SetBool("isKnockback", false);
+        knockbacking = true;
+        StartCoroutine(Sturning());
+    }
+
     public void OnDie()
     {
         gameObject.SetActive(false);
@@ -61,7 +70,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") && !(knockbacking || dying))
         {
             Player.health -= 2;
             Player.instance.Knockback(gameObject);
@@ -92,5 +101,11 @@ public class Enemy : MonoBehaviour
         knockbacking = false;
         Rigidbody.velocity = Vector3.zero;
         animator.SetBool("isKnockback", false);
+    }
+
+    private IEnumerator Sturning()
+    {
+        yield return new WaitForSeconds(4f);
+        knockbacking = false;
     }
 }

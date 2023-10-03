@@ -143,17 +143,16 @@ public class DefaultWeapon : MonoBehaviour
 
     private IEnumerator StampPlump()
     {
-        List<GameObject> targets = new(){};
         WaitForSeconds wait = new(weapon.stats.Cooldown);
         while(true)
         {
-            yield return wait;
-            List<GameObject> enemy = Scanner.ScanAll(Player.instance.transform.position, 40, "Enemy", 2);
-            for(int i = 0; i < enemy.Count; i++)
+            GameObject enemy = Scanner.Scan(Player.instance.transform.position, 8, "Enemy");
+            if(enemy)
             {
-                EnemyPool enemyPool = EnemyManager.instance.GetEnemy(enemy[i]);
-                // enemyPool.target
+                GameObject magicCircle = Instantiate(MagicCircle, enemy.transform);
+                magicCircle.GetComponent<MagicCircle>().Reset(weapon.stats, enemy);
             }
+            yield return wait;
         }
     }
 
