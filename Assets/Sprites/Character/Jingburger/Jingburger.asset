@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc5026286f1f01499003fb138ccefec, type: 3}
+  m_Name: Jingburger
+  m_EditorClassIdentifier: 
+  playerName: "\uC9D5\uBC84\uAC70"
+  defaultWeapon: MuayThai
+  headImage: {fileID: 1627126936, guid: 3caad957cb518ac4aa10e19a9479bb53, type: 3}
+  controller: {fileID: 9100000, guid: ad0280c6a4c3e4e4faa21346e39d6db6, type: 2}
+  stats:
+    MaxHealth: 19
+    Power: 14
+    MoveSpeed: 13
