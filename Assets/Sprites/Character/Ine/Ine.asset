@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc5026286f1f01499003fb138ccefec, type: 3}
+  m_Name: Ine
+  m_EditorClassIdentifier: 
+  playerName: "\uC544\uC774\uB124"
+  defaultWeapon: Wakchori
+  headImage: {fileID: -724689676, guid: d3cf1f9168549f64cac68d7a5857bb55, type: 3}
+  controller: {fileID: 9100000, guid: 82ada20759583e7419ef045a2bc05e60, type: 2}
+  stats:
+    MaxHealth: 20
+    Power: 12
+    MoveSpeed: 13
