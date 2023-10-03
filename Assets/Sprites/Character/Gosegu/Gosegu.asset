@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc5026286f1f01499003fb138ccefec, type: 3}
+  m_Name: Gosegu
+  m_EditorClassIdentifier: 
+  playerName: "\uACE0\uC138\uAD6C"
+  defaultWeapon: Headpin
+  headImage: {fileID: -739936313, guid: 7935b83615ef56546b80d20fb88768a7, type: 3}
+  controller: {fileID: 9100000, guid: e6b017cc3c9c74e43b474c1b38b69a90, type: 2}
+  stats:
+    MaxHealth: 20
+    Power: 13
+    MoveSpeed: 12

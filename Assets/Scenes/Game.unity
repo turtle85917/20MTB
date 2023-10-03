@@ -2286,7 +2286,7 @@ Animator:
   m_GameObject: {fileID: 1062170207}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e6b017cc3c9c74e43b474c1b38b69a90, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2622,7 +2622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e163bcae6c9029b4f8920997c2fcd6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 4
+  character: 5
   playerData: {fileID: 0}
   PoolManager: {fileID: 2039443999}
   Exp: {fileID: 6774499916034219985, guid: 86e418ff4e317694da5bad3a7514086b, type: 3}
@@ -2632,6 +2632,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 29cdcdaff43dbdb4686c08a9da5a13d6, type: 2}
   - {fileID: 11400000, guid: 35490b45140fecb4ea269dd6d376ff16, type: 2}
   - {fileID: 11400000, guid: f4608e70d2121c249a0f26b4e44c8f28, type: 2}
+  - {fileID: 11400000, guid: b3fe73e5fd9232e44bf2399584a69b52, type: 2}
   HeadImage: {fileID: 210327020}
   TimerText: {fileID: 1351960660}
   HealthBar: {fileID: 995665493}
