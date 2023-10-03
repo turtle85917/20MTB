@@ -17,6 +17,6 @@ MonoBehaviour:
   headImage: {fileID: -794333072, guid: 35f5852c1a84d884eae50b444b4fac09, type: 3}
   controller: {fileID: 9100000, guid: 8776f2997d701ea41a723be0124410a9, type: 2}
   stats:
-    MaxHealth: 21
+    MaxHealth: 20
     Power: 13
     MoveSpeed: 14

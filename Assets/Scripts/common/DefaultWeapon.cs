@@ -8,6 +8,7 @@ public class DefaultWeapon : MonoBehaviour
 {
     [SerializeField] private GameObject Blow;
     [SerializeField] private GameObject Star;
+    [SerializeField] private GameObject Ring;
     private Weapon weapon;
 
     private void Start()
@@ -23,6 +24,9 @@ public class DefaultWeapon : MonoBehaviour
                 break;
             case "MuayThai":
                 StartCoroutine(MuayThai());
+                break;
+            case "Lilpaaaaaa":
+                StartCoroutine(Lilpaaaaaa());
                 break;
         }
     }
@@ -84,7 +88,7 @@ public class DefaultWeapon : MonoBehaviour
                 enemy = enemy.OrderBy(item => Vector3.Distance(item.transform.position, Player.instance.transform.position)).ToList();
                 for(int i = 0; i < weapon.stats.Through; i++)
                 {
-                    if(enemy.Count < i) break;
+                    if(enemy.Count < i) break; // BUG: ...
                     EnemyPool enemyPool = EnemyManager.instance.GetEnemy(enemy[i]);
                     int deal = Game.instance.GetDamage(weapon.stats.Power) - i * weapon.stats.DecreasePower;
                     enemyPool.health -= deal;
@@ -104,6 +108,32 @@ public class DefaultWeapon : MonoBehaviour
                 yield return new WaitForSeconds(weapon.stats.Life);
                 blow.SetActive(false);
             }
+        }
+    }
+
+    private IEnumerator Lilpaaaaaa()
+    {
+        WaitForSeconds wait = new(weapon.stats.Cooldown);
+        while(true)
+        {
+            yield return wait;
+            GameObject ring = ObjectPool.Get(
+                Game.instance.PoolManager,
+                "Ring",
+                () => Instantiate(Ring, Game.instance.PoolManager.transform, false)
+            );
+            ring.name = "Ring";
+            ring.transform.position = Player.instance.transform.position - Vector3.forward * 0.8f;
+            List<GameObject> enemy = Scanner.ScanAll(Player.instance.transform.position, 40, "Enemy");
+            for(int i = 0; i < enemy.Count; i++)
+            {
+                EnemyPool enemyPool = EnemyManager.instance.GetEnemy(enemy[i]);
+                int deal = weapon.stats.Power + i * weapon.stats.DecreasePower;
+                enemyPool.health -= deal;
+                Damage.instance.WriteDamage(enemyPool.target, deal);
+            }
+            yield return new WaitForSeconds(weapon.stats.Life);
+            ring.SetActive(false);
         }
     }
 
