@@ -2,19 +2,20 @@ using UnityEngine;
 
 public static class Scanner
 {
-    public static GameObject Scan(Vector2 origin, float radius, string tag = null)
+    public static GameObject Scan(Vector2 origin, float radius, string tag)
     {
         float r = radius;
-        GameObject result = Physics2D.CircleCast(origin, r, Vector2.right).collider.gameObject;
-        while(result != null)
+        GameObject result = null;
+        RaycastHit2D[] raycasts = Physics2D.CircleCastAll(origin, r, Vector2.right);
+        foreach(RaycastHit2D raycast in raycasts)
         {
-            if(tag != null && result.CompareTag(tag))
+            if(raycast.collider.CompareTag(tag))
             {
-                float distance = Vector3.Distance(origin, result.transform.position);
+                float distance = Vector3.Distance(origin, raycast.transform.position);
                 if(distance < r)
                 {
                     r = distance;
-                    result = Physics2D.CircleCast(origin, r, Vector2.right).collider.gameObject;
+                    result = raycast.collider.gameObject;
                 }
             }
         }

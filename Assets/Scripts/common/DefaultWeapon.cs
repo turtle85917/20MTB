@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -30,6 +31,7 @@ public class DefaultWeapon : MonoBehaviour
                 () => Instantiate(Blow, Game.instance.PoolManager.transform, false)
             );
             blow.name = "Blow";
+            blow.transform.rotation = LookAtMouse();
             Blow script = blow.GetComponent<Blow>();
             script.stats = weapon.stats;
             script.movement = distance.normalized * -1;
@@ -37,5 +39,15 @@ public class DefaultWeapon : MonoBehaviour
             yield return new WaitForSeconds(weapon.stats.Life);
             blow.SetActive(false);
         }
+    }
+
+    private Quaternion LookAtMouse()
+    {
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 distance = transform.position.x < mousePosition.x
+            ? (Vector3)mousePosition - transform.position
+            : transform.position - (Vector3)mousePosition
+        ;
+        return Quaternion.AngleAxis((float)(Math.Atan2(distance.y, distance.x) * Mathf.Rad2Deg), Vector3.forward);
     }
 }

@@ -16,5 +16,6 @@ MonoBehaviour:
   Prefab: {fileID: 9127897591107940937, guid: f16ea47333006e949a634f8f08a68a23, type: 3}
   stats:
     MaxHealth: 15
-    Power: 8
-    MoveSpeed: 7
+    Power: 10
+    MoveSpeed: 090000000d000000
+    Exp: 4

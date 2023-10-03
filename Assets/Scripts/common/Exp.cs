@@ -2,24 +2,34 @@ using UnityEngine;
 
 public class Exp : MonoBehaviour
 {
-    public GameObject target;
     private Animator animator;
+    private Rigidbody2D Rigidbody;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        Rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        if(target != null)
+        if(Scanner.Scan(transform.position, 4, "Player") != null)
         {
-            transform.position = target.transform.position;
+            Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, Player.instance.transform.position, 30 * Time.deltaTime));
         }
     }
 
     private void OnEnable()
     {
         animator.SetTrigger("isAppear");
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            gameObject.SetActive(false);
+            // TODO: Give exp.
+        }
     }
 }

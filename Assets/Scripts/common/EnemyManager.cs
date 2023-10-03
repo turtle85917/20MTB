@@ -19,6 +19,7 @@ public class EnemyManager : MonoBehaviour
         enemyPools.Add(new EnemyPool(){
             target = enemy,
             health = enemyData.stats.MaxHealth,
+            MoveSpeed = UnityEngine.Random.Range(enemyData.stats.MoveSpeed[0], enemyData.stats.MoveSpeed[1]),
             data = enemyData
         });
     }
