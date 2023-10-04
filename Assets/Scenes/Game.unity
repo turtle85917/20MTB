@@ -2622,10 +2622,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e163bcae6c9029b4f8920997c2fcd6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 5
+  character: 4
   playerData: {fileID: 0}
   PoolManager: {fileID: 2039443999}
   Exp: {fileID: 6774499916034219985, guid: 86e418ff4e317694da5bad3a7514086b, type: 3}
+  Sturn: {fileID: 1770957174278101124, guid: f599f8c051e73d341ae6b24ff2fd7914, type: 3}
   players:
   - {fileID: 11400000, guid: 439513c4e4f6bd94d93ea41b2bd8fe9e, type: 2}
   - {fileID: 11400000, guid: 2bff62d513b701146af838fe6ecfe069, type: 2}

@@ -32,6 +32,9 @@ public class DefaultWeapon : MonoBehaviour
             case "StampPlump":
                 StartCoroutine(StampPlump());
                 break;
+            case "Headpin":
+                StartCoroutine(Headpin());
+                break;
         }
     }
 
@@ -152,6 +155,15 @@ public class DefaultWeapon : MonoBehaviour
                 GameObject magicCircle = Instantiate(MagicCircle, enemy.transform);
                 magicCircle.GetComponent<MagicCircle>().Reset(weapon.stats, enemy);
             }
+            yield return wait;
+        }
+    }
+
+    private IEnumerator Headpin()
+    {
+        WaitForSeconds wait = new(weapon.stats.Cooldown);
+        while(true)
+        {
             yield return wait;
         }
     }

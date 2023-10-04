@@ -19,6 +19,20 @@ public class MagicCircle : MonoBehaviour
     private IEnumerator DelayAttack()
     {
         yield return new WaitForSeconds(stats.Life);
+        List<GameObject> enemies = Scanner.ScanAll(target.transform.position, 10, "Enemy", 4);
+        enemies = enemies.OrderBy(item => Vector3.Distance(item.transform.position, Player.instance.transform.position)).ToList();
+        for(int i = 0; i < enemies.Count; i++)
+        {
+            EnemyPool enemyPool = EnemyManager.instance.GetEnemy(enemies[i]);
+            Enemy script = enemyPool.target.GetComponent<Enemy>();
+            script.Sturn();
+            if(i > 0)
+                script.Knockback(gameObject);
+            int deal = Game.instance.GetDamage(stats.Power) - i * stats.DecreasePower;
+            enemyPool.health -= deal;
+            Damage.instance.WriteDamage(enemyPool.target, deal);
+        }
+        Destroy(gameObject);
         GameObject stamp = ObjectPool.Get(
             Game.instance.PoolManager,
             "Stamp",
@@ -26,17 +40,6 @@ public class MagicCircle : MonoBehaviour
         );
         stamp.name = "Stamp";
         stamp.transform.position = target.transform.position + Vector3.up * 4;
-        List<GameObject> enemies = Scanner.ScanAll(target.transform.position, 10, "Enemy", 4);
-        enemies = enemies.OrderBy(item => Vector3.Distance(item.transform.position, Player.instance.transform.position)).ToList();
-        for(int i = 0; i < enemies.Count; i++)
-        {
-            EnemyPool enemyPool = EnemyManager.instance.GetEnemy(enemies[i]);
-            enemyPool.target.GetComponent<Enemy>().Sturn();
-            int deal = Game.instance.GetDamage(Game.instance.playerData.stats.Power) - i * stats.DecreasePower;
-            enemyPool.health -= deal;
-            Damage.instance.WriteDamage(enemyPool.target, deal);
-        }
-        Destroy(gameObject);
         StopAllCoroutines();
     }
 }

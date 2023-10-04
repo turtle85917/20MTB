@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private SpriteRenderer bodySprite;
     private EnemyPool enemyPool;
     private bool knockbacking;
+    private bool sturning;
     private bool dying;
     private int forceAdd = 20;
 
@@ -27,11 +28,12 @@ public class Enemy : MonoBehaviour
 
     public void Sturn()
     {
-        if(knockbacking || dying) return;
+        if(sturning || dying) return;
         animator.SetBool("isWalk", false);
         animator.SetBool("isKnockback", false);
-        knockbacking = true;
-        StartCoroutine(Sturning());
+        sturning = true;
+        GameObject sturn = Instantiate(Game.instance.Sturn, transform, false);
+        StartCoroutine(Sturning(sturn));
     }
 
     public void OnDie()
@@ -49,7 +51,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         enemyPool = EnemyManager.instance.GetEnemy(gameObject);
-        if(!(knockbacking || dying))
+        if(!(knockbacking || sturning || dying))
         {
             LookAtPlayer();
             bodySprite.flipX = transform.position.x > Player.instance.transform.position.x;
@@ -70,7 +72,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player") && !(knockbacking || dying))
+        if(other.CompareTag("Player") && !(knockbacking || sturning || dying))
         {
             Player.health -= 2;
             Player.instance.Knockback(gameObject);
@@ -103,9 +105,10 @@ public class Enemy : MonoBehaviour
         animator.SetBool("isKnockback", false);
     }
 
-    private IEnumerator Sturning()
+    private IEnumerator Sturning(GameObject sturn)
     {
         yield return new WaitForSeconds(4f);
-        knockbacking = false;
+        sturning = false;
+        Destroy(sturn);
     }
 }
