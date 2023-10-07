@@ -10,6 +10,7 @@ public class DefaultWeapon : MonoBehaviour
     [SerializeField] private GameObject Star;
     [SerializeField] private GameObject Ring;
     [SerializeField] private GameObject MagicCircle;
+    [SerializeField] private GameObject HeadpinPrefab;
     private Weapon weapon;
 
     private void Start()
@@ -52,7 +53,7 @@ public class DefaultWeapon : MonoBehaviour
                 () => Instantiate(Blow, Game.instance.PoolManager.transform, false)
             );
             blow.name = "Blow";
-            blow.transform.rotation = LookAtMouse();
+            blow.transform.rotation = LookAtTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             Blow script = blow.GetComponent<Blow>();
             script.Reset(weapon.stats, distance.normalized * -1);
             yield return new WaitForSeconds(weapon.stats.Life);
@@ -74,7 +75,7 @@ public class DefaultWeapon : MonoBehaviour
                     "Star",
                     () => Instantiate(Star, Game.instance.PoolManager.transform, false)
                 );
-                star.name = "Star" + i;
+                star.name = "Star";
                 star.transform.localPosition = Player.instance.transform.position;
                 star.GetComponent<Star>().Reset(weapon.stats, targets);
             }
@@ -120,6 +121,7 @@ public class DefaultWeapon : MonoBehaviour
 
     private IEnumerator Lilpaaaaaa()
     {
+        // TODO: attack animation
         WaitForSeconds wait = new(weapon.stats.Cooldown);
         while(true)
         {
@@ -161,19 +163,33 @@ public class DefaultWeapon : MonoBehaviour
 
     private IEnumerator Headpin()
     {
+        List<GameObject> targets = new(){};
         WaitForSeconds wait = new(weapon.stats.Cooldown);
         while(true)
         {
             yield return wait;
+            for(int i = 0; i < weapon.stats.Through; i++)
+            {
+                GameObject enemy = Scanner.ScanFilter(Player.instance.transform.position, 14, "Enemy", targets);
+                if(enemy == null) continue;
+                GameObject headpin = ObjectPool.Get(
+                    Game.instance.PoolManager,
+                    "Headpin",
+                    () => Instantiate(HeadpinPrefab, Game.instance.PoolManager.transform, false)
+                );
+                headpin.name = "Headpin";
+                headpin.transform.position = enemy.transform.position;
+                targets.Add(enemy);
+                headpin.GetComponent<Headpin>().Reset(weapon.stats, enemy, targets);
+            }
         }
     }
 
-    private Quaternion LookAtMouse()
+    private Quaternion LookAtTarget(Vector2 target)
     {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 distance = transform.position.x < mousePosition.x
-            ? (Vector3)mousePosition - transform.position
-            : transform.position - (Vector3)mousePosition
+        Vector2 distance = transform.position.x < target.x
+            ? (Vector3)target - transform.position
+            : transform.position - (Vector3)target
         ;
         return Quaternion.AngleAxis((float)(Math.Atan2(distance.y, distance.x) * Mathf.Rad2Deg), Vector3.forward);
     }

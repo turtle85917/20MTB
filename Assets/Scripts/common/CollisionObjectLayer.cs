@@ -22,7 +22,8 @@ public class CollisionObjectLayer : MonoBehaviour
             {
                 ChangeZ(gameObject, 1);
                 ChangeZ(other.gameObject, 0);
-            }else
+            }
+            else
             {
                 ChangeZ(gameObject, 0);
                 ChangeZ(other.gameObject, 1);

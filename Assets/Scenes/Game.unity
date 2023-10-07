@@ -2286,7 +2286,7 @@ Animator:
   m_GameObject: {fileID: 1062170207}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e6b017cc3c9c74e43b474c1b38b69a90, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2622,7 +2622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e163bcae6c9029b4f8920997c2fcd6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 4
+  character: 5
   playerData: {fileID: 0}
   PoolManager: {fileID: 2039443999}
   Exp: {fileID: 6774499916034219985, guid: 86e418ff4e317694da5bad3a7514086b, type: 3}
@@ -2699,6 +2699,7 @@ MonoBehaviour:
   Star: {fileID: 8843331417007882623, guid: e84f20940bb7f414aaf10c62cb136a84, type: 3}
   Ring: {fileID: 7490041862257003976, guid: b3456600e7f5be04795155269d1cfdee, type: 3}
   MagicCircle: {fileID: 7573715438263169103, guid: 7ad0dbf4521393646800ba36c6daec6d, type: 3}
+  HeadpinPrefab: {fileID: 5019590825961031447, guid: 63e51989fa92a4943b1285c9cabe67c8, type: 3}
 --- !u!114 &1210831722
 MonoBehaviour:
   m_ObjectHideFlags: 0

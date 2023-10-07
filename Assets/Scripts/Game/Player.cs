@@ -56,7 +56,8 @@ public class Player : MonoBehaviour
             Rigidbody.MovePosition(FollowCamera.instance.MovePosition(Rigidbody.position + movement * Game.instance.playerData.stats.MoveSpeed * Time.deltaTime, transform.position.z));
             Rigidbody.velocity = Vector2.zero;
             SetFlipX();
-        }else
+        }
+        else
         {
             animator.SetBool("isWalk", false);
         }

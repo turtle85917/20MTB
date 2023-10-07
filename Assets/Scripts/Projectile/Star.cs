@@ -43,7 +43,7 @@ public class Star : MonoBehaviour
         }
         if(target == null && !goAway)
         {
-            GameObject enemy = Scanner.ScanFilter(transform.position, 20, "Enemy", targets);
+            GameObject enemy = Scanner.ScanFilter(transform.position, 10, "Enemy", targets);
             if(enemy == null)
                 goAway = true;
             else
