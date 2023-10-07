@@ -2622,7 +2622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e163bcae6c9029b4f8920997c2fcd6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 5
+  character: 6
   playerData: {fileID: 0}
   PoolManager: {fileID: 2039443999}
   Exp: {fileID: 6774499916034219985, guid: 86e418ff4e317694da5bad3a7514086b, type: 3}
@@ -2634,6 +2634,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 35490b45140fecb4ea269dd6d376ff16, type: 2}
   - {fileID: 11400000, guid: f4608e70d2121c249a0f26b4e44c8f28, type: 2}
   - {fileID: 11400000, guid: b3fe73e5fd9232e44bf2399584a69b52, type: 2}
+  - {fileID: 11400000, guid: d3c7dfac48d61d048b5a416452dd6444, type: 2}
   HeadImage: {fileID: 210327020}
   TimerText: {fileID: 1351960660}
   HealthBar: {fileID: 995665493}
