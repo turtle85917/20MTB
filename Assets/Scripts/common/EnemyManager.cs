@@ -9,12 +9,12 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private EnemyData[] enemies;
     private List<EnemyPool> enemyPools;
 
-    public void NewEnemy(string enemyId)
+    public GameObject NewEnemy(string enemyId)
     {
         EnemyData enemyData = Array.Find(enemies, item => item.enemyId == enemyId);
         GameObject enemy = Instantiate(enemyData.Prefab, Enemies.transform, false);
         enemy.name = "Enemy" + Enemies.transform.childCount;
-        enemy.transform.position = FollowCamera.instance.MovePosition(Player.instance.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle.normalized * 15, 0);
+        // enemy.transform.position = FollowCamera.instance.MovePosition(Player.instance.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle.normalized * 15, 0);
         enemy.GetComponent<Enemy>().enemy = enemyData;
         enemyPools.Add(new EnemyPool(){
             target = enemy,
@@ -22,6 +22,7 @@ public class EnemyManager : MonoBehaviour
             MoveSpeed = UnityEngine.Random.Range(enemyData.stats.MoveSpeed[0], enemyData.stats.MoveSpeed[1]),
             data = enemyData
         });
+        return enemy;
     }
 
     public EnemyPool GetEnemy(GameObject Object)

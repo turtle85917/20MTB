@@ -2650,6 +2650,7 @@ MonoBehaviour:
   - {fileID: 1800012944}
   - {fileID: 1822855544}
   WeaponSlotPanel: {fileID: 2658271339453779870, guid: d1632b7cb80f189429c626de7f562ab3, type: 3}
+  cycle: {fileID: 11400000, guid: d600d11aa09380147a2d12fd49add112, type: 2}
 --- !u!4 &1210831719
 Transform:
   m_ObjectHideFlags: 0
@@ -2719,6 +2720,7 @@ MonoBehaviour:
   Enemies: {fileID: 1145575509}
   enemies:
   - {fileID: 11400000, guid: 211c5ff8f02f5ea48a453c86f96cf0bf, type: 2}
+  - {fileID: 11400000, guid: 999813c34513b614c905c3dcd15103da, type: 2}
 --- !u!1 &1224177660
 GameObject:
   m_ObjectHideFlags: 0

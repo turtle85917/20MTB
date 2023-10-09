@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +24,10 @@ public class Game : MonoBehaviour
     [SerializeField] private TMP_Text LevelText;
     [SerializeField] private GameObject[] WeaponSlots;
     [SerializeField] private GameObject WeaponSlotPanel;
+    [SerializeField] private Cycle cycle;
+    private List<int> times;
     private int timer = 20 * 60; // 기본 20분
+    private int maxTime = 20 * 60;
 
     public void AddWeapon(string weaponId)
     {
@@ -51,6 +55,7 @@ public class Game : MonoBehaviour
         instance = this;
         playerData = players[(int)character];
         playerWeapons = new(){};
+        times = new(){};
     }
 
     private void Start()
@@ -58,11 +63,6 @@ public class Game : MonoBehaviour
         HeadImage.sprite = playerData.headImage;
         AddWeapon(playerData.defaultWeapon);
         StartCoroutine(Timer());
-        EnemyManager.instance.NewEnemy("Panzee");
-        EnemyManager.instance.NewEnemy("Panzee");
-        EnemyManager.instance.NewEnemy("Panzee");
-        EnemyManager.instance.NewEnemy("Panzee");
-        EnemyManager.instance.NewEnemy("Panzee");
     }
 
     private void Update()
@@ -72,6 +72,29 @@ public class Game : MonoBehaviour
         HealthText.text = Player.health + " / " + playerData.stats.MaxHealth;
         ExpBar.value = (float)Player.exp / GetNeedExpFromLevel();
         LevelText.text = "Lv " + Player.level;
+        foreach(CycleTimeline timeline in cycle.cycleTimelines)
+        {
+            if(maxTime - timer == timeline.time && !times.Contains(timeline.time))
+            {
+                times.Add(timeline.time);
+                for(int i = 0; i < UnityEngine.Random.Range(timeline.spawnCount[0], timeline.spawnCount[1]); i++)
+                {
+                    EnemyData enemyData = timeline.enemies[UnityEngine.Random.Range(0, timeline.enemies.Length)];
+                    GameObject enemy = EnemyManager.instance.NewEnemy(enemyData.enemyId);
+                    if(timeline.circleRadius > 0)
+                    {
+                        enemy.transform.position = FollowCamera.instance.MovePosition(Player.instance.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle.normalized * timeline.circleRadius, 0);
+                    }
+                    else
+                    {
+                        enemy.transform.position = new Vector3(
+                            UnityEngine.Random.Range(timeline.spawnPosition[0].x, timeline.spawnPosition[1].x),
+                            UnityEngine.Random.Range(timeline.spawnPosition[0].y, timeline.spawnPosition[1].y)
+                        );
+                    }
+                }
+            }
+        }
     }
 
     private IEnumerator Timer()
