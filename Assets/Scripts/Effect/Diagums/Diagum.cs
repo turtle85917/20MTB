@@ -22,7 +22,7 @@ public class Diagum : ThroughWeapon
         {
             EnemyPool enemyPool = AttackEnemy(other.gameObject);
             Enemy script = enemyPool.target.GetComponent<Enemy>();
-            script.Knockback(gameObject);
+            script.Knockback(Player.instance.gameObject);
         }
     }
 }
