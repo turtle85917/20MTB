@@ -1,12 +1,10 @@
 using UnityEngine;
 
-public class Blow : MonoBehaviour
+public class Blow : ThroughWeapon
 {
-    private WeaponStats stats;
     private Vector2 movement;
     private Rigidbody2D Rigidbody;
     private SpriteRenderer spriteRenderer;
-    private int through;
 
     public void Reset(WeaponStats statsVal, Vector2 movementVal)
     {
@@ -26,10 +24,7 @@ public class Blow : MonoBehaviour
 
     private void Update()
     {
-        if(through == stats.Through)
-        {
-            gameObject.SetActive(false);
-        }
+        CheckBroken();
     }
 
     private void FixedUpdate()
@@ -44,13 +39,7 @@ public class Blow : MonoBehaviour
     {
         if(other.CompareTag("Enemy"))
         {
-            Enemy script = other.GetComponent<Enemy>();
-            script.Knockback(Player.instance.gameObject);
-            var enemy = EnemyManager.instance.GetEnemy(other.gameObject);
-            int deal = Game.instance.GetDamage(stats.Power) - through * stats.DecreasePower;
-            enemy.health -= deal;
-            gameObject.SetActive(false);
-            Damage.instance.WriteDamage(other.gameObject, deal);
+            AttackEnemy(other.gameObject);
         }
     }
 }

@@ -1,10 +1,7 @@
 using UnityEngine;
 
-public class Diagum : MonoBehaviour
+public class Diagum : ThroughWeapon
 {
-    private WeaponStats stats;
-    private int through;
-
     private void Awake()
     {
         Diagums script = transform.parent.GetComponent<Diagums>();
@@ -23,13 +20,9 @@ public class Diagum : MonoBehaviour
     {
         if(other.CompareTag("Enemy"))
         {
-            EnemyPool enemyPool = EnemyManager.instance.GetEnemy(other.gameObject);
-            int deal = Game.instance.GetDamage(stats.Power) - through * stats.DecreasePower;
-            enemyPool.health -= deal;
+            EnemyPool enemyPool = AttackEnemy(other.gameObject);
             Enemy script = enemyPool.target.GetComponent<Enemy>();
             script.Knockback(gameObject);
-            Damage.instance.WriteDamage(enemyPool.target, deal);
-            through++;
         }
     }
 }

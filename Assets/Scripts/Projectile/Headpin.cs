@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Headpin : MonoBehaviour
+public class Headpin : ThroughWeapon
 {
-    private WeaponStats stats;
     private GameObject target;
     private List<GameObject> targets;
     private bool goAway;
@@ -31,11 +30,7 @@ public class Headpin : MonoBehaviour
     {
         if(other.gameObject.Equals(target) && !goAway)
         {
-            EnemyPool enemyPool = EnemyManager.instance.GetEnemy(target);
-            enemyPool.target.GetComponent<Enemy>().Knockback(Player.instance.gameObject);
-            int deal = Game.instance.GetDamage(stats.Power);
-            enemyPool.health -= deal;
-            Damage.instance.WriteDamage(target, deal);
+            AttackEnemy(other.gameObject);
             goAway = true;
             targets.Remove(target);
             transform.Rotate(0, 0, Random.Range(-360f, 360f));
