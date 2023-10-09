@@ -14,7 +14,6 @@ public class EnemyManager : MonoBehaviour
         EnemyData enemyData = Array.Find(enemies, item => item.enemyId == enemyId);
         GameObject enemy = Instantiate(enemyData.Prefab, Enemies.transform, false);
         enemy.name = "Enemy" + Enemies.transform.childCount;
-        // enemy.transform.position = FollowCamera.instance.MovePosition(Player.instance.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle.normalized * 15, 0);
         enemy.GetComponent<Enemy>().enemy = enemyData;
         enemyPools.Add(new EnemyPool(){
             target = enemy,
