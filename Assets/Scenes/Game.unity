@@ -2623,7 +2623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e163bcae6c9029b4f8920997c2fcd6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 6
+  character: 0
   playerData: {fileID: 0}
   PoolManager: {fileID: 2039443999}
   Exp: {fileID: 6774499916034219985, guid: 86e418ff4e317694da5bad3a7514086b, type: 3}
