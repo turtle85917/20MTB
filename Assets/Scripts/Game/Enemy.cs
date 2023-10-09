@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public EnemyData enemy;
     private Animator animator;
     private Rigidbody2D Rigidbody;
     [SerializeField] private GameObject Head;

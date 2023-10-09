@@ -8,7 +8,7 @@ public class DefaultWeapon : MonoBehaviour
 {
     [SerializeField] private GameObject Blow;
     [SerializeField] private GameObject Star;
-    [SerializeField] private GameObject Ring;
+    [SerializeField] private GameObject Scream;
     [SerializeField] private GameObject MagicCircle;
     [SerializeField] private GameObject HeadpinPrefab;
     [SerializeField] private GameObject PlayerWeapons;
@@ -131,23 +131,17 @@ public class DefaultWeapon : MonoBehaviour
         while(true)
         {
             yield return wait;
-            GameObject ring = ObjectPool.Get(
+            GameObject scream = ObjectPool.Get(
                 Game.instance.PoolManager,
-                "Ring",
-                () => Instantiate(Ring, Game.instance.PoolManager.transform, false)
+                "Scream",
+                () => Instantiate(Scream, Game.instance.PoolManager.transform, false)
             );
-            ring.name = "Ring";
-            ring.transform.position = Player.instance.transform.position - Vector3.forward * 0.8f;
-            List<GameObject> enemy = Scanner.ScanAll(Player.instance.transform.position, 6, "Enemy");
-            for(int i = 0; i < enemy.Count; i++)
-            {
-                EnemyPool enemyPool = EnemyManager.instance.GetEnemy(enemy[i]);
-                int deal = weapon.stats.Power + i * weapon.stats.DecreasePower;
-                enemyPool.health -= deal;
-                Damage.instance.WriteDamage(enemyPool.target, deal);
-            }
+            scream.name = "Scream";
+            scream.transform.position = Player.instance.transform.position;
+            Scream script = scream.GetComponent<Scream>();
+            script.Reset(weapon.stats);
             yield return new WaitForSeconds(weapon.stats.Life);
-            ring.SetActive(false);
+            scream.SetActive(false);
         }
     }
 
