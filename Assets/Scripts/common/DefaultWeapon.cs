@@ -11,6 +11,8 @@ public class DefaultWeapon : MonoBehaviour
     [SerializeField] private GameObject Ring;
     [SerializeField] private GameObject MagicCircle;
     [SerializeField] private GameObject HeadpinPrefab;
+    [SerializeField] private GameObject PlayerWeapons;
+    [SerializeField] private GameObject Diagums;
     private Weapon weapon;
 
     private void Start()
@@ -35,6 +37,9 @@ public class DefaultWeapon : MonoBehaviour
                 break;
             case "Headpin":
                 StartCoroutine(Headpin());
+                break;
+            case "DiaGum":
+                StartCoroutine(DiaGum());
                 break;
         }
     }
@@ -182,6 +187,25 @@ public class DefaultWeapon : MonoBehaviour
                 targets.Add(enemy);
                 headpin.GetComponent<Headpin>().Reset(weapon.stats, enemy, targets);
             }
+        }
+    }
+
+    private IEnumerator DiaGum()
+    {
+        WaitForSeconds wait = new(weapon.stats.Cooldown);
+        while(true)
+        {
+            yield return wait;
+            GameObject diagums = ObjectPool.Get(
+                PlayerWeapons,
+                "DiaGums",
+                () => Instantiate(Diagums, PlayerWeapons.transform, false)
+            );
+            diagums.name = "DiaGums";
+            Diagums script = diagums.GetComponent<Diagums>();
+            script.Reset(weapon.stats);
+            yield return new WaitForSeconds(weapon.stats.Life);
+            diagums.SetActive(false);
         }
     }
 

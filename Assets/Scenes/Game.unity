@@ -2273,6 +2273,7 @@ Transform:
   m_Children:
   - {fileID: 685697176}
   - {fileID: 522529759}
+  - {fileID: 1875431088}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2701,6 +2702,8 @@ MonoBehaviour:
   Ring: {fileID: 7490041862257003976, guid: b3456600e7f5be04795155269d1cfdee, type: 3}
   MagicCircle: {fileID: 7573715438263169103, guid: 7ad0dbf4521393646800ba36c6daec6d, type: 3}
   HeadpinPrefab: {fileID: 5019590825961031447, guid: 63e51989fa92a4943b1285c9cabe67c8, type: 3}
+  PlayerWeapons: {fileID: 1875431087}
+  Diagums: {fileID: 7942860905616382804, guid: 745e7777d708ccb4c8525b46a7628a26, type: 3}
 --- !u!114 &1210831722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3841,6 +3844,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861443846}
   m_CullTransparentMesh: 1
+--- !u!1 &1875431087
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1875431088}
+  m_Layer: 6
+  m_Name: Weapons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1875431088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875431087}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1062170208}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1956150081
 GameObject:
   m_ObjectHideFlags: 0
