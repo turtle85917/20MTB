@@ -6,7 +6,7 @@ public class Damage : MonoBehaviour
     public static Damage instance;
     [SerializeField] private GameObject Text;
 
-    public void WriteDamage(GameObject target, int value)
+    public void WriteDamage(GameObject target, int value, bool critical)
     {
         GameObject text = ObjectPool.Get(
             gameObject,
@@ -21,6 +21,8 @@ public class Damage : MonoBehaviour
         tmpText.text = (target.CompareTag("Player") ? '-' : string.Empty) + value.ToString();
         tmpText.color = target.CompareTag("Player")
             ? Color.red
+            : critical
+            ? Color.yellow
             : Color.white
         ;
     }

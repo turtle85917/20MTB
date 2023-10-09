@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Headpin : ThroughWeapon
+public class Headpin : MonoBehaviour
 {
+    private WeaponStats stats;
+    private int through;
     private GameObject target;
     private List<GameObject> targets;
     private bool goAway;
@@ -30,7 +32,7 @@ public class Headpin : ThroughWeapon
     {
         if(other.gameObject.Equals(target) && !goAway)
         {
-            AttackEnemy(other.gameObject);
+            Game.instance.AttackEnemy(other.gameObject, stats, through);
             goAway = true;
             targets.Remove(target);
             transform.Rotate(0, 0, Random.Range(-360f, 360f));

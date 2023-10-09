@@ -28,9 +28,7 @@ public class MagicCircle : MonoBehaviour
             script.Sturn();
             if(i > 0)
                 script.Knockback(gameObject);
-            int deal = Game.instance.GetDamage(stats.Power) - i * stats.DecreasePower;
-            enemyPool.health -= deal;
-            Damage.instance.WriteDamage(enemyPool.target, deal);
+            Game.instance.AttackEnemy(enemies[i], stats, i);
         }
         Destroy(gameObject);
         GameObject stamp = ObjectPool.Get(

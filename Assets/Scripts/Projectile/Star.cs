@@ -91,12 +91,10 @@ public class Star : MonoBehaviour
         while(target)
         {
             yield return new WaitForSeconds(0.5f);
-            EnemyPool pool = EnemyManager.instance.GetEnemy(target);
-            int deal = Game.instance.GetDamage(stats.Power) - through * stats.DecreasePower;
-            pool.health -= deal;
-            if(pool.health <= 0)
+            Game.instance.AttackEnemy(target, stats, through);
+            EnemyPool enemyPool = EnemyManager.instance.GetEnemy(target);
+            if(enemyPool.health <= 0)
                 targets.Remove(target);
-            Damage.instance.WriteDamage(target, deal);
             through++;
         }
     }

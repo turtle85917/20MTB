@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public class Blow : ThroughWeapon
+public class Blow : MonoBehaviour
 {
+    private WeaponStats stats;
+    private int through;
     private Vector2 movement;
     private Rigidbody2D Rigidbody;
     private SpriteRenderer spriteRenderer;
@@ -24,7 +26,10 @@ public class Blow : ThroughWeapon
 
     private void Update()
     {
-        CheckBroken();
+        if(through == stats.Through)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void FixedUpdate()
@@ -39,7 +44,8 @@ public class Blow : ThroughWeapon
     {
         if(other.CompareTag("Enemy"))
         {
-            AttackEnemy(other.gameObject);
+            Game.instance.AttackEnemy(other.gameObject, stats, through, true);
+            through++;
         }
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,6 +47,17 @@ public class Game : MonoBehaviour
     public int GetDamage(int Power)
     {
         return Power + playerData.stats.Power / Power;
+    }
+
+    public void AttackEnemy(GameObject target, WeaponStats stats, int through, bool knockback = false)
+    {
+        bool critical = UnityEngine.Random.Range(0f, 1f) <= stats.CriticalHit;
+        EnemyPool enemyPool = EnemyManager.instance.GetEnemy(target);
+        if(knockback)
+            enemyPool.target.GetComponent<Enemy>().Knockback(Player.instance.gameObject);
+        int deal = GetDamage(critical ? stats.CriticalDamage : stats.Power) - through * stats.DecreasePower;
+        enemyPool.health -= deal;
+        Damage.instance.WriteDamage(target, deal, critical);
     }
 
     private void Awake()

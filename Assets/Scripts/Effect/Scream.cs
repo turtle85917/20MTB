@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scream : ThroughWeapon
+public class Scream : MonoBehaviour
 {
+    private WeaponStats stats;
+    private int through;
     private List<GameObject> targets;
     private SpriteRenderer spriteRenderer;
 
@@ -29,14 +31,17 @@ public class Scream : ThroughWeapon
         color.a -= 0.08f;
         spriteRenderer.color = color;
         transform.localScale += new Vector3(0.2f, 0.2f);
-        CheckBroken();
+        if(through == stats.Through)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Enemy") && !targets.Contains(other.gameObject))
         {
-            AttackEnemy(other.gameObject);
+            Game.instance.AttackEnemy(other.gameObject, stats, through, true);
             targets.Add(other.gameObject);
         }
     }

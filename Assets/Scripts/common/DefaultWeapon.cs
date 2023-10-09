@@ -103,9 +103,7 @@ public class DefaultWeapon : MonoBehaviour
                 {
                     if(enemy.Count <= i) break;
                     EnemyPool enemyPool = EnemyManager.instance.GetEnemy(enemy[i]);
-                    int deal = Game.instance.GetDamage(weapon.stats.Power) - i * weapon.stats.DecreasePower;
-                    enemyPool.health -= deal;
-                    Damage.instance.WriteDamage(enemyPool.target, deal);
+                    Game.instance.AttackEnemy(enemy[i], weapon.stats, i);
                 }
             }
             else
