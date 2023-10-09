@@ -126,11 +126,11 @@ public class DefaultWeapon : MonoBehaviour
 
     private IEnumerator Lilpaaaaaa()
     {
-        // TODO: attack animation
         WaitForSeconds wait = new(weapon.stats.Cooldown);
         while(true)
         {
             yield return wait;
+            Player.instance.Attack();
             GameObject scream = ObjectPool.Get(
                 Game.instance.PoolManager,
                 "Scream",

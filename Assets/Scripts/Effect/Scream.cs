@@ -1,15 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scream : MonoBehaviour
+public class Scream : ThroughWeapon
 {
-    private WeaponStats stats;
     private List<GameObject> targets;
     private SpriteRenderer spriteRenderer;
 
     public void Reset(WeaponStats statsVal)
     {
         stats = statsVal;
+        through = 0;
+        targets.Clear();
+        transform.localScale = new Vector3(1, 1);
+        Color color = spriteRenderer.color;
+        color.a = 1f;
+        spriteRenderer.color = color;
     }
 
     private void Awake()
@@ -21,30 +26,18 @@ public class Scream : MonoBehaviour
     private void Update()
     {
         Color color = spriteRenderer.color;
-        color.a -= 0.05f;
+        color.a -= 0.08f;
         spriteRenderer.color = color;
-        transform.localScale += new Vector3(0.3f, 0.3f);
+        transform.localScale += new Vector3(0.2f, 0.2f);
+        CheckBroken();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Enemy") && !targets.Contains(other.gameObject))
         {
-            EnemyPool enemyPool = EnemyManager.instance.GetEnemy(other.gameObject);
-            Enemy script = enemyPool.target.GetComponent<Enemy>();
-            script.Knockback(Player.instance.gameObject);
-            int deal = Game.instance.GetDamage(stats.Power);
-            enemyPool.health -= deal;
-            Damage.instance.WriteDamage(other.gameObject, deal);
+            AttackEnemy(other.gameObject);
             targets.Add(other.gameObject);
         }
-    }
-
-    private void OnEnable()
-    {
-        targets.Clear();
-        Color color = spriteRenderer.color;
-        color.a = 1f;
-        spriteRenderer.color = color;
     }
 }
