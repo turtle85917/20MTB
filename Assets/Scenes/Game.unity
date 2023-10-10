@@ -923,6 +923,7 @@ GameObject:
   m_Component:
   - component: {fileID: 395566571}
   - component: {fileID: 395566572}
+  - component: {fileID: 395566573}
   m_Layer: 5
   m_Name: Chatting
   m_TagString: Untagged
@@ -957,15 +958,29 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395566570}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f60a62bd943d3a44991ae85dc26b5141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nick: "\uC9C4\uC9DC\uC6B0\uC641\uAD73"
   username: pulto
-  oauth: oauth:jxfubhxztyfyir8pt4momtvbo09n0v
-  Chat: {fileID: 803838717720544292, guid: adc172e8acb317348bb28a9ace556d9c, type: 3}
+  oauth: oauth:hsl8d25xw4dzp7f5fct7v675l3odcm
+  Chat: {fileID: 516552620922020897, guid: c9cc9b78fb563a34ea0110fd28f1ea69, type: 3}
+--- !u!114 &395566573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395566570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &518822034
 GameObject:
   m_ObjectHideFlags: 0
@@ -2575,7 +2590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1145575510
 Transform:
   m_ObjectHideFlags: 0

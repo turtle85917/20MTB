@@ -3,25 +3,51 @@ public static class Parser
     public static Chat GetMessage(string message)
     {
         string[] chunk = message.Split(' ');
-        switch(chunk[1])
+        switch(chunk[2])
         {
             case "PRIVMSG":
-                string nickname = ParseNickname(chunk[0]);
-                string channel = chunk[2].Substring(1);
-                string messageContent = chunk[3].Substring(1);
-                return new Chat()
+                string channel = ParseChannel(chunk[3]);
+                Chat chat =  new Chat()
                 {
-                    nickname = nickname,
                     channel = channel,
-                    message = messageContent
+                    message = ParseMessage(message)
                 };
+                ParseBadges(chat, message);
+                return chat;
             default:
                 return null;
         }
     }
 
-    private static string ParseNickname(string value)
+    private static void ParseBadges(Chat chat, string value)
     {
-        return value.Substring(1, value.IndexOf('!') - 1);
+        string[] chunk = value.Substring(1).Split(';');
+        foreach(string item in chunk)
+        {
+            string key = item.Substring(0, item.IndexOf('='));
+            string v = item.Substring(item.IndexOf('=') + 1);
+            switch(key)
+            {
+                case "color":
+                    chat.color = v;
+                    break;
+                case "user-id":
+                    chat.userId = v;
+                    break;
+                case "display-name":
+                    chat.username = v;
+                    break;
+            }
+        }
+    }
+
+    private static string ParseChannel(string value)
+    {
+        return value.Substring(1);
+    }
+
+    private static string ParseMessage(string value)
+    {
+        return value.Split(':')[^1];
     }
 }
