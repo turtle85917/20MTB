@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
             LookAtPlayer();
             bodySprite.flipX = transform.position.x > Player.instance.transform.position.x;
             animator.SetBool("isWalk", true);
-            Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, Player.instance.transform.position, enemyPool.MoveSpeed * Time.deltaTime));
+            Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, Player.instance.transform.position, enemyPool.moveSpeed * Time.deltaTime));
         }
         if(enemyPool.health <= 0 && !dying)
         {

@@ -5,7 +5,7 @@ public class EnemyPool
 {
     public GameObject target;
     public int health;
-    public int MoveSpeed;
-    public static List<EnemyWeapon> enemyWeapons;
+    public int moveSpeed;
+    public List<EnemyWeapon> enemyWeapons;
     public EnemyData data;
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
-    public static Damage instance;
+    public static Damage instance {get; private set;}
     [SerializeField] private GameObject Text;
 
     public void WriteDamage(GameObject target, int value, bool critical)

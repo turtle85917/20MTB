@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public static EnemyManager instance;
+    public static EnemyManager instance {get; private set;}
     [SerializeField] private GameObject Enemies;
     [SerializeField] private EnemyData[] enemies;
     private List<EnemyPool> enemyPools;
@@ -17,10 +17,23 @@ public class EnemyManager : MonoBehaviour
         enemyPools.Add(new EnemyPool(){
             target = enemy,
             health = enemyData.stats.MaxHealth,
-            MoveSpeed = UnityEngine.Random.Range(enemyData.stats.MoveSpeed[0], enemyData.stats.MoveSpeed[1]),
+            moveSpeed = UnityEngine.Random.Range(enemyData.stats.MinMoveSpeed, enemyData.stats.MaxMoveSpeed),
+            enemyWeapons = new(){},
             data = enemyData
         });
         return enemy;
+    }
+
+    public void AddWeaponToEnemy(GameObject target, string weaponId)
+    {
+        EnemyPool enemyPool = GetEnemy(target);
+        Weapon weapon = WeaponBundle.GetWeapon(weaponId);
+        enemyPool.enemyWeapons.Add(new EnemyWeapon(){
+            type = "N",
+            weapon = weapon.weapon,
+            stats = weapon.stats,
+            count = 0
+        });
     }
 
     public EnemyPool GetEnemy(GameObject Object)

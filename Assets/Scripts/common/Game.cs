@@ -94,13 +94,21 @@ public class Game : MonoBehaviour
                     if(timeline.circleRadius > 0)
                     {
                         enemy.transform.position = FollowCamera.instance.MovePosition(Player.instance.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle.normalized * timeline.circleRadius, 0);
+                        EnemyManager.instance.AddWeaponToEnemy(enemy, "axe");
                     }
                     else
                     {
-                        enemy.transform.position = new Vector3(
-                            UnityEngine.Random.Range(timeline.spawnPosition[0].x, timeline.spawnPosition[1].x),
-                            UnityEngine.Random.Range(timeline.spawnPosition[0].y, timeline.spawnPosition[1].y)
-                        );
+                        if(timeline.spawnPosition.Length == 1)
+                        {
+                            enemy.transform.position = timeline.spawnPosition[0];
+                        }
+                        else
+                        {
+                            enemy.transform.position = new Vector3(
+                                UnityEngine.Random.Range(timeline.spawnPosition[0].x, timeline.spawnPosition[1].x),
+                                UnityEngine.Random.Range(timeline.spawnPosition[0].y, timeline.spawnPosition[1].y)
+                            );
+                        }
                     }
                 }
             }
