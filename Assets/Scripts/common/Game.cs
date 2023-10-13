@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,6 +40,11 @@ public class Game : MonoBehaviour
                 GameObject weaponSlot = Instantiate(WeaponSlotPanel, WeaponSlot.transform, false);
                 weaponSlot.name = "Logo";
                 weaponSlot.GetComponent<Image>().sprite = weapon.weapon.logo;
+                if(weapon.type != "D")
+                {
+                    IExecuteWeapon executeWeapon = weaponSlot.AddComponent(weapon.weapon.executeWeapon.GetClass()) as IExecuteWeapon;
+                    executeWeapon.ExecuteWeapon();
+                }
                 break;
             }
         }
@@ -72,6 +78,7 @@ public class Game : MonoBehaviour
     {
         HeadImage.sprite = playerData.headImage;
         AddWeapon(playerData.defaultWeapon);
+        AddWeapon("Axe");
         StartCoroutine(Timer());
     }
 
@@ -94,7 +101,7 @@ public class Game : MonoBehaviour
                     if(timeline.circleRadius > 0)
                     {
                         enemy.transform.position = FollowCamera.instance.MovePosition(Player.instance.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle.normalized * timeline.circleRadius, 0);
-                        EnemyManager.instance.AddWeaponToEnemy(enemy, "axe");
+                        // EnemyManager.instance.AddWeaponToEnemy(enemy, "Axe");
                     }
                     else
                     {
