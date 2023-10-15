@@ -7,4 +7,5 @@ public class WeaponData : ScriptableObject
     public string WeaponId;
     public Sprite logo;
     public MonoScript executeWeapon;
+    public Object[] resources;
 }

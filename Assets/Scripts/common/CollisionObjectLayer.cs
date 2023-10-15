@@ -20,13 +20,13 @@ public class CollisionObjectLayer : MonoBehaviour
         {
             if(other.transform.position.y < transform.position.y)
             {
-                ChangeZ(gameObject, 1);
+                ChangeZ(gameObject, 3);
                 ChangeZ(other.gameObject, 0);
             }
             else
             {
                 ChangeZ(gameObject, 0);
-                ChangeZ(other.gameObject, 1);
+                ChangeZ(other.gameObject, 3);
             }
         }
     }

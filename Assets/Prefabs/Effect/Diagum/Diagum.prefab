@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1699098696854729763}
   - component: {fileID: 6515472307112163751}
   - component: {fileID: 4392555791075891644}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Diagum
   m_TagString: Untagged
   m_Icon: {fileID: 0}

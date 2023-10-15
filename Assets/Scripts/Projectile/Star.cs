@@ -11,6 +11,7 @@ public class Star : MonoBehaviour
     private List<GameObject> targets;
     private bool goAway;
     private int through;
+    private Vector2 movement;
     private readonly Color[] colors = new Color[4]{
         new Color(0.8f, 0.3f, 0.3f),
         new Color(0.3f, 0.8f, 0.5f),
@@ -38,14 +39,17 @@ public class Star : MonoBehaviour
     {
         if(goAway)
         {
-            Rigidbody.AddForce(Player.instance.lastMovement * 20);
+            Rigidbody.AddForce(movement * 20);
             return;
         }
         if(target == null && !goAway)
         {
             GameObject enemy = Scanner.ScanFilter(transform.position, 10, "Enemy", targets);
             if(enemy == null)
+            {
+                movement = Player.instance.Movement;
                 goAway = true;
+            }
             else
             {
                 target = enemy;

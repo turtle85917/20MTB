@@ -3,8 +3,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Vector2 movement;
-    public Vector2 lastMovement;
+    public Vector2 Movement
+    {
+        get
+        {
+            if(movement == Vector2.zero)
+                return lastMovement;
+            return movement;
+        }
+    }
     public static int health;
     public static int level;
     public static int exp;
@@ -15,6 +22,8 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer headSprite;
     [SerializeField] private SpriteRenderer bodySprite;
     private int forceAdd = 20;
+    private Vector2 movement;
+    private Vector2 lastMovement;
 
     public void Knockback(GameObject target)
     {

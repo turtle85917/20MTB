@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,7 +42,7 @@ public class Game : MonoBehaviour
                 if(weapon.type != "D")
                 {
                     IExecuteWeapon executeWeapon = weaponSlot.AddComponent(weapon.weapon.executeWeapon.GetClass()) as IExecuteWeapon;
-                    executeWeapon.ExecuteWeapon();
+                    executeWeapon.ExecuteWeapon(weapon.weapon.resources, weapon.stats);
                 }
                 break;
             }
@@ -55,12 +54,12 @@ public class Game : MonoBehaviour
         return Power + playerData.stats.Power / Power;
     }
 
-    public void AttackEnemy(GameObject target, WeaponStats stats, int through, bool knockback = false)
+    public void AttackEnemy(GameObject target, WeaponStats stats, int through, bool knockback = false, GameObject knocbackTarget = null)
     {
         bool critical = UnityEngine.Random.Range(0f, 1f) <= stats.CriticalHit;
         EnemyPool enemyPool = EnemyManager.instance.GetEnemy(target);
         if(knockback)
-            enemyPool.target.GetComponent<Enemy>().Knockback(Player.instance.gameObject);
+            enemyPool.target.GetComponent<Enemy>().Knockback(knocbackTarget ?? Player.instance.gameObject);
         int deal = GetDamage(critical ? stats.CriticalDamage : stats.Power) - through * stats.DecreasePower;
         enemyPool.health -= deal;
         Damage.instance.WriteDamage(target, deal, critical);

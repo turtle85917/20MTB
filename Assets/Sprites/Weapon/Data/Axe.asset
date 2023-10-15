@@ -15,3 +15,5 @@ MonoBehaviour:
   WeaponId: Axe
   logo: {fileID: -1554710923, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
   executeWeapon: {fileID: 11500000, guid: 59fae0af09f158a48855224101071bc9, type: 3}
+  resources:
+  - {fileID: 4373399261051658914, guid: 0903e1ea8548eed45a7ec2bfe8df6ae7, type: 3}

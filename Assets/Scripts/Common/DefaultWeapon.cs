@@ -95,7 +95,7 @@ public class DefaultWeapon : MonoBehaviour
             yield return wait;
             List<GameObject> enemy = Scanner.ScanAll(Player.instance.transform.position, 10, "Enemy");
             Player.instance.Attack();
-            Vector2 direction = Player.instance.lastMovement;
+            Vector2 direction = Player.instance.Movement;
             if(enemy.Count > 0)
             {
                 enemy = enemy.OrderBy(item => Vector3.Distance(item.transform.position, Player.instance.transform.position)).ToList();

@@ -1596,8 +1596,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec408a541d6582f41ae1eb5b4e39e3ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {x: 0, y: 0}
-  lastMovement: {x: 0, y: 0}
   headSprite: {fileID: 685697177}
   bodySprite: {fileID: 522529760}
 --- !u!50 &1062170211
