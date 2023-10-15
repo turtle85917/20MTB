@@ -32,7 +32,6 @@ public class Enemy : MonoBehaviour
         Rigidbody.velocity = Vector2.zero;
         StartCoroutine(Knockbacking(target));
     }
-
     public void Sturn()
     {
         if(sturning || dying) return;
@@ -84,6 +83,15 @@ public class Enemy : MonoBehaviour
             Player.health -= 2;
             Player.instance.Knockback(gameObject);
             Damage.instance.WriteDamage(other.gameObject, 2, false);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            Player.health -= 1;
+            Damage.instance.WriteDamage(other.gameObject, 1, false);
         }
     }
 

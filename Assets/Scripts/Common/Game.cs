@@ -77,6 +77,7 @@ public class Game : MonoBehaviour
     {
         HeadImage.sprite = playerData.headImage;
         AddWeapon(playerData.defaultWeapon);
+        AddWeapon("Axe");
         StartCoroutine(Timer());
     }
 

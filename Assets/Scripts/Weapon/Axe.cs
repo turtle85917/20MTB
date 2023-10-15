@@ -6,10 +6,11 @@ public class Axe : MonoBehaviour, IExecuteWeapon
     private WeaponStats stats;
     private GameObject AxePrefab;
     [SerializeField] private bool isProjectile;
-    private bool isEnemyUsing;     // 적이 사용 중인가?
-    private GameObject weaponUser; // 적 전용
+    private GameObject weaponUser; // 무기 사용 중인 적
+    private string targetTag;
     private bool goAway;
     private int through;
+    private GameObject target;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D Rigidbody;
 
@@ -18,33 +19,36 @@ public class Axe : MonoBehaviour, IExecuteWeapon
         stats = statsVal;
         AxePrefab = resources[0] as GameObject;
         goAway = false;
-        isEnemyUsing = false;
-        StartCoroutine(WeaponCycle());
+        StartCoroutine(WeaponCycle(false));
     }
 
     public void ExecuteEnemyWeapon(GameObject weaponUserVal, Object[] resources, WeaponStats statsVal)
     {
-        weaponUser = weaponUserVal;
         stats = statsVal;
         AxePrefab = resources[0] as GameObject;
         goAway = false;
-        isEnemyUsing = true;
-        StartCoroutine(WeaponCycle());
+        weaponUser = weaponUserVal;
+        StartCoroutine(WeaponCycle(true));
     }
 
-    public void Reset(WeaponStats statsVal, GameObject target)
+    public void Reset(WeaponStats statsVal, GameObject targetVal, GameObject chaser, string tag)
     {
-        stats = statsVal;
         goAway = false;
+        stats = statsVal;
         through = 0;
+        target = targetVal;
+        targetTag = tag;
+        transform.position = target.transform.position;
         Rigidbody.velocity = Vector2.zero;
-        string targetTag = isEnemyUsing ? "Player" : "Enemy";
-        float x = 0;
-        if(target.CompareTag(targetTag))
+        if(chaser != null)
         {
-            x = (target.transform.position - transform.position).normalized.x;
+            Debug.Log($"{target.name} -->> {chaser.name} :: {GetDirection(chaser.transform.position)}");
+            Rigidbody.AddForce(new Vector3(GetDirection(chaser.transform.position), 18), ForceMode2D.Impulse);
         }
-        Rigidbody.AddForce(new Vector3(x * 0.6f, 18), ForceMode2D.Impulse);
+        else
+        {
+            Rigidbody.AddForce(Vector3.up * 4, ForceMode2D.Impulse);
+        }
     }
 
     private void Awake()
@@ -61,11 +65,11 @@ public class Axe : MonoBehaviour, IExecuteWeapon
         if(isProjectile)
         {
             // NOTE: 유도성 도끼
-            GameObject enemy = Scanner.Scan(transform.position, 1.5f, "Enemy");
-            if(!goAway && enemy != null)
+            GameObject gameObject = Scanner.Scan(target.transform.position, 2f, targetTag);
+            if(!goAway && gameObject != null)
             {
-                spriteRenderer.flipX = Player.instance.transform.position.x < enemy.transform.position.x;
-                Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, enemy.transform.position, 40 * Time.deltaTime));
+                spriteRenderer.flipX = transform.position.x < gameObject.transform.position.x;
+                Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, gameObject.transform.position, 40 * Time.deltaTime));
             }
             if(through == stats.Through)
             {
@@ -76,30 +80,55 @@ public class Axe : MonoBehaviour, IExecuteWeapon
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(isProjectile && !goAway && other.CompareTag("Enemy"))
+        if(isProjectile && !goAway)
         {
-            Game.instance.AttackEnemy(other.gameObject, stats, through, true, gameObject);
-            through++;
+            if(target.CompareTag("Player") && other.CompareTag("Enemy"))
+            {
+                Game.instance.AttackEnemy(other.gameObject, stats, through, true, gameObject);
+                through++;
+            }
+            if(target.CompareTag("Enemy") && other.CompareTag("Player"))
+            {
+                int deal = Game.instance.GetDamage(stats.Power);
+                Player.health -= deal;
+                Damage.instance.WriteDamage(other.gameObject, deal, false);
+                through++;
+            }
         }
     }
 
-    private IEnumerator WeaponCycle()
+    private void OnTriggerStay2D(Collider2D other)
     {
-        GameObject target = isEnemyUsing ? weaponUser : Player.instance.gameObject;
-        string targetTag = isEnemyUsing ? "Player" : "Enemy";
+        if(isProjectile)
+        {
+            Rigidbody.AddForce(Vector3.up * 4, ForceMode2D.Impulse);
+        }
+    }
+
+    private float GetDirection(Vector3 chaser)
+    {
+        Vector3 distance = chaser - target.transform.localPosition;
+        if(target.CompareTag("Player"))
+            distance.Normalize();
+        return distance.x * 0.8f;
+    }
+
+    private IEnumerator WeaponCycle(bool isEnemyUsing)
+    {
+        target = isEnemyUsing ? weaponUser : Player.instance.gameObject;
+        string enemyTag = isEnemyUsing ? "Player" : "Enemy";
         while(true)
         {
             yield return new WaitForSeconds(stats.Cooldown);
-            GameObject chaser = Scanner.Scan((isEnemyUsing ? Player.instance.gameObject : weaponUser).transform.position, 10, targetTag);
+            GameObject chaser = Scanner.Scan(target.transform.position, 10, enemyTag);
             GameObject axe = ObjectPool.Get(
                 Game.instance.PoolManager,
                 "Axe",
                 () => Instantiate(AxePrefab, Game.instance.PoolManager.transform, false)
             );
             axe.name = "Axe";
-            axe.transform.position = target.transform.position;
             Axe script = axe.GetComponent<Axe>();
-            script.Reset(stats, chaser ?? target);
+            script.Reset(stats, target, chaser, enemyTag);
             yield return new WaitForSeconds(stats.Life);
             axe.SetActive(false);
         }
