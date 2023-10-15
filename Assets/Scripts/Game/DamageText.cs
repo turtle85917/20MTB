@@ -7,7 +7,7 @@ public class DamageText : MonoBehaviour
     {
         if(gameObject.activeSelf)
         {
-            transform.localPosition += Vector3.up * 60 * Time.deltaTime;
+            ((RectTransform)transform).anchoredPosition += Vector2.up * Time.deltaTime;
         }
     }
 
