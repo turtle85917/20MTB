@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -7,6 +8,7 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     private Rigidbody2D Rigidbody;
     [SerializeField] private GameObject Head;
+    [SerializeField] private GameObject WeaponManager;
     [Header("캐릭터 파츠")]
     [SerializeField] private SpriteRenderer headSprite;
     [SerializeField] private SpriteRenderer bodySprite;
@@ -15,6 +17,12 @@ public class Enemy : MonoBehaviour
     private bool sturning;
     private bool dying;
     private int forceAdd = 20;
+
+    public IExecuteWeapon AddWeaponScript(MonoScript script)
+    {
+        IExecuteWeapon executeWeapon = WeaponManager.AddComponent(script.GetClass()) as IExecuteWeapon;
+        return executeWeapon;
+    }
 
     public void Knockback(GameObject target)
     {

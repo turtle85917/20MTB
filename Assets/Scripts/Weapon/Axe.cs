@@ -6,6 +6,8 @@ public class Axe : MonoBehaviour, IExecuteWeapon
     private WeaponStats stats;
     private GameObject AxePrefab;
     [SerializeField] private bool isProjectile;
+    private bool isEnemyUsing;     // 적이 사용 중인가?
+    private GameObject weaponUser; // 적 전용
     private bool goAway;
     private int through;
     private SpriteRenderer spriteRenderer;
@@ -16,11 +18,18 @@ public class Axe : MonoBehaviour, IExecuteWeapon
         stats = statsVal;
         AxePrefab = resources[0] as GameObject;
         goAway = false;
+        isEnemyUsing = false;
         StartCoroutine(WeaponCycle());
     }
 
-    public void ExecuteEnemyWeapon()
+    public void ExecuteEnemyWeapon(GameObject weaponUserVal, Object[] resources, WeaponStats statsVal)
     {
+        weaponUser = weaponUserVal;
+        stats = statsVal;
+        AxePrefab = resources[0] as GameObject;
+        goAway = false;
+        isEnemyUsing = true;
+        StartCoroutine(WeaponCycle());
     }
 
     public void Reset(WeaponStats statsVal, GameObject target)
@@ -29,10 +38,11 @@ public class Axe : MonoBehaviour, IExecuteWeapon
         goAway = false;
         through = 0;
         Rigidbody.velocity = Vector2.zero;
+        string targetTag = isEnemyUsing ? "Player" : "Enemy";
         float x = 0;
-        if(target.CompareTag("Enemy"))
+        if(target.CompareTag(targetTag))
         {
-            x = (target.transform.position - Player.instance.transform.position).normalized.x;
+            x = (target.transform.position - transform.position).normalized.x;
         }
         Rigidbody.AddForce(new Vector3(x * 0.6f, 18), ForceMode2D.Impulse);
     }
@@ -75,19 +85,21 @@ public class Axe : MonoBehaviour, IExecuteWeapon
 
     private IEnumerator WeaponCycle()
     {
+        GameObject target = isEnemyUsing ? weaponUser : Player.instance.gameObject;
+        string targetTag = isEnemyUsing ? "Player" : "Enemy";
         while(true)
         {
             yield return new WaitForSeconds(stats.Cooldown);
-            GameObject enemy = Scanner.Scan(Player.instance.transform.position, 10, "Enemy");
+            GameObject chaser = Scanner.Scan((isEnemyUsing ? Player.instance.gameObject : weaponUser).transform.position, 10, targetTag);
             GameObject axe = ObjectPool.Get(
                 Game.instance.PoolManager,
                 "Axe",
                 () => Instantiate(AxePrefab, Game.instance.PoolManager.transform, false)
             );
             axe.name = "Axe";
-            axe.transform.position = Player.instance.transform.position;
+            axe.transform.position = target.transform.position;
             Axe script = axe.GetComponent<Axe>();
-            script.Reset(stats, enemy ?? Player.instance.gameObject);
+            script.Reset(stats, chaser ?? target);
             yield return new WaitForSeconds(stats.Life);
             axe.SetActive(false);
         }
