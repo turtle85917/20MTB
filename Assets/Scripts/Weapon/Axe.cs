@@ -42,11 +42,12 @@ public class Axe : MonoBehaviour, IExecuteWeapon
         Rigidbody.velocity = Vector2.zero;
         if(chaser != null)
         {
-            Debug.Log($"{target.name} -->> {chaser.name} :: {GetDirection(chaser.transform.position)}");
-            Rigidbody.AddForce(new Vector3(GetDirection(chaser.transform.position), 18), ForceMode2D.Impulse);
+            Debug.Log($"Axe {target.name} -->> {chaser.name} :: {GetDirection(chaser.transform.position)}");
+            Rigidbody.AddForce(GetDirection(chaser.transform.position), ForceMode2D.Impulse);
         }
         else
         {
+            Debug.Log("Axe go-away");
             Rigidbody.AddForce(Vector3.up * 4, ForceMode2D.Impulse);
         }
     }
@@ -101,16 +102,28 @@ public class Axe : MonoBehaviour, IExecuteWeapon
     {
         if(isProjectile)
         {
-            Rigidbody.AddForce(Vector3.up * 4, ForceMode2D.Impulse);
+            StartCoroutine(StuckBug());
         }
     }
 
-    private float GetDirection(Vector3 chaser)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        Vector3 distance = chaser - target.transform.localPosition;
-        if(target.CompareTag("Player"))
-            distance.Normalize();
-        return distance.x * 0.8f;
+        if(isProjectile)
+        {
+            StopCoroutine(StuckBug());
+        }
+    }
+
+    private Vector2 GetDirection(Vector3 chaserPosition)
+    {
+        Vector3 distance = chaserPosition - target.transform.position;
+        float magnitude = distance.magnitude;
+        float correction = 0.4f;
+        if(chaserPosition.x < target.transform.position.x)
+            magnitude *= -1;
+        if(target.CompareTag("Enemy"))
+            correction = 0.8f;
+        return new Vector2(magnitude * correction, 18);
     }
 
     private IEnumerator WeaponCycle(bool isEnemyUsing)
@@ -132,5 +145,11 @@ public class Axe : MonoBehaviour, IExecuteWeapon
             yield return new WaitForSeconds(stats.Life);
             axe.SetActive(false);
         }
+    }
+
+    private IEnumerator StuckBug()
+    {
+        yield return new WaitForSeconds(0.6f);
+        Rigidbody.AddForce(Vector2.up * 2, ForceMode2D.Impulse);
     }
 }
