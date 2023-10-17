@@ -1,5 +1,6 @@
 public class ExcelWeapon
 {
+    public string Name;
     public string Type;
     public int Power;
     public int Cooldown;
@@ -12,4 +13,5 @@ public class ExcelWeapon
     public int ProjectileSize;
     public int ProjectileSpeed;
     public int ProjectileCount;
+    public int Count;
 }

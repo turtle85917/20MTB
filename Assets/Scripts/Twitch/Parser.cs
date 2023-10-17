@@ -10,7 +10,8 @@ public static class Parser
                 Chat chat =  new Chat()
                 {
                     channel = channel,
-                    message = ParseMessage(message)
+                    message = ParseMessage(message),
+                    target = null
                 };
                 ParseBadges(chat, message);
                 return chat;

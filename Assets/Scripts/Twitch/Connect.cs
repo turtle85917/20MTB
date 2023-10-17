@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Sockets;
 using UnityEngine;
 
@@ -11,12 +13,17 @@ public class Connect : MonoBehaviour
     private TcpClient twitchClient;
     private StreamReader reader;
     private StreamWriter writer;
+    private List<Chat> chatQueue;
+    private readonly Dictionary<string, string[]> commands = new(){
+        {"spawn", new string[]{"spawn", "create", "생성"}}
+    };
 
     private void Awake()
     {
         twitchClient = new("irc.chat.twitch.tv", 6667);
         reader = new(twitchClient.GetStream());
         writer = new(twitchClient.GetStream());
+        chatQueue = new(){};
     }
 
     private void Start()
@@ -24,7 +31,7 @@ public class Connect : MonoBehaviour
         writer.WriteLine("PASS " + oauth);
         writer.WriteLine("NICK " + nick);
         writer.WriteLine("USER " + username + " 8 * : " + username);
-        writer.WriteLine("JOIN #aba4647");
+        writer.WriteLine("JOIN #pulto");
         writer.WriteLine("CAP REQ :twitch.tv/commands twitch.tv/tags");
         writer.Flush();
         Debug.Log("Connect twitch chatting");
@@ -49,27 +56,55 @@ public class Connect : MonoBehaviour
                 return;
             }
             Chat chat = Parser.GetMessage(message);
+            
+            if(chatQueue.Count > 4)
+            {
+                Chat oldChat = chatQueue.First();
+                oldChat.target.SetActive(false);
+                chatQueue.Remove(oldChat);
+            }
             if(chat != null)
             {
-                GameObject chat_ = ObjectPool.Get(
-                    gameObject,
-                    "Chat",
-                    () => {
-                        GameObject target = Instantiate(Chat, transform, false);
-                        target.transform.SetAsLastSibling();
-                        return target;
-                    }
-                );
-                chat_.name = "Chat";
-                chat_.GetComponent<ChatPanel>().RectTransform.anchoredPosition = new Vector2(0, -40);
-                for(int i = 0; i < transform.childCount; i++)
+                CreateNewChatObject(chat);
+                if(chat.message.StartsWith("!"))
                 {
-                    GameObject child = transform.GetChild(i).gameObject;
-                    child.GetComponent<ChatPanel>().RectTransform.anchoredPosition += new Vector2(0, 80);
+                    string[] chunk = chat.message.Substring(1).Split(' ');
+                    string key = commands.FirstOrDefault(item => item.Value.Contains(chunk[0])).Key;
+                    switch(key)
+                    {
+                        case "spawn":
+                            string weaponName = chunk[1];
+                            Weapon weapon = WeaponBundle.GetWeaponByName(weaponName);
+                            if(weapon != null)
+                            {
+                                GameObject enemy = EnemyManager.instance.NewEnemy("Panzee");
+                                EnemyManager.instance.AddWeaponToEnemy(enemy, weapon.weapon.WeaponId);
+                                enemy.transform.position = FollowCamera.instance.MovePosition(Player.instance.transform.position + (Vector3)Random.insideUnitCircle.normalized * 15, 0);
+                            }
+                            break;
+                    }
                 }
-                ChatPanel script = chat_.GetComponent<ChatPanel>();
-                script.WriteContent(chat);
             }
         }
+    }
+
+    private void CreateNewChatObject(Chat chat)
+    {
+        GameObject chat_ = ObjectPool.Get(
+            gameObject,
+            "Chat",
+            () => Instantiate(Chat, transform, false)
+        );
+        chat_.name = "Chat";
+        chat_.GetComponent<ChatPanel>().RectTransform.anchoredPosition = new Vector2(0, -40);
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            GameObject child = transform.GetChild(i).gameObject;
+            child.GetComponent<ChatPanel>().RectTransform.anchoredPosition += new Vector2(0, 80);
+        }
+        ChatPanel script = chat_.GetComponent<ChatPanel>();
+        script.WriteContent(chat);
+        chat.target = chat_;
+        chatQueue.Add(chat);
     }
 }

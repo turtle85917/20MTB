@@ -100,7 +100,6 @@ public class Game : MonoBehaviour
                     if(timeline.circleRadius > 0)
                     {
                         enemy.transform.position = FollowCamera.instance.MovePosition(Player.instance.transform.position + (Vector3)UnityEngine.Random.insideUnitCircle.normalized * timeline.circleRadius, 0);
-                        EnemyManager.instance.AddWeaponToEnemy(enemy, "Axe");
                     }
                     else
                     {

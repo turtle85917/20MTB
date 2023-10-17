@@ -531,14 +531,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395566570}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f60a62bd943d3a44991ae85dc26b5141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nick: "\uC9C4\uC9DC\uC6B0\uC641\uAD73"
   username: pulto
-  oauth: oauth:hsl8d25xw4dzp7f5fct7v675l3odcm
+  oauth: oauth:ii243cmd3yt1a1cx702fcixkxujksb
   Chat: {fileID: 516552620922020897, guid: c9cc9b78fb563a34ea0110fd28f1ea69, type: 3}
 --- !u!114 &395566573
 MonoBehaviour:

@@ -11,4 +11,5 @@ public class WeaponStats
     public int ProjectileSize;
     public int ProjectileSpeed;
     public int ProjectileCount;
+    public int Count;
 }

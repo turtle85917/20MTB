@@ -47,7 +47,7 @@ public class Axe : MonoBehaviour, IExecuteWeapon
         }
         else
         {
-            Debug.Log("Axe go-away");
+            Debug.Log($"Axe {target.name} go-away");
             Rigidbody.AddForce(Vector3.up * 4, ForceMode2D.Impulse);
         }
     }
@@ -72,7 +72,10 @@ public class Axe : MonoBehaviour, IExecuteWeapon
                 spriteRenderer.flipX = transform.position.x < gameObject.transform.position.x;
                 Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, gameObject.transform.position, 40 * Time.deltaTime));
             }
-            if(through == stats.Through)
+            if(
+                (through == stats.Through && target.CompareTag("Player")) ||
+                (through == stats.Count && target.CompareTag("Enemy"))
+            )
             {
                 goAway = true;
             }

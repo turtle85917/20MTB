@@ -13,7 +13,6 @@ public class ChatPanel : MonoBehaviour
     }
     [SerializeField] private TMP_Text Nickname;
     [SerializeField] private TMP_Text Content;
-    private Animator animator;
     private RectTransform rectTransform;
 
     public void WriteContent(Chat chat)
@@ -25,25 +24,8 @@ public class ChatPanel : MonoBehaviour
         Content.text = chat.message;
     }
 
-    public void HideAnimEnd()
-    {
-        gameObject.SetActive(false);
-    }
-
     private void Awake()
     {
-        animator = GetComponent<Animator>();
         rectTransform = GetComponent<RectTransform>();
-    }
-
-    private void OnEnable()
-    {
-        StartCoroutine(Hide());
-    }
-
-    private IEnumerator Hide()
-    {
-        yield return new WaitForSeconds(1.3f);
-        animator.SetTrigger("fadeOut");
     }
 }

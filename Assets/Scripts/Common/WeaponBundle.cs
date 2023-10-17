@@ -3,12 +3,17 @@ using UnityEngine;
 
 public class WeaponBundle : MonoBehaviour
 {
-    public static List<Weapon> assets;
+    private static List<Weapon> assets;
     [SerializeField] private WeaponData[] weaponDatas;
 
     public static Weapon GetWeapon(string weaponId)
     {
         return assets.Find(item => item.weapon.WeaponId == weaponId);
+    }
+    
+    public static Weapon GetWeaponByName(string weaponName)
+    {
+        return assets.Find(item => item.name.Equals(weaponName)) ?? GetWeapon(weaponName); // 이름을 구할 수 없을 경우, id로도 구해본다.
     }
 
     private void Awake()
@@ -21,6 +26,7 @@ public class WeaponBundle : MonoBehaviour
             Weapon weapon = new Weapon()
             {
                 type = (string)excelData["Type"],
+                name = (string)excelData["Name"],
                 weapon = weaponDatas[i],
                 stats = new WeaponStats()
                 {
@@ -34,7 +40,8 @@ public class WeaponBundle : MonoBehaviour
                     ProjectileName = (string)excelData["ProjectileName"],
                     ProjectileSize = (int)TryGetNumValue(excelData["ProjectileSize"]),
                     ProjectileSpeed = (int)TryGetNumValue(excelData["ProjectileSpeed"]),
-                    ProjectileCount = (int)TryGetNumValue(excelData["ProjectileCount"])
+                    ProjectileCount = (int)TryGetNumValue(excelData["ProjectileCount"]),
+                    Count = (int)TryGetNumValue(excelData["Count"])
                 }
             };
             assets.Add(weapon);
