@@ -56,7 +56,6 @@ public class Connect : MonoBehaviour
                 return;
             }
             Chat chat = Parser.GetMessage(message);
-            
             if(chatQueue.Count > 4)
             {
                 Chat oldChat = chatQueue.First();
