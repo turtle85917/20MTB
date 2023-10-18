@@ -31,7 +31,7 @@ public class Connect : MonoBehaviour
         writer.WriteLine("PASS " + oauth);
         writer.WriteLine("NICK " + nick);
         writer.WriteLine("USER " + username + " 8 * : " + username);
-        writer.WriteLine("JOIN #pulto");
+        writer.WriteLine("JOIN #pulto__");
         writer.WriteLine("CAP REQ :twitch.tv/commands twitch.tv/tags");
         writer.Flush();
         Debug.Log("Connect twitch chatting");
@@ -39,7 +39,11 @@ public class Connect : MonoBehaviour
 
     private void Update()
     {
-        if(!twitchClient.Connected) return;
+        if(!twitchClient.Connected)
+        {
+            Debug.Log("Disconnect");
+            return;
+        }
         ReadChat();
     }
 
@@ -49,7 +53,7 @@ public class Connect : MonoBehaviour
         {
             string message = reader.ReadLine();
             Debug.Log(message);
-            if(message.Split(' ')[1] == "PING")
+            if(message.StartsWith("PING"))
             {
                 writer.WriteLine("PONG :tmi.twitch.tv");
                 writer.Flush();
