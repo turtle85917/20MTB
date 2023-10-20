@@ -11,7 +11,6 @@ public class Game : MonoBehaviour
     public PlayerData playerData;
     public GameObject PoolManager;
     public GameObject Exp;
-    public GameObject Sturn;
     public static List<Weapon> playerWeapons;
     public static Game instance {get; private set;}
     [SerializeField] private PlayerData[] players;

@@ -37,7 +37,7 @@ public class MagicCircle : MonoBehaviour
             () => Instantiate(Stamp, Game.instance.PoolManager.transform, false)
         );
         stamp.name = "Stamp";
-        stamp.transform.position = target.transform.position + Vector3.up * 4;
+        stamp.transform.position = target.transform.position + Vector3.up * 3;
         StopAllCoroutines();
     }
 }

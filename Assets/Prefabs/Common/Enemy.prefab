@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3866623078030494412}
-  - component: {fileID: 8090658814711050018}
+  - component: {fileID: 6511797227913090034}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -116,7 +116,7 @@ Transform:
   m_Father: {fileID: 3513722089968042373}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8090658814711050018
+--- !u!212 &6511797227913090034
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Head: {fileID: 1823365418843209841}
   WeaponManager: {fileID: 2440521382580745528}
-  headSprite: {fileID: 8090658814711050018}
+  headSprite: {fileID: 6511797227913090034}
   bodySprite: {fileID: 7436819865670068624}
 --- !u!114 &869598142683592418
 MonoBehaviour:

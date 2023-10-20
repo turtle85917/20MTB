@@ -5,7 +5,7 @@ public class Stamp : MonoBehaviour
 {
     private void Update()
     {
-        transform.localPosition += Vector3.down * 4f * Time.deltaTime;
+        transform.localPosition += Vector3.down * 2f * Time.deltaTime;
     }
 
     private void OnEnable()

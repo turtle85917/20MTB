@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Panzee
   m_EditorClassIdentifier: 
   enemyId: Panzee
-  Prefab: {fileID: 9127897591107940937, guid: f16ea47333006e949a634f8f08a68a23, type: 3}
+  Prefab: {fileID: 4546626817620932141, guid: 7abde2c39dd6d59438abb0422d91fcf0, type: 3}
   stats:
-    MaxHealth: 15
+    MaxHealth: 10
     Power: 10
     MinMoveSpeed: 5
     MaxMoveSpeed: 9

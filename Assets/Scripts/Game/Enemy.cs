@@ -32,14 +32,14 @@ public class Enemy : MonoBehaviour
         Rigidbody.velocity = Vector2.zero;
         StartCoroutine(Knockbacking(target));
     }
+
     public void Sturn()
     {
         if(sturning || dying) return;
         animator.SetBool("isWalk", false);
         animator.SetBool("isKnockback", false);
         sturning = true;
-        GameObject sturn = Instantiate(Game.instance.Sturn, transform, false);
-        StartCoroutine(Sturning(sturn));
+        StartCoroutine(Sturning());
     }
 
     public void OnDie()
@@ -120,10 +120,13 @@ public class Enemy : MonoBehaviour
         animator.SetBool("isKnockback", false);
     }
 
-    private IEnumerator Sturning(GameObject sturn)
+    private IEnumerator Sturning()
     {
+        headSprite.color = Color.yellow;
+        bodySprite.color = Color.yellow;
         yield return new WaitForSeconds(4f);
         sturning = false;
-        Destroy(sturn);
+        headSprite.color = Color.white;
+        bodySprite.color = Color.white;
     }
 }
