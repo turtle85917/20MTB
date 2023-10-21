@@ -58,7 +58,7 @@ public class Game : MonoBehaviour
                 if(weapon.type != "D")
                 {
                     IExecuteWeapon executeWeapon = weaponSlot.AddComponent(weapon.weapon.weaponCycleScriptFile.GetClass()) as IExecuteWeapon;
-                    executeWeapon.ExecuteWeapon(weapon.weapon.resources, weapon.stats);
+                    executeWeapon.ExecuteWeapon(Player.instance.gameObject);
                 }
                 break;
             }
@@ -83,7 +83,7 @@ public class Game : MonoBehaviour
     {
         HeadImage.sprite = playerData.data.headImage;
         AddWeapon(playerData.data.defaultWeapon);
-        // AddWeapon("Axe");
+        AddWeapon("Axe");
         StartCoroutine(Timer());
     }
 
