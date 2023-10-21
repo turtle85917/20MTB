@@ -40,7 +40,7 @@ public class EnemyManager : MonoBehaviour
         Weapon weapon = WeaponBundle.GetWeapon(weaponId);
         if(weapon.type == "D") return;
         IExecuteWeapon executeWeapon = target.AddComponent(weapon.weapon.weaponCycleScriptFile.GetClass()) as IExecuteWeapon;
-        executeWeapon.ExecuteWeapon(weapon.weapon.resources, weapon.stats, enemyPool.target);
+        executeWeapon.ExecuteWeapon(enemyPool.target);
         enemyPool.enemyWeapons.Add(new Weapon(){
             type = "N",
             weapon = weapon.weapon,

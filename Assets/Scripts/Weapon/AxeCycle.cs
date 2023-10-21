@@ -1,112 +1,21 @@
 using System.Collections;
 using _20MTB.Stats;
-using _20MTB.Utillity;
 using UnityEngine;
 
-public class Axe : MonoBehaviour, IExecuteWeapon
+public class AxeCycle : MonoBehaviour, IExecuteWeapon
 {
     private WeaponStats stats;
     private GameObject AxePrefab;
-    [SerializeField] private bool isProjectile;
-    private WeaponUseMode useMode;
-    private WeaponStatus weaponStatus;
-    private GameObject weaponUser; // 무기 사용 중인 놈
-    private int through;
-    private SpriteRenderer spriteRenderer;
-    private Rigidbody2D Rigidbody;
 
-    public void ExecuteWeapon(Object[] resources, WeaponStats statsVal, GameObject useTarget)
+    public void ExecuteWeapon(GameObject weaponUserVal)
     {
-        stats = statsVal;
-        AxePrefab = resources[0] as GameObject;
-        useMode = useTarget == null ? WeaponUseMode.Enemy : WeaponUseMode.Player;
-        weaponUser = useTarget ?? Player.instance.gameObject;
-        StartCoroutine(WeaponCycle());
+        Weapon weapon = WeaponBundle.GetWeapon("Axe");
+        stats = weapon.stats;
+        AxePrefab = weapon.weapon.resources[0] as GameObject;
+        StartCoroutine(WeaponCycle(weaponUserVal));
     }
 
-    public void Reset(WeaponStats statsVal, ref GameObject weaponUser)
-    {
-        stats = statsVal;
-        through = 0;
-        Rigidbody.velocity = Vector2.zero;
-        weaponStatus = WeaponStatus.GoAway;
-        GameObject target = Scanner.Scan(weaponUser.transform.position, 10, weaponUser.CompareTag("Player") ? "Enemy" : "Player");
-        if(target != null)
-        {
-            Rigidbody.AddForce(GetDirection(weaponUser.transform.position, target.transform.position), ForceMode2D.Impulse);
-        }
-        else
-        {
-            Rigidbody.AddForce(Vector3.up * 4, ForceMode2D.Impulse);
-        }
-    }
-
-    private void Awake()
-    {
-        if(isProjectile)
-        {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-            Rigidbody = GetComponent<Rigidbody2D>();
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if(isProjectile && weaponStatus == WeaponStatus.Idle)
-        {
-            string targetTag = GameUtils.GetAttackTargetTag(weaponUser);
-            int maxCount = weaponUser ? stats.Through : stats.Count;
-            if(other.CompareTag(targetTag))
-            {
-                if(weaponUser.CompareTag("Player"))
-                {}
-            }
-            // if(target.CompareTag("Player") && other.CompareTag("Enemy"))
-            // {
-            //     EnemyManager.AttackEnemy(other.gameObject, stats, through, processFunc:(enemy) => {
-            //         enemy.Knockback(gameObject);
-            //     });
-            //     through++;
-            // }
-            // if(target.CompareTag("Enemy") && other.CompareTag("Player"))
-            // {
-            //     int deal = Game.instance.GetDamage(stats.Power);
-            //     Player.health -= deal;
-            //     Damage.instance.WriteDamage(other.gameObject, deal, false);
-            //     through++;
-            // }
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if(isProjectile)
-        {
-            StartCoroutine(StuckBug());
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if(isProjectile)
-        {
-            StopCoroutine(StuckBug());
-        }
-    }
-
-    private Vector2 GetDirection(Vector3 targetPosition, Vector3 chaserPosition)
-    {
-        Vector3 distance = chaserPosition - targetPosition;
-        float magnitude = distance.magnitude;
-        float correction = 0.4f;
-        if(chaserPosition.x < targetPosition.x)
-            magnitude *= -1;
-        if(useMode == WeaponUseMode.Enemy)
-            correction = 0.8f;
-        return new Vector2(magnitude * correction, 18);
-    }
-
-    private IEnumerator WeaponCycle()
+    private IEnumerator WeaponCycle(GameObject weaponUser)
     {
         while(true)
         {
@@ -120,16 +29,9 @@ public class Axe : MonoBehaviour, IExecuteWeapon
                     return obj;
                 }
             );
-            transform.position = weaponUser.transform.position;
-            axe.GetComponent<Axe>().Reset(stats, ref weaponUser);
+            axe.GetComponent<AxeExecute>().Reset(weaponUser);
             yield return new WaitForSeconds(stats.Life);
             axe.SetActive(false);
         }
-    }
-
-    private IEnumerator StuckBug()
-    {
-        yield return new WaitForSeconds(0.6f);
-        Rigidbody.AddForce(Vector2.up * 2, ForceMode2D.Impulse);
     }
 }
