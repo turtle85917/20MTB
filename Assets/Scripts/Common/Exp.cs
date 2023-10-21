@@ -28,7 +28,7 @@ public class Exp : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             gameObject.SetActive(false);
-            Player.exp += exp;
+            Game.playerData.exp += exp;
         }
     }
 }

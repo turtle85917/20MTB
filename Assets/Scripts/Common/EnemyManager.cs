@@ -1,20 +1,30 @@
 using System;
 using System.Collections.Generic;
+using _20MTB.Stats;
+using _20MTB.Utillity;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public static EnemyManager instance {get; private set;}
     [SerializeField] private GameObject Enemies;
     [SerializeField] private EnemyData[] enemies;
+    private static EnemyManager instance;
     private List<EnemyPool> enemyPools;
-
-    public GameObject NewEnemy(string enemyId)
+    public class EnemyPool
     {
-        EnemyData enemyData = Array.Find(enemies, item => item.enemyId == enemyId);
-        GameObject enemy = Instantiate(enemyData.Prefab, Enemies.transform, false);
-        enemy.name = "Enemy" + Enemies.transform.childCount;
-        enemyPools.Add(new EnemyPool(){
+        public GameObject target;
+        public int health;
+        public int moveSpeed;
+        public List<Weapon> enemyWeapons;
+        public EnemyData data;
+    }
+
+    public static GameObject NewEnemy(string enemyId)
+    {
+        EnemyData enemyData = Array.Find(instance.enemies, item => item.enemyId == enemyId);
+        GameObject enemy = Instantiate(enemyData.Prefab, instance.Enemies.transform, false);
+        enemy.name = "Enemy";
+        instance.enemyPools.Add(new EnemyPool(){
             target = enemy,
             health = enemyData.stats.MaxHealth,
             moveSpeed = UnityEngine.Random.Range(enemyData.stats.MinMoveSpeed, enemyData.stats.MaxMoveSpeed),
@@ -24,30 +34,41 @@ public class EnemyManager : MonoBehaviour
         return enemy;
     }
 
-    public void AddWeaponToEnemy(GameObject target, string weaponId)
+    public static void AddWeaponToEnemy(GameObject target, string weaponId)
     {
         EnemyPool enemyPool = GetEnemy(target);
         Weapon weapon = WeaponBundle.GetWeapon(weaponId);
         if(weapon.type == "D") return;
-        Enemy script = enemyPool.target.GetComponent<Enemy>();
-        IExecuteWeapon executeWeapon = script.AddWeaponScript(weapon.weapon.executeWeapon);
-        executeWeapon.ExecuteEnemyWeapon(enemyPool.target, weapon.weapon.resources, weapon.stats);
-        enemyPool.enemyWeapons.Add(new EnemyWeapon(){
+        IExecuteWeapon executeWeapon = target.AddComponent(weapon.weapon.weaponCycleScriptFile.GetClass()) as IExecuteWeapon;
+        executeWeapon.ExecuteWeapon(weapon.weapon.resources, weapon.stats, enemyPool.target);
+        enemyPool.enemyWeapons.Add(new Weapon(){
             type = "N",
             weapon = weapon.weapon,
-            stats = weapon.stats,
-            count = 0
+            stats = weapon.stats
         });
     }
 
-    public EnemyPool GetEnemy(GameObject Object)
+    public static EnemyPool GetEnemy(GameObject Object)
     {
-        return enemyPools.Find(item => item.target.Equals(Object));
+        return instance.enemyPools.Find(item => item.target.Equals(Object));
     }
 
-    public void RemoveEnemy(EnemyPool pool)
+    public static void RemoveEnemy(EnemyPool pool)
     {
-        enemyPools.Remove(pool);
+        instance.enemyPools.Remove(pool);
+    }
+
+    public static void AttackEnemy(GameObject target, WeaponStats stats, int through = 1, Action<Enemy> processFunc = null)
+    {
+        EnemyPool enemyPool = GetEnemy(target);
+        if(enemyPool == null) return;
+        var res = CalcStat.GetDamageValueFromPlayerStat(stats, through);
+        enemyPool.health -= res.demage;
+        TextManager.WriteDamage(target, res.demage, res.isCritical);
+        if(processFunc != null)
+        {
+            processFunc(target.GetComponent<Enemy>());
+        }
     }
 
     private void Awake()

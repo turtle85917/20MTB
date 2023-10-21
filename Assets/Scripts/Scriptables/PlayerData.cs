@@ -1,3 +1,4 @@
+using _20MTB.Stats;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "캐릭터")]

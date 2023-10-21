@@ -1,0 +1,207 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public class DefaultWeapon : MonoBehaviour
+{
+    [SerializeField] private GameObject Blow;
+    [SerializeField] private GameObject Star;
+    [SerializeField] private GameObject Scream;
+    [SerializeField] private GameObject MagicCircle;
+    [SerializeField] private GameObject HeadpinPrefab;
+    [SerializeField] private GameObject PlayerWeapons;
+    [SerializeField] private GameObject Diagums;
+    private Weapon weapon;
+    private WaitForSeconds cooltimeWait;
+
+    private void Start()
+    {
+        weapon = WeaponBundle.GetWeapon(Game.playerData.data.defaultWeapon);
+        cooltimeWait = new WaitForSeconds(weapon.stats.Cooldown);
+        switch(weapon.weapon.WeaponId)
+        {
+            case "Wakchori":
+                StartCoroutine(Wakchori());
+                break;
+            case "MagicWand":
+                StartCoroutine(MagicWand());
+                break;
+            case "MuayThai":
+                StartCoroutine(MuayThai());
+                break;
+            case "Lilpaaaaaa":
+                StartCoroutine(Lilpaaaaaa());
+                break;
+            case "StampPlump":
+                StartCoroutine(StampPlump());
+                break;
+            case "Headpin":
+                StartCoroutine(Headpin());
+                break;
+            case "DiaGum":
+                StartCoroutine(DiaGum());
+                break;
+        }
+    }
+
+    private IEnumerator Wakchori()
+    {
+        while(true)
+        {
+            yield return cooltimeWait;
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 distance = Player.instance.transform.position - (Vector3)mousePosition;
+            GameObject blow = ObjectPool.Get(
+                Game.instance.PoolManager,
+                "Blow",
+                () => Instantiate(Blow, Game.instance.PoolManager.transform, false)
+            );
+            blow.name = "Blow";
+            blow.transform.rotation = LookAtTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            Blow script = blow.GetComponent<Blow>();
+            script.Reset(weapon.stats, distance.normalized * -1);
+            yield return new WaitForSeconds(weapon.stats.Life);
+            blow.SetActive(false);
+        }
+    }
+
+    private IEnumerator MagicWand()
+    {
+        List<GameObject> targets = new(){};
+        while(true)
+        {
+            yield return cooltimeWait;
+            for(int i = 0; i < weapon.stats.ProjectileCount; i++)
+            {
+                GameObject star = ObjectPool.Get(
+                    Game.instance.PoolManager,
+                    "Star",
+                    () => Instantiate(Star, Game.instance.PoolManager.transform, false)
+                );
+                star.name = "Star";
+                star.transform.localPosition = Player.instance.transform.position;
+                star.GetComponent<Star>().Reset(weapon.stats, targets);
+            }
+        }
+    }
+
+    private IEnumerator MuayThai()
+    {
+        while(true)
+        {
+            yield return cooltimeWait;
+            List<GameObject> enemy = Scanner.ScanAll(Player.instance.transform.position, 10, "Enemy");
+            Player.instance.Attack();
+            Vector2 direction = Player.instance.Movement;
+            if(enemy.Count > 0)
+            {
+                enemy = enemy.OrderBy(item => Vector3.Distance(item.transform.position, Player.instance.transform.position)).ToList();
+                for(int i = 0; i < weapon.stats.Through; i++)
+                {
+                    if(enemy.Count <= i) break;
+                    var enemyPool = EnemyManager.GetEnemy(enemy[i]);
+                    EnemyManager.AttackEnemy(enemy[i], weapon.stats, i);
+                }
+            }
+            else
+            {
+                GameObject blow = ObjectPool.Get(
+                    Game.instance.PoolManager,
+                    "Blow",
+                    () => Instantiate(Blow, Game.instance.PoolManager.transform, false)
+                );
+                blow.name = "Blow";
+                Blow script = blow.GetComponent<Blow>();
+                script.Reset(weapon.stats, direction);
+                yield return new WaitForSeconds(weapon.stats.Life);
+                blow.SetActive(false);
+            }
+        }
+    }
+
+    private IEnumerator Lilpaaaaaa()
+    {
+        while(true)
+        {
+            yield return cooltimeWait;
+            Player.instance.Attack();
+            GameObject scream = ObjectPool.Get(
+                Game.instance.PoolManager,
+                "Scream",
+                () => Instantiate(Scream, Game.instance.PoolManager.transform, false)
+            );
+            scream.name = "Scream";
+            scream.transform.position = Player.instance.transform.position;
+            Scream script = scream.GetComponent<Scream>();
+            script.Reset(weapon.stats);
+            yield return new WaitForSeconds(weapon.stats.Life);
+            scream.SetActive(false);
+        }
+    }
+
+    private IEnumerator StampPlump()
+    {
+        while(true)
+        {
+            GameObject enemy = Scanner.Scan(Player.instance.transform.position, 8, "Enemy");
+            if(enemy)
+            {
+                GameObject magicCircle = Instantiate(MagicCircle, enemy.transform);
+                magicCircle.GetComponent<MagicCircle>().Reset(weapon.stats, enemy);
+            }
+            yield return cooltimeWait;
+        }
+    }
+
+    private IEnumerator Headpin()
+    {
+        List<GameObject> targets = new(){};
+        while(true)
+        {
+            yield return cooltimeWait;
+            for(int i = 0; i < weapon.stats.Through; i++)
+            {
+                GameObject enemy = Scanner.ScanFilter(Player.instance.transform.position, 14, "Enemy", targets);
+                if(enemy == null) continue;
+                GameObject headpin = ObjectPool.Get(
+                    Game.instance.PoolManager,
+                    "Headpin",
+                    () => Instantiate(HeadpinPrefab, Game.instance.PoolManager.transform, false)
+                );
+                headpin.name = "Headpin";
+                headpin.transform.position = enemy.transform.position;
+                targets.Add(enemy);
+                headpin.GetComponent<Headpin>().Reset(weapon.stats, enemy, targets);
+            }
+        }
+    }
+
+    private IEnumerator DiaGum()
+    {
+        while(true)
+        {
+            yield return cooltimeWait;
+            GameObject diagums = ObjectPool.Get(
+                PlayerWeapons,
+                "DiaGums",
+                () => Instantiate(Diagums, PlayerWeapons.transform, false)
+            );
+            diagums.name = "DiaGums";
+            Diagums script = diagums.GetComponent<Diagums>();
+            script.Reset(weapon.stats);
+            yield return new WaitForSeconds(weapon.stats.Life);
+            diagums.SetActive(false);
+        }
+    }
+
+    private Quaternion LookAtTarget(Vector2 target)
+    {
+        Vector2 distance = transform.position.x < target.x
+            ? (Vector3)target - transform.position
+            : transform.position - (Vector3)target
+        ;
+        return Quaternion.AngleAxis((float)(Math.Atan2(distance.y, distance.x) * Mathf.Rad2Deg), Vector3.forward);
+    }
+}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _20MTB.Stats;
 using UnityEngine;
 
 public class Headpin : MonoBehaviour
@@ -32,7 +33,7 @@ public class Headpin : MonoBehaviour
     {
         if(other.gameObject.Equals(target) && !goAway)
         {
-            Game.instance.AttackEnemy(other.gameObject, stats, through);
+            EnemyManager.AttackEnemy(other.gameObject, stats, through);
             goAway = true;
             targets.Remove(target);
             transform.Rotate(0, 0, Random.Range(-360f, 360f));

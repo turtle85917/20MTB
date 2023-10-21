@@ -1173,7 +1173,6 @@ GameObject:
   - component: {fileID: 707863007}
   - component: {fileID: 707863006}
   - component: {fileID: 707863005}
-  - component: {fileID: 707863008}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1247,20 +1246,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &707863008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 707863004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d54403079d73643af86f863c752b06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxPoint: {x: 29.6, y: 17.8}
-  minPoint: {x: -29.6, y: -16}
 --- !u!1 &755234628
 GameObject:
   m_ObjectHideFlags: 0
@@ -2114,7 +2099,7 @@ Animator:
   m_GameObject: {fileID: 1062170207}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bd3abc821593a4448bf52b09208a55bc, type: 2}
+  m_Controller: {fileID: 9100000, guid: ef14608790c55bb4688e12d711709e93, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2264,7 +2249,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: 4
-  playerData: {fileID: 0}
   PoolManager: {fileID: 2039443999}
   Exp: {fileID: 6774499916034219985, guid: 86e418ff4e317694da5bad3a7514086b, type: 3}
   players:
@@ -4897,7 +4881,7 @@ GameObject:
   - component: {fileID: 2123171937}
   - component: {fileID: 2123171941}
   m_Layer: 5
-  m_Name: Damage
+  m_Name: TextManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,72 +1,50 @@
 using System;
-using System.Collections;
-using UnityEditor;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Affecter
 {
     private Animator animator;
-    private Rigidbody2D Rigidbody;
     [SerializeField] private GameObject Head;
-    [SerializeField] private GameObject WeaponManager;
     [Header("캐릭터 파츠")]
     [SerializeField] private SpriteRenderer headSprite;
     [SerializeField] private SpriteRenderer bodySprite;
-    private EnemyPool enemyPool;
-    private bool knockbacking;
-    private bool sturning;
-    private bool dying;
-    private int forceAdd = 20;
+    private EnemyManager.EnemyPool enemyPool;
 
-    public IExecuteWeapon AddWeaponScript(MonoScript script)
+    public override void Sturn(Action callbackFunc = null)
     {
-        IExecuteWeapon executeWeapon = WeaponManager.AddComponent(script.GetClass()) as IExecuteWeapon;
-        return executeWeapon;
-    }
-
-    public void Knockback(GameObject target)
-    {
-        knockbacking = true;
-        animator.SetBool("isWalk", false);
-        animator.SetBool("isKnockback", true);
-        Rigidbody.velocity = Vector2.zero;
-        StartCoroutine(Knockbacking(target));
-    }
-
-    public void Sturn()
-    {
-        if(sturning || dying) return;
-        animator.SetBool("isWalk", false);
-        animator.SetBool("isKnockback", false);
-        sturning = true;
-        StartCoroutine(Sturning());
+        headSprite.color = Color.yellow;
+        bodySprite.color = Color.yellow;
+        base.Sturn(() => {
+            headSprite.color = Color.white;
+            bodySprite.color = Color.white;
+        });
     }
 
     public void OnDie()
     {
         gameObject.SetActive(false);
-        EnemyManager.instance.RemoveEnemy(enemyPool);
+        EnemyManager.RemoveEnemy(enemyPool);
     }
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        Rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        enemyPool = EnemyManager.instance.GetEnemy(gameObject);
-        if(!(knockbacking || sturning || dying))
+        enemyPool = EnemyManager.GetEnemy(gameObject);
+        if(status == Status.Idle)
         {
             LookAtPlayer();
             bodySprite.flipX = transform.position.x > Player.instance.transform.position.x;
             animator.SetBool("isWalk", true);
-            Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, Player.instance.transform.position, enemyPool.moveSpeed * Time.deltaTime));
+            rigidbody.MovePosition(Vector3.MoveTowards(rigidbody.position, Player.instance.transform.position, enemyPool.moveSpeed * Time.deltaTime));
         }
-        if(enemyPool.health <= 0 && !dying)
+        if(enemyPool.health <= 0 && status != Status.Die)
         {
-            dying = true;
+            status = Status.Die;
             headSprite.flipX = false;
             bodySprite.flipX = false;
             transform.Rotate(transform.position.x > Player.instance.transform.position.x ? new Vector3(0, 180, 0) : Vector3.zero);
@@ -78,11 +56,11 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player") && !(knockbacking || sturning || dying))
+        if(other.CompareTag("Player") && status != Status.Idle)
         {
-            Player.health -= 2;
+            Game.playerData.health -= 2;
             Player.instance.Knockback(gameObject);
-            Damage.instance.WriteDamage(other.gameObject, 2, false);
+            TextManager.WriteDamage(other.gameObject, 2, false);
         }
     }
 
@@ -90,8 +68,8 @@ public class Enemy : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            Player.health -= 1;
-            Damage.instance.WriteDamage(other.gameObject, 1, false);
+            Game.playerData.health -= 1;
+            TextManager.WriteDamage(other.gameObject, 1, false);
         }
     }
 
@@ -108,25 +86,5 @@ public class Enemy : MonoBehaviour
             Head.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         else
             Head.transform.rotation = Quaternion.identity;
-    }
-
-    private IEnumerator Knockbacking(GameObject target)
-    {
-        Vector2 direction = (transform.position - target.transform.position).normalized;
-        Rigidbody.AddForce(direction * forceAdd, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(0.2f);
-        knockbacking = false;
-        Rigidbody.velocity = Vector3.zero;
-        animator.SetBool("isKnockback", false);
-    }
-
-    private IEnumerator Sturning()
-    {
-        headSprite.color = Color.yellow;
-        bodySprite.color = Color.yellow;
-        yield return new WaitForSeconds(4f);
-        sturning = false;
-        headSprite.color = Color.white;
-        bodySprite.color = Color.white;
     }
 }

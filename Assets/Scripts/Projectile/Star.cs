@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _20MTB.Stats;
 using UnityEngine;
 
 public class Star : MonoBehaviour
@@ -95,8 +96,8 @@ public class Star : MonoBehaviour
         while(target)
         {
             yield return new WaitForSeconds(0.5f);
-            Game.instance.AttackEnemy(target, stats, through);
-            EnemyPool enemyPool = EnemyManager.instance.GetEnemy(target);
+            EnemyManager.AttackEnemy(target, stats, through);
+            var enemyPool = EnemyManager.GetEnemy(target);
             if(enemyPool.health <= 0)
                 targets.Remove(target);
             through++;

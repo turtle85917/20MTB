@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using _20MTB.Utillity;
 
 public class WeaponBundle : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class WeaponBundle : MonoBehaviour
 
     public static Weapon GetWeapon(string weaponId)
     {
-        return assets.Find(item => item.weapon.WeaponId == weaponId);
+        return assets.Find(item => item.weapon.WeaponId.ToLower() == weaponId.ToLower());
     }
     
     public static Weapon GetWeaponByName(string weaponName)
@@ -28,7 +29,7 @@ public class WeaponBundle : MonoBehaviour
                 type = (string)excelData["Type"],
                 name = (string)excelData["Name"],
                 weapon = weaponDatas[i],
-                stats = new WeaponStats()
+                stats = new _20MTB.Stats.WeaponStats()
                 {
                     Power = (int)excelData["Power"],
                     Cooldown = (int)excelData["Cooldown"],

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _20MTB.Stats;
 using UnityEngine;
 
 public class MagicCircle : MonoBehaviour
@@ -23,12 +24,12 @@ public class MagicCircle : MonoBehaviour
         enemies = enemies.OrderBy(item => Vector3.Distance(item.transform.position, Player.instance.transform.position)).ToList();
         for(int i = 0; i < enemies.Count; i++)
         {
-            EnemyPool enemyPool = EnemyManager.instance.GetEnemy(enemies[i]);
+            var enemyPool = EnemyManager.GetEnemy(enemies[i]);
             Enemy script = enemyPool.target.GetComponent<Enemy>();
             script.Sturn();
             if(i > 0)
                 script.Knockback(gameObject);
-            Game.instance.AttackEnemy(enemies[i], stats, i);
+            EnemyManager.AttackEnemy(enemies[i], stats, i);
         }
         Destroy(gameObject);
         GameObject stamp = ObjectPool.Get(
