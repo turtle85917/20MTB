@@ -12,7 +12,6 @@ public class Player : Affecter
         }
     }
     public static Player instance {get; private set;}
-    private Animator animator;
     [Header("캐릭터 파츠")]
     [SerializeField] private SpriteRenderer headSprite;
     [SerializeField] private SpriteRenderer bodySprite;

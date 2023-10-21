@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Enemy : Affecter
 {
-    private Animator animator;
     [SerializeField] private GameObject Head;
     [Header("캐릭터 파츠")]
     [SerializeField] private SpriteRenderer headSprite;
@@ -49,8 +48,7 @@ public class Enemy : Affecter
             bodySprite.flipX = false;
             transform.Rotate(transform.position.x > Player.instance.transform.position.x ? new Vector3(0, 180, 0) : Vector3.zero);
             animator.SetTrigger("isDie");
-            GameObject exp = ObjectPool.SpawnExp(transform);
-            exp.GetComponent<Exp>().SetExp(enemyPool.data.stats.Exp);
+            Game.SpawnExpObject(transform.position, enemyPool.data.stats.Exp);
         }
     }
 

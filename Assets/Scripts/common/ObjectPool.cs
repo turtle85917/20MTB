@@ -16,12 +16,4 @@ public static class ObjectPool
         }
         return CreateFunc();
     }
-
-    public static GameObject SpawnExp(Transform target)
-    {
-        GameObject exp = UnityEngine.Object.Instantiate(Game.instance.Exp, Game.instance.PoolManager.transform, false);
-        exp.name = "Exp";
-        exp.transform.position = target.position;
-        return exp;
-    }
 }

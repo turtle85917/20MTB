@@ -10,11 +10,11 @@ public class Game : MonoBehaviour
 {
     public Character character;
     public GameObject PoolManager;
-    public GameObject Exp;
     public static List<Weapon> playerWeapons;
     public static PlayerStatus playerData {get; private set;}
     public static Game instance {get; private set;}
     [SerializeField] private PlayerData[] players;
+    [SerializeField] private GameObject Exp;
     [SerializeField] private Image HeadImage;
     [SerializeField] private TMP_Text TimerText;
     [SerializeField] private Slider HealthBar;
@@ -42,6 +42,20 @@ public class Game : MonoBehaviour
     public static Vector3 MovePositionLimited(Vector2 position, float z)
     {
         return new(Math.Max(instance.minPoint.x, Math.Min(position.x, instance.maxPoint.x)), Math.Max(instance.minPoint.y, Math.Min(position.y, instance.maxPoint.y)), z);
+    }
+
+    public static void SpawnExpObject(Vector3 targetPosition, int value)
+    {
+        GameObject exp = ObjectPool.Get(
+            instance.PoolManager,
+            "Exp",
+            () => {
+                GameObject obj = Instantiate(instance.Exp, instance.PoolManager.transform, false);
+                obj.name = "Exp";
+                return obj;
+            }
+        );
+        exp.transform.position = targetPosition;
     }
 
     public void AddWeapon(string weaponId)

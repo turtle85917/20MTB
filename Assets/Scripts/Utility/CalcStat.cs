@@ -1,3 +1,4 @@
+using System;
 using _20MTB.Stats;
 
 namespace _20MTB.Utillity
@@ -12,7 +13,7 @@ namespace _20MTB.Utillity
 
         public static int GetDamageValueFromPlayerStat(int Power)
         {
-            return Power + Game.playerData.data.stats.Power;
+            return Power + (int)Math.Ceiling(Game.playerData.data.stats.Power / (float)Power);
         }
 
         public static DamageResult GetDamageValueFromPlayerStat(WeaponStats stats, int through)
