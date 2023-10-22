@@ -13,6 +13,8 @@ public class MusketCycle : MonoBehaviour, IExecuteWeapon
         stats = weapon.stats;
         Bullet = (GameObject)weapon.weapon.resources[1];
         GameObject musket = Instantiate((GameObject)weapon.weapon.resources[0], Game.instance.PlayerWeapons.transform, false);
+        musket.name = "머스켓";
+        musket.transform.localPosition = Vector3.right;
         StartCoroutine(WeaponCycle(musket));
     }
 
@@ -27,6 +29,9 @@ public class MusketCycle : MonoBehaviour, IExecuteWeapon
                 (parent) => Instantiate(Bullet, parent.transform, false)
             );
             bullet.transform.position = Musket.transform.position;
+            Bullet script = bullet.GetComponent<Bullet>();
+            script.stats = stats;
+            script.Reset(Musket);
             yield return new WaitForSeconds(stats.Life);
             bullet.SetActive(false);
         }
