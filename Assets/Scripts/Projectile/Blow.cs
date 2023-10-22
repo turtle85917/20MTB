@@ -6,7 +6,7 @@ public class Blow : MonoBehaviour
     private WeaponStats stats;
     private int through;
     private Vector2 movement;
-    private Rigidbody2D Rigidbody;
+    private new Rigidbody2D rigidbody;
     private SpriteRenderer spriteRenderer;
 
     public void Reset(WeaponStats statsVal, Vector2 movementVal)
@@ -14,14 +14,14 @@ public class Blow : MonoBehaviour
         through = 0;
         stats = statsVal;
         movement = movementVal;
-        Rigidbody.velocity = Vector2.zero;
         spriteRenderer.flipX = movement.x < 0;
         transform.localPosition = Player.instance.transform.position;
+        rigidbody.velocity = Vector2.zero;
     }
 
     private void Awake()
     {
-        Rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -35,15 +35,12 @@ public class Blow : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(gameObject.activeSelf)
-        {
-            Rigidbody.AddForce(movement * 30);
-        }
+        rigidbody.AddForce(movement * 30);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Enemy"))
+        if(other.CompareTag("Enemy") && gameObject.activeSelf)
         {
             EnemyManager.AttackEnemy(other.gameObject, stats, through, processFunc:(enemy) => {
                 enemy.Knockback(gameObject);

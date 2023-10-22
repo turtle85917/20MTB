@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class MusketCycle : MonoBehaviour, IExecuteWeapon
 {
+    private GameObject target;
     private WeaponStats stats;
     private GameObject weaponUser;
     private GameObject Bullet;
@@ -19,7 +20,7 @@ public class MusketCycle : MonoBehaviour, IExecuteWeapon
         Bullet = (GameObject)weapon.weapon.resources[1];
         GameObject musket = Instantiate((GameObject)weapon.weapon.resources[0], Game.instance.PlayerWeapons.transform, false);
         musket.name = "머스켓";
-        musket.transform.localPosition = Vector3.right;
+        musket.transform.localPosition = Vector3.right * 0.7f;
         MusketSpriteRenderer = musket.GetComponent<SpriteRenderer>();
         Musket = musket;
         StartCoroutine(WeaponCycle());
@@ -27,8 +28,9 @@ public class MusketCycle : MonoBehaviour, IExecuteWeapon
 
     private void Update()
     {
-        Musket.transform.localPosition = Vector3.right * GameUtils.GetDirectionFromTarget(weaponUser);
-        MusketSpriteRenderer.flipX = Musket.transform.localPosition.x < 0;
+        MusketSpriteRenderer.flipX = GameUtils.GetDirectionFromTarget(weaponUser) == 1;
+        target = Scanner.Scan(Musket.transform.position, stats.Range, "Enemy");
+        Musket.transform.rotation = GameUtils.LookAtTarget(Musket.transform.position, target?.transform.position ?? Vector2.zero);
     }
 
     private IEnumerator WeaponCycle()
@@ -42,10 +44,10 @@ public class MusketCycle : MonoBehaviour, IExecuteWeapon
                 (parent) => Instantiate(Bullet, parent.transform, false)
             );
             bullet.transform.position = Musket.transform.position;
-            GameObject enemy = Scanner.Scan(transform.position, stats.Range, "Enemy");
+            bullet.transform.rotation = Musket.transform.rotation;
             Bullet script = bullet.GetComponent<Bullet>();
             script.stats = stats;
-            script.Reset(enemy);
+            script.Reset(target);
             yield return new WaitForSeconds(stats.Life);
             bullet.SetActive(false);
         }

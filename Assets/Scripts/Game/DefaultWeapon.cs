@@ -58,7 +58,7 @@ public class DefaultWeapon : MonoBehaviour
                 "Blow",
                 (parent) => Instantiate(Blow, parent.transform, false)
             );
-            blow.transform.rotation = GameUtils.LookAtTarget(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            blow.transform.rotation = GameUtils.LookAtTarget(Vector2.zero, mousePosition);
             Blow script = blow.GetComponent<Blow>();
             script.Reset(weapon.stats, distance.normalized * -1);
             yield return new WaitForSeconds(weapon.stats.Life);
@@ -68,7 +68,7 @@ public class DefaultWeapon : MonoBehaviour
 
     private IEnumerator MagicWand()
     {
-        List<GameObject> targets = new(){};
+        List<GameObject> targets = new List<GameObject>(){};
         while(true)
         {
             yield return cooltimeWait;
@@ -154,7 +154,7 @@ public class DefaultWeapon : MonoBehaviour
 
     private IEnumerator Headpin()
     {
-        List<GameObject> targets = new(){};
+        List<GameObject> targets = new List<GameObject>(){};
         while(true)
         {
             yield return cooltimeWait;

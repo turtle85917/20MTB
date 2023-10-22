@@ -1,5 +1,4 @@
 using _20MTB.Stats;
-using _20MTB.Utillity;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -11,14 +10,6 @@ public class Bullet : MonoBehaviour
     public void Reset(GameObject target)
     {
         through = 0;
-        if(target != null)
-        {
-            transform.rotation = GameUtils.LookAtTarget(transform.position, target.transform.position);
-        }
-        else
-        {
-            transform.rotation = Quaternion.identity;
-        }
     }
 
     private void Awake()

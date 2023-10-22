@@ -18,5 +18,5 @@ MonoBehaviour:
     MaxHealth: 15
     Power: 10
     MinMoveSpeed: 5
-    MaxMoveSpeed: 9
+    MaxMoveSpeed: 8
     Exp: 4

@@ -10,7 +10,7 @@ public static class Scanner
         RaycastHit2D[] raycasts = Physics2D.CircleCastAll(origin, r, Vector2.right);
         foreach(RaycastHit2D raycast in raycasts)
         {
-            if(raycast.collider.CompareTag(tag) && !list.Contains(raycast.collider.gameObject))
+            if(raycast.collider.CompareTag(tag) && !list.Contains(raycast.collider.gameObject) && raycast.collider.gameObject.activeSelf)
             {
                 float distance = Vector3.Distance(origin, raycast.transform.position);
                 if(distance < r)
@@ -29,7 +29,7 @@ public static class Scanner
         RaycastHit2D[] raycasts = Physics2D.CircleCastAll(origin, radius, Vector2.right);
         foreach(RaycastHit2D raycast in raycasts)
         {
-            if(raycast.collider.CompareTag(tag))
+            if(raycast.collider.CompareTag(tag) && raycast.collider.gameObject.activeSelf)
             {
                 result.Add(raycast.collider.gameObject);
                 if(limit > 0 && result.Count == limit) break;
@@ -45,7 +45,7 @@ public static class Scanner
         RaycastHit2D[] raycasts = Physics2D.CircleCastAll(origin, r, Vector2.right);
         foreach(RaycastHit2D raycast in raycasts)
         {
-            if(raycast.collider.CompareTag(tag))
+            if(raycast.collider.CompareTag(tag) && raycast.collider.gameObject.activeSelf)
             {
                 float distance = Vector3.Distance(origin, raycast.transform.position);
                 if(distance < r)
