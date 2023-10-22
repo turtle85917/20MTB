@@ -4,11 +4,11 @@ using UnityEngine;
 public class Enemy : Affecter
 {
     public GameObject text {private get; set;} // 트위치 닉네임 텍스트
+    public EnemyManager.EnemyPool enemyPool {private get; set;}
     [SerializeField] private GameObject Head;
     [Header("캐릭터 파츠")]
     [SerializeField] private SpriteRenderer headSprite;
     [SerializeField] private SpriteRenderer bodySprite;
-    private EnemyManager.EnemyPool enemyPool;
 
     public override void Sturn(Action callbackFunc = null)
     {
@@ -34,7 +34,6 @@ public class Enemy : Affecter
 
     private void Update()
     {
-        enemyPool = EnemyManager.GetEnemy(gameObject);
         if(status == Status.Idle)
         {
             LookAtPlayer();

@@ -35,6 +35,7 @@ public class WeaponBundle : MonoBehaviour
                     Cooldown = (int)excelData["Cooldown"],
                     Through = (int)excelData["Through"],
                     DecreasePower = (int)excelData["DecreasePower"],
+                    Range = (int)excelData["Range"],
                     Life = (int)excelData["Life"],
                     CriticalHit = (float)excelData["CriticalHit"],
                     CriticalDamage = (int)excelData["CriticalDamage"],

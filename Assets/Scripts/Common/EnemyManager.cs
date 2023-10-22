@@ -27,13 +27,15 @@ public class EnemyManager : MonoBehaviour
             "Enemy",
             (parent) => Instantiate(enemyData.Prefab, parent.transform, false)
         );
-        instance.enemyPools.Add(new EnemyPool(){
+        EnemyPool enemyPool = new EnemyPool(){
             target = enemy,
             health = enemyData.stats.MaxHealth,
             moveSpeed = UnityEngine.Random.Range(enemyData.stats.MinMoveSpeed, enemyData.stats.MaxMoveSpeed),
             enemyWeapons = new(){},
             data = enemyData
-        });
+        };
+        enemy.GetComponent<Enemy>().enemyPool = enemyPool;
+        instance.enemyPools.Add(enemyPool);
         return enemy;
     }
 

@@ -1,15 +1,23 @@
 using _20MTB.Stats;
+using _20MTB.Utillity;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     public WeaponStats stats {private get; set;}
-    private Vector3 direction;
+    private int through;
     private new Rigidbody2D rigidbody;
 
     public void Reset(GameObject target)
     {
-        direction = target.transform.right;
+        if(target != null)
+        {
+            transform.rotation = GameUtils.LookAtTarget(transform.position, target.transform.position);
+        }
+        else
+        {
+            transform.rotation = Quaternion.identity;
+        }
     }
 
     private void Awake()
@@ -19,6 +27,15 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidbody.AddForce(new Vector2(direction.x * 50, 0));
+        rigidbody.AddForce(transform.right * 50);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Enemy"))
+        {
+            EnemyManager.AttackEnemy(other.gameObject, stats, through);
+            through++;
+        }
     }
 }

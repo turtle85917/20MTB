@@ -31,6 +31,7 @@ namespace _20MTB.Stats
         public int Cooldown;
         public int Through;
         public int DecreasePower;
+        public int Range;
         public int Life;
         public float CriticalHit;
         public int CriticalDamage;

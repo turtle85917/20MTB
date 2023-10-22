@@ -7,7 +7,9 @@ public class Player : Affecter
         get
         {
             if(movement == Vector2.zero)
+            {
                 return lastMovement;
+            }
             return movement;
         }
     }

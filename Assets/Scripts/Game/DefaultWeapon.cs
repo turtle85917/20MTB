@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _20MTB.Utillity;
 using UnityEngine;
 
 public class DefaultWeapon : MonoBehaviour
@@ -57,7 +58,7 @@ public class DefaultWeapon : MonoBehaviour
                 "Blow",
                 (parent) => Instantiate(Blow, parent.transform, false)
             );
-            blow.transform.rotation = LookAtTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            blow.transform.rotation = GameUtils.LookAtTarget(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
             Blow script = blow.GetComponent<Blow>();
             script.Reset(weapon.stats, distance.normalized * -1);
             yield return new WaitForSeconds(weapon.stats.Life);
@@ -188,14 +189,5 @@ public class DefaultWeapon : MonoBehaviour
             yield return new WaitForSeconds(weapon.stats.Life);
             diagums.SetActive(false);
         }
-    }
-
-    private Quaternion LookAtTarget(Vector2 target)
-    {
-        Vector2 distance = transform.position.x < target.x
-            ? (Vector3)target - transform.position
-            : transform.position - (Vector3)target
-        ;
-        return Quaternion.AngleAxis((float)(Math.Atan2(distance.y, distance.x) * Mathf.Rad2Deg), Vector3.forward);
     }
 }
