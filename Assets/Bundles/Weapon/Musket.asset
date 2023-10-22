@@ -15,4 +15,5 @@ MonoBehaviour:
   WeaponId: Musket
   logo: {fileID: -1521537396, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
   weaponCycleScriptFile: {fileID: 0}
-  resources: []
+  resources:
+  - {fileID: 441661794653429694, guid: dfb18b4d459221d4398421ffdbdd40e4, type: 3}
