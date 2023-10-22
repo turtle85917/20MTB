@@ -121,7 +121,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -142,7 +142,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 0
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -163,7 +163,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 0
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -184,7 +184,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 0
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -205,7 +205,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 0
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -226,7 +226,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 80
-        y: 0
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -246,7 +246,7 @@ TextureImporter:
       name: sheet_6
       rect:
         serializedVersion: 2
-        x: 96
+        x: 0
         y: 0
         width: 16
         height: 16
@@ -267,7 +267,7 @@ TextureImporter:
       name: sheet_7
       rect:
         serializedVersion: 2
-        x: 112
+        x: 16
         y: 0
         width: 16
         height: 16
@@ -280,6 +280,27 @@ TextureImporter:
       bones: []
       spriteID: 9f8bb5c4f36b1f3469d954ff18a63b69
       internalID: -1554710923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_8
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82b659b48c34e604c973b4460285ddbc
+      internalID: -1521537396
       vertices: []
       indices: 
       edges: []
@@ -303,6 +324,7 @@ TextureImporter:
       sheet_5: 302606900
       sheet_6: 694369025
       sheet_7: -1554710923
+      sheet_8: -1521537396
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
