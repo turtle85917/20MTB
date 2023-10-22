@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class ObjectPool
 {
-    public static GameObject Get(GameObject Parent, string name, Func<GameObject> CreateFunc)
+    public static GameObject Get(GameObject Parent, string name, Func<GameObject, GameObject> CreateFunc)
     {
         for(int i = 0; i < Parent.transform.childCount; i++)
         {
@@ -14,6 +14,8 @@ public static class ObjectPool
                 return child;
             }
         }
-        return CreateFunc();
+        GameObject obj = CreateFunc(Parent);
+        obj.name = name;
+        return obj;
     }
 }

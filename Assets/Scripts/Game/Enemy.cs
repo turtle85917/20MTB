@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Enemy : Affecter
 {
-    public GameObject text {private get; set;}
+    public GameObject text {private get; set;} // 트위치 닉네임 텍스트
     [SerializeField] private GameObject Head;
     [Header("캐릭터 파츠")]
     [SerializeField] private SpriteRenderer headSprite;
@@ -50,13 +50,19 @@ public class Enemy : Affecter
             transform.Rotate(transform.position.x > Player.instance.transform.position.x ? new Vector3(0, 180, 0) : Vector3.zero);
             animator.SetTrigger("isDie");
             Game.SpawnExpObject(transform.position, enemyPool.data.stats.Exp);
-            text.SetActive(false);
+            if(text != null)
+            {
+                text.SetActive(false);
+            }
         }
     }
 
     private void LateUpdate()
     {
-        text.transform.localPosition = (Vector2)transform.position + Vector2.down * 1.3f;
+        if(text != null)
+        {
+            text.transform.localPosition = (Vector2)transform.position + Vector2.down * 1.3f;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

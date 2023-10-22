@@ -12,11 +12,7 @@ public class TextManager : MonoBehaviour
         GameObject text = ObjectPool.Get(
             instance.gameObject,
             "TwitchNickname",
-            () => {
-                GameObject obj = Instantiate(instance.TwitchNickname, instance.transform, false);
-                obj.name = "TwitchNickname";
-                return obj;
-            }
+            (parent) => Instantiate(instance.TwitchNickname, parent.transform, false)
         );
         text.transform.localPosition = (Vector2)target.transform.position + Vector2.down * 1.3f;
         TMP_Text tmpText = text.GetComponent<TMP_Text>();
@@ -31,11 +27,7 @@ public class TextManager : MonoBehaviour
         GameObject text = ObjectPool.Get(
             instance.gameObject,
             "DamageText",
-            () => {
-                GameObject obj = Instantiate(instance.DamageText, instance.transform, false);
-                obj.name = "DamageText";
-                return obj;
-            }
+            (parent) => Instantiate(instance.DamageText, parent.transform, false)
         );
         text.transform.localPosition = (Vector2)target.transform.position + Vector2.up * 0.5f;
         Color color = Color.white;

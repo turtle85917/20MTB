@@ -11,7 +11,6 @@ public class DefaultWeapon : MonoBehaviour
     [SerializeField] private GameObject Scream;
     [SerializeField] private GameObject MagicCircle;
     [SerializeField] private GameObject HeadpinPrefab;
-    [SerializeField] private GameObject PlayerWeapons;
     [SerializeField] private GameObject Diagums;
     private Weapon weapon;
     private WaitForSeconds cooltimeWait;
@@ -56,9 +55,8 @@ public class DefaultWeapon : MonoBehaviour
             GameObject blow = ObjectPool.Get(
                 Game.instance.PoolManager,
                 "Blow",
-                () => Instantiate(Blow, Game.instance.PoolManager.transform, false)
+                (parent) => Instantiate(Blow, parent.transform, false)
             );
-            blow.name = "Blow";
             blow.transform.rotation = LookAtTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             Blow script = blow.GetComponent<Blow>();
             script.Reset(weapon.stats, distance.normalized * -1);
@@ -78,7 +76,7 @@ public class DefaultWeapon : MonoBehaviour
                 GameObject star = ObjectPool.Get(
                     Game.instance.PoolManager,
                     "Star",
-                    () => Instantiate(Star, Game.instance.PoolManager.transform, false)
+                    (parent) => Instantiate(Star, parent.transform, false)
                 );
                 star.name = "Star";
                 star.transform.localPosition = Player.instance.transform.position;
@@ -108,11 +106,10 @@ public class DefaultWeapon : MonoBehaviour
             else
             {
                 GameObject blow = ObjectPool.Get(
-                    Game.instance.PoolManager,
+                Game.instance.PoolManager,
                     "Blow",
-                    () => Instantiate(Blow, Game.instance.PoolManager.transform, false)
+                    (parent) => Instantiate(Blow, parent.transform, false)
                 );
-                blow.name = "Blow";
                 Blow script = blow.GetComponent<Blow>();
                 script.Reset(weapon.stats, direction);
                 yield return new WaitForSeconds(weapon.stats.Life);
@@ -130,9 +127,8 @@ public class DefaultWeapon : MonoBehaviour
             GameObject scream = ObjectPool.Get(
                 Game.instance.PoolManager,
                 "Scream",
-                () => Instantiate(Scream, Game.instance.PoolManager.transform, false)
+                (parent) => Instantiate(Scream, parent.transform, false)
             );
-            scream.name = "Scream";
             scream.transform.position = Player.instance.transform.position;
             Scream script = scream.GetComponent<Scream>();
             script.Reset(weapon.stats);
@@ -168,9 +164,8 @@ public class DefaultWeapon : MonoBehaviour
                 GameObject headpin = ObjectPool.Get(
                     Game.instance.PoolManager,
                     "Headpin",
-                    () => Instantiate(HeadpinPrefab, Game.instance.PoolManager.transform, false)
+                    (parent) => Instantiate(HeadpinPrefab, parent.transform, false)
                 );
-                headpin.name = "Headpin";
                 headpin.transform.position = enemy.transform.position;
                 targets.Add(enemy);
                 headpin.GetComponent<Headpin>().Reset(weapon.stats, enemy, targets);
@@ -184,11 +179,10 @@ public class DefaultWeapon : MonoBehaviour
         {
             yield return cooltimeWait;
             GameObject diagums = ObjectPool.Get(
-                PlayerWeapons,
+                Game.instance.PlayerWeapons,
                 "DiaGums",
-                () => Instantiate(Diagums, PlayerWeapons.transform, false)
+                (parent) => Instantiate(Diagums, parent.transform, false)
             );
-            diagums.name = "DiaGums";
             Diagums script = diagums.GetComponent<Diagums>();
             script.Reset(weapon.stats);
             yield return new WaitForSeconds(weapon.stats.Life);

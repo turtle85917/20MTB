@@ -23,11 +23,7 @@ public class AxeCycle : MonoBehaviour, IExecuteWeapon
             GameObject axe = ObjectPool.Get(
                 Game.instance.PoolManager,
                 "Axe",
-                () => {
-                    GameObject obj = Instantiate(AxePrefab, Game.instance.PoolManager.transform, false);
-                    obj.name = "Axe";
-                    return obj;
-                }
+                (parent) => Instantiate(AxePrefab, parent.transform, false)
             );
             axe.GetComponent<AxeExecute>().Reset(weaponUser);
             yield return new WaitForSeconds(stats.Life);

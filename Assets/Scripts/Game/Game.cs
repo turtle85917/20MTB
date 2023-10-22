@@ -10,6 +10,7 @@ public class Game : MonoBehaviour
 {
     public Character character;
     public GameObject PoolManager;
+    public GameObject PlayerWeapons;
     public static List<Weapon> playerWeapons;
     public static PlayerStatus playerData {get; private set;}
     public static Game instance {get; private set;}
@@ -49,11 +50,7 @@ public class Game : MonoBehaviour
         GameObject exp = ObjectPool.Get(
             instance.PoolManager,
             "Exp",
-            () => {
-                GameObject obj = Instantiate(instance.Exp, instance.PoolManager.transform, false);
-                obj.name = "Exp";
-                return obj;
-            }
+            (parent) => Instantiate(instance.Exp, parent.transform, false)
         );
         exp.transform.position = targetPosition;
     }
@@ -97,7 +94,7 @@ public class Game : MonoBehaviour
     {
         HeadImage.sprite = playerData.data.headImage;
         AddWeapon(playerData.data.defaultWeapon);
-        AddWeapon("Axe");
+        AddWeapon("Musket");
         StartCoroutine(Timer());
     }
 

@@ -2226,9 +2226,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1210831719}
   - component: {fileID: 1210831718}
+  - component: {fileID: 1210831721}
   - component: {fileID: 1210831720}
   - component: {fileID: 1210831722}
-  - component: {fileID: 1210831721}
   m_Layer: 0
   m_Name: Game
   m_TagString: Player
@@ -2250,6 +2250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: 0
   PoolManager: {fileID: 2039443999}
+  PlayerWeapons: {fileID: 1875431087}
   players:
   - {fileID: 11400000, guid: 439513c4e4f6bd94d93ea41b2bd8fe9e, type: 2}
   - {fileID: 11400000, guid: 2bff62d513b701146af838fe6ecfe069, type: 2}
@@ -2310,6 +2311,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: babbeafbf7abefb4f95920ccbe1e8696, type: 2}
   - {fileID: 11400000, guid: 99cc1877b4622b445bc8f5993a29e6e7, type: 2}
   - {fileID: 11400000, guid: ab7dc50070625b3439855e515cf0ca60, type: 2}
+  - {fileID: 11400000, guid: 3ee0abe0275990d4cb66c92fe7bfdd5f, type: 2}
 --- !u!114 &1210831721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2327,7 +2329,6 @@ MonoBehaviour:
   Scream: {fileID: 7490041862257003976, guid: b3456600e7f5be04795155269d1cfdee, type: 3}
   MagicCircle: {fileID: 7573715438263169103, guid: 7ad0dbf4521393646800ba36c6daec6d, type: 3}
   HeadpinPrefab: {fileID: 5019590825961031447, guid: 63e51989fa92a4943b1285c9cabe67c8, type: 3}
-  PlayerWeapons: {fileID: 1875431087}
   Diagums: {fileID: 7942860905616382804, guid: 745e7777d708ccb4c8525b46a7628a26, type: 3}
 --- !u!114 &1210831722
 MonoBehaviour:

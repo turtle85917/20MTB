@@ -22,8 +22,11 @@ public class EnemyManager : MonoBehaviour
     public static GameObject NewEnemy(string enemyId)
     {
         EnemyData enemyData = Array.Find(instance.enemies, item => item.enemyId == enemyId);
-        GameObject enemy = Instantiate(enemyData.Prefab, instance.Enemies.transform, false);
-        enemy.name = "Enemy";
+        GameObject enemy = ObjectPool.Get(
+            instance.Enemies,
+            "Enemy",
+            (parent) => Instantiate(enemyData.Prefab, parent.transform, false)
+        );
         instance.enemyPools.Add(new EnemyPool(){
             target = enemy,
             health = enemyData.stats.MaxHealth,
