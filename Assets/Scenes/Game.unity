@@ -2248,9 +2248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e163bcae6c9029b4f8920997c2fcd6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 4
+  character: 0
   PoolManager: {fileID: 2039443999}
-  Exp: {fileID: 6774499916034219985, guid: 86e418ff4e317694da5bad3a7514086b, type: 3}
   players:
   - {fileID: 11400000, guid: 439513c4e4f6bd94d93ea41b2bd8fe9e, type: 2}
   - {fileID: 11400000, guid: 2bff62d513b701146af838fe6ecfe069, type: 2}
@@ -2259,6 +2258,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f4608e70d2121c249a0f26b4e44c8f28, type: 2}
   - {fileID: 11400000, guid: b3fe73e5fd9232e44bf2399584a69b52, type: 2}
   - {fileID: 11400000, guid: d3c7dfac48d61d048b5a416452dd6444, type: 2}
+  Exp: {fileID: 6774499916034219985, guid: 86e418ff4e317694da5bad3a7514086b, type: 3}
   HeadImage: {fileID: 210327020}
   TimerText: {fileID: 1351960660}
   HealthBar: {fileID: 995665493}
@@ -4980,7 +4980,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89bff1e6b7f545649bb369bb573c0256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 2049845797921003652, guid: 5ae312150ed60e24da0875390afe9824, type: 3}
+  TwitchNickname: {fileID: 3834622029677472627, guid: 30ca07b13a819de4e8d1120a132eb49a, type: 3}
+  DamageText: {fileID: 2049845797921003652, guid: 5ae312150ed60e24da0875390afe9824, type: 3}
 --- !u!1 &2123487257
 GameObject:
   m_ObjectHideFlags: 0

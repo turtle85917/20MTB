@@ -4,22 +4,40 @@ using UnityEngine;
 public class TextManager : MonoBehaviour
 {
     private static TextManager instance;
-    [SerializeField] private GameObject Text;
+    [SerializeField] private GameObject TwitchNickname;
+    [SerializeField] private GameObject DamageText;
+
+    public static void WriteTwitchNickname(GameObject target, Chat chat)
+    {
+        GameObject text = ObjectPool.Get(
+            instance.gameObject,
+            "TwitchNickname",
+            () => {
+                GameObject obj = Instantiate(instance.TwitchNickname, instance.transform, false);
+                obj.name = "TwitchNickname";
+                return obj;
+            }
+        );
+        text.transform.localPosition = (Vector2)target.transform.position + Vector2.down * 1.3f;
+        TMP_Text tmpText = text.GetComponent<TMP_Text>();
+        tmpText.text = chat.username;
+        ColorUtility.TryParseHtmlString(chat.color, out Color color);
+        tmpText.color = color;
+        target.GetComponent<Enemy>().text = text;
+    }
 
     public static void WriteDamage(GameObject target, int value, bool critical)
     {
         GameObject text = ObjectPool.Get(
             instance.gameObject,
-            "Text",
+            "DamageText",
             () => {
-                GameObject obj = Instantiate(instance.Text, instance.transform, false);
-                obj.name = "Text";
+                GameObject obj = Instantiate(instance.DamageText, instance.transform, false);
+                obj.name = "DamageText";
                 return obj;
             }
         );
-        Vector3 targetPosition = new Vector3(target.transform.position.x, target.transform.position.y, 0);
-        RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)instance.transform, Camera.main.WorldToScreenPoint(targetPosition), Camera.main, out var localPoint);
-        text.transform.localPosition = localPoint + new Vector2(0, 0.5f);
+        text.transform.localPosition = (Vector2)target.transform.position + Vector2.up * 0.5f;
         Color color = Color.white;
         if(target.CompareTag("Player"))
         {
