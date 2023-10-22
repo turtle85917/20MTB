@@ -18,7 +18,8 @@ public class Affecter : MonoBehaviour
 
     public void Knockback(GameObject target)
     {
-        status = Status.Knockback;
+        if(status != Status.Die)
+            status = Status.Knockback;
         Vector2 direction = (transform.position - target.transform.position).normalized;
         rigidbody.AddForce(direction * forcePower, ForceMode2D.Impulse);
         StartCoroutine(Reset());
@@ -26,8 +27,8 @@ public class Affecter : MonoBehaviour
 
     public virtual void Sturn(Action callbackFunc = null)
     {
-        if(status != Status.Idle) return;
-        status = Status.Sturn;
+        if(status != Status.Die)
+            status = Status.Sturn;
         animator.SetBool("isWalk", false);
         StartCoroutine(Reset(3f, callbackFunc:callbackFunc));
     }
@@ -35,7 +36,8 @@ public class Affecter : MonoBehaviour
     private IEnumerator Reset(float duration = 0.2f, Action callbackFunc = null)
     {
         yield return new WaitForSeconds(duration);
-        status = Status.Idle;
+        if(status != Status.Die)
+            status = Status.Idle;
         rigidbody.velocity = Vector2.zero;
         if(callbackFunc != null)
         {

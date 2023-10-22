@@ -2,13 +2,8 @@ using UnityEngine;
 
 public class Exp : MonoBehaviour
 {
+    public int exp {private get; set;}
     private Rigidbody2D Rigidbody;
-    private int exp;
-
-    public void SetExp(int expVal)
-    {
-        exp = expVal;
-    }
 
     private void Awake()
     {

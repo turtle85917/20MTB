@@ -53,6 +53,7 @@ public class Game : MonoBehaviour
             (parent) => Instantiate(instance.Exp, parent.transform, false)
         );
         exp.transform.position = targetPosition;
+        exp.GetComponent<Exp>().exp = value;
     }
 
     public void AddWeapon(string weaponId)
