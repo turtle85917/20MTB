@@ -1,28 +1,24 @@
 using _20MTB.Stats;
+using _20MTB.Utillity;
 using UnityEngine;
 
 public class Blow : MonoBehaviour
 {
-    private WeaponStats stats;
-    private int through;
+    public int through {private get; set;}
+    public WeaponStats stats {private get; set;}
+    public Vector2 direction {private get; set;}
     private Vector2 movement;
-    private new Rigidbody2D rigidbody;
-    private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rigid;
 
-    public void Reset(WeaponStats statsVal, Vector2 movementVal)
+    public void Init()
     {
-        through = 0;
-        stats = statsVal;
-        movement = movementVal;
-        spriteRenderer.flipX = movement.x < 0;
-        transform.localPosition = Player.instance.transform.position;
-        rigidbody.velocity = Vector2.zero;
+        transform.localPosition = Game.Player.transform.position;
+        rigid.velocity = Vector2.zero;
     }
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        rigid = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -35,7 +31,7 @@ public class Blow : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidbody.AddForce(movement * 30);
+        rigid.AddForce(direction.normalized * 10);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -43,7 +39,7 @@ public class Blow : MonoBehaviour
         if(other.CompareTag("Enemy") && gameObject.activeSelf)
         {
             EnemyManager.AttackEnemy(other.gameObject, stats, through, processFunc:(enemy) => {
-                enemy.Knockback(gameObject);
+                // enemy.Knockback(gameObject);
             });
             through++;
         }

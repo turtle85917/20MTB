@@ -2059,11 +2059,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1062170208}
-  - component: {fileID: 1062170212}
+  - component: {fileID: 1062170214}
   - component: {fileID: 1062170211}
   - component: {fileID: 1062170209}
-  - component: {fileID: 1062170210}
-  - component: {fileID: 1062170213}
+  - component: {fileID: 1062170216}
+  - component: {fileID: 1062170217}
+  - component: {fileID: 1062170215}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -2080,7 +2081,7 @@ Transform:
   m_GameObject: {fileID: 1062170207}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 3}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 685697176}
@@ -2109,20 +2110,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &1062170210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062170207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec408a541d6582f41ae1eb5b4e39e3ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  headSprite: {fileID: 685697177}
-  bodySprite: {fileID: 522529760}
 --- !u!50 &1062170211
 Rigidbody2D:
   serializedVersion: 4
@@ -2137,15 +2124,15 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 0.02
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &1062170212
-BoxCollider2D:
+--- !u!70 &1062170214
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2157,20 +2144,10 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.030000001, y: -0.25}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.565, y: 0.38}
-  m_EdgeRadius: 0
---- !u!114 &1062170213
+  m_Offset: {x: 0.029873872, y: -0.037743747}
+  m_Size: {x: 0.43824467, y: 0.6626259}
+  m_Direction: 0
+--- !u!114 &1062170215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2185,6 +2162,41 @@ MonoBehaviour:
   targetLayout:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &1062170216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062170207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6726bfe9f48aab4388bb0064309374d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headSprite: {fileID: 685697177}
+  bodySprite: {fileID: 522529760}
+  character: 0
+  players:
+  - {fileID: 11400000, guid: 439513c4e4f6bd94d93ea41b2bd8fe9e, type: 2}
+  - {fileID: 11400000, guid: 2bff62d513b701146af838fe6ecfe069, type: 2}
+  - {fileID: 11400000, guid: 29cdcdaff43dbdb4686c08a9da5a13d6, type: 2}
+  - {fileID: 11400000, guid: 35490b45140fecb4ea269dd6d376ff16, type: 2}
+  - {fileID: 11400000, guid: f4608e70d2121c249a0f26b4e44c8f28, type: 2}
+  - {fileID: 11400000, guid: b3fe73e5fd9232e44bf2399584a69b52, type: 2}
+  - {fileID: 11400000, guid: d3c7dfac48d61d048b5a416452dd6444, type: 2}
+--- !u!114 &1062170217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062170207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1b7b85ded9a7440bd1ec4031dad2ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1145575509
 GameObject:
   m_ObjectHideFlags: 0
@@ -2248,9 +2260,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e163bcae6c9029b4f8920997c2fcd6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 0
-  PoolManager: {fileID: 2039443999}
-  PlayerWeapons: {fileID: 1875431087}
   players:
   - {fileID: 11400000, guid: 439513c4e4f6bd94d93ea41b2bd8fe9e, type: 2}
   - {fileID: 11400000, guid: 2bff62d513b701146af838fe6ecfe069, type: 2}
@@ -2259,21 +2268,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f4608e70d2121c249a0f26b4e44c8f28, type: 2}
   - {fileID: 11400000, guid: b3fe73e5fd9232e44bf2399584a69b52, type: 2}
   - {fileID: 11400000, guid: d3c7dfac48d61d048b5a416452dd6444, type: 2}
-  Exp: {fileID: 6774499916034219985, guid: 86e418ff4e317694da5bad3a7514086b, type: 3}
-  HeadImage: {fileID: 210327020}
-  TimerText: {fileID: 1351960660}
-  HealthBar: {fileID: 995665493}
-  HealthText: {fileID: 220858073}
-  ExpBar: {fileID: 2024055702}
-  LevelText: {fileID: 1987490713}
-  WeaponSlots:
-  - {fileID: 65024565}
-  - {fileID: 943050535}
-  - {fileID: 1623244566}
-  - {fileID: 114186991}
-  - {fileID: 1800012944}
-  - {fileID: 1822855544}
-  WeaponSlotPanel: {fileID: 6216582016864394770, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
   cycle: {fileID: 11400000, guid: d600d11aa09380147a2d12fd49add112, type: 2}
 --- !u!4 &1210831719
 Transform:
@@ -4235,7 +4229,7 @@ GameObject:
   - component: {fileID: 1875431088}
   m_Layer: 6
   m_Name: Weapons
-  m_TagString: Untagged
+  m_TagString: PlayerWeapons
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4771,7 +4765,7 @@ GameObject:
   - component: {fileID: 2039444000}
   m_Layer: 0
   m_Name: PoolManager
-  m_TagString: Untagged
+  m_TagString: PoolManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

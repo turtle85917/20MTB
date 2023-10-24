@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
+using _20MTB.Utillity;
 using UnityEngine;
 
 public class Connect : MonoBehaviour
@@ -82,7 +83,7 @@ public class Connect : MonoBehaviour
                             {
                                 GameObject enemy = EnemyManager.NewEnemy("Panzee");
                                 EnemyManager.AddWeaponToEnemy(enemy, weapon.weapon.WeaponId);
-                                enemy.transform.position = Game.MovePositionLimited(Player.instance.transform.position + (Vector3)Random.insideUnitCircle.normalized * 15, 0);
+                                enemy.transform.position = GameUtils.MovePositionLimited(Game.Player.transform.position + (Vector3)Random.insideUnitCircle.normalized * 15, 0);
                                 TextManager.WriteTwitchNickname(enemy, chat);
                             }
                             break;

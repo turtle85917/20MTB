@@ -13,7 +13,7 @@ namespace _20MTB.Utillity
 
         public static int GetDamageValueFromPlayerStat(int Power)
         {
-            return Power + (int)Math.Ceiling(Game.playerData.data.stats.Power / (float)Power);
+            return Power + (int)Math.Ceiling(Player.playerData.data.stats.Power / (float)Power);
         }
 
         public static DamageResult GetDamageValueFromPlayerStat(WeaponStats stats, int through)
@@ -32,7 +32,7 @@ namespace _20MTB.Utillity
 
         public static int GetNeedExpFromLevel()
         {
-            return 50 * Game.playerData.level + 10;
+            return 50 * Player.playerData.level + 10;
         }
 
         public static bool CheckCriticalHit(float criticalHit)

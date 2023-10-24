@@ -48,7 +48,7 @@ public class Star : MonoBehaviour
             GameObject enemy = Scanner.ScanFilter(transform.position, 10, "Enemy", targets);
             if(enemy == null)
             {
-                movement = Player.instance.Movement;
+                movement = Player.lastDirection;
                 goAway = true;
             }
             else

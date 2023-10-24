@@ -43,7 +43,7 @@ public class Scream : MonoBehaviour
         if(other.CompareTag("Enemy") && !targets.Contains(other.gameObject))
         {
             EnemyManager.AttackEnemy(other.gameObject, stats, through, processFunc:(enemy) => {
-                enemy.Knockback(gameObject);
+                // enemy.Knockback(gameObject);
             });
             targets.Add(other.gameObject);
         }

@@ -25,7 +25,7 @@ public class Diagum : MonoBehaviour
         if(other.CompareTag("Enemy"))
         {
             EnemyManager.AttackEnemy(other.gameObject, stats, through, processFunc:(enemy) => {
-                enemy.Knockback(gameObject);
+                // enemy.Knockback(gameObject);
             });
         }
     }

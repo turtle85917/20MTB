@@ -14,7 +14,7 @@ public class Exp : MonoBehaviour
     {
         if(Scanner.Scan(transform.position, 3, "Player") != null)
         {
-            Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, Player.instance.transform.position, 40 * Time.deltaTime));
+            Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, Game.Player.transform.position, 40 * Time.deltaTime));
         }
     }
 
@@ -23,7 +23,7 @@ public class Exp : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             gameObject.SetActive(false);
-            Game.playerData.exp += exp;
+            Player.playerData.exp += exp;
         }
     }
 }

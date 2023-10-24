@@ -18,12 +18,24 @@ public class DefaultWeapon : MonoBehaviour
 
     private void Start()
     {
-        weapon = WeaponBundle.GetWeapon(Game.playerData.data.defaultWeapon);
+        weapon = WeaponBundle.GetWeapon(Player.playerData.data.defaultWeapon);
         cooltimeWait = new WaitForSeconds(weapon.stats.Cooldown);
         switch(weapon.weapon.WeaponId)
         {
             case "Wakchori":
-                StartCoroutine(Wakchori());
+                StartCoroutine(WeaponCycle(
+                    Game.PoolManager,
+                    Blow,
+                    (blow) => {
+                        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        blow.transform.rotation = GameUtils.LookAtTarget(blow.transform.position, mousePosition);
+                        Blow script = blow.GetComponent<Blow>();
+                        script.Init();
+                        script.through = 0;
+                        script.stats = weapon.stats;
+                        script.direction = mousePosition - (Vector2)blow.transform.position;
+                    }
+                ));
                 break;
             case "MagicWand":
                 StartCoroutine(MagicWand());
@@ -52,15 +64,15 @@ public class DefaultWeapon : MonoBehaviour
         {
             yield return cooltimeWait;
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 distance = Player.instance.transform.position - (Vector3)mousePosition;
+            Vector2 distance = Game.Player.transform.position - (Vector3)mousePosition;
             GameObject blow = ObjectPool.Get(
-                Game.instance.PoolManager,
+                Game.PoolManager,
                 "Blow",
                 (parent) => Instantiate(Blow, parent.transform, false)
             );
-            blow.transform.rotation = GameUtils.LookAtTarget(Vector2.zero, mousePosition);
+            // blow.transform.rotation = GameUtils.LookAtTarget(Vector2.zero, mousePosition);
             Blow script = blow.GetComponent<Blow>();
-            script.Reset(weapon.stats, distance.normalized * -1);
+            // script.Reset(weapon.stats, distance.normalized * -1);
             yield return new WaitForSeconds(weapon.stats.Life);
             blow.SetActive(false);
         }
@@ -75,12 +87,12 @@ public class DefaultWeapon : MonoBehaviour
             for(int i = 0; i < weapon.stats.ProjectileCount; i++)
             {
                 GameObject star = ObjectPool.Get(
-                    Game.instance.PoolManager,
+                    Game.PoolManager,
                     "Star",
                     (parent) => Instantiate(Star, parent.transform, false)
                 );
                 star.name = "Star";
-                star.transform.localPosition = Player.instance.transform.position;
+                star.transform.localPosition = Game.Player.transform.position;
                 star.GetComponent<Star>().Reset(weapon.stats, targets);
             }
         }
@@ -91,12 +103,12 @@ public class DefaultWeapon : MonoBehaviour
         while(true)
         {
             yield return cooltimeWait;
-            List<GameObject> enemy = Scanner.ScanAll(Player.instance.transform.position, 10, "Enemy");
-            Player.instance.Attack();
-            Vector2 direction = Player.instance.Movement;
+            List<GameObject> enemy = Scanner.ScanAll(Game.Player.transform.position, 10, "Enemy");
+            // Player.instance.Attack();
+            Vector2 direction = Player.lastDirection;
             if(enemy.Count > 0)
             {
-                enemy = enemy.OrderBy(item => Vector3.Distance(item.transform.position, Player.instance.transform.position)).ToList();
+                enemy = enemy.OrderBy(item => Vector3.Distance(item.transform.position, Game.Player.transform.position)).ToList();
                 for(int i = 0; i < weapon.stats.Through; i++)
                 {
                     if(enemy.Count <= i) break;
@@ -107,12 +119,12 @@ public class DefaultWeapon : MonoBehaviour
             else
             {
                 GameObject blow = ObjectPool.Get(
-                Game.instance.PoolManager,
+                Game.PoolManager,
                     "Blow",
                     (parent) => Instantiate(Blow, parent.transform, false)
                 );
                 Blow script = blow.GetComponent<Blow>();
-                script.Reset(weapon.stats, direction);
+                script.Init();
                 yield return new WaitForSeconds(weapon.stats.Life);
                 blow.SetActive(false);
             }
@@ -124,13 +136,13 @@ public class DefaultWeapon : MonoBehaviour
         while(true)
         {
             yield return cooltimeWait;
-            Player.instance.Attack();
+            // Player.instance.Attack();
             GameObject scream = ObjectPool.Get(
-                Game.instance.PoolManager,
+                Game.PoolManager,
                 "Scream",
                 (parent) => Instantiate(Scream, parent.transform, false)
             );
-            scream.transform.position = Player.instance.transform.position;
+            scream.transform.position = Game.Player.transform.position;
             Scream script = scream.GetComponent<Scream>();
             script.Reset(weapon.stats);
             yield return new WaitForSeconds(weapon.stats.Life);
@@ -142,7 +154,7 @@ public class DefaultWeapon : MonoBehaviour
     {
         while(true)
         {
-            GameObject enemy = Scanner.Scan(Player.instance.transform.position, 8, "Enemy");
+            GameObject enemy = Scanner.Scan(Game.Player.transform.position, 8, "Enemy");
             if(enemy)
             {
                 GameObject magicCircle = Instantiate(MagicCircle, enemy.transform);
@@ -160,10 +172,10 @@ public class DefaultWeapon : MonoBehaviour
             yield return cooltimeWait;
             for(int i = 0; i < weapon.stats.Through; i++)
             {
-                GameObject enemy = Scanner.ScanFilter(Player.instance.transform.position, 14, "Enemy", targets);
+                GameObject enemy = Scanner.ScanFilter(Game.Player.transform.position, 14, "Enemy", targets);
                 if(enemy == null) continue;
                 GameObject headpin = ObjectPool.Get(
-                    Game.instance.PoolManager,
+                    Game.PoolManager,
                     "Headpin",
                     (parent) => Instantiate(HeadpinPrefab, parent.transform, false)
                 );
@@ -180,7 +192,7 @@ public class DefaultWeapon : MonoBehaviour
         {
             yield return cooltimeWait;
             GameObject diagums = ObjectPool.Get(
-                Game.instance.PlayerWeapons,
+                Game.PlayerWeapons,
                 "DiaGums",
                 (parent) => Instantiate(Diagums, parent.transform, false)
             );
@@ -188,6 +200,18 @@ public class DefaultWeapon : MonoBehaviour
             script.Reset(weapon.stats);
             yield return new WaitForSeconds(weapon.stats.Life);
             diagums.SetActive(false);
+        }
+    }
+
+    private IEnumerator WeaponCycle(GameObject Parent, GameObject WeaponPrefab, Action<GameObject> createFunc)
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(weapon.stats.Cooldown);
+            GameObject obj = ObjectPool.Get(Parent, WeaponPrefab.name, (parent) => Instantiate(WeaponPrefab, parent.transform, false));
+            createFunc(obj);
+            yield return new WaitForSeconds(weapon.stats.Life);
+            obj.SetActive(false);
         }
     }
 }

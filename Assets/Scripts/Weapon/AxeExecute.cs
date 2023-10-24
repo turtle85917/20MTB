@@ -44,15 +44,15 @@ public class AxeExecute : MonoBehaviour
                 if(weaponUser.CompareTag("Player"))
                 {
                     EnemyManager.AttackEnemy(other.gameObject, stats, processFunc:(enemy) => {
-                        enemy.Knockback(gameObject);
+                        // enemy.Knockback(gameObject);
                     });
                 }
                 if(weaponUser.CompareTag("Enemy"))
                 {
                     EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(weaponUser);
                     int damage = CalcStat.GetDamageValueFromEnemyStat(enemyPool.data.stats.Power, stats.Power);
-                    Game.playerData.health -= damage;
-                    TextManager.WriteDamage(Player.instance.gameObject, damage, false);
+                    Player.playerData.health -= damage;
+                    TextManager.WriteDamage(Game.Player.gameObject, damage, false);
                 }
             }
         }

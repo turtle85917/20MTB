@@ -18,9 +18,9 @@ public class MusketCycle : MonoBehaviour, IExecuteWeapon
         stats = weapon.stats;
         weaponUser = weaponUserVal;
         Bullet = (GameObject)weapon.weapon.resources[1];
-        GameObject musket = Instantiate((GameObject)weapon.weapon.resources[0], Game.instance.PlayerWeapons.transform, false);
+        GameObject musket = Instantiate((GameObject)weapon.weapon.resources[0], Game.PlayerWeapons.transform, false);
         musket.name = "머스켓";
-        musket.transform.localPosition = Vector3.right * 0.7f;
+        musket.transform.localPosition = Vector3.right * 0.5f;
         MusketSpriteRenderer = musket.GetComponent<SpriteRenderer>();
         Musket = musket;
         StartCoroutine(WeaponCycle());
@@ -28,9 +28,17 @@ public class MusketCycle : MonoBehaviour, IExecuteWeapon
 
     private void Update()
     {
-        MusketSpriteRenderer.flipX = GameUtils.GetDirectionFromTarget(weaponUser) == 1;
-        target = Scanner.Scan(Musket.transform.position, stats.Range, "Enemy");
-        Musket.transform.rotation = GameUtils.LookAtTarget(Musket.transform.position, target?.transform.position ?? Vector2.zero);
+        target = Scanner.Scan(Game.Player.transform.position, stats.Range, "Enemy");
+        if(target != null)
+        {
+            MusketSpriteRenderer.flipX = false;
+            Musket.transform.rotation = GameUtils.LookAtTarget(Musket.transform.position, target.transform.position);
+        }
+        else
+        {
+            MusketSpriteRenderer.flipX = GameUtils.GetDirectionFromTarget(weaponUser) == -1;
+            Musket.transform.rotation = Quaternion.identity;
+        }
     }
 
     private IEnumerator WeaponCycle()
@@ -39,17 +47,22 @@ public class MusketCycle : MonoBehaviour, IExecuteWeapon
         {
             yield return new WaitForSeconds(stats.Cooldown);
             GameObject bullet = ObjectPool.Get(
-                Game.instance.PoolManager,
+                Game.PoolManager,
                 "Bullet",
                 (parent) => Instantiate(Bullet, parent.transform, false)
             );
             bullet.transform.position = Musket.transform.position;
-            bullet.transform.rotation = Musket.transform.rotation;
+            // bullet.transform.rotation = MultipleQuaternionInt(Musket.transform.rotation, MusketSpriteRenderer.flipX ? 1 : -1);
             Bullet script = bullet.GetComponent<Bullet>();
             script.stats = stats;
-            script.Reset(target);
+            script.Reset(Musket, target);
             yield return new WaitForSeconds(stats.Life);
             bullet.SetActive(false);
         }
+    }
+
+    private Quaternion MultipleQuaternionInt(Quaternion quaternion, int value)
+    {
+        return new Quaternion(quaternion.x * value, quaternion.y * value, quaternion.z * value, quaternion.w * value);
     }
 }

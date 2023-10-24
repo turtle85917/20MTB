@@ -21,7 +21,7 @@ public class AxeCycle : MonoBehaviour, IExecuteWeapon
         {
             yield return new WaitForSeconds(stats.Cooldown);
             GameObject axe = ObjectPool.Get(
-                Game.instance.PoolManager,
+                Game.PoolManager,
                 "Axe",
                 (parent) => Instantiate(AxePrefab, parent.transform, false)
             );

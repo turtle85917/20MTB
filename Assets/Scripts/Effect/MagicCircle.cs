@@ -21,19 +21,19 @@ public class MagicCircle : MonoBehaviour
     {
         yield return new WaitForSeconds(stats.Life);
         List<GameObject> enemies = Scanner.ScanAll(target.transform.position, 10, "Enemy", 4);
-        enemies = enemies.OrderBy(item => Vector3.Distance(item.transform.position, Player.instance.transform.position)).ToList();
+        enemies = enemies.OrderBy(item => Vector3.Distance(item.transform.position, Game.Player.transform.position)).ToList();
         for(int i = 0; i < enemies.Count; i++)
         {
             var enemyPool = EnemyManager.GetEnemy(enemies[i]);
             Enemy script = enemyPool.target.GetComponent<Enemy>();
-            script.Sturn();
-            if(i > 0)
-                script.Knockback(gameObject);
+            // script.Sturn();
+            // if(i > 0)
+            //     script.Knockback(gameObject);
             EnemyManager.AttackEnemy(enemies[i], stats, i);
         }
         Destroy(gameObject);
         GameObject stamp = ObjectPool.Get(
-            Game.instance.PoolManager,
+            Game.PoolManager,
             "Stamp",
             (parent) => Instantiate(Stamp, parent.transform, false)
         );
