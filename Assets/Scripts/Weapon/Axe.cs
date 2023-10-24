@@ -2,7 +2,7 @@ using _20MTB.Stats;
 using _20MTB.Utillity;
 using UnityEngine;
 
-public class AxeExecute : MonoBehaviour
+public class Axe : MonoBehaviour
 {
     private WeaponUseMode useMode;
     private WeaponStatus weaponStatus;

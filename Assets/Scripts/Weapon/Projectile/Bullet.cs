@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
         {
             EnemyManager.AttackEnemy(other.gameObject, stats, through);
             through++;
-            if(through == stats.Through)
+            if(through == stats.Penetrate)
             {
                 gameObject.SetActive(false);
             }

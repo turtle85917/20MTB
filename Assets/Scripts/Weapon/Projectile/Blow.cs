@@ -23,7 +23,7 @@ public class Blow : MonoBehaviour
 
     private void Update()
     {
-        if(through == stats.Through)
+        if(through == stats.Penetrate)
         {
             gameObject.SetActive(false);
         }

@@ -61,7 +61,7 @@ public class Star : MonoBehaviour
         {
             Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, target.transform.position, 14 * Time.deltaTime));
         }
-        if(through == stats.Through)
+        if(through == stats.Penetrate)
         {
             StopAllCoroutines();
             gameObject.SetActive(false);

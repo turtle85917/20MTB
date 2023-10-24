@@ -25,7 +25,7 @@ public class AxeCycle : MonoBehaviour, IExecuteWeapon
                 "Axe",
                 (parent) => Instantiate(AxePrefab, parent.transform, false)
             );
-            axe.GetComponent<AxeExecute>().Reset(weaponUser);
+            axe.GetComponent<Axe>().Reset(weaponUser);
             yield return new WaitForSeconds(stats.Life);
             axe.SetActive(false);
         }

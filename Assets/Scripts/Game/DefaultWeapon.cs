@@ -109,7 +109,7 @@ public class DefaultWeapon : MonoBehaviour
             if(enemy.Count > 0)
             {
                 enemy = enemy.OrderBy(item => Vector3.Distance(item.transform.position, Game.Player.transform.position)).ToList();
-                for(int i = 0; i < weapon.stats.Through; i++)
+                for(int i = 0; i < weapon.stats.Penetrate; i++)
                 {
                     if(enemy.Count <= i) break;
                     var enemyPool = EnemyManager.GetEnemy(enemy[i]);
@@ -170,7 +170,7 @@ public class DefaultWeapon : MonoBehaviour
         while(true)
         {
             yield return cooltimeWait;
-            for(int i = 0; i < weapon.stats.Through; i++)
+            for(int i = 0; i < weapon.stats.Penetrate; i++)
             {
                 GameObject enemy = Scanner.ScanFilter(Game.Player.transform.position, 14, "Enemy", targets);
                 if(enemy == null) continue;

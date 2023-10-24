@@ -1,4 +1,4 @@
-무기 ID,Name,Type,Power,Cooldown,Through,DecreasePower,Range,Life,CriticalHit,CriticalDamage,ProjectileName,ProjectileSize,ProjectileSpeed,ProjectileCount,Count
+무기 ID,Name,Type,Power,Cooldown,Penetrate,DecreasePower,Range,Life,CriticalHit,CriticalDamage,ProjectileName,ProjectileSize,ProjectileSpeed,ProjectileCount,Count
 Wakchori,왁초리,D,14,1,1,0,-1,1,0.02,17,,,,,0
 MagicWand,마법봉,D,5,3,2,4,-1,2,0.05,11,Star,1,16,2,0
 MuayThai,무에타이,D,12,2,3,4,-1,1,0.12,15,,,,,0

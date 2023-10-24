@@ -33,7 +33,7 @@ public class WeaponBundle : MonoBehaviour
                 {
                     Power = (int)excelData["Power"],
                     Cooldown = (int)excelData["Cooldown"],
-                    Through = (int)excelData["Through"],
+                    Penetrate = (int)excelData["Penetrate"],
                     DecreasePower = (int)excelData["DecreasePower"],
                     Range = (int)excelData["Range"],
                     Life = (int)excelData["Life"],

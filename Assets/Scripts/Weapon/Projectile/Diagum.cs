@@ -14,7 +14,7 @@ public class Diagum : MonoBehaviour
 
     private void Update()
     {
-        if(through == stats.Through)
+        if(through == stats.Penetrate)
         {
             Destroy(gameObject);
         }

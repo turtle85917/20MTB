@@ -29,7 +29,7 @@ namespace _20MTB.Stats
     {
         public int Power;
         public int Cooldown;
-        public int Through;
+        public int Penetrate;
         public int DecreasePower;
         public int Range;
         public int Life;

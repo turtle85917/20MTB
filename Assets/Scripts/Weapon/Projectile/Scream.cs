@@ -32,7 +32,7 @@ public class Scream : MonoBehaviour
         color.a -= 0.08f;
         spriteRenderer.color = color;
         transform.localScale += new Vector3(0.2f, 0.2f);
-        if(through == stats.Through)
+        if(through == stats.Penetrate)
         {
             gameObject.SetActive(false);
         }
