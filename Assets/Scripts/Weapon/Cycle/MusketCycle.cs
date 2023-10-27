@@ -1,68 +1,38 @@
 using System.Collections;
-using _20MTB.Stats;
 using _20MTB.Utillity;
 using UnityEngine;
 
-public class MusketCycle : MonoBehaviour, IExecuteWeapon
+public class MusketCycle : BaseCycle
 {
-    private GameObject target;
-    private WeaponStats stats;
-    private GameObject weaponUser;
-    private GameObject Bullet;
-    private GameObject Musket;
-    private SpriteRenderer MusketSpriteRenderer;
-
-    public void ExecuteWeapon(GameObject weaponUserVal)
+    public override IEnumerator Cycle(GameObject weaponUser)
     {
         Weapon weapon = WeaponBundle.GetWeapon("Musket");
-        stats = weapon.stats;
-        weaponUser = weaponUserVal;
-        Bullet = (GameObject)weapon.weapon.resources[1];
-        GameObject musket = Instantiate((GameObject)weapon.weapon.resources[0], Game.PlayerWeapons.transform, false);
-        musket.name = "머스켓";
-        musket.transform.localPosition = Vector3.right * 0.5f;
-        MusketSpriteRenderer = musket.GetComponent<SpriteRenderer>();
-        Musket = musket;
-        StartCoroutine(WeaponCycle());
-    }
-
-    private void Update()
-    {
-        target = Scanner.Scan(Game.Player.transform.position, stats.Range, "Enemy");
-        if(target != null)
-        {
-            MusketSpriteRenderer.flipX = false;
-            Musket.transform.rotation = GameUtils.LookAtTarget(Musket.transform.position, target.transform.position);
-        }
-        else
-        {
-            MusketSpriteRenderer.flipX = GameUtils.GetDirectionFromTarget(weaponUser) == -1;
-            Musket.transform.rotation = Quaternion.identity;
-        }
-    }
-
-    private IEnumerator WeaponCycle()
-    {
+        GameObject musket = Object.Instantiate(
+            (GameObject)weapon.weapon.resources[0],
+            Game.PlayerWeapons.transform,
+            false
+        );
+        musket.name = "Musket";
+        musket.transform.localPosition = Vector3.right * 0.4f;
+        Musket musketScript = musket.GetComponent<Musket>();
+        musketScript.Init();
+        musketScript.stats = weapon.stats;
+        musketScript.weaponUser = weaponUser;
+        musketScript.weaponUserType = GameUtils.GetWeaponUserType(weaponUser);
         while(true)
         {
-            yield return new WaitForSeconds(stats.Cooldown);
+            yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject bullet = ObjectPool.Get(
                 Game.PoolManager,
                 "Bullet",
-                (parent) => Instantiate(Bullet, parent.transform, false)
+                (parent) => Object.Instantiate((GameObject)weapon.weapon.resources[0], parent.transform, false)
             );
-            bullet.transform.position = Musket.transform.position;
-            // bullet.transform.rotation = MultipleQuaternionInt(Musket.transform.rotation, MusketSpriteRenderer.flipX ? 1 : -1);
             Bullet script = bullet.GetComponent<Bullet>();
-            script.stats = stats;
-            script.Reset(Musket, target);
-            yield return new WaitForSeconds(stats.Life);
-            bullet.SetActive(false);
+            script.weaponId = weapon.weapon.weaponId;
+            script.stats = weapon.stats;
+            script.weaponUser = weaponUser;
+            script.weaponUserType = GameUtils.GetWeaponUserType(weaponUser);
+            script.Init();
         }
-    }
-
-    private Quaternion MultipleQuaternionInt(Quaternion quaternion, int value)
-    {
-        return new Quaternion(quaternion.x * value, quaternion.y * value, quaternion.z * value, quaternion.w * value);
     }
 }

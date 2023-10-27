@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31882fd8b3cb5f4bb018cef43a79d26, type: 3}
   m_Name: DiaGum
   m_EditorClassIdentifier: 
-  WeaponId: DiaGum
+  weaponId: DiaGum
   logo: {fileID: 694369025, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
-  event_:
-    m_PersistentCalls:
-      m_Calls: []
+  weaponCycleScriptFile: {fileID: 0}
+  resources:
+  - {fileID: 7942860905616382804, guid: 745e7777d708ccb4c8525b46a7628a26, type: 3}

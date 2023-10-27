@@ -1,14 +1,18 @@
 using System.Collections.Generic;
 using _20MTB.Utillity;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : BaseController
 {
     public static Vector2 lastDirection {get; private set;}
     public static PlayerStatus playerData {get; private set;}
     private Vector2 inputDirection;
+    [Header("플레이어 스크립터블")]
     [SerializeField] private Character character;
     [SerializeField] private PlayerData[] players;
+    [Header("UI")]
+    [SerializeField] private Image headImage;
 #region 플레이어 데이터
     public class PlayerStatus
     {
@@ -33,6 +37,8 @@ public class Player : BaseController
             data = data
         };
         animator.runtimeAnimatorController = data.controller;
+        headImage.sprite = data.headImage;
+        WeaponBundle.AddWeaponToTarget(gameObject, data.defaultWeapon);
     }
 
     private void Update()
@@ -40,12 +46,12 @@ public class Player : BaseController
         inputDirection.x = Input.GetAxisRaw("Horizontal");
         inputDirection.y = Input.GetAxisRaw("Vertical");
         animator.SetBool("isWalk", inputDirection.magnitude != 0);
-        transform.rotation = new Quaternion(0, inputDirection.x < 0 ? 180 : 0, 0, 0);
+        transform.rotation = new Quaternion(0, lastDirection.x < 0 ? 180 : 0, 0, 0);
     }
 
     private void FixedUpdate()
     {
-        rigid.MovePosition(GameUtils.MovePositionLimited(rigid.position + inputDirection * playerData.data.stats.MoveSpeed * Time.fixedDeltaTime, transform.position.z));
+        rigid.MovePosition(GameUtils.MovePositionLimited(rigid.position + inputDirection * playerData.data.stats.MoveSpeed / 3 * Time.fixedDeltaTime, transform.position.z));
         if(inputDirection.magnitude != 0)
         {
             lastDirection = inputDirection;

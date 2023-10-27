@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using _20MTB.Utillity;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
@@ -9,55 +11,37 @@ public class Game : MonoBehaviour
     public static GameObject PoolManager;
     public static GameObject PlayerWeapons;
     public static Game instance {get; private set;}
-    [SerializeField] private PlayerData[] players;
+    [Header("Game")]
+    [SerializeField] private GameObject ExpPrefab;
     [SerializeField] private Cycle cycle;
-    private List<int> times;        // 소화된 시간 기록
-    private int timer = 20 * 60;    // 기본 20분
-    private readonly int maxTime = 20 * 60;
+    [Header("UI - Player Status")]
+    [SerializeField] private Slider Health;
+    [SerializeField] private Slider Exp;
+    [SerializeField] private TMP_Text HealthValue;
+    [SerializeField] private TMP_Text ExpValue;
+    private List<int> times;                // 소화된 시간 기록
+    private int timer = 20 * 60;            // 기본 20분
+    private readonly int maxTime = 20 * 60; // 최대 시간 20분
 
     public static void SpawnExpObject(Vector3 targetPosition, int value)
     {
-        // GameObject exp = ObjectPool.Get(
-        //     PoolManager,
-        //     "Exp",
-        //     (parent) => Instantiate(instance.Exp, parent.transform, false)
-        // );
-        // exp.transform.position = targetPosition;
-        // exp.GetComponent<Exp>().exp = value;
+        GameObject exp = ObjectPool.Get(
+            PoolManager,
+            "Exp",
+            (parent) => Instantiate(instance.ExpPrefab, parent.transform, false)
+        );
+        exp.transform.position = targetPosition;
+        exp.GetComponent<Exp>().exp = value;
     }
-
-    // public void AddWeapon(string weaponId)
-    // {
-    //     Weapon weapon = WeaponBundle.GetWeapon(weaponId);
-    //     playerWeapons.Add(weapon);
-    //     foreach(GameObject WeaponSlot in WeaponSlots)
-    //     {
-    //         if(WeaponSlot.transform.childCount == 0)
-    //         {
-    //             GameObject weaponSlot = Instantiate(WeaponSlotPanel, WeaponSlot.transform, false);
-    //             weaponSlot.name = "Logo";
-    //             weaponSlot.GetComponent<Image>().sprite = weapon.weapon.logo;
-    //             if(weapon.type != "D")
-    //             {
-    //                 IExecuteWeapon executeWeapon = weaponSlot.AddComponent(weapon.weapon.weaponCycleScriptFile.GetClass()) as IExecuteWeapon;
-    //                 executeWeapon.ExecuteWeapon(Player.instance.gameObject);
-    //             }
-    //             break;
-    //         }
-    //     }
-    // }
 
     private void Awake()
     {
         instance = this;
-        times = new(){};
+        times = new List<int>(){};
     }
 
     private void Start()
     {
-        // HeadImage.sprite = playerData.data.headImage;
-        // AddWeapon(playerData.data.defaultWeapon);
-        // AddWeapon("Musket");
         Player = GameObject.FindWithTag("Player");
         PoolManager = GameObject.FindWithTag("PoolManager");
         PlayerWeapons = GameObject.FindWithTag("PlayerWeapons");

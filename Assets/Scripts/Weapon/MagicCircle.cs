@@ -1,13 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using _20MTB.Stats;
 using UnityEngine;
 
-public class MagicCircle : MonoBehaviour
+public class MagicCircle : BaseWeapon
 {
     [SerializeField] private GameObject Stamp;
-    private WeaponStats stats;
     private GameObject target;
 
     public void Reset(WeaponStats statsVal, GameObject targetVal)
@@ -20,16 +18,15 @@ public class MagicCircle : MonoBehaviour
     private IEnumerator DelayAttack()
     {
         yield return new WaitForSeconds(stats.Life);
-        List<GameObject> enemies = Scanner.ScanAll(target.transform.position, 10, "Enemy", 4);
-        enemies = enemies.OrderBy(item => Vector3.Distance(item.transform.position, Game.Player.transform.position)).ToList();
+        var enemies = Scanner.ScanAll(Game.Player.transform.position, 4, "Enemy").OrderBy(item => Vector3.Distance(item.transform.position, Game.Player.transform.position)).ToList();
         for(int i = 0; i < enemies.Count; i++)
         {
             var enemyPool = EnemyManager.GetEnemy(enemies[i]);
-            Enemy script = enemyPool.target.GetComponent<Enemy>();
-            // script.Sturn();
-            // if(i > 0)
-            //     script.Knockback(gameObject);
-            EnemyManager.AttackEnemy(enemies[i], stats, i);
+            AttackManager.AttackTarget(weaponId, enemies[i], i, (affecter) => {
+                affecter.Sturn();
+                if(i > 0)
+                    affecter.Knockback(gameObject);
+            });
         }
         Destroy(gameObject);
         GameObject stamp = ObjectPool.Get(

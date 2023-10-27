@@ -1,49 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
-using _20MTB.Stats;
 using UnityEngine;
 
-public class Headpin : MonoBehaviour
+public class Headpin : BaseWeapon
 {
-    private WeaponStats stats;
-    private int through;
-    private GameObject target;
-    private List<GameObject> targets;
-    private bool goAway;
-
-    public void Reset(WeaponStats statsVal, GameObject targetVal, List<GameObject> targetsVal)
+    public new void Init()
     {
-        stats = statsVal;
-        target = targetVal;
-        targets = targetsVal;
-        goAway = false;
-        transform.rotation = Quaternion.identity;
-        StartCoroutine(Hide());
+        base.Init();
+        transform.rotation = Quaternion.AngleAxis(Random.Range(-360f, 360f), Vector3.forward);
     }
 
-    private void Update()
+    private void Awake()
     {
-        if(goAway)
+        rigid = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        rigid.AddForce(transform.right * 22);
+    }
+
+    private void OnBecameInvisible()
+    {
+        if(transform.rotation.z < 0.5f)
         {
-            transform.position += transform.right * 15 * Time.deltaTime;
+            transform.rotation = transform.rotation * Quaternion.AngleAxis(Random.Range(45f, 90f), Vector3.forward);
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.gameObject.Equals(target) && !goAway)
+        else
         {
-            EnemyManager.AttackEnemy(other.gameObject, stats, through);
-            goAway = true;
-            targets.Remove(target);
-            transform.Rotate(0, 0, Random.Range(-360f, 360f));
+            transform.rotation = transform.rotation * Quaternion.AngleAxis(Random.Range(-45f, -90f), Vector3.forward);
         }
-    }
-
-    private IEnumerator Hide()
-    {
-        yield return new WaitForSeconds(stats.Life);
-        gameObject.SetActive(false);
-        targets.Remove(target);
     }
 }

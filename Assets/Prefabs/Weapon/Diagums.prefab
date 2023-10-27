@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1720684486281758423}
-  - component: {fileID: 7901328749120304432}
+  - component: {fileID: 8704597141486020400}
   m_Layer: 6
   m_Name: Diagums
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7901328749120304432
+--- !u!114 &8704597141486020400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7942860905616382804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 405c692a99fa0544895e8e9dc4681d82, type: 3}
+  m_Script: {fileID: 11500000, guid: be91faa433565ff4990baeb53a38607b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponId: 
   Diagum: {fileID: 1699098696854729762, guid: f0d4a82ea61c80a4386495002a54219f, type: 3}

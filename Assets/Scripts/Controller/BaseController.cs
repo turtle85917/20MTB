@@ -7,7 +7,7 @@ public abstract class BaseController : MonoBehaviour
     protected Rigidbody2D rigid;
     protected Animator animator;
 
-    private void Awake()
+    private void Start()
     {
         Init();
     }

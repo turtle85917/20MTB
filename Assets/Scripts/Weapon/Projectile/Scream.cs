@@ -1,51 +1,37 @@
-using System.Collections.Generic;
-using _20MTB.Stats;
 using UnityEngine;
 
-public class Scream : MonoBehaviour
+public class Scream : BaseWeapon
 {
-    private WeaponStats stats;
-    private int through;
-    private List<GameObject> targets;
-    private SpriteRenderer spriteRenderer;
-
-    public void Reset(WeaponStats statsVal)
+    public new void Init()
     {
-        stats = statsVal;
-        through = 0;
-        targets.Clear();
+        base.Init();
+        transform.localPosition = Game.Player.transform.position;
         transform.localScale = new Vector3(1, 1);
-        Color color = spriteRenderer.color;
-        color.a = 1f;
-        spriteRenderer.color = color;
+        sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1);
     }
 
     private void Awake()
     {
-        targets = new(){};
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        Color color = spriteRenderer.color;
+        Color color = sprite.color;
         color.a -= 0.08f;
-        spriteRenderer.color = color;
+        sprite.color = color;
         transform.localScale += new Vector3(0.2f, 0.2f);
-        if(through == stats.Penetrate)
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Enemy") && !targets.Contains(other.gameObject))
+        if(other.CompareTag(weaponUserType == WeaponUser.Player ? "Enemy" : "Player"))
         {
-            EnemyManager.AttackEnemy(other.gameObject, stats, through, processFunc:(enemy) => {
-                // enemy.Knockback(gameObject);
-            });
-            targets.Add(other.gameObject);
+            AttackManager.AttackTarget(weaponId, other.gameObject, penetrate);
+            if(penetrate == stats.Penetrate)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

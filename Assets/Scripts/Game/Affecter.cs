@@ -15,6 +15,11 @@ public class Affecter : MonoBehaviour
         Sturn
     }
 
+    public void AttackAnimate()
+    {
+        animator.SetTrigger("Attack");
+    }
+
     public void Knockback(GameObject target)
     {
         status = Status.Knockback;

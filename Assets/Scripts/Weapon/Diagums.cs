@@ -1,19 +1,12 @@
-using _20MTB.Stats;
 using UnityEngine;
 
-public class Diagums : MonoBehaviour
+public class Diagums : BaseWeapon
 {
-    public WeaponStats Stats {
-        get {
-            return stats;
-        }
-    }
     [SerializeField] private GameObject Diagum;
-    private WeaponStats stats;
 
-    public void Reset(WeaponStats statsVal)
+    public new void Init()
     {
-        stats = statsVal;
+        base.Init();
         transform.rotation = Quaternion.identity;
         for(int i = 0; i < transform.childCount; i++)
         {

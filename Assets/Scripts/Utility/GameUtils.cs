@@ -8,11 +8,11 @@ namespace _20MTB.Utillity
         private static readonly Vector2 maxPoint = new Vector2(29.6f, 17.8f);
         private static readonly Vector2 minPoint = new Vector2(-29.6f, -16f);
 
-        public static string GetAttackTargetTag(GameObject target)
+        public static WeaponUser GetWeaponUserType(GameObject target)
         {
             return target.CompareTag("Player")
-                ? "Enemy"
-                : "Player"
+                ? WeaponUser.Player
+                : WeaponUser.Enemy
             ;
         }
 
@@ -25,11 +25,11 @@ namespace _20MTB.Utillity
             return target.transform.position.x > Player.lastDirection.x ? 1 : -1;
         }
 
-        public static Quaternion LookAtTarget(Vector2 origin, Vector2 target)
+        public static Quaternion LookAtTarget(Vector3 origin, Vector3 target)
         {
-            Vector2 distance = origin - target;
+            Vector3 distance = target - origin;
             float angle = (float)(Math.Atan2(distance.y, distance.x) * Mathf.Rad2Deg);
-            return Quaternion.AngleAxis(angle - 90, Vector3.forward);
+            return Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
         public static Vector3 MovePositionLimited(Vector3 position, float z)

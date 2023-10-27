@@ -12,20 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31882fd8b3cb5f4bb018cef43a79d26, type: 3}
   m_Name: Wakchori
   m_EditorClassIdentifier: 
-  WeaponId: Wakchori
+  weaponId: Wakchori
   logo: {fileID: 1957048752, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
-  DefaultWeaponListener:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11500000, guid: 0808731ea55bf5444992eb261c53ec4e, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  weaponCycleScriptFile: {fileID: 11500000, guid: 6a16333fa2e24d846accb1868dd291ff, type: 3}
+  resources:
+  - {fileID: 4021328352662059622, guid: b672a3c600916854fb8618f997b906cf, type: 3}

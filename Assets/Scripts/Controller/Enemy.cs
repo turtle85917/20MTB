@@ -21,6 +21,7 @@ public class Enemy : BaseController
     private void Update()
     {
         LookAtPlayer();
+        headSprite.flipX = transform.position.x > Game.Player.transform.position.x;
         bodySprite.flipX = transform.position.x > Game.Player.transform.position.x;
         animator.SetBool("isWalk", true);
         // if(enemyPool.health <= 0 && status != Status.Die)
@@ -40,7 +41,7 @@ public class Enemy : BaseController
 
     private void FixedUpdate()
     {
-        rigid.MovePosition(Vector3.MoveTowards(rigid.position, Game.Player.transform.position, enemyPool.moveSpeed * Time.fixedDeltaTime));
+        rigid.MovePosition(Vector3.MoveTowards(rigid.position, Game.Player.transform.position, enemyPool.moveSpeed / 3 * Time.fixedDeltaTime));
     }
 
     private void LateUpdate()

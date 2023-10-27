@@ -1,4 +1,4 @@
-public enum WeaponUseMode
+public enum WeaponUser
 {
     Player,
     Enemy

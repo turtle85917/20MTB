@@ -32,7 +32,7 @@ namespace _20MTB.Stats
         public int Penetrate;
         public int DecreasePower;
         public int Range;
-        public int Life;
+        public float Life;
         public float CriticalHit;
         public int CriticalDamage;
         public string ProjectileName;

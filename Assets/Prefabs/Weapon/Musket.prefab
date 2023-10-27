@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2653388192538661916}
   - component: {fileID: 3826946005598728751}
+  - component: {fileID: 4804069222975747804}
   m_Layer: 0
   m_Name: Musket
   m_TagString: Untagged
@@ -84,3 +85,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4804069222975747804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441661794653429694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0c76d6e63904634e9ed0063ebc53aa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

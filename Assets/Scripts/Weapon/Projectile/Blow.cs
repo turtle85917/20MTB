@@ -1,47 +1,28 @@
-using _20MTB.Stats;
-using _20MTB.Utillity;
 using UnityEngine;
 
-public class Blow : MonoBehaviour
+public class Blow : BaseWeapon
 {
-    public int through {private get; set;}
-    public WeaponStats stats {private get; set;}
-    public Vector2 direction {private get; set;}
-    private Vector2 movement;
-    private Rigidbody2D rigid;
-
-    public void Init()
+    public new void Init()
     {
-        transform.localPosition = Game.Player.transform.position;
-        rigid.velocity = Vector2.zero;
+        base.Init();
+        animation.Play("Show");
+        Vector2 direction = new Vector2((Camera.main.ScreenToWorldPoint(Input.mousePosition) - Game.Player.transform.position).normalized.x < 0 ? -1 : 1, 0);
+        sprite.flipX = direction.x < 0;
+        transform.localPosition = Game.Player.transform.position + Vector3.right * direction.x * 1.2f;
     }
 
     private void Awake()
     {
-        rigid = GetComponent<Rigidbody2D>();
-    }
-
-    private void Update()
-    {
-        if(through == stats.Penetrate)
-        {
-            gameObject.SetActive(false);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        rigid.AddForce(direction.normalized * 10);
+        animation = GetComponent<Animation>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Enemy") && gameObject.activeSelf)
+        if(other.CompareTag("Enemy") && penetrate < stats.Penetrate)
         {
-            EnemyManager.AttackEnemy(other.gameObject, stats, through, processFunc:(enemy) => {
-                // enemy.Knockback(gameObject);
-            });
-            through++;
+            AttackManager.AttackTarget(weaponId, other.gameObject, penetrate);
+            penetrate++;
         }
     }
 }
