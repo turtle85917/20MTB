@@ -36,5 +36,10 @@ namespace _20MTB.Utillity
         {
             return new(Math.Max(minPoint.x, Math.Min(position.x, maxPoint.x)), Math.Max(minPoint.y, Math.Min(position.y, maxPoint.y)), position.z);
         }
+
+        public static int GetNeedExpFromLevel()
+        {
+            return 50 * Player.playerData.level + 10;
+        }
     }
 }
