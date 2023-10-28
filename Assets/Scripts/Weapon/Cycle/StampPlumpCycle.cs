@@ -12,7 +12,11 @@ public class StampPlumpCycle : BaseCycle
             if(enemy)
             {
                 GameObject magicCircle = Object.Instantiate((GameObject)weapon.weapon.resources[0], enemy.transform);
-                magicCircle.GetComponent<MagicCircle>();
+                MagicCircle script = magicCircle.GetComponent<MagicCircle>();
+                script.weaponId = weapon.weapon.weaponId;
+                script.stats = weapon.stats;
+                script.target = enemy;
+                script.Init();
             }
             yield return new WaitForSeconds(weapon.stats.Cooldown);
         }

@@ -28,6 +28,7 @@ public class Player : BaseController
     {
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        Game.Player = gameObject;
         PlayerData data = players[(int)character];
         playerData = new PlayerStatus()
         {

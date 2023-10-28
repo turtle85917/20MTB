@@ -42,7 +42,6 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
-        Player = GameObject.FindWithTag("Player");
         PoolManager = GameObject.FindWithTag("PoolManager");
         PlayerWeapons = GameObject.FindWithTag("PlayerWeapons");
         StartCoroutine(Timer());

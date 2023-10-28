@@ -1,18 +1,37 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class Affecter : MonoBehaviour
 {
-    protected Status status;
-    protected Animator animator;
-    protected new Rigidbody2D rigidbody;
+    public Status status {
+        get
+        {
+            return _status;
+        }
+        private set
+        {
+            lastStatus = _status;
+            if(value == Status.Idle) _status = Status.Idle;
+            else
+            {
+                if(_status == Status.Idle)
+                    _status = value;
+                else
+                    _status = Status.Multiple;
+            }
+        }
+    }
+    private Animator animator;
+    private Rigidbody2D rigid;
+    private Status _status = Status.Idle;
+    private Status lastStatus;
     private readonly int forcePower = 10;
     public enum Status
     {
         Idle,
         Knockback,
-        Sturn
+        Sturn,
+        Multiple
     }
 
     public void AttackAnimate()
@@ -24,33 +43,36 @@ public class Affecter : MonoBehaviour
     {
         status = Status.Knockback;
         Vector2 direction = (transform.position - target.transform.position).normalized;
-        rigidbody.AddForce(direction * forcePower, ForceMode2D.Impulse);
-        StartCoroutine(Reset());
+        rigid.AddForce(direction * forcePower, ForceMode2D.Impulse);
+        StartCoroutine(KnockbackReset());
     }
 
-    public void Sturn(Action callbackFunc = null)
+    public void Sturn()
     {
-        SetColor(Color.yellow);
         status = Status.Sturn;
         animator.SetBool("isWalk", false);
-        StartCoroutine(Reset(3f, callbackFunc:callbackFunc));
+        SetColor(Color.yellow);
+        StartCoroutine(SturnReset());
     }
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        rigid = GetComponent<Rigidbody2D>();
     }
 
-    private IEnumerator Reset(float duration = 0.2f, Action callbackFunc = null)
+    private IEnumerator KnockbackReset()
     {
-        yield return new WaitForSeconds(duration);
-        status = Status.Idle;
-        rigidbody.velocity = Vector2.zero;
+        yield return new WaitForSeconds(0.2f);
+        rigid.velocity = Vector2.zero;
+        CheckCurrentStatus(Status.Knockback);
+    }
+
+    private IEnumerator SturnReset()
+    {
+        yield return new WaitForSeconds(3f);
         SetColor(Color.white);
-        if(callbackFunc != null)
-        {
-            callbackFunc();
-        }
+        CheckCurrentStatus(Status.Sturn);
     }
 
     private void SetColor(Color color)
@@ -58,5 +80,18 @@ public class Affecter : MonoBehaviour
         BaseController baseController =  transform.GetComponent<BaseController>();
         baseController.headSprite.color = color;
         baseController.bodySprite.color = color;
+    }
+
+    private void CheckCurrentStatus(Status checkStatus)
+    {
+        if(status == Status.Multiple)
+        {
+            status = lastStatus;
+            lastStatus = Status.Idle;
+        }
+        else if(status == checkStatus)
+        {
+            status = Status.Idle;
+        }
     }
 }
