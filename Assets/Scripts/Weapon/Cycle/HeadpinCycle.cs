@@ -9,7 +9,7 @@ public class HeadpinCycle : BaseCycle
         while(true)
         {
             yield return new WaitForSeconds(weapon.stats.Cooldown);
-            for(int i = 0; i < weapon.stats.Penetrate; i++)
+            for(int i = 0; i < weapon.stats.ProjectileCount; i++)
             {
                 GameObject headpin = ObjectPool.Get(
                     Game.PoolManager,
@@ -18,6 +18,7 @@ public class HeadpinCycle : BaseCycle
                 );
                 Headpin script = headpin.GetComponent<Headpin>();
                 script.weaponId = weapon.weapon.weaponId;
+                script.stats = weapon.stats;
                 script.Init();
             }
         }

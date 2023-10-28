@@ -59,9 +59,7 @@ public class Game : MonoBehaviour
 
     private void LateUpdate()
     {
-        Vector3 oldPosition = Player.transform.position;
-        oldPosition.z = Camera.main.transform.position.z;
-        Camera.main.transform.position = oldPosition;
+        Camera.main.transform.position = Player.transform.position + Vector3.back * 10;
     }
 
     private void SpawnEnemies()
