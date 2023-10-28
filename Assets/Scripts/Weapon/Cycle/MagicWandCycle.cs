@@ -18,15 +18,13 @@ public class MagicWandCycle : BaseCycle
                     "Star",
                     (parent) => Object.Instantiate((GameObject)weapon.weapon.resources[0], parent.transform, false)
                 );
-                GameObject target;
-                Scanner.Scan(Game.Player.transform.position, 6, "Enemy", out target);
-                while(targets.Contains(target))
-                {
-                    Scanner.Scan(Game.Player.transform.position, 6, "Enemy", out target);
-                }
+                GameObject target = Scanner.Scan(Game.Player.transform.position, 10, "Enemy", targets.ToArray());
                 targets.Add(target);
                 Star script = star.GetComponent<Star>();
                 script.target = target;
+                script.stats = weapon.stats;
+                script.weaponId = weapon.weapon.weaponId;
+                script.Init();
             }
         }
     }

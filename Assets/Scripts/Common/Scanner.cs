@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class Scanner
@@ -16,18 +17,21 @@ public static class Scanner
         return result;
     }
 
-    public static GameObject Scan(Vector2 origin, float radius, string tag)
+    public static GameObject Scan(Vector2 origin, float radius, string tag, GameObject[] list = null)
     {
         float r = radius;
         GameObject result = null;
         ProcessRaycast(origin, radius, (RaycastHit2D raycast) => {
             if(raycast.collider.CompareTag(tag))
             {
-                float distance = Vector3.Distance(origin, raycast.transform.position);
-                if(distance < r)
+                if(list == null || !list.Contains(raycast.collider.gameObject))
                 {
-                    r = distance;
-                    result = raycast.collider.gameObject;
+                    float distance = Vector3.Distance(origin, raycast.transform.position);
+                    if(distance < r)
+                    {
+                        r = distance;
+                        result = raycast.collider.gameObject;
+                    }
                 }
             }
         });

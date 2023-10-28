@@ -4,7 +4,6 @@ using UnityEngine;
 public class Star : BaseWeapon
 {
     public GameObject target;
-    private Vector2 movement;
     private readonly Color[] colors = new Color[4]{
         new Color(0.8f, 0.3f, 0.3f),
         new Color(0.3f, 0.8f, 0.5f),
@@ -17,6 +16,7 @@ public class Star : BaseWeapon
         base.Init();
         rigid.velocity = Vector2.zero;
         sprite.color = colors[Random.Range(0, colors.Length)];
+        transform.localPosition = Game.Player.transform.position;
     }
 
     private void Awake()
@@ -27,14 +27,21 @@ public class Star : BaseWeapon
 
     private void Update()
     {
-        if(weaponStatus == WeaponStatus.GoAway)
-        {
-            rigid.AddForce(movement * 20);
-            return;
-        }
         if(target)
         {
-            rigid.MovePosition(Vector3.MoveTowards(rigid.position, target.transform.position, 14 * Time.deltaTime));
+            rigid.MovePosition(Vector3.MoveTowards(rigid.position, target.transform.position, stats.ProjectileSpeed * Time.deltaTime));
+        }
+        else
+        {
+            weaponStatus = WeaponStatus.GoAway;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if(weaponStatus == WeaponStatus.GoAway)
+        {
+            rigid.AddForce(Player.lastDirection * 20);
         }
     }
 
@@ -57,18 +64,19 @@ public class Star : BaseWeapon
 
     private IEnumerator AttackEnemy()
     {
-        while(target || penetrate < stats.Penetrate)
+        while(penetrate <= stats.Penetrate)
         {
             yield return new WaitForSeconds(0.5f);
+            if(target == null) break;
             AttackManager.AttackTarget(weaponId, target, penetrate);
             var enemyPool = EnemyManager.GetEnemy(target);
             if(enemyPool.health <= 0)
             {
                 target = null;
-                StopAllCoroutines();
+                StopCoroutine(AttackEnemy());
             }
             penetrate++;
         }
-        gameObject.SetActive(false);
+        weaponStatus = WeaponStatus.GoAway;
     }
 }
