@@ -64,7 +64,7 @@ public class Star : BaseWeapon
 
     private IEnumerator AttackEnemy()
     {
-        while(penetrate <= stats.Penetrate)
+        while(penetrate < stats.Penetrate)
         {
             yield return new WaitForSeconds(0.5f);
             if(target == null) break;

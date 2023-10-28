@@ -46,7 +46,7 @@ public class Player : BaseController
         inputDirection.x = Input.GetAxisRaw("Horizontal");
         inputDirection.y = Input.GetAxisRaw("Vertical");
         animator.SetBool("isWalk", inputDirection.magnitude != 0);
-        transform.rotation = new Quaternion(0, lastDirection.x < 0 ? 180 : 0, 0, 0);
+        transform.rotation = Quaternion.AngleAxis(lastDirection.x < 0 ? 180 : 0, Vector3.up);
     }
 
     private void FixedUpdate()

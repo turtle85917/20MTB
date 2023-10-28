@@ -19,7 +19,7 @@ public class Enemy : BaseController
 
     private void Update()
     {
-        transform.rotation = new Quaternion(0, transform.position.x > Game.Player.transform.position.x ? 180 : 0, 0, 0);
+        transform.rotation = Quaternion.AngleAxis(transform.position.x > Game.Player.transform.position.x ? 180 : 0, Vector3.up);
         animator.SetBool("isWalk", true);
         if(enemyPool.health <= 0 && !animator.GetBool("isDie"))
         {
