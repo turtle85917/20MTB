@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using _20MTB.Utillity;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
-    public static GameObject Player;
+    public static GameObject PlayerObject;
     public static GameObject PoolManager;
     public static GameObject PlayerWeapons;
     public static Game instance {get; private set;}
@@ -15,10 +16,12 @@ public class Game : MonoBehaviour
     [SerializeField] private GameObject ExpPrefab;
     [SerializeField] private Cycle cycle;
     [Header("UI - Player Status")]
-    [SerializeField] private Slider Health;
-    [SerializeField] private Slider Exp;
-    [SerializeField] private TMP_Text HealthValue;
-    [SerializeField] private TMP_Text ExpValue;
+    [SerializeField] private Slider HealthSlider;
+    [SerializeField] private Slider ExpSlider;
+    [SerializeField] private TMP_Text HealthText;
+    [SerializeField] private TMP_Text LevelText;
+    [Header("UI")]
+    [SerializeField] private TMP_Text TimerText;
     private List<int> times;                // 소화된 시간 기록
     private int timer = 20 * 60;            // 기본 20분
     private readonly int maxTime = 20 * 60; // 최대 시간 20분
@@ -49,17 +52,17 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
-        // TimerText.text = TimeSpan.FromSeconds(timer).ToString(@"mm\:ss");
-        // HealthBar.value = (float)playerData.health / playerData.data.stats.MaxHealth;
-        // HealthText.text = playerData.health + " / " + playerData.data.stats.MaxHealth;
-        // ExpBar.value = (float)playerData.exp / CalcStat.GetNeedExpFromLevel();
-        // LevelText.text = "Lv " + playerData.level;
+        TimerText.text = System.TimeSpan.FromSeconds(timer).ToString(@"mm\:ss");
+        HealthSlider.value = (float)Player.playerData.health / Player.playerData.data.stats.MaxHealth;
+        ExpSlider.value = (float)Player.playerData.exp / GameUtils.GetNeedExpFromLevel();
+        HealthText.text = Player.playerData.health + " / " + Player.playerData.data.stats.MaxHealth;
+        LevelText.text = "Lv " + Player.playerData.level;
         SpawnEnemies();
     }
 
     private void LateUpdate()
     {
-        Camera.main.transform.position = Player.transform.position + Vector3.back * 10;
+        Camera.main.transform.position = PlayerObject.transform.position + Vector3.back * 10;
     }
 
     private void SpawnEnemies()
@@ -75,7 +78,7 @@ public class Game : MonoBehaviour
                     GameObject enemy = EnemyManager.NewEnemy(enemyData.enemyId);
                     if(timeline.circleRadius > 0)
                     {
-                        enemy.transform.position = GameUtils.MovePositionLimited(Player.transform.position + (Vector3)Random.insideUnitCircle.normalized * timeline.circleRadius, 0);
+                        enemy.transform.position = GameUtils.MovePositionLimited(PlayerObject.transform.position + (Vector3)Random.insideUnitCircle.normalized * timeline.circleRadius, 0);
                     }
                     else
                     {

@@ -8,7 +8,7 @@ public class StampPlumpCycle : BaseCycle
         Weapon weapon = WeaponBundle.GetWeapon("StampPlump");
         while(true)
         {
-            GameObject enemy = Scanner.Scan(Game.Player.transform.position, 8, "Enemy");
+            GameObject enemy = Scanner.Scan(Game.PlayerObject.transform.position, 8, "Enemy");
             if(enemy)
             {
                 GameObject magicCircle = Object.Instantiate((GameObject)weapon.weapon.resources[0], enemy.transform);

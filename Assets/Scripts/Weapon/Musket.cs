@@ -10,7 +10,7 @@ public class Musket : BaseWeapon
 
     private void Update()
     {
-        GameObject target = Scanner.Scan(Game.Player.transform.position, stats.Range, weaponUserType == WeaponUser.Player ? "Enemy" : "Player");
+        GameObject target = Scanner.Scan(Game.PlayerObject.transform.position, stats.Range, weaponUserType == WeaponUser.Player ? "Enemy" : "Player");
         if(target != null)
         {
             sprite.flipX = false;

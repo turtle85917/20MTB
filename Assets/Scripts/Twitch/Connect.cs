@@ -83,7 +83,7 @@ public class Connect : MonoBehaviour
                             {
                                 GameObject enemy = EnemyManager.NewEnemy("Panzee");
                                 WeaponBundle.AddWeaponToTarget(enemy, weapon.weapon.weaponId);
-                                enemy.transform.position = GameUtils.MovePositionLimited(Game.Player.transform.position + (Vector3)Random.insideUnitCircle.normalized * 15, 0);
+                                enemy.transform.position = GameUtils.MovePositionLimited(Game.PlayerObject.transform.position + (Vector3)Random.insideUnitCircle.normalized * 15, 0);
                                 TextManager.WriteTwitchNickname(enemy, chat);
                             }
                             break;

@@ -10,10 +10,10 @@ public class MuayThaiCycle : BaseCycle
         while(true)
         {
             yield return new WaitForSeconds(weapon.stats.Cooldown);
-            var enemies = Scanner.ScanAll(Game.Player.transform.position, 10, "Enemy").OrderBy(item => Vector3.Distance(item.transform.position, Game.Player.transform.position)).ToList();
+            var enemies = Scanner.ScanAll(Game.PlayerObject.transform.position, 10, "Enemy").OrderBy(item => Vector3.Distance(item.transform.position, Game.PlayerObject.transform.position)).ToList();
             if(enemies.Count > 0)
             {
-                Game.Player.GetComponent<Affecter>().AttackAnimate();
+                Game.PlayerObject.GetComponent<Affecter>().AttackAnimate();
                 for(int i = 0; i < weapon.stats.Penetrate; i++)
                 {
                     if(enemies.Count <= i) break;

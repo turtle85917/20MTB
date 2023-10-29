@@ -10,7 +10,7 @@ public class LilpaaaaaaCycle : BaseCycle
         {
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             Game.instance.StartCoroutine(RepeatAttack(weapon));
-            Game.Player.GetComponent<Affecter>().AttackAnimate();
+            Game.PlayerObject.GetComponent<Affecter>().AttackAnimate();
         }
     }
 

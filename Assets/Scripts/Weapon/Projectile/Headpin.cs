@@ -8,7 +8,7 @@ public class Headpin : BaseWeapon
     public new void Init()
     {
         base.Init();
-        transform.localPosition = Game.Player.transform.localPosition;
+        transform.localPosition = Game.PlayerObject.transform.localPosition;
         transform.rotation = Quaternion.AngleAxis(Random.Range(-360f, 360f), Vector3.forward);
         maxPosition = new Vector2(Camera.main.orthographicSize * Camera.main.aspect, Camera.main.orthographicSize);
     }

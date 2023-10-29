@@ -2176,7 +2176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headSprite: {fileID: 685697177}
   bodySprite: {fileID: 522529760}
-  character: 6
+  character: 0
   players:
   - {fileID: 11400000, guid: 439513c4e4f6bd94d93ea41b2bd8fe9e, type: 2}
   - {fileID: 11400000, guid: 2bff62d513b701146af838fe6ecfe069, type: 2}
@@ -2262,10 +2262,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExpPrefab: {fileID: 6774499916034219985, guid: 86e418ff4e317694da5bad3a7514086b, type: 3}
   cycle: {fileID: 11400000, guid: d600d11aa09380147a2d12fd49add112, type: 2}
-  Health: {fileID: 995665493}
-  Exp: {fileID: 2024055702}
-  HealthValue: {fileID: 220858073}
-  ExpValue: {fileID: 220858073}
+  HealthSlider: {fileID: 995665493}
+  ExpSlider: {fileID: 2024055702}
+  HealthText: {fileID: 220858073}
+  LevelText: {fileID: 1987490713}
+  TimerText: {fileID: 1351960660}
 --- !u!4 &1210831719
 Transform:
   m_ObjectHideFlags: 0

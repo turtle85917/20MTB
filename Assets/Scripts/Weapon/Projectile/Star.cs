@@ -16,7 +16,7 @@ public class Star : BaseWeapon
         base.Init();
         rigid.velocity = Vector2.zero;
         sprite.color = colors[Random.Range(0, colors.Length)];
-        transform.localPosition = Game.Player.transform.position;
+        transform.localPosition = Game.PlayerObject.transform.position;
     }
 
     private void Awake()
