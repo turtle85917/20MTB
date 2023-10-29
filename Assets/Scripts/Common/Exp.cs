@@ -14,7 +14,7 @@ public class Exp : MonoBehaviour
     {
         if(Scanner.Scan(transform.position, 3, "Player") != null)
         {
-            Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, Game.PlayerObject.transform.position, 40 * Time.deltaTime));
+            Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, Player.@object.transform.position, 40 * Time.deltaTime));
         }
     }
 

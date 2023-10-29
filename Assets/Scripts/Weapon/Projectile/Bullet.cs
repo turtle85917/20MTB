@@ -1,15 +1,25 @@
+using _20MTB.Utillity;
 using UnityEngine;
 
 public class Bullet : BaseWeapon
 {
-    private void Awake()
+    public GameObject target;
+
+    public new void Init()
     {
-        rigid = GetComponent<Rigidbody2D>();
+        base.Init();
+        transform.position = weaponUser.transform.position;
+    }
+
+    private void Update()
+    {
+        transform.rotation = GameUtils.LookAtTarget(weaponUser.transform.position, target.transform.position);
+        transform.position += (target.transform.position - weaponUser.transform.position).normalized * stats.ProjectileSpeed * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Enemy") && gameObject.activeSelf)
+        if(other.CompareTag("Enemy") && penetrate < stats.Penetrate)
         {
             AttackManager.AttackTarget(weaponId, other.gameObject, penetrate);
             penetrate++;

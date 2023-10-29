@@ -15,14 +15,14 @@ public class MagicCircle : BaseWeapon
     private IEnumerator AttackDelay()
     {
         yield return new WaitForSeconds(stats.Life);
-        var enemies = Scanner.ScanAll(Game.PlayerObject.transform.position, 4, "Enemy").OrderBy(item => Vector3.Distance(item.transform.position, Game.PlayerObject.transform.position)).ToList();
+        var enemies = Scanner.ScanAll(Player.@object.transform.position, 4, "Enemy").OrderBy(item => Vector3.Distance(item.transform.position, Player.@object.transform.position)).ToList();
         for(int i = 0; i < enemies.Count; i++)
         {
             EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(enemies[i]);
             AttackManager.AttackTarget(weaponId, enemies[i], i, (affecter) => {
                 affecter.Sturn();
                 if(i > 0)
-                    affecter.Knockback(Game.PlayerObject.gameObject);
+                    affecter.Knockback(Player.@object.gameObject);
             });
         }
         Destroy(gameObject);

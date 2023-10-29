@@ -7,6 +7,8 @@ public class Player : BaseController
 {
     public static Vector2 lastDirection {get; private set;}
     public static PlayerStatus playerData {get; private set;}
+    public static GameObject @object;
+    public static GameObject weapons;
     private Vector2 inputDirection;
     [Header("플레이어 스크립터블")]
     [SerializeField] private Character character;
@@ -28,7 +30,8 @@ public class Player : BaseController
     {
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        Game.PlayerObject = gameObject;
+        @object = gameObject;
+        weapons = GameObject.FindWithTag("PlayerWeapons");
         PlayerData data = players[(int)character];
         playerData = new PlayerStatus()
         {
@@ -40,7 +43,7 @@ public class Player : BaseController
         animator.runtimeAnimatorController = data.controller;
         headImage.sprite = data.headImage;
         WeaponBundle.AddWeaponToTarget(gameObject, data.defaultWeapon);
-        WeaponBundle.AddWeaponToTarget(gameObject, "Axe");
+        WeaponBundle.AddWeaponToTarget(gameObject, "Musket");
     }
 
     private void Update()

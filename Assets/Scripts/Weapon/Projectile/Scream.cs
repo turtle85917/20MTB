@@ -6,7 +6,7 @@ public class Scream : BaseWeapon
     {
         base.Init();
         transform.localScale = new Vector2(1, 1);
-        transform.localPosition = Game.PlayerObject.transform.position;
+        transform.localPosition = Player.@object.transform.position;
         sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1);
     }
 

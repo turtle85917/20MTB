@@ -21,7 +21,7 @@ public class Enemy : BaseController
 
     private void Update()
     {
-        transform.rotation = Quaternion.AngleAxis(transform.position.x > Game.PlayerObject.transform.position.x ? 180 : 0, Vector3.up);
+        transform.rotation = Quaternion.AngleAxis(transform.position.x > Player.@object.transform.position.x ? 180 : 0, Vector3.up);
         animator.SetBool("isWalk", affecter.status == Affecter.Status.Idle);
         if(enemyPool.health <= 0 && !animator.GetBool("isDie"))
         {
@@ -39,7 +39,7 @@ public class Enemy : BaseController
     {
         if(!animator.GetBool("isDie") && affecter.status == Affecter.Status.Idle)
         {
-            rigid.MovePosition(Vector3.MoveTowards(rigid.position, Game.PlayerObject.transform.position, enemyPool.moveSpeed / 3 * Time.fixedDeltaTime));
+            rigid.MovePosition(Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed / 3 * Time.fixedDeltaTime));
         }
     }
 

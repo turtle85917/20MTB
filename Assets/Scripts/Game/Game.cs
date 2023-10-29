@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using _20MTB.Utillity;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
-    public static GameObject PlayerObject;
     public static GameObject PoolManager;
-    public static GameObject PlayerWeapons;
     public static Game instance {get; private set;}
     [Header("Game")]
     [SerializeField] private GameObject ExpPrefab;
@@ -46,7 +43,6 @@ public class Game : MonoBehaviour
     private void Start()
     {
         PoolManager = GameObject.FindWithTag("PoolManager");
-        PlayerWeapons = GameObject.FindWithTag("PlayerWeapons");
         StartCoroutine(Timer());
     }
 
@@ -62,7 +58,7 @@ public class Game : MonoBehaviour
 
     private void LateUpdate()
     {
-        Camera.main.transform.position = PlayerObject.transform.position + Vector3.back * 10;
+        Camera.main.transform.position = Player.@object.transform.position + Vector3.back * 10;
     }
 
     private void SpawnEnemies()
@@ -78,7 +74,7 @@ public class Game : MonoBehaviour
                     GameObject enemy = EnemyManager.NewEnemy(enemyData.enemyId);
                     if(timeline.circleRadius > 0)
                     {
-                        enemy.transform.position = GameUtils.MovePositionLimited(PlayerObject.transform.position + (Vector3)Random.insideUnitCircle.normalized * timeline.circleRadius, 0);
+                        enemy.transform.position = GameUtils.MovePositionLimited(Player.@object.transform.position + (Vector3)Random.insideUnitCircle.normalized * timeline.circleRadius, 0);
                     }
                     else
                     {
