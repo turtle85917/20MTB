@@ -42,8 +42,8 @@ public class Player : BaseController
         };
         animator.runtimeAnimatorController = data.controller;
         headImage.sprite = data.headImage;
-        WeaponBundle.AddWeaponToTarget(gameObject, data.defaultWeapon);
-        WeaponBundle.AddWeaponToTarget(gameObject, "Musket");
+        // WeaponBundle.AddWeaponToTarget(gameObject, data.defaultWeapon);
+        WeaponBundle.AddWeaponToTarget(gameObject, "パラソーシャル");
     }
 
     private void Update()

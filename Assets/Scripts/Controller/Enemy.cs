@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : BaseController
@@ -5,6 +7,7 @@ public class Enemy : BaseController
     public GameObject text {private get; set;} // 트위치 닉네임 텍스트
     public EnemyManager.EnemyPool enemyPool {private get; set;}
     private Affecter affecter;
+    private bool isPlayerAttacking;
 
     protected override void Init()
     {
@@ -28,6 +31,7 @@ public class Enemy : BaseController
             headSprite.flipX = false;
             bodySprite.flipX = false;
             animator.SetBool("isDie", true);
+            StopAllCoroutines();
             if(text != null)
             {
                 text.SetActive(false);
@@ -55,17 +59,28 @@ public class Enemy : BaseController
     {
         if(affecter.status == Affecter.Status.Idle && other.CompareTag("Player"))
         {
-            Player.playerData.health -= 2;
-            TextManager.WriteDamage(other.gameObject, 2, false);
+            isPlayerAttacking = true;
+            StartCoroutine(AttackPlayer());
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if(affecter.status == Affecter.Status.Idle && other.CompareTag("Player"))
+        if(other.CompareTag("Player"))
         {
-            Player.playerData.health -= 1;
-            TextManager.WriteDamage(other.gameObject, 1, false);
+            isPlayerAttacking = false;
+            StopCoroutine(AttackPlayer());
         }
+    }
+
+    private IEnumerator AttackPlayer()
+    {
+        while(isPlayerAttacking)
+        {
+            yield return new WaitForSeconds(0.3f);
+            Player.playerData.health -= 2;
+            TextManager.WriteDamage(Player.@object, 2, false);
+        }
+        yield break;
     }
 }

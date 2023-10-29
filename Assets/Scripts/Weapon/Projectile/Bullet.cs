@@ -21,7 +21,7 @@ public class Bullet : BaseWeapon
     {
         if(other.CompareTag("Enemy") && penetrate < stats.Penetrate)
         {
-            AttackManager.AttackTarget(weaponId, other.gameObject, penetrate);
+            AttackManager.AttackTarget(weaponId, other.gameObject, penetrate, source:weaponUser);
             penetrate++;
             if(penetrate == stats.Penetrate)
             {

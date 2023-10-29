@@ -30,12 +30,7 @@ public class Axe : BaseWeapon
         if(weaponStatus == WeaponStatus.Idle && other.CompareTag(weaponUserType == WeaponUser.Player ? "Enemy" : "Player"))
         {
             weaponStatus = WeaponStatus.GoAway;
-            AttackManager.AttackTarget(
-                "Axe",
-                other.gameObject,
-                penetrate,
-                (affecter) => affecter.Knockback(gameObject)
-            );
+            AttackManager.AttackTarget("Axe", other.gameObject, penetrate, (affecter) => affecter.Knockback(gameObject), weaponUser);
         }
     }
 

@@ -9,14 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7d1362e8a2a5b04bbe4ecfb0c80bc0e, type: 3}
-  m_Name: Panzee
+  m_Script: {fileID: 11500000, guid: f31882fd8b3cb5f4bb018cef43a79d26, type: 3}
+  m_Name: Parasocial
   m_EditorClassIdentifier: 
-  enemyId: Panzee
-  Prefab: {fileID: 4546626817620932141, guid: 7abde2c39dd6d59438abb0422d91fcf0, type: 3}
-  stats:
-    MaxHealth: 15
-    Power: 10
-    MinMoveSpeed: 5
-    MaxMoveSpeed: 8
-    Exp: 4
+  weaponId: "\u30D1\u30E9\u30BD\u30FC\u30B7\u30E3\u30EB"
+  logo: {fileID: 1801052765, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
+  weaponCycleScriptFile: {fileID: 0}
+  resources: []

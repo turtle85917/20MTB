@@ -27,7 +27,7 @@ public class WeaponBundle : MonoBehaviour
     public static void AddWeaponToTarget(GameObject target, string weaponId)
     {
         Weapon weapon = GetWeapon(weaponId);
-        Type monoscript = weapon.weapon.weaponCycleScriptFile.GetClass();
+        Type monoscript = weapon.weapon.weaponCycleScriptFile ? weapon.weapon.weaponCycleScriptFile.GetClass() : null;
         if(target.CompareTag("Player")) // 플레이어
         {
             if(Player.playerData.weapons.Count == 6) return; // 무기 최대 6개까지 소지 가능
@@ -43,10 +43,14 @@ public class WeaponBundle : MonoBehaviour
             GameObject weaponSlot = Instantiate(instance.SlotPrefab, slot.transform, false);
             weaponSlot.name = "Logo";
             weaponSlot.GetComponent<Image>().sprite = weapon.weapon.logo;
-            BaseCycle baseCycle = Activator.CreateInstance(monoscript) as BaseCycle;
-            instance.StartCoroutine(baseCycle.Cycle(target));
+            Player.playerData.weapons.Add(weapon);
+            if(monoscript != null)
+            {
+                BaseCycle baseCycle = Activator.CreateInstance(monoscript) as BaseCycle;
+                instance.StartCoroutine(baseCycle.Cycle(target));
+            }
         }
-        else                            // 적
+        else // 적
         {
             EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(target);
             enemyPool.weapon = new Weapon()
