@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class Axe : BaseWeapon
 {
-    protected new void Init()
+    public new void Init()
     {
         base.Init();
         stats = WeaponBundle.GetWeapon("Axe").stats;
         weaponStatus = WeaponStatus.Idle;
         transform.position = weaponUser.transform.position;
-        GameObject target = Scanner.Scan(weaponUser.transform.position, 10, weaponUserType == WeaponUser.Player ? "Enemy" : "Player");
         rigid.velocity = Vector2.zero;
+        GameObject target = Scanner.Scan(weaponUser.transform.position, 10, weaponUserType == WeaponUser.Player ? "Enemy" : "Player");
         if(target != null)
         {
             rigid.AddForce(GetDirection(weaponUser.transform.position, target.transform.position), ForceMode2D.Impulse);
         }
         else
         {
-            rigid.AddForce(Vector3.up * 4, ForceMode2D.Impulse);
+            rigid.AddForce(Vector3.up * 10, ForceMode2D.Impulse);
         }
     }
 

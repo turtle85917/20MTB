@@ -15,7 +15,7 @@ public class AxeCycle : BaseCycle
                 "Axe",
                 (parent) => Object.Instantiate(
                     (GameObject)weapon.weapon.resources[0],
-                    Game.PlayerWeapons.transform,
+                    parent.transform,
                     false
                 )
             );

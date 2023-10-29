@@ -40,6 +40,7 @@ public class Player : BaseController
         animator.runtimeAnimatorController = data.controller;
         headImage.sprite = data.headImage;
         WeaponBundle.AddWeaponToTarget(gameObject, data.defaultWeapon);
+        WeaponBundle.AddWeaponToTarget(gameObject, "Axe");
     }
 
     private void Update()
