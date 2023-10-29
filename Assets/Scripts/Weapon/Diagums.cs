@@ -7,6 +7,7 @@ public class Diagums : BaseWeapon
     public new void Init()
     {
         base.Init();
+        transform.position = Game.Player.transform.position;
         transform.rotation = Quaternion.identity;
         for(int i = 0; i < transform.childCount; i++)
         {
@@ -24,6 +25,7 @@ public class Diagums : BaseWeapon
 
     private void Update()
     {
+        transform.position = Game.Player.transform.position;
         transform.Rotate(0, 0, stats.ProjectileSpeed, Space.Self);
     }
 }

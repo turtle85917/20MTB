@@ -1,5 +1,4 @@
 using System.Collections;
-using _20MTB.Utillity;
 using UnityEngine;
 
 public class DiagumsCycle : BaseCycle
@@ -11,15 +10,13 @@ public class DiagumsCycle : BaseCycle
         {
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject diagums = ObjectPool.Get(
-                Game.PlayerWeapons,
+                Game.PoolManager,
                 "Diagums",
                 (parent) => Object.Instantiate((GameObject)weapon.weapon.resources[0], parent.transform, false)
             );
             Diagums script = diagums.GetComponent<Diagums>();
             script.weaponId = weapon.weapon.weaponId;
             script.stats = weapon.stats;
-            script.weaponUser = weaponUser;
-            script.weaponUserType = GameUtils.GetWeaponUserType(weaponUser);
             script.Init();
         }
     }
