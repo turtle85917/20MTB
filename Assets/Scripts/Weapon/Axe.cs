@@ -1,3 +1,4 @@
+using _20MTB.Utillity;
 using UnityEngine;
 
 public class Axe : BaseWeapon
@@ -9,7 +10,7 @@ public class Axe : BaseWeapon
         weaponStatus = WeaponStatus.Idle;
         transform.position = weaponUser.transform.position;
         rigid.velocity = Vector2.zero;
-        GameObject target = Scanner.Scan(weaponUser.transform.position, 10, weaponUserType == WeaponUser.Player ? "Enemy" : "Player");
+        GameObject target = Scanner.Scan(weaponUser.transform.position, 10, GameUtils.GetTargetTag(weaponUserType));
         if(target != null)
         {
             rigid.AddForce(GetDirection(weaponUser.transform.position, target.transform.position), ForceMode2D.Impulse);
@@ -27,7 +28,7 @@ public class Axe : BaseWeapon
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(weaponStatus == WeaponStatus.Idle && other.CompareTag(weaponUserType == WeaponUser.Player ? "Enemy" : "Player"))
+        if(weaponStatus == WeaponStatus.Idle && other.CompareTag(GameUtils.GetTargetTag(weaponUserType)))
         {
             weaponStatus = WeaponStatus.GoAway;
             AttackManager.AttackTarget("Axe", other.gameObject, penetrate, (affecter) => affecter.Knockback(gameObject), weaponUser);

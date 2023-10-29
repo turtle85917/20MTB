@@ -31,7 +31,7 @@ public class Player : BaseController
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         @object = gameObject;
-        weapons = GameObject.FindWithTag("PlayerWeapons");
+        weapons = GameObject.FindWithTag("Weapons");
         PlayerData data = players[(int)character];
         playerData = new PlayerStatus()
         {
@@ -42,8 +42,7 @@ public class Player : BaseController
         };
         animator.runtimeAnimatorController = data.controller;
         headImage.sprite = data.headImage;
-        // WeaponBundle.AddWeaponToTarget(gameObject, data.defaultWeapon);
-        WeaponBundle.AddWeaponToTarget(gameObject, "パラソーシャル");
+        WeaponBundle.AddWeaponToTarget(gameObject, data.defaultWeapon);
     }
 
     private void Update()

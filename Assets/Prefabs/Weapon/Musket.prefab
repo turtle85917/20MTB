@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2653388192538661916}
   - component: {fileID: 3826946005598728751}
   - component: {fileID: 4804069222975747804}
+  - component: {fileID: 4949372634660318117}
   m_Layer: 0
   m_Name: Musket
   m_TagString: Untagged
@@ -99,3 +100,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponId: 
   Bullet: {fileID: 4025807316600386476, guid: d6172cd1c24862d4a90993b7bf626ba7, type: 3}
+--- !u!111 &4949372634660318117
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441661794653429694}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

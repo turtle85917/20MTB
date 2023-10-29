@@ -16,6 +16,11 @@ namespace _20MTB.Utillity
             ;
         }
 
+        public static string GetTargetTag(WeaponUser weaponUserType)
+        {
+            return weaponUserType == WeaponUser.Player ? "Enemy" : "Player";
+        }
+
         public static int GetDirectionFromTarget(GameObject target)
         {
             if(target.CompareTag("Player")){
@@ -40,6 +45,19 @@ namespace _20MTB.Utillity
         public static int GetNeedExpFromLevel()
         {
             return 50 * Player.playerData.level + 10;
+        }
+
+        public static GameObject FindGameObjectInChildWithTag(GameObject parent, string tag)
+        {
+            Transform transform = parent.transform;
+            for (int i = 0; i < transform.childCount; i++) 
+            {
+                if(transform.GetChild(i).CompareTag(tag))
+                {
+                    return transform.GetChild(i).gameObject;
+                }
+            }
+            return null;
         }
     }
 }

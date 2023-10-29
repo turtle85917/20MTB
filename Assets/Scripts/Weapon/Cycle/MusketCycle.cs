@@ -9,7 +9,7 @@ public class MusketCycle : BaseCycle
         Weapon weapon = WeaponBundle.GetWeapon("Musket");
         GameObject musket = Object.Instantiate(
             (GameObject)weapon.weapon.resources[0],
-            Player.weapons.transform,
+            GameUtils.FindGameObjectInChildWithTag(weaponUser, "Weapons").transform,
             false
         );
         musket.name = "Musket";
