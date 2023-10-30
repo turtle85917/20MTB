@@ -40,7 +40,7 @@ public class BulletManager : BaseWeapon
             yield return new WaitForSeconds(stats.Cooldown);
             if(target != null)
             {
-                GameObject bullet = ObjectPool.Get(Game.PoolManager, "Bullet", Bullet);
+                GameObject bullet = ObjectPool.Get(Game.PoolManager, Bullet.name, Bullet);
                 Bullet script = bullet.GetComponent<Bullet>();
                 script.target = target;
                 script.weaponId = weaponId;

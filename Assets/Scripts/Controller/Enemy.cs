@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : BaseController
@@ -53,6 +52,11 @@ public class Enemy : BaseController
         {
             text.transform.localPosition = (Vector2)transform.position + Vector2.down * 1.3f;
         }
+    }
+
+    private void OnEnable() {
+        StopAllCoroutines();
+        isPlayerAttacking = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
