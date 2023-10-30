@@ -2,19 +2,19 @@ using System.Collections;
 using _20MTB.Utillity;
 using UnityEngine;
 
-public class MusketCycle : BaseCycle
+public class RibbonBowCycle : BaseCycle
 {
     public override IEnumerator Cycle(GameObject weaponUser)
     {
-        Weapon weapon = WeaponBundle.GetWeapon("Musket");
-        GameObject musket = Object.Instantiate(
+        Weapon weapon = WeaponBundle.GetWeapon("RibbonBow");
+        GameObject ribbonBow = Object.Instantiate(
             (GameObject)weapon.weapon.resources[0],
             GameUtils.FindGameObjectInChildWithTag(weaponUser, "Weapons").transform,
             false
         );
-        musket.name = "Musket";
-        musket.transform.localPosition = Vector3.right * 0.4f;
-        BulletManager script = musket.GetComponent<BulletManager>();
+        ribbonBow.name = "Ribbon Bow";
+        ribbonBow.transform.localPosition = Vector3.right * 0.4f;
+        BulletManager script = ribbonBow.GetComponent<BulletManager>();
         script.weaponId = weapon.weapon.weaponId;
         script.stats = weapon.stats;
         script.weaponUser = weaponUser;
