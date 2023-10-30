@@ -5,17 +5,32 @@ using UnityEngine;
 public abstract class BaseWeapon : MonoBehaviour
 {
     public string weaponId;
-    public int penetrate {protected get; set;}
     public WeaponStats stats {protected get; set;}
     public GameObject weaponUser {protected get; set;}
     public WeaponUser weaponUserType {protected get; set;}
+    protected int penetrate; // 관통 수
+    protected int count     // 무기 사용 횟수 (적한테만)
+    {
+        get
+        {
+            return _count;
+        }
+        set
+        {
+            if(weaponUserType == WeaponUser.Enemy)
+                _count = value;
+        }
+    }
     protected WeaponStatus weaponStatus;
     protected Rigidbody2D rigid;
     protected new Animation animation;
     protected SpriteRenderer sprite;
+    private int _count;
 
     public void Init()
     {
+        count = 0;
+        _count = 0;
         penetrate = 0;
         weaponStatus = WeaponStatus.Idle;
         StartCoroutine(FinisingLifeTime());

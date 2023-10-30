@@ -31,11 +31,16 @@ public class Ladle : BaseWeapon
             transform.localRotation = GameUtils.LookAtTarget(transform.position, target.transform.position);
             rigid.MovePosition(Vector3.MoveTowards(rigid.position, target.transform.position, 30 * Time.deltaTime));
             sprite.flipX = 90 <= transform.rotation.eulerAngles.z && transform.rotation.eulerAngles.z <= 270;
+            count++;
         }
         if(weaponStatus == WeaponStatus.Idle)
         {   
             transform.localRotation *= Quaternion.AngleAxis(4, Vector3.forward);
             transform.localPosition = weaponUser.transform.position + transform.up * 1.2f;
+        }
+        if(count == stats.Count)
+        {
+            gameObject.SetActive(false);
         }
     }
 
@@ -51,6 +56,7 @@ public class Ladle : BaseWeapon
                 return;
             }
             Reset();
+            count++;
         }
     }
 
