@@ -2,16 +2,20 @@ using System.Collections;
 using _20MTB.Utillity;
 using UnityEngine;
 
-public class AxeCycle : BaseCycle
+public class LadleCycle : BaseCycle
 {
     public override IEnumerator Cycle(GameObject weaponUser)
     {
-        Weapon weapon = WeaponBundle.GetWeapon("Axe");
+        Weapon weapon = WeaponBundle.GetWeapon("Ladle");
         while(true)
         {
             yield return new WaitForSeconds(weapon.stats.Cooldown);
-            GameObject axe = ObjectPool.Get(Game.PoolManager, "Axe", (GameObject)weapon.weapon.resources[0]);
-            Axe script = axe.GetComponent<Axe>();
+            GameObject ladle = ObjectPool.Get(
+                Game.PoolManager,
+                "Ladle",
+                (GameObject)weapon.weapon.resources[0]
+            );
+            Ladle script = ladle.GetComponent<Ladle>();
             script.weaponId = weapon.weapon.weaponId;
             script.stats = weapon.stats;
             script.weaponUser = weaponUser;

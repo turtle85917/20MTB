@@ -95,11 +95,7 @@ public class Connect : MonoBehaviour
 
     private void CreateNewChatObject(Chat chat)
     {
-        GameObject chat_ = ObjectPool.Get(
-            gameObject,
-            "Chat",
-            (parent) => Instantiate(Chat, parent.transform, false)
-        );
+        GameObject chat_ = ObjectPool.Get(gameObject, "Chat", Chat);
         chat_.GetComponent<ChatPanel>().RectTransform.anchoredPosition = new Vector2(0, -40);
         for(int i = 0; i < transform.childCount; i++)
         {

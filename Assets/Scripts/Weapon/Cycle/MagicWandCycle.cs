@@ -13,11 +13,7 @@ public class MagicWandCycle : BaseCycle
             var targets = new List<GameObject>(){};
             for(int i = 0; i < weapon.stats.ProjectileCount; i++)
             {
-                GameObject star = ObjectPool.Get(
-                    Game.PoolManager,
-                    "Star",
-                    (parent) => Object.Instantiate((GameObject)weapon.weapon.resources[0], parent.transform, false)
-                );
+                GameObject star = ObjectPool.Get(Game.PoolManager, "Star", (GameObject)weapon.weapon.resources[0]);
                 GameObject target = Scanner.Scan(Player.@object.transform.position, 10, "Enemy", targets.ToArray());
                 targets.Add(target);
                 Star script = star.GetComponent<Star>();

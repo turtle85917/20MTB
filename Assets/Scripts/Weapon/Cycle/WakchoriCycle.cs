@@ -10,15 +10,7 @@ public class WakchoriCycle : BaseCycle
         while(true)
         {
             yield return new WaitForSeconds(weapon.stats.Cooldown);
-            GameObject blow = ObjectPool.Get(
-                Game.PoolManager,
-                "Blow",
-                (parent) => Object.Instantiate(
-                    (GameObject)weapon.weapon.resources[0],
-                    parent.transform,
-                    false
-                )
-            );
+            GameObject blow = ObjectPool.Get(Game.PoolManager, "Blow", (GameObject)weapon.weapon.resources[0]);
             Blow script = blow.GetComponent<Blow>();
             script.weaponId = weapon.weapon.weaponId;
             script.stats = weapon.stats;

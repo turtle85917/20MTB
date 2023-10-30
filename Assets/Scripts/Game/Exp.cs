@@ -3,18 +3,18 @@ using UnityEngine;
 public class Exp : MonoBehaviour
 {
     public int exp {private get; set;}
-    private Rigidbody2D Rigidbody;
+    private Rigidbody2D rigid;
 
     private void Awake()
     {
-        Rigidbody = GetComponent<Rigidbody2D>();
+        rigid = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
         if(Scanner.Scan(transform.position, 3, "Player") != null)
         {
-            Rigidbody.MovePosition(Vector3.MoveTowards(Rigidbody.position, Player.@object.transform.position, 40 * Time.deltaTime));
+            rigid.MovePosition(Vector3.MoveTowards(rigid.position, Player.@object.transform.position, 40 * Time.deltaTime));
         }
     }
 

@@ -17,6 +17,7 @@ public abstract class BaseWeapon : MonoBehaviour
     public void Init()
     {
         penetrate = 0;
+        weaponStatus = WeaponStatus.Idle;
         StartCoroutine(FinisingLifeTime());
     }
 

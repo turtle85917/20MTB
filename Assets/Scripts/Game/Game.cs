@@ -25,11 +25,7 @@ public class Game : MonoBehaviour
 
     public static void SpawnExpObject(Vector3 targetPosition, int value)
     {
-        GameObject exp = ObjectPool.Get(
-            PoolManager,
-            "Exp",
-            (parent) => Instantiate(instance.ExpPrefab, parent.transform, false)
-        );
+        GameObject exp = ObjectPool.Get(PoolManager, "Exp", instance.ExpPrefab);
         exp.transform.position = targetPosition;
         exp.GetComponent<Exp>().exp = value;
     }

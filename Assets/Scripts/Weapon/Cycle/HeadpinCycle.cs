@@ -11,11 +11,7 @@ public class HeadpinCycle : BaseCycle
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             for(int i = 0; i < weapon.stats.ProjectileCount; i++)
             {
-                GameObject headpin = ObjectPool.Get(
-                    Game.PoolManager,
-                    "Headpin",
-                    (parent) => Object.Instantiate((GameObject)weapon.weapon.resources[0], parent.transform, false)
-                );
+                GameObject headpin = ObjectPool.Get(Game.PoolManager, "Headpin", (GameObject)weapon.weapon.resources[0]);
                 Headpin script = headpin.GetComponent<Headpin>();
                 script.weaponId = weapon.weapon.weaponId;
                 script.stats = weapon.stats;

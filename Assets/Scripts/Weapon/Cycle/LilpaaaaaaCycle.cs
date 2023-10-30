@@ -19,11 +19,7 @@ public class LilpaaaaaaCycle : BaseCycle
         for(int i = 0; i < 3; i++)
         {
             yield return new WaitForSeconds(i * 0.15f);
-            GameObject scream = ObjectPool.Get(
-                Game.PoolManager,
-                "Scream",
-                (parent) => Object.Instantiate((GameObject)weapon.weapon.resources[0], parent.transform, false)
-            );
+            GameObject scream = ObjectPool.Get(Game.PoolManager, "Scream", (GameObject)weapon.weapon.resources[0]);
             scream.transform.localScale = Vector3.one * (3 - i) * 0.35f;
             scream.transform.rotation = Quaternion.AngleAxis(Random.Range(90f, -90f), Vector3.forward);
             Scream script = scream.GetComponent<Scream>();

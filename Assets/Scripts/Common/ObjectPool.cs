@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 
 public static class ObjectPool
 {
-    public static GameObject Get(GameObject Parent, string name, Func<GameObject, GameObject> CreateFunc)
+    public static GameObject Get(GameObject Parent, string name, GameObject Prefab)
     {
         for(int i = 0; i < Parent.transform.childCount; i++)
         {
@@ -14,7 +13,7 @@ public static class ObjectPool
                 return child;
             }
         }
-        GameObject obj = CreateFunc(Parent);
+        GameObject obj = Object.Instantiate(Prefab, Parent.transform, false);
         obj.name = name;
         return obj;
     }

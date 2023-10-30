@@ -9,11 +9,7 @@ public class TextManager : MonoBehaviour
 
     public static void WriteTwitchNickname(GameObject target, Chat chat)
     {
-        GameObject text = ObjectPool.Get(
-            instance.gameObject,
-            "TwitchNickname",
-            (parent) => Instantiate(instance.TwitchNickname, parent.transform, false)
-        );
+        GameObject text = ObjectPool.Get(instance.gameObject, "TwitchNickname", instance.TwitchNickname);
         text.transform.localPosition = (Vector2)target.transform.position + Vector2.down * 1.3f;
         TMP_Text tmpText = text.GetComponent<TMP_Text>();
         tmpText.text = chat.username;
@@ -24,18 +20,14 @@ public class TextManager : MonoBehaviour
 
     public static void WriteDamage(GameObject target, int value, bool critical)
     {
-        GameObject text = ObjectPool.Get(
-            instance.gameObject,
-            "DamageText",
-            (parent) => Instantiate(instance.DamageText, parent.transform, false)
-        );
+        GameObject text = ObjectPool.Get(instance.gameObject, "DamageText", instance.DamageText);
         text.transform.localPosition = (Vector2)target.transform.position + Vector2.up * 0.5f;
-        Color color = Color.white;
-        if(target.CompareTag("Player"))
+        Color color;
+        if (target.CompareTag("Player"))
         {
             color = Color.red;
         }
-        else if(critical)
+        else if (critical)
         {
             color = Color.yellow;
         }

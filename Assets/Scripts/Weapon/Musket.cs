@@ -40,11 +40,7 @@ public class Musket : BaseWeapon
             yield return new WaitForSeconds(stats.Cooldown);
             if(target != null)
             {
-                GameObject bullet = ObjectPool.Get(
-                    Game.PoolManager,
-                    "Bullet",
-                    (parent) => Instantiate(Bullet, parent.transform, false)
-                );
+                GameObject bullet = ObjectPool.Get(Game.PoolManager, "Bullet", Bullet);
                 Bullet script = bullet.GetComponent<Bullet>();
                 script.target = target;
                 script.weaponId = "Musket";

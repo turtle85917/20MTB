@@ -26,11 +26,7 @@ public class MagicCircle : BaseWeapon
             });
         }
         Destroy(gameObject);
-        GameObject stamp = ObjectPool.Get(
-            Game.PoolManager,
-            "Stamp",
-            (parent) => Instantiate(Stamp, parent.transform, false)
-        );
+        GameObject stamp = ObjectPool.Get(Game.PoolManager, "Stamp", Stamp);
         stamp.transform.position = target.transform.position + Vector3.up * 3;
     }
 }
