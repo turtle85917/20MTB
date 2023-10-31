@@ -47,6 +47,24 @@ public class Affecter : MonoBehaviour
         StartCoroutine(KnockbackReset());
     }
 
+    public IEnumerator ThreeComboKnockback(GameObject target, GameObject source)
+    {
+        status = Status.Knockback;
+        Vector2 direction = (transform.position - target.transform.position).normalized;
+        for(int i = 0; i < 3; i++)
+        {
+            if(!gameObject.activeSelf) yield break;
+            rigid.AddForce(direction * 5f, ForceMode2D.Impulse);
+            AttackManager.AttackTarget("Cex", gameObject, i, source:source);
+            yield return new WaitForSeconds(0.2f);
+            rigid.velocity = Vector2.zero;
+            if(i < 2)
+                yield return new WaitForSeconds(0.2f); // 공격 딜레이
+        }
+        yield return null;
+        CheckCurrentStatus(Status.Knockback);
+    }
+
     public void Sturn()
     {
         status = Status.Sturn;

@@ -2307,6 +2307,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08bbdee8454f78646a2acaf5823e18d3, type: 2}
   - {fileID: 11400000, guid: 5362b6b1c74599f44bcbb6d4e1cc2bda, type: 2}
   - {fileID: 11400000, guid: 722b87e30f580fb4f83aaaa1771e323d, type: 2}
+  - {fileID: 11400000, guid: 35cf6e213e990ee499e226f68e9e3a29, type: 2}
   Slots:
   - {fileID: 65024565}
   - {fileID: 943050535}

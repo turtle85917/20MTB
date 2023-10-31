@@ -31,10 +31,6 @@ public class BulletManager : BaseWeapon
             sprite.flipX = GameUtils.GetDirectionFromTarget(weaponUser) == -1;
             transform.rotation = Quaternion.identity;
         }
-        if(count == stats.Count)
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     private IEnumerator BulletCycle()

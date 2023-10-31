@@ -38,10 +38,6 @@ public class Ladle : BaseWeapon
             transform.localRotation *= Quaternion.AngleAxis(4, Vector3.forward);
             transform.localPosition = weaponUser.transform.position + transform.up * 1.2f;
         }
-        if(count == stats.Count)
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -9,7 +9,13 @@ public class MagicCircle : BaseWeapon
 
     public new void Init()
     {
+        animation.Play("Spin");
         StartCoroutine(AttackDelay());
+    }
+
+    private void Awake()
+    {
+        animation = GetComponent<Animation>();
     }
 
     private IEnumerator AttackDelay()

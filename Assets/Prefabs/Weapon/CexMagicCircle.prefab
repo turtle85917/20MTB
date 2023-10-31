@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7573715438263169103
+--- !u!1 &2676694222297934164
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9094155840569337128}
-  - component: {fileID: 7635478935714246106}
-  - component: {fileID: 8076763091921674497}
-  - component: {fileID: 706983372254680178}
+  - component: {fileID: 6699631815813367886}
+  - component: {fileID: 7125607349085018400}
+  - component: {fileID: 1276429784449647648}
+  - component: {fileID: 2144545201480394636}
+  - component: {fileID: 4122989492312392960}
   m_Layer: 0
-  m_Name: MagicCircle
+  m_Name: CexMagicCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9094155840569337128
+--- !u!4 &6699631815813367886
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7573715438263169103}
-  m_LocalRotation: {x: 0.6427876, y: 0, z: 0, w: 0.7660445}
-  m_LocalPosition: {x: 0, y: -0.45, z: 1}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_GameObject: {fileID: 2676694222297934164}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
---- !u!212 &7635478935714246106
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &7125607349085018400
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7573715438263169103}
+  m_GameObject: {fileID: 2676694222297934164}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -74,46 +75,60 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 8ca417088fa9e9544a1f183cd13a3317, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: e29e67b7ea7bff2438a23e67b5462261, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1.9375, y: 1.9375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!111 &8076763091921674497
+--- !u!58 &1276429784449647648
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2676694222297934164}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.013882935, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.73274046
+--- !u!111 &2144545201480394636
 Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7573715438263169103}
+  m_GameObject: {fileID: 2676694222297934164}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 1638d6fe9cf767c42a93df7f8fc8f3e6, type: 2}
+  m_Animation: {fileID: 0}
   m_Animations:
-  - {fileID: 7400000, guid: 1638d6fe9cf767c42a93df7f8fc8f3e6, type: 2}
+  - {fileID: 7400000, guid: 3f863b24f96b8df4fbe4667670d2ac49, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &706983372254680178
+--- !u!114 &4122989492312392960
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7573715438263169103}
+  m_GameObject: {fileID: 2676694222297934164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d753c4721fc6fd84385f4785307f67b7, type: 3}
+  m_Script: {fileID: 11500000, guid: ff1c5b012da66dd42bedf1e04d7b47ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponId: 
-  target: {fileID: 0}
-  Stamp: {fileID: 2841014536623738933, guid: 8bf2a252db28434419b36e21cd9e52da, type: 3}

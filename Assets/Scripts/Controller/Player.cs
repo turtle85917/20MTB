@@ -9,6 +9,7 @@ public class Player : BaseController
     public static PlayerStatus playerData {get; private set;}
     public static GameObject @object;
     public static GameObject weapons;
+    private Affecter affecter;
     private Vector2 inputDirection;
     [Header("플레이어 스크립터블")]
     [SerializeField] private Character character;
@@ -30,6 +31,7 @@ public class Player : BaseController
     {
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        affecter = GetComponent<Affecter>();
         @object = gameObject;
         weapons = GameObject.FindWithTag("Weapons");
         PlayerData data = players[(int)character];
@@ -43,13 +45,20 @@ public class Player : BaseController
         animator.runtimeAnimatorController = data.controller;
         headImage.sprite = data.headImage;
         WeaponBundle.AddWeaponToTarget(gameObject, data.defaultWeapon);
-        WeaponBundle.AddWeaponToTarget(gameObject, "RibbonBow");
+        WeaponBundle.AddWeaponToTarget(gameObject, "Cex");
     }
 
     private void Update()
     {
-        inputDirection.x = Input.GetAxisRaw("Horizontal");
-        inputDirection.y = Input.GetAxisRaw("Vertical");
+        if(affecter.status == Affecter.Status.Idle)
+        {
+            inputDirection.x = Input.GetAxisRaw("Horizontal");
+            inputDirection.y = Input.GetAxisRaw("Vertical");
+        }
+        else
+        {
+            inputDirection = Vector2.zero;
+        }
         animator.SetBool("isWalk", inputDirection.magnitude != 0);
         transform.rotation = Quaternion.AngleAxis(lastDirection.x < 0 ? 180 : 0, Vector3.up);
     }

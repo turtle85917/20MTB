@@ -18,7 +18,13 @@ public abstract class BaseWeapon : MonoBehaviour
         set
         {
             if(weaponUserType == WeaponUser.Enemy)
+            {
                 _count = value;
+                if(_count == stats.Count)
+                {
+                    gameObject.SetActive(false);
+                }
+            }
         }
     }
     protected WeaponStatus weaponStatus;
@@ -44,7 +50,7 @@ public abstract class BaseWeapon : MonoBehaviour
     private IEnumerator FinisingLifeTime()
     {
         yield return new WaitForSeconds(stats.Life);
-        if(animation != null)
+        if(animation != null && animation.GetClip("Hide"))
         {
             animation.Play("Hide");
         }
