@@ -11,7 +11,6 @@ public class DiagumsCycle : BaseCycle
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject diagums = ObjectPool.Get(Game.PoolManager, "Diagums", (GameObject)weapon.weapon.resources[0]);
             Diagums script = diagums.GetComponent<Diagums>();
-            script.weaponId = weapon.weapon.weaponId;
             script.stats = weapon.stats;
             script.Init();
         }

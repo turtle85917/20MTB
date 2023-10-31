@@ -19,7 +19,6 @@ public class MagicWandCycle : BaseCycle
                 Star script = star.GetComponent<Star>();
                 script.target = target;
                 script.stats = weapon.stats;
-                script.weaponId = weapon.weapon.weaponId;
                 script.Init();
             }
         }

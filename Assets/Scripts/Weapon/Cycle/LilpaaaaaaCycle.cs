@@ -24,7 +24,6 @@ public class LilpaaaaaaCycle : BaseCycle
             scream.transform.rotation = Quaternion.AngleAxis(Random.Range(90f, -90f), Vector3.forward);
             Scream script = scream.GetComponent<Scream>();
             script.stats = weapon.stats;
-            script.weaponId = weapon.weapon.weaponId;
             script.Init();
         }
     }

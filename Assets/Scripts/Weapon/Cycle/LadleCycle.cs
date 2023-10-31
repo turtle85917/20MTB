@@ -16,7 +16,6 @@ public class LadleCycle : BaseCycle
                 (GameObject)weapon.weapon.resources[0]
             );
             Ladle script = ladle.GetComponent<Ladle>();
-            script.weaponId = weapon.weapon.weaponId;
             script.stats = weapon.stats;
             script.weaponUser = weaponUser;
             script.weaponUserType = GameUtils.GetWeaponUserType(weaponUser);

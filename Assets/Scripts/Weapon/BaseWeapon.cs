@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class BaseWeapon : MonoBehaviour
 {
-    public string weaponId;
     public WeaponStats stats {protected get; set;}
     public GameObject weaponUser {protected get; set;}
     public WeaponUser weaponUserType {protected get; set;}

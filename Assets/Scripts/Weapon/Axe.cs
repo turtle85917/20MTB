@@ -6,9 +6,6 @@ public class Axe : BaseWeapon
     public new void Init()
     {
         base.Init();
-        stats = WeaponBundle.GetWeapon("Axe").stats;
-        weaponStatus = WeaponStatus.Idle;
-        transform.position = weaponUser.transform.position;
         rigid.velocity = Vector2.zero;
         GameObject target = Scanner.Scan(weaponUser.transform.position, 10, GameUtils.GetTargetTag(weaponUserType));
         if(target != null)

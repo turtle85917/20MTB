@@ -43,7 +43,6 @@ public class BulletManager : BaseWeapon
                 GameObject bullet = ObjectPool.Get(Game.PoolManager, Bullet.name, Bullet);
                 Bullet script = bullet.GetComponent<Bullet>();
                 script.target = target;
-                script.weaponId = weaponId;
                 script.stats = stats;
                 script.weaponUser = weaponUser;
                 script.weaponUserType = weaponUserType;

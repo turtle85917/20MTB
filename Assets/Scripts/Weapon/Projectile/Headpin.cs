@@ -41,7 +41,7 @@ public class Headpin : BaseWeapon
     {
         if(other.CompareTag("Enemy") && penetrate < stats.Penetrate)
         {
-            AttackManager.AttackTarget(weaponId, other.gameObject, penetrate, (affecter) => {
+            AttackManager.AttackTarget("Headpin", other.gameObject, penetrate, (affecter) => {
                 affecter.Knockback(gameObject);
             });
             penetrate++;

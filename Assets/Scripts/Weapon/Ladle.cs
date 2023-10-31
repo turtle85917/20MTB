@@ -44,7 +44,7 @@ public class Ladle : BaseWeapon
     {
         if(other.CompareTag(GameUtils.GetTargetTag(weaponUserType)) && weaponStatus == WeaponStatus.GoAway && penetrate < stats.Penetrate)
         {
-            AttackManager.AttackTarget(weaponId, other.gameObject, penetrate, (affecter) => affecter.Knockback(gameObject), weaponUser);
+            AttackManager.AttackTarget("Ladle", other.gameObject, penetrate, (affecter) => affecter.Knockback(gameObject), weaponUser);
             penetrate++;
             if(penetrate == stats.Penetrate)
             {

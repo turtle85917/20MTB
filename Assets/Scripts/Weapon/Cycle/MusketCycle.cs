@@ -15,7 +15,6 @@ public class MusketCycle : BaseCycle
         musket.name = "Musket";
         musket.transform.localPosition = Vector3.right * 0.4f;
         BulletManager script = musket.GetComponent<BulletManager>();
-        script.weaponId = weapon.weapon.weaponId;
         script.stats = weapon.stats;
         script.weaponUser = weaponUser;
         script.weaponUserType = GameUtils.GetWeaponUserType(weaponUser);

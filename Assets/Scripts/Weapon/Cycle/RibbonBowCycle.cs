@@ -15,7 +15,6 @@ public class RibbonBowCycle : BaseCycle
         ribbonBow.name = "Ribbon Bow";
         ribbonBow.transform.localPosition = Vector3.right * 0.4f;
         BulletManager script = ribbonBow.GetComponent<BulletManager>();
-        script.weaponId = weapon.weapon.weaponId;
         script.stats = weapon.stats;
         script.weaponUser = weaponUser;
         script.weaponUserType = GameUtils.GetWeaponUserType(weaponUser);

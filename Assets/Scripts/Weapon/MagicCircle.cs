@@ -25,7 +25,7 @@ public class MagicCircle : BaseWeapon
         for(int i = 0; i < enemies.Count; i++)
         {
             EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(enemies[i]);
-            AttackManager.AttackTarget(weaponId, enemies[i], i, (affecter) => {
+            AttackManager.AttackTarget("MagicWand", enemies[i], i, (affecter) => {
                 affecter.Sturn();
                 if(i > 0)
                     affecter.Knockback(Player.@object.gameObject);

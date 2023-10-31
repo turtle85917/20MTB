@@ -68,7 +68,7 @@ public class Star : BaseWeapon
         {
             yield return new WaitForSeconds(0.5f);
             if(target == null) break;
-            AttackManager.AttackTarget(weaponId, target, penetrate);
+            AttackManager.AttackTarget("Star", target, penetrate);
             var enemyPool = EnemyManager.GetEnemy(target);
             if(enemyPool.health <= 0)
             {

@@ -13,7 +13,6 @@ public class HeadpinCycle : BaseCycle
             {
                 GameObject headpin = ObjectPool.Get(Game.PoolManager, "Headpin", (GameObject)weapon.weapon.resources[0]);
                 Headpin script = headpin.GetComponent<Headpin>();
-                script.weaponId = weapon.weapon.weaponId;
                 script.stats = weapon.stats;
                 script.Init();
             }

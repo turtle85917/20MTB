@@ -5,14 +5,14 @@ public class Diagum : BaseWeapon
     private void Awake()
     {
         penetrate = 0;
-        stats = WeaponBundle.GetWeapon(weaponId).stats;
+        stats = WeaponBundle.GetWeapon("Diagum").stats;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Enemy") && penetrate < stats.Penetrate)
         {
-            AttackManager.AttackTarget(weaponId, other.gameObject, penetrate, (affecter) => affecter.Knockback(gameObject));
+            AttackManager.AttackTarget("Diagum", other.gameObject, penetrate, (affecter) => affecter.Knockback(gameObject));
             penetrate++;
             if(penetrate == stats.Penetrate)
             {

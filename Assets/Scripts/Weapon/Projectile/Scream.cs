@@ -27,7 +27,7 @@ public class Scream : BaseWeapon
     {
         if(other.CompareTag("Enemy") && penetrate < stats.Penetrate)
         {
-            AttackManager.AttackTarget(weaponId, other.gameObject, penetrate);
+            AttackManager.AttackTarget("Scream", other.gameObject, penetrate);
             penetrate++;
         }
     }

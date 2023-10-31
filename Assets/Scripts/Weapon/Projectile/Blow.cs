@@ -21,7 +21,7 @@ public class Blow : BaseWeapon
     {
         if(other.CompareTag("Enemy") && penetrate < stats.Penetrate)
         {
-            AttackManager.AttackTarget(weaponId, other.gameObject, penetrate);
+            AttackManager.AttackTarget("Wakchori", other.gameObject, penetrate);
             penetrate++;
         }
     }

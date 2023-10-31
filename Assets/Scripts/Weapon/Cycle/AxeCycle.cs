@@ -11,8 +11,8 @@ public class AxeCycle : BaseCycle
         {
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject axe = ObjectPool.Get(Game.PoolManager, "Axe", (GameObject)weapon.weapon.resources[0]);
+            axe.transform.position = weaponUser.transform.position;
             Axe script = axe.GetComponent<Axe>();
-            script.weaponId = weapon.weapon.weaponId;
             script.stats = weapon.stats;
             script.weaponUser = weaponUser;
             script.weaponUserType = GameUtils.GetWeaponUserType(weaponUser);

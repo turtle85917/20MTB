@@ -12,7 +12,6 @@ public class WakchoriCycle : BaseCycle
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject blow = ObjectPool.Get(Game.PoolManager, "Blow", (GameObject)weapon.weapon.resources[0]);
             Blow script = blow.GetComponent<Blow>();
-            script.weaponId = weapon.weapon.weaponId;
             script.stats = weapon.stats;
             script.weaponUser = weaponUser;
             script.weaponUserType = GameUtils.GetWeaponUserType(weaponUser);
