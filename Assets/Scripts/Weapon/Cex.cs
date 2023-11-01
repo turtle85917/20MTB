@@ -19,7 +19,8 @@ public class Cex : BaseWeapon
     {
         if(other.CompareTag(GameUtils.GetTargetTag(weaponUserType)))
         {
-            StartCoroutine(other.GetComponent<Affecter>().ThreeComboKnockback(gameObject, weaponUser));
+            Affecter script = other.GetComponent<Affecter>();
+            script.StartCoroutine(script.ThreeComboKnockback(weaponUser));
         }
     }
 }

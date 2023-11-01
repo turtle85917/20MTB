@@ -34,6 +34,13 @@ public class Affecter : MonoBehaviour
         Multiple
     }
 
+    public void Reset()
+    {
+        status = Status.Idle;
+        _status = Status.Idle;
+        StopAllCoroutines();
+    }
+
     public void AttackAnimate()
     {
         animator.SetTrigger("Attack");
@@ -47,21 +54,16 @@ public class Affecter : MonoBehaviour
         StartCoroutine(KnockbackReset());
     }
 
-    public IEnumerator ThreeComboKnockback(GameObject target, GameObject source)
+    public IEnumerator ThreeComboKnockback(GameObject source)
     {
         status = Status.Knockback;
-        Vector2 direction = (transform.position - target.transform.position).normalized;
-        for(int i = 0; i < 3; i++)
-        {
-            if(!gameObject.activeSelf) yield break;
-            rigid.AddForce(direction * 5f, ForceMode2D.Impulse);
-            AttackManager.AttackTarget("Cex", gameObject, i, source:source);
-            yield return new WaitForSeconds(0.2f);
-            rigid.velocity = Vector2.zero;
-            if(i < 2)
-                yield return new WaitForSeconds(0.2f); // 공격 딜레이
-        }
-        yield return null;
+        Vector2 direction = (transform.position - source.transform.position).normalized;
+        StartCoroutine(ComboKnockback(direction, 0, source));
+        yield return new WaitForSeconds(0.2f); // 공격 딜레이
+        StartCoroutine(ComboKnockback(direction, 1, source));
+        yield return new WaitForSeconds(0.2f); // 공격 딜레이
+        StartCoroutine(ComboKnockback(direction, 2, source));
+        yield return new WaitForSeconds(0.2f); // 공격 딜레이
         CheckCurrentStatus(Status.Knockback);
     }
 
@@ -77,6 +79,14 @@ public class Affecter : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
+    }
+
+    private IEnumerator ComboKnockback(Vector2 direction, int i, GameObject source)
+    {
+        rigid.AddForce(direction * (forcePower - i * 4), ForceMode2D.Impulse);
+        AttackManager.AttackTarget("Cex", gameObject, i, source:source);
+        yield return new WaitForSeconds(0.2f);
+        rigid.velocity = Vector2.zero;
     }
 
     private IEnumerator KnockbackReset()

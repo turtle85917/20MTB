@@ -14,6 +14,7 @@ public class CexCycle : BaseCycle
             cexMagicCircle.transform.position = weaponUser.transform.position;
             Cex script = cexMagicCircle.GetComponent<Cex>();
             script.stats = weapon.stats;
+            script.weaponUser = weaponUser;
             script.weaponUserType = GameUtils.GetWeaponUserType(weaponUser);
             script.Init();
         }

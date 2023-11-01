@@ -29,8 +29,10 @@ public class Enemy : BaseController
         {
             headSprite.flipX = false;
             bodySprite.flipX = false;
+            rigid.velocity = Vector2.zero;
             animator.SetBool("isDie", true);
             StopAllCoroutines();
+            affecter.Reset();
             if(text != null)
             {
                 text.SetActive(false);
