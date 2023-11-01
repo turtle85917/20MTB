@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Game : MonoBehaviour
 {
     public static GameObject PoolManager;
+    public static bool isPaused {get; private set;}
     public static Game instance {get; private set;}
     [Header("Game")]
     [SerializeField] private GameObject ExpPrefab;
@@ -22,6 +23,18 @@ public class Game : MonoBehaviour
     private List<int> times;                // 소화된 시간 기록
     private int timer = 20 * 60;            // 기본 20분
     private readonly int maxTime = 20 * 60; // 최대 시간 20분
+
+    public static void Pause()
+    {
+        Time.timeScale = 0;
+        isPaused = true;
+    }
+
+    public static void Resume()
+    {
+        Time.timeScale = 1;
+        isPaused = false;
+    }
 
     public static void SpawnExpObject(Vector3 targetPosition, int value)
     {
@@ -54,6 +67,7 @@ public class Game : MonoBehaviour
 
     private void LateUpdate()
     {
+        if(isPaused) return;
         Camera.main.transform.position = Player.@object.transform.position + Vector3.back * 10;
     }
 
