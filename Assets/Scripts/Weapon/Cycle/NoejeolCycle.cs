@@ -1,11 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
 using _20MTB.Utillity;
 using UnityEngine;
 
 public class NoejeolCycle : BaseCycle
 {
-    private readonly int MIN_HEIGHT = 4;
-    private readonly int MIN_POS_Y = 3;
+    private readonly float HEIGHT = 33.75f;
 
     public override IEnumerator Cycle(GameObject weaponUser)
     {
@@ -13,14 +13,19 @@ public class NoejeolCycle : BaseCycle
         while(true)
         {
             yield return new WaitForSeconds(weapon.stats.Cooldown);
-            GameObject target = Scanner.Scan(weaponUser.transform.position, weapon.stats.Range, GameUtils.GetTargetTag(weaponUser));
-            if(target)
+            var targets = new List<GameObject>(){};
+            for(int i = 0; i < weapon.stats.Penetrate; i++)
             {
-                GameObject thunder = ObjectPool.Get(Game.PoolManager, "Thunder", (GameObject)weapon.weapon.resources[0]);
-                float newPosY = Mathf.Abs(target.transform.position.y) + 1.2f;
-                thunder.GetComponent<SpriteRenderer>().size = new Vector2(1, MIN_HEIGHT + newPosY);
-                thunder.transform.position = new Vector3(target.transform.position.x, MIN_POS_Y - newPosY / 2);
-                Game.instance.StartCoroutine(FinisingLifeTime(weapon.stats.Life, thunder));
+                if(weaponUser.CompareTag("Enemy") && i == 1) break; // 플레이어는 한번만 공격
+                GameObject target = Scanner.Scan(weaponUser.transform.position, weapon.stats.Range, GameUtils.GetTargetTag(weaponUser), targets.ToArray());
+                if(target)
+                {
+                    targets.Add(target);
+                    GameObject thunder = ObjectPool.Get(Game.PoolManager, "Thunder", (GameObject)weapon.weapon.resources[0]);
+                    thunder.transform.position = new Vector3(target.transform.position.x, HEIGHT / 2 + target.transform.position.y);
+                    Game.instance.StartCoroutine(FinisingLifeTime(weapon.stats.Life, thunder));
+                    AttackManager.AttackTarget("Noejeol", target, i, (affecter) => affecter.Sturn(), weaponUser);
+                }
             }
         }
     }
