@@ -64,7 +64,10 @@ public class Player : BaseController
 
     private void FixedUpdate()
     {
-        rigid.MovePosition(GameUtils.MovePositionLimited(rigid.position + inputDirection * playerData.data.stats.MoveSpeed / 3 * Time.fixedDeltaTime, transform.position.z));
+        if(affecter.status == Affecter.Status.Idle)
+        {
+            rigid.MovePosition(GameUtils.MovePositionLimited(rigid.position + inputDirection * playerData.data.stats.MoveSpeed / 3 * Time.fixedDeltaTime, transform.position.z));
+        }
         if(inputDirection.magnitude != 0)
         {
             lastDirection = inputDirection;

@@ -16,6 +16,11 @@ namespace _20MTB.Utillity
             ;
         }
 
+        public static string GetTargetTag(GameObject target)
+        {
+            return target.CompareTag("Player") ? "Enemy" : "Player";
+        }
+
         public static string GetTargetTag(WeaponUser weaponUserType)
         {
             return weaponUserType == WeaponUser.Player ? "Enemy" : "Player";

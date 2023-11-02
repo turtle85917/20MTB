@@ -21,6 +21,7 @@ public class Cex : BaseWeapon
         {
             Affecter script = other.GetComponent<Affecter>();
             script.StartCoroutine(script.ThreeComboKnockback(weaponUser));
+            count++;
         }
     }
 }

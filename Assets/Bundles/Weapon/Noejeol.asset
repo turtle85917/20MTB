@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f31882fd8b3cb5f4bb018cef43a79d26, type: 3}
+  m_Name: Noejeol
+  m_EditorClassIdentifier: 
+  weaponId: Noejeol
+  logo: {fileID: 134620545, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
+  weaponCycleScriptFile: {fileID: 11500000, guid: abe40b516bd68a444b5ec9a6c29e7a7a, type: 3}
+  resources:
+  - {fileID: 3878540323456443628, guid: 615b8bc0d4950bb4cad7b9c2419280a2, type: 3}

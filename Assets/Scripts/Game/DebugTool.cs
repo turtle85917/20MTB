@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Debugging : MonoBehaviour
+public class DebugTool : MonoBehaviour
 {
     [SerializeField] private GameObject Panel;
     [SerializeField] private GameObject[] Contents;
+
     [Header("Content : Add Weapon")]
     [SerializeField] private TMP_InputField WeaponId;
+
     [Header("Content : Add Weapon To Enemy")]
     [SerializeField] private GameObject SelectEnemyPanel;
     [SerializeField] private GameObject AddWeaponPanel;
@@ -15,6 +17,7 @@ public class Debugging : MonoBehaviour
     private GameObject selectTarget;
     private Vector3 lastCameraPosition;
     private Vector3 lastMousePosition;
+
     private int level;
     private Content openContent;
     private readonly Dictionary<KeyCode, Content> contentShortcut = new Dictionary<KeyCode, Content>
@@ -32,7 +35,7 @@ public class Debugging : MonoBehaviour
     {
         foreach(KeyCode key in contentShortcut.Keys)
         {
-            if(Input.GetKeyDown(key))
+            if(Input.GetKeyDown(key) && !Panel.activeSelf)
             {
                 Reset();
                 Panel.SetActive(true);
@@ -83,7 +86,7 @@ public class Debugging : MonoBehaviour
                         }
                         if(Input.GetMouseButton(0))
                         {
-                            Vector3 fixedMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition - lastMousePosition) - Camera.main.ScreenToWorldPoint(Vector3.zero); // Chat GPT 曰. Vecotr3.zero는 원점이므로 시작 위치임.
+                            Vector3 fixedMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition - lastMousePosition) - Camera.main.ScreenToWorldPoint(Vector3.zero); // Vecotr3.zero는 원점이므로 시작 위치임.
                             Camera.main.transform.position = lastCameraPosition - new Vector3(fixedMousePosition.x, fixedMousePosition.y, 0);
                         }
                         break;
