@@ -12,7 +12,7 @@ public class EnemyManager : MonoBehaviour
     {
         public GameObject target;
         public int health;
-        public int moveSpeed;
+        public float moveSpeed;
         public Weapon weapon;
         public EnemyData data;
     }
