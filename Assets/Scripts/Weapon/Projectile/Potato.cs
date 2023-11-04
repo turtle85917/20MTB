@@ -21,7 +21,7 @@ public class Potato : BaseWeapon
         if(weaponStatus == WeaponStatus.Idle)
         {
             var targets = Scanner.ScanAll(transform.position, stats.Range, GameUtils.GetTargetTag(weaponUserType), stats.Penetrate);
-            if(targets.Count > 1)
+            if(targets.Count > 0)
             {
                 rigid.velocity = Vector2.zero;
                 weaponStatus = WeaponStatus.GoAway;
