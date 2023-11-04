@@ -24,10 +24,6 @@ public class Bullet : BaseWeapon
         {
             AttackManager.AttackTarget(weaponId, other.gameObject, penetrate, source:weaponUser);
             penetrate++;
-            if(penetrate == stats.Penetrate)
-            {
-                gameObject.SetActive(false);
-            }
         }
     }
 }

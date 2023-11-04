@@ -10,14 +10,10 @@ public class Diagum : BaseWeapon
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Enemy") && penetrate < stats.Penetrate)
+        if(other.CompareTag("Enemy"))
         {
             AttackManager.AttackTarget("Diagum", other.gameObject, penetrate, (affecter) => affecter.Knockback(gameObject));
             penetrate++;
-            if(penetrate == stats.Penetrate)
-            {
-                gameObject.SetActive(false);
-            }
         }
     }
 }

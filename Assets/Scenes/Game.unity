@@ -3776,6 +3776,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 722b87e30f580fb4f83aaaa1771e323d, type: 2}
   - {fileID: 11400000, guid: 35cf6e213e990ee499e226f68e9e3a29, type: 2}
   - {fileID: 11400000, guid: 88cfa156a19abac49b839b45ddb7809f, type: 2}
+  - {fileID: 11400000, guid: 0e8620565d0bea9429ae140191a5564f, type: 2}
   Slots:
   - {fileID: 65024565}
   - {fileID: 943050535}
@@ -3799,7 +3800,6 @@ MonoBehaviour:
   Enemies: {fileID: 1145575509}
   enemies:
   - {fileID: 11400000, guid: 211c5ff8f02f5ea48a453c86f96cf0bf, type: 2}
-  - {fileID: 11400000, guid: 999813c34513b614c905c3dcd15103da, type: 2}
 --- !u!114 &1210831723
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -69,6 +69,7 @@ public class Affecter : MonoBehaviour
 
     public void Sturn()
     {
+        if(gameObject.CompareTag("Player")) return; // 플레이어는 기절할 수 없음
         status = Status.Sturn;
         animator.SetBool("isWalk", false);
         SetColor(Color.yellow);

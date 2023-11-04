@@ -5,10 +5,11 @@ using UnityEngine;
 
 public static class Scanner
 {
-    public static List<GameObject> ScanAll(Vector2 origin, float radius, string tag)
+    public static List<GameObject> ScanAll(Vector2 origin, float radius, string tag, int limit = 0)
     {
         List<GameObject> result = new List<GameObject>(){};
         ProcessRaycast(origin, radius, (RaycastHit2D raycast) => {
+            if(limit > 0 && result.Count == limit) return;
             if(raycast.collider.CompareTag(tag))
             {
                 result.Add(raycast.collider.gameObject);

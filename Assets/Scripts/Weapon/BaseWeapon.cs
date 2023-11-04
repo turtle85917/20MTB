@@ -7,7 +7,21 @@ public abstract class BaseWeapon : MonoBehaviour
     public WeaponStats stats {protected get; set;}
     public GameObject weaponUser {protected get; set;}
     public WeaponUser weaponUserType {protected get; set;}
-    protected int penetrate; // 관통 수
+    protected int penetrate // 관통 수
+    {
+        get
+        {
+            return _penetrate;
+        }
+        set
+        {
+            _penetrate = value;
+            if(_penetrate == stats.Penetrate)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+    }
     protected int count     // 무기 사용 횟수 (적한테만)
     {
         get
@@ -30,13 +44,15 @@ public abstract class BaseWeapon : MonoBehaviour
     protected Rigidbody2D rigid;
     protected new Animation animation;
     protected SpriteRenderer sprite;
+    private int _penetrate;
     private int _count;
 
     public void Init()
     {
         count = 0;
-        _count = 0;
         penetrate = 0;
+        _count = 0;
+        _penetrate = 0;
         weaponStatus = WeaponStatus.Idle;
         StartCoroutine(FinisingLifeTime());
     }

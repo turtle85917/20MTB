@@ -19,7 +19,7 @@ public class Blow : BaseWeapon
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Enemy") && penetrate < stats.Penetrate)
+        if(other.CompareTag("Enemy"))
         {
             AttackManager.AttackTarget("Wakchori", other.gameObject, penetrate);
             penetrate++;

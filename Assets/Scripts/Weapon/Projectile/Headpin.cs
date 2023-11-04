@@ -39,11 +39,9 @@ public class Headpin : BaseWeapon
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Enemy") && penetrate < stats.Penetrate)
+        if(other.CompareTag("Enemy"))
         {
-            AttackManager.AttackTarget("Headpin", other.gameObject, penetrate, (affecter) => {
-                affecter.Knockback(gameObject);
-            });
+            AttackManager.AttackTarget("Headpin", other.gameObject, penetrate, (affecter) => affecter.Knockback(gameObject));
             penetrate++;
         }
     }
