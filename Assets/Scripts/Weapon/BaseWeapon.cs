@@ -16,7 +16,7 @@ public abstract class BaseWeapon : MonoBehaviour
         set
         {
             _penetrate = value;
-            if(_penetrate == stats.Penetrate)
+            if(_penetrate == stats.Penetrate && weaponStatus == WeaponStatus.Idle)
             {
                 gameObject.SetActive(false);
             }
