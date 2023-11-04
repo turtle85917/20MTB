@@ -3,11 +3,6 @@ using UnityEngine;
 
 public class Shuriken : BaseWeapon
 {
-    public new void Init()
-    {
-        base.Init();
-    }
-
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -22,14 +17,11 @@ public class Shuriken : BaseWeapon
     {
         if(other.CompareTag(GameUtils.GetTargetTag(weaponUser)))
         {
-            if(weaponStatus == WeaponStatus.Idle)
-            {
-                weaponStatus = WeaponStatus.GoAway;
-                UpdateRotation();
-                rigid.velocity = Vector2.zero;
-            }
+            if(weaponStatus == WeaponStatus.Idle) weaponStatus = WeaponStatus.GoAway;
             AttackManager.AttackTarget("NinjaShuriken", other.gameObject, penetrate > 0 ? 1 : 0, source:weaponUser);
             penetrate++;
+            UpdateRotation();
+            rigid.velocity = Vector2.zero;
         }
     }
 

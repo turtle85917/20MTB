@@ -16,6 +16,7 @@ public abstract class BaseWeapon : MonoBehaviour
         set
         {
             _penetrate = value;
+            if(value > 0) count++;
             if(_penetrate == stats.Penetrate && weaponStatus == WeaponStatus.Idle)
             {
                 gameObject.SetActive(false);
@@ -30,7 +31,7 @@ public abstract class BaseWeapon : MonoBehaviour
         }
         set
         {
-            if(weaponUserType == WeaponUser.Enemy)
+            if((weaponUser && weaponUser.CompareTag("Enemy")) || weaponUserType == WeaponUser.Enemy)
             {
                 _count = value;
                 if(_count == stats.Count)

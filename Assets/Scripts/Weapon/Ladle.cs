@@ -46,11 +46,7 @@ public class Ladle : BaseWeapon
         {
             AttackManager.AttackTarget("Ladle", other.gameObject, penetrate, (affecter) => affecter.Knockback(gameObject), weaponUser);
             penetrate++;
-            if(penetrate < stats.Penetrate)
-            {
-                Reset();
-                count++;
-            }
+            if(penetrate < stats.Penetrate) Reset();
         }
     }
 
