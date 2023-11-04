@@ -2951,7 +2951,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB514\uBC84\uAE45 \uD234"
+  m_text: "\uB514\uBC84\uADF8 \uD234"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0c34431862676984f9d13ce495b19eb3, type: 2}
   m_sharedMaterial: {fileID: 5092230480352266154, guid: 0c34431862676984f9d13ce495b19eb3, type: 2}
@@ -3777,6 +3777,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 35cf6e213e990ee499e226f68e9e3a29, type: 2}
   - {fileID: 11400000, guid: 88cfa156a19abac49b839b45ddb7809f, type: 2}
   - {fileID: 11400000, guid: 0e8620565d0bea9429ae140191a5564f, type: 2}
+  - {fileID: 11400000, guid: f7735dc73b9814b4f874a2ee6f9f37f6, type: 2}
   Slots:
   - {fileID: 65024565}
   - {fileID: 943050535}
