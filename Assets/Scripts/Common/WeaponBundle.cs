@@ -53,11 +53,34 @@ public class WeaponBundle : MonoBehaviour
         else // 적
         {
             EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(target);
+            float percent = 0.4f;
+            Weapon newEnemyWeapon = new Weapon()
+            {
+                type = weapon.type,
+                name = weapon.name,
+                weapon = weapon.weapon,
+                stats = new _20MTB.Stats.WeaponStats()
+                {
+                    Power = Mathf.RoundToInt(weapon.stats.Power * percent),
+                    Cooldown = Mathf.RoundToInt(weapon.stats.Power * percent),
+                    Penetrate = Mathf.RoundToInt(weapon.stats.Penetrate * percent),
+                    DecreasePower = Mathf.RoundToInt(weapon.stats.DecreasePower * percent),
+                    Range = weapon.stats.Range,
+                    Life = Mathf.RoundToInt(weapon.stats.Life * percent),
+                    CriticalHit = Mathf.RoundToInt(weapon.stats.CriticalHit * percent),
+                    CriticalDamage = Mathf.RoundToInt(weapon.stats.CriticalDamage * percent),
+                    ProjectileName = weapon.stats.ProjectileName,
+                    ProjectileSize = weapon.stats.ProjectileSize,
+                    ProjectileSpeed = weapon.stats.ProjectileSpeed,
+                    ProjectileCount = weapon.stats.ProjectileCount,
+                    Count = weapon.stats.Count
+                }
+            };
             enemyPool.weapon = new Weapon()
             {
                 type = "N",
-                weapon = weapon.weapon,
-                stats = weapon.stats
+                weapon = newEnemyWeapon.weapon,
+                stats = newEnemyWeapon.stats
             };
             BaseCycle baseCycle = Activator.CreateInstance(monoscript) as BaseCycle;
             instance.StartCoroutine(baseCycle.Cycle(enemyPool.target));

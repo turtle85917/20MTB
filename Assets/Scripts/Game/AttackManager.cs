@@ -16,12 +16,13 @@ public static class AttackManager
         Weapon weapon = WeaponBundle.GetWeapon(weaponId);
         EnemyManager.EnemyPool enemyPool = null;
         int power = Player.playerData.data.stats.Power;
-        if(target.CompareTag("Enemy"))
+        if(source && source.CompareTag("Enemy"))
         {
-            enemyPool = EnemyManager.GetEnemy(target);
+            enemyPool = EnemyManager.GetEnemy(source);
             power = enemyPool.data.stats.Power;
         }
         int damage = weapon.stats.Power + weapon.stats.Power / power - penetrate * weapon.stats.DecreasePower;
+        if(enemyPool != null) damage = enemyPool.weapon.stats.Power + enemyPool.weapon.stats.Power / power - penetrate * enemyPool.weapon.stats.DecreasePower;
         if(target.CompareTag("Player"))
         {
             Weapon parasocialWeapon = Player.playerData.weapons.Find(item => item.weapon.weaponId == "パラソーシャル");

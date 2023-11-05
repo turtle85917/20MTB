@@ -15,7 +15,8 @@ public class Connect : MonoBehaviour
     private StreamReader reader;
     private StreamWriter writer;
     private List<Chat> chatQueue;
-    private readonly Dictionary<string, string[]> commands = new(){
+    private readonly Dictionary<string, string[]> commands = new()
+    {
         {"spawn", new string[]{"spawn", "create", "생성"}}
     };
 
