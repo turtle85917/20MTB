@@ -33,13 +33,14 @@ public class Sledgehammer : BaseWeapon
         if(GetAngleZ() == 90 && weaponStatus == WeaponStatus.Idle)
         {
             weaponStatus = WeaponStatus.GoAway;
+            Game.cameraAgent.Shake();
             for(int i = 0; i < 20; i++)
             {
                 GameObject rock = ObjectPool.Get(Game.PoolManager, Rock.name, Rock);
                 Vector3 cameraPosition = Camera.main.transform.position;
                 rock.transform.position = new Vector3(Random.Range(-maxPosition.x + cameraPosition.x, maxPosition.x + cameraPosition.x), maxPosition.y + cameraPosition.y);
                 rock.transform.localScale = Vector2.one * Random.Range(0.3f, 1f);
-                rock.transform.GetComponent<Rigidbody2D>().gravityScale = Random.Range(1f, 4f);
+                rock.transform.GetComponent<Rigidbody2D>().gravityScale = Random.Range(1f, 5f);
                 Rock script = rock.GetComponent<Rock>();
                 script.index = i + 1;
                 script.stats = stats;

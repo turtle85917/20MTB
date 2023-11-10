@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Game : MonoBehaviour
 {
     public static GameObject PoolManager;
+    public static CameraAgent cameraAgent {get; private set;}
     public static bool isPaused {get; private set;}
     public static Game instance {get; private set;}
     [Header("Game")]
@@ -47,6 +48,7 @@ public class Game : MonoBehaviour
     {
         instance = this;
         times = new List<int>(){};
+        cameraAgent = GetComponent<CameraAgent>();
     }
 
     private void Start()
@@ -63,12 +65,6 @@ public class Game : MonoBehaviour
         HealthText.text = Player.playerData.health + " / " + Player.playerData.data.stats.MaxHealth;
         LevelText.text = "Lv " + Player.playerData.level;
         SpawnEnemies();
-    }
-
-    private void LateUpdate()
-    {
-        if(isPaused) return;
-        Camera.main.transform.position = Player.@object.transform.position + Vector3.back * 10;
     }
 
     private void SpawnEnemies()

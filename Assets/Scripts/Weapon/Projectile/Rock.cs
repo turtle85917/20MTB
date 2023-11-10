@@ -1,3 +1,4 @@
+using System.Collections;
 using _20MTB.Utillity;
 using UnityEngine;
 
@@ -14,8 +15,14 @@ public class Rock : BaseWeapon
         }
     }
 
-    private void OnBecameInvisible()
+    private void OnEnable()
     {
+        StartCoroutine(BrokenRock());
+    }
+
+    private IEnumerator BrokenRock()
+    {
+        yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
     }
 }
