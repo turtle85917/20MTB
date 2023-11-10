@@ -7,7 +7,7 @@ public static class ObjectPool
         for(int i = 0; i < Parent.transform.childCount; i++)
         {
             GameObject child = Parent.transform.GetChild(i).gameObject;
-            if(!child.activeSelf && child.name.StartsWith(name))
+            if(!child.activeSelf && child.name == name)
             {
                 child.SetActive(true);
                 return child;
