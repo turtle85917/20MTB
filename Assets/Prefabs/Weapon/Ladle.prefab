@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5086360628094723133}
   - component: {fileID: 5086360628094723135}
   - component: {fileID: 5086360628094723132}
-  - component: {fileID: 1594066278434392869}
   - component: {fileID: 6442628483374272543}
+  - component: {fileID: 1594066278434392869}
   - component: {fileID: 8905262625114220789}
   m_Layer: 0
   m_Name: Ladle
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5086360628094723130}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,26 +101,9 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.029465873, y: 0.87490606}
-  m_Size: {x: 0.7919878, y: 0.6192053}
+  m_Offset: {x: 0.09183815, y: -0.87745196}
+  m_Size: {x: 0.8089421, y: 0.6257408}
   m_Direction: 1
---- !u!111 &1594066278434392869
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5086360628094723130}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 4230629a7499d9c42be654b8fc3aac58, type: 2}
-  - {fileID: 7400000, guid: 11e11ce547d446e4e869dd134e80d02c, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!50 &6442628483374272543
 Rigidbody2D:
   serializedVersion: 4
@@ -141,7 +124,24 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!111 &1594066278434392869
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5086360628094723130}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 4230629a7499d9c42be654b8fc3aac58, type: 2}
+  - {fileID: 7400000, guid: 11e11ce547d446e4e869dd134e80d02c, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &8905262625114220789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,4 +154,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a6018eec5cc464ab9268730c273cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponId: 

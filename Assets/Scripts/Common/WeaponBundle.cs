@@ -27,6 +27,11 @@ public class WeaponBundle : MonoBehaviour
     public static void AddWeaponToTarget(GameObject target, string weaponId)
     {
         Weapon weapon = GetWeapon(weaponId);
+        if(weapon == null)
+        {
+            Debug.Log("Not found weapon");
+            return;
+        }
         Type monoscript = weapon.weapon.weaponCycleScriptFile ? weapon.weapon.weaponCycleScriptFile.GetClass() : null;
         if(target.CompareTag("Player")) // 플레이어
         {

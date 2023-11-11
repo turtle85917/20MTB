@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
-    public static GameObject PoolManager;
+    public static Vector2 maxPosition {get; private set;}
+    public static GameObject PoolManager {get; private set;}
     public static CameraAgent cameraAgent {get; private set;}
     public static bool isPaused {get; private set;}
     public static Game instance {get; private set;}
@@ -54,6 +55,7 @@ public class Game : MonoBehaviour
     private void Start()
     {
         PoolManager = GameObject.FindWithTag("PoolManager");
+        maxPosition = new Vector2(Camera.main.orthographicSize * Camera.main.aspect, Camera.main.orthographicSize);
         StartCoroutine(Timer());
     }
 

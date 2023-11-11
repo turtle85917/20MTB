@@ -12,7 +12,8 @@ public static class AttackManager
     /// <param name="penetrate">관통 수</param>
     /// <param name="postProcessFunc">후처리 함수 (lambda)</param>
     /// <param name="source">무기 사용자</param>
-    public static void AttackTarget(string weaponId, GameObject target, int penetrate, Action<Affecter> postProcessFunc = null, GameObject source = null)
+    /// <param name="plusForce">추가적인 힘 (곱적용으로 적용함.)</param>
+    public static void AttackTarget(string weaponId, GameObject target, int penetrate, Action<Affecter> postProcessFunc = null, GameObject source = null, float plusForce = 0)
     {
         Weapon weapon = WeaponBundle.GetWeapon(weaponId);
 
@@ -24,7 +25,7 @@ public static class AttackManager
 #endregion
 
         bool critical = UnityEngine.Random.value < (target.CompareTag("Enemy") ? weapon.stats.CriticalHit : sourceEnemyPool.weapon.stats.CriticalHit);
-        int damage = GetCalcDamage(Player.playerData.data.stats.Power, GetWeaponPower(critical, weapon.stats), penetrate * weapon.stats.DecreasePower);
+        int damage = Mathf.CeilToInt(GetCalcDamage(Player.playerData.data.stats.Power, GetWeaponPower(critical, weapon.stats), penetrate * weapon.stats.DecreasePower) * (plusForce + 1));
         if(sourceEnemyPool != null) damage = GetCalcDamage(sourceEnemyPool.data.stats.Power, GetWeaponPower(critical, sourceEnemyPool.weapon.stats), penetrate * sourceEnemyPool.weapon.stats.DecreasePower);
         if(target.CompareTag("Player"))
         {
@@ -33,7 +34,7 @@ public static class AttackManager
             {
                 sourceEnemyPool = EnemyManager.GetEnemy(source);
                 // 크리티컬 데미지가 아닌 값으로 처리하기 위함
-                damage = Mathf.RoundToInt(GetCalcDamage(sourceEnemyPool.data.stats.Power, sourceEnemyPool.weapon.stats.Power, penetrate * sourceEnemyPool.weapon.stats.DecreasePower) * 0.25f);
+                damage = Mathf.CeilToInt(Mathf.RoundToInt(GetCalcDamage(sourceEnemyPool.data.stats.Power, sourceEnemyPool.weapon.stats.Power, penetrate * sourceEnemyPool.weapon.stats.DecreasePower) * 0.25f) * (plusForce + 1));
                 if(damage > 0)
                 {
                     sourceEnemyPool.health -= damage;

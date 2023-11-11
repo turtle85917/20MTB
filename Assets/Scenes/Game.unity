@@ -6895,6 +6895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwitchNickname: {fileID: 3834622029677472627, guid: 30ca07b13a819de4e8d1120a132eb49a, type: 3}
   DamageText: {fileID: 2049845797921003652, guid: 5ae312150ed60e24da0875390afe9824, type: 3}
+  ComboText: {fileID: 5044520540881646644, guid: b61749763f3729f4483925d450417211, type: 3}
 --- !u!1 &2123487257
 GameObject:
   m_ObjectHideFlags: 0

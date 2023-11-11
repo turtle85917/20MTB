@@ -5,6 +5,8 @@ using UnityEngine;
 
 public static class Scanner
 {
+    public static bool IsAnyTargetAround(Vector2 origin, float radius, string tag) => Physics2D.CircleCastAll(origin, radius, Vector2.right).Where(item => item.collider.CompareTag(tag)).ToArray().Length > 0;
+
     public static List<GameObject> ScanAll(Vector2 origin, float radius, string tag, int limit = 0)
     {
         List<GameObject> result = new List<GameObject>(){};
@@ -62,7 +64,9 @@ public static class Scanner
         RaycastHit2D[] raycasts = Physics2D.CircleCastAll(origin, radius, Vector2.right);
         foreach(RaycastHit2D raycast in raycasts)
         {
-            processFunc(raycast);
+            EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(raycast.collider.gameObject);
+            if(enemyPool == null || enemyPool.health > 0)
+                processFunc(raycast);
         }
     }
 }

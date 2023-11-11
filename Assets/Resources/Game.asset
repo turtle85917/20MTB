@@ -15,7 +15,7 @@ MonoBehaviour:
   cycleTimelines:
   - time: 0
     spawnPosition: []
-    spawnCount: 0e0000000f000000
-    circleRadius: 12
+    spawnCount: 0c0000000f000000
+    circleRadius: 10
     enemies:
     - {fileID: 11400000, guid: 211c5ff8f02f5ea48a453c86f96cf0bf, type: 2}

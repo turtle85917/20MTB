@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Headpin : BaseWeapon
 {
-    private Vector2 maxPosition;
     private Vector3 cameraPosition;
 
     public new void Init()
@@ -10,15 +9,14 @@ public class Headpin : BaseWeapon
         base.Init();
         transform.localPosition = Player.@object.transform.localPosition;
         transform.rotation = Quaternion.AngleAxis(Random.Range(-360f, 360f), Vector3.forward);
-        maxPosition = new Vector2(Camera.main.orthographicSize * Camera.main.aspect, Camera.main.orthographicSize);
     }
 
     private void Update()
     {
         cameraPosition = Camera.main.transform.position;
         if(
-            -maxPosition.x + cameraPosition.x > transform.position.x || transform.position.x > maxPosition.x + cameraPosition.x ||
-            -maxPosition.y + cameraPosition.y > transform.position.y || transform.position.y > maxPosition.y + cameraPosition.y
+            -Game.maxPosition.x + cameraPosition.x > transform.position.x || transform.position.x > Game.maxPosition.x + cameraPosition.x ||
+            -Game.maxPosition.y + cameraPosition.y > transform.position.y || transform.position.y > Game.maxPosition.y + cameraPosition.y
         )
         {
             UpdateRotation();
@@ -32,8 +30,8 @@ public class Headpin : BaseWeapon
     private void OnBecameInvisible()
     {
         Vector2 teleportVec = Vector2.zero;
-        teleportVec.x = Random.Range(0, 1) == 1 ? -maxPosition.x + cameraPosition.x : maxPosition.x + cameraPosition.x;
-        teleportVec.y = Random.Range(0, 1) == 1 ? -maxPosition.y + cameraPosition.y : maxPosition.y + cameraPosition.y;
+        teleportVec.x = Random.Range(0, 1) == 1 ? -Game.maxPosition.x + cameraPosition.x : Game.maxPosition.x + cameraPosition.x;
+        teleportVec.y = Random.Range(0, 1) == 1 ? -Game.maxPosition.y + cameraPosition.y : Game.maxPosition.y + cameraPosition.y;
         transform.position = teleportVec;
     }
 

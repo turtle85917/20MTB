@@ -1,60 +1,78 @@
+using System.Collections;
 using _20MTB.Utillity;
 using UnityEngine;
+
+// TODO: 적이 쓸 경우, 고려하기
 
 public class Ladle : BaseWeapon
 {
     private GameObject target;
+    private float combo;
 
     public new void Init()
     {
         base.Init();
-        animation.Play("Show");
         transform.localPosition = weaponUser.transform.position + Vector3.forward * 1.2f;
-        transform.localRotation = Quaternion.identity;
+        transform.localScale = Vector2.zero;
         rigid.velocity = Vector2.zero;
+        animation.Play("Show");
     }
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         animation = GetComponent<Animation>();
-        sprite = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        Scanner.Scan(weaponUser.transform.position, stats.Range, GameUtils.GetTargetTag(weaponUserType), out target);
-        if(weaponStatus == WeaponStatus.GoAway && target == null) Reset();
-        if(target != null)
-        {
-            weaponStatus = WeaponStatus.GoAway;
-            transform.localRotation = GameUtils.LookAtTarget(transform.position, target.transform.position);
-            rigid.MovePosition(Vector3.MoveTowards(rigid.position, target.transform.position, 30 * Time.deltaTime));
-            sprite.flipX = 90 <= transform.rotation.eulerAngles.z && transform.rotation.eulerAngles.z <= 270;
-            count++;
-        }
         if(weaponStatus == WeaponStatus.Idle)
-        {   
-            transform.localRotation *= Quaternion.AngleAxis(4, Vector3.forward);
-            transform.localPosition = weaponUser.transform.position + transform.up * 1.2f;
+        {
+            if(target == null)
+            {
+                Scanner.Scan(weaponUser.transform.position, stats.Range, GameUtils.GetTargetTag(weaponUserType), out target);
+                if(target == null)
+                    animation.Play("Hide");
+                else
+                {
+                    combo = ((Vector3)Game.maxPosition + Camera.main.transform.position - target.transform.position).normalized.y;
+                    StartCoroutine(Repair());
+                }
+                count++;
+            }
+            else
+            {
+                rigid.MovePosition(Vector3.MoveTowards(rigid.position, target.transform.position, 40 * Time.deltaTime));
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag(GameUtils.GetTargetTag(weaponUserType)) && weaponStatus == WeaponStatus.GoAway && penetrate < stats.Penetrate)
+        if(other.gameObject.Equals(target))
         {
-            AttackManager.AttackTarget("Ladle", other.gameObject, penetrate, (affecter) => affecter.Knockback(gameObject), weaponUser);
+            AttackManager.AttackTarget("Ladle", other.gameObject, penetrate, (affecter) => affecter.Knockback(gameObject), weaponUser, combo + 1);
+            TextManager.WriteComboText(target, Mathf.RoundToInt(combo * 1000));
+            StartCoroutine(LadleGGang());
+            target = null;
             penetrate++;
-            if(penetrate < stats.Penetrate) Reset();
         }
     }
 
-    private void Reset()
+    private IEnumerator Repair()
     {
+        yield return new WaitForSeconds(0.3f);
         target = null;
+        animation.Play("Hide");
+    }
+
+    private IEnumerator LadleGGang()
+    {
+        rigid.AddForce(target.transform.up * 20);
+        rigid.gravityScale = 5;
+        weaponStatus = WeaponStatus.GoAway;
+        yield return new WaitForSeconds(0.4f);
         weaponStatus = WeaponStatus.Idle;
-        transform.localPosition = weaponUser.transform.position + Vector3.forward * 1.2f;
-        transform.localRotation = Quaternion.identity;
+        rigid.gravityScale = 0;
     }
 }
