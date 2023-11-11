@@ -5,8 +5,8 @@ namespace _20MTB.Utillity
 {
     public static class GameUtils
     {
-        private static readonly Vector2 maxPoint = new Vector2(29.6f, 17.8f);
-        private static readonly Vector2 minPoint = new Vector2(-29.6f, -16f);
+        private static readonly Vector2 maxPoint = new Vector2(29.625f, 17.4f);
+        private static readonly Vector2 minPoint = new Vector2(-29.7f, -16.35f);
 
         public static WeaponUser GetWeaponUserType(GameObject target)
         {

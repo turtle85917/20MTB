@@ -23,8 +23,7 @@ public class BulletManager : BaseWeapon
         if(target != null)
         {
             transform.rotation = GameUtils.LookAtTarget(transform.position, target.transform.position);
-            sprite.flipX = false;
-            sprite.flipY = 90 <= transform.rotation.eulerAngles.z && transform.rotation.eulerAngles.z <= 270;
+            sprite.flipY = 90 < transform.rotation.eulerAngles.z || transform.rotation.eulerAngles.z < -90;
         }
         else
         {

@@ -35,7 +35,15 @@ public class EnemyManager : MonoBehaviour
 
     public static EnemyPool GetEnemy(GameObject Object)
     {
-        return instance.enemyPools.Find(item => item.target.Equals(Object));
+        GameObject target = Object;
+        if(Object.name == "Jinhe")
+            target = Object.GetComponent<Jinhe>().weaponUser;
+        return instance.enemyPools.Find(item => item.target.Equals(target));
+    }
+
+    public static EnemyPool[] GetEnemies()
+    {
+        return instance.enemyPools.ToArray();
     }
 
     public static void RemoveEnemy(EnemyPool pool)

@@ -33,7 +33,7 @@ public class WeaponBundle : MonoBehaviour
             return;
         }
         Type monoscript = weapon.weapon.weaponCycleScriptFile ? weapon.weapon.weaponCycleScriptFile.GetClass() : null;
-        if(target.CompareTag("Player")) // 플레이어
+        if(target.CompareTag("Player"))
         {
             if(Player.playerData.weapons.Count == 6) return; // 무기 최대 6개까지 소지 가능
             GameObject slot = null;
@@ -55,7 +55,7 @@ public class WeaponBundle : MonoBehaviour
                 instance.StartCoroutine(baseCycle.Cycle(target));
             }
         }
-        else // 적
+        else
         {
             EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(target);
             float percent = 0.4f;
