@@ -9,7 +9,6 @@ public class Player : BaseController
     public static PlayerStatus playerData {get; private set;}
     public static GameObject @object;
     public static GameObject weapons;
-    private Affecter affecter;
     private Vector2 inputDirection;
     [Header("플레이어 스크립터블")]
     [SerializeField] private Character character;
@@ -31,7 +30,6 @@ public class Player : BaseController
     {
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        affecter = GetComponent<Affecter>();
         @object = gameObject;
         weapons = GameObject.FindWithTag("Weapons");
         PlayerData data = players[(int)character];
@@ -49,25 +47,16 @@ public class Player : BaseController
 
     private void Update()
     {
-        if(affecter.status == Affecter.Status.Idle)
-        {
-            inputDirection.x = Input.GetAxisRaw("Horizontal");
-            inputDirection.y = Input.GetAxisRaw("Vertical");
-        }
-        else
-        {
-            inputDirection = Vector2.zero;
-        }
+        inputDirection.x = Input.GetAxisRaw("Horizontal");
+        inputDirection.y = Input.GetAxisRaw("Vertical");
         animator.SetBool("isWalk", inputDirection.magnitude != 0);
         transform.rotation = Quaternion.AngleAxis(lastDirection.x < 0 ? 180 : 0, Vector3.up);
     }
 
     private void FixedUpdate()
     {
-        if(affecter.status == Affecter.Status.Idle)
-        {
-            rigid.MovePosition(GameUtils.MovePositionLimited(rigid.position + inputDirection * playerData.data.stats.MoveSpeed / 3 * Time.fixedDeltaTime, transform.position.z));
-        }
+        // 플레이어는 어떠한 영향도 받을 수 없는 무적이다.
+        rigid.MovePosition(GameUtils.MovePositionLimited(rigid.position + inputDirection * playerData.data.stats.MoveSpeed / 3 * Time.fixedDeltaTime, transform.position.z));
         if(inputDirection.magnitude != 0)
         {
             lastDirection = inputDirection;

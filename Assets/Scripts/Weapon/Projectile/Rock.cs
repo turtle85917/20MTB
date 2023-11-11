@@ -8,7 +8,7 @@ public class Rock : BaseWeapon
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag(GameUtils.GetTargetTag(weaponUser)) && index < stats.Penetrate)
+        if(other.gameObject.CompareTag(GameUtils.GetTargetTag(weaponUser)) && index < stats.Penetrate)
         {
             weaponStatus = WeaponStatus.GoAway;
             AttackManager.AttackTarget("Sledgehammer", other.gameObject, index, source:weaponUser);

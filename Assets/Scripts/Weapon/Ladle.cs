@@ -2,8 +2,6 @@ using System.Collections;
 using _20MTB.Utillity;
 using UnityEngine;
 
-// TODO: 적이 쓸 경우, 고려하기
-
 public class Ladle : BaseWeapon
 {
     private GameObject target;
@@ -62,8 +60,15 @@ public class Ladle : BaseWeapon
     private IEnumerator Repair()
     {
         yield return new WaitForSeconds(0.3f);
-        target = null;
-        animation.Play("Hide");
+        if(weaponUser.CompareTag("Enemy"))
+        {
+            animation.Play("Hide");
+        }
+        else
+        {
+            target = null;
+            animation.Play("Hide");
+        }
     }
 
     private IEnumerator LadleGGang()

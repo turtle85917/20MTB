@@ -34,11 +34,15 @@ public class Sledgehammer : BaseWeapon
         {
             weaponStatus = WeaponStatus.GoAway;
             Game.cameraAgent.Shake();
-            for(int i = 0; i < 20; i++)
+            int rockCount = 20;
+            if(weaponUser.CompareTag("Enemy")) rockCount = 5;
+            for(int i = 0; i < rockCount; i++)
             {
                 GameObject rock = ObjectPool.Get(Game.PoolManager, Rock.name, Rock);
                 Vector3 cameraPosition = Camera.main.transform.position;
-                rock.transform.position = new Vector3(Random.Range(-Game.maxPosition.x + cameraPosition.x, Game.maxPosition.x + cameraPosition.x), Game.maxPosition.y + cameraPosition.y);
+                float rockX = Random.Range(-Game.maxPosition.x + cameraPosition.x, Game.maxPosition.x + cameraPosition.x);
+                if(weaponUser.CompareTag("Enemy")) rockX = Player.@object.transform.position.x + Random.Range(-3f, 3f);
+                rock.transform.position = new Vector3(rockX, Game.maxPosition.y + cameraPosition.y);
                 rock.transform.localScale = Vector2.one * Random.Range(0.3f, 1f);
                 rock.transform.GetComponent<Rigidbody2D>().gravityScale = Random.Range(1f, 5f);
                 Rock script = rock.GetComponent<Rock>();
