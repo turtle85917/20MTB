@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class Enemy : BaseController
 {
-    public GameObject text {private get; set;} // 트위치 닉네임 텍스트
+    public GameObject text {private get; set;}                      // 트위치 닉네임 텍스트
     public EnemyManager.EnemyPool enemyPool {private get; set;}
     private Affecter affecter;
-    private bool isPlayerAttacking;
+    public bool isSlowing {get; private set;}                       // 현재 느리게 걷고 있는 중인가?
+    private bool isPlayerAttacking;                                 // 플레이어 도트 공격을 하는 중인가?
+    private float slowRatio = 0f;                        // 이동 속도 비율 (느리게 걷을 때만 적용됨.)
 
     protected override void Init()
     {
@@ -44,7 +46,7 @@ public class Enemy : BaseController
     {
         if(!animator.GetBool("isDie") && affecter.status == Affecter.Status.Idle)
         {
-            rigid.MovePosition(Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed / 3 * Time.fixedDeltaTime));
+            rigid.MovePosition(Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed / 3 * (isSlowing ? slowRatio : 1) * Time.fixedDeltaTime));
         }
     }
 
@@ -68,6 +70,14 @@ public class Enemy : BaseController
             isPlayerAttacking = true;
             StartCoroutine(AttackPlayer());
         }
+        if(other.CompareTag("Enemy"))
+        {
+            if(!other.gameObject.GetComponent<Enemy>().isSlowing)
+            {
+                isSlowing = true;
+                slowRatio = Random.Range(0.5f, 0.9f);
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -76,6 +86,10 @@ public class Enemy : BaseController
         {
             isPlayerAttacking = false;
             StopCoroutine(AttackPlayer());
+        }
+        if(other.CompareTag("Enemy"))
+        {
+            isSlowing = false;
         }
     }
 

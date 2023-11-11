@@ -4,11 +4,6 @@ public class CollisionObjectLayer : MonoBehaviour
 {
     [SerializeField] private LayerMask targetLayout;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        ProcessCollider(other);
-    }
-
     private void OnTriggerStay2D(Collider2D other)
     {
         ProcessCollider(other);
