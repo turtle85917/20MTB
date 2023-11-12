@@ -17,9 +17,19 @@ public abstract class BaseWeapon : MonoBehaviour
         {
             _penetrate = value;
             if(value > 0) count++;
-            if(_penetrate == stats.Penetrate && weaponStatus == WeaponStatus.Idle)
+            if(weaponUser?.name == "Jinhe")
             {
-                gameObject.SetActive(false);
+                if(_penetrate == stats.Penetrate + stats.Count)
+                {
+                    weaponUser.GetComponent<Jinhe>().OnBrokenWeapon();
+                }
+            }
+            else
+            {
+                if(_penetrate == stats.Penetrate && weaponStatus == WeaponStatus.Idle)
+                {
+                    gameObject.SetActive(false);
+                }
             }
         }
     }
@@ -61,6 +71,16 @@ public abstract class BaseWeapon : MonoBehaviour
     public void OnHideAnimEnd()
     {
         gameObject.SetActive(false);
+        StealEnemyWeapon();
+    }
+
+    private void StealEnemyWeapon()
+    {
+        if(weaponUser != null && weaponUser.CompareTag("Enemy"))
+        {
+            EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(weaponUser);
+            enemyPool.weapon = null;
+        }
     }
 
     private IEnumerator FinisingLifeTime()
@@ -73,6 +93,7 @@ public abstract class BaseWeapon : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+            StealEnemyWeapon();
         }
     }
 }

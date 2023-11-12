@@ -7,10 +7,13 @@ public class KettleCycle : BaseCycle
     public override IEnumerator Cycle(GameObject weaponUser)
     {
         Weapon weapon = WeaponBundle.GetWeapon("Kettle");
-        while(true)
+        bool oneshot = true;
+        while(oneshot)
         {
-            yield return new WaitForSeconds(weapon.stats.Cooldown);
+            yield return new WaitForSeconds(2f);
+            oneshot = false;
             Weapon selectWeapon = null;
+            EnemyManager.EnemyPool selectEnemyPool = null;
             switch(weaponUser.tag)
             {
                 case "Player":
@@ -19,9 +22,12 @@ public class KettleCycle : BaseCycle
                         selectWeapon = filteredArray[Random.Range(0, filteredArray.Length)];
                     break;
                 case "Enemy":
-                    EnemyManager.EnemyPool[] enemies = EnemyManager.GetEnemies();
+                    EnemyManager.EnemyPool[] enemies = EnemyManager.GetEnemies().Where(item => item.weapon != null && item.weapon.weapon.weaponId != "Kettle").ToArray();
                     if(enemies.Length > 0)
-                        selectWeapon = enemies[Random.Range(0, enemies.Length)].weapon;
+                    {
+                        selectEnemyPool = enemies[Random.Range(0, enemies.Length)];
+                        selectWeapon = selectEnemyPool.weapon;
+                    }
                     break;
             }
             if(selectWeapon != null)
@@ -36,6 +42,7 @@ public class KettleCycle : BaseCycle
                     : weapon.stats.Life
                 ;
                 script.weaponUser = weaponUser;
+                script.weaponOwner = selectEnemyPool;
                 script.Init();
                 System.Type monoscript = selectWeapon.weapon.weaponCycleScriptFile.GetClass();
                 BaseCycle baseCycle = System.Activator.CreateInstance(monoscript) as BaseCycle;

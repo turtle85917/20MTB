@@ -33,12 +33,10 @@ public class EnemyManager : MonoBehaviour
         return enemy;
     }
 
-    public static EnemyPool GetEnemy(GameObject Object)
+    public static EnemyPool GetEnemy(GameObject enemy)
     {
-        GameObject target = Object;
-        if(Object.name == "Jinhe")
-            target = Object.GetComponent<Jinhe>().weaponUser;
-        return instance.enemyPools.Find(item => item.target.Equals(target));
+        if(enemy.name == "Jinhe") return enemy.GetComponent<Jinhe>().weaponOwner;
+        return instance.enemyPools.Find(item => item.target.Equals(enemy));
     }
 
     public static EnemyPool[] GetEnemies()

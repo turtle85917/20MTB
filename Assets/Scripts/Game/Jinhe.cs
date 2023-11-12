@@ -3,14 +3,21 @@ using UnityEngine;
 
 public class Jinhe : MonoBehaviour
 {
-    public float life {private get; set;}                 // 진희 생존 시간
-    [HideInInspector] public GameObject weaponUser;       // 사용할 무기를 사용하고 있는 대상
+    public float life {private get; set;}             // 진희 생존 시간
+    public GameObject weaponUser;                     // 사용할 무기를 사용하고 있는 대상
+    public EnemyManager.EnemyPool weaponOwner;       // 무기 원래 사용자
     private Rigidbody2D rigid;
 
     public void Init()
     {
         rigid.velocity = Vector2.zero;
         StartCoroutine(Dead());
+    }
+
+    public void OnBrokenWeapon()
+    {
+        StopAllCoroutines();
+        gameObject.SetActive(false);
     }
 
     private void Awake()

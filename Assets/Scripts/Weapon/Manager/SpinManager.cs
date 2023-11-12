@@ -1,4 +1,3 @@
-using _20MTB.Utillity;
 using UnityEngine;
 
 public class SpinManager : BaseWeapon
@@ -23,7 +22,7 @@ public class SpinManager : BaseWeapon
             revert.transform.localPosition = revert.transform.up * 1.24f;
             Revert script = revert.GetComponent<Revert>();
             script.stats = weapon.stats;
-            script.weaponUserType = GameUtils.GetWeaponUserType(weaponUser);
+            script.weaponUser = weaponUser;
             script.Init();
         }
     }

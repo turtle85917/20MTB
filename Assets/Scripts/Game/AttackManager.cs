@@ -15,6 +15,8 @@ public static class AttackManager
     /// <param name="plusForce">추가적인 힘 (곱적용으로 적용함.)</param>
     public static void AttackTarget(string weaponId, GameObject target, int penetrate, Action<Affecter> postProcessFunc = null, GameObject source = null, float plusForce = 0)
     {
+        if(target.name == "Jinhe") return;
+
         Weapon weapon = WeaponBundle.GetWeapon(weaponId);
 
 #region 공격 대상/무기 사용자가 적일 경우, 적 데이터 가져오기
@@ -24,7 +26,9 @@ public static class AttackManager
         if(source && source.CompareTag("Enemy")) sourceEnemyPool = EnemyManager.GetEnemy(source);
 #endregion
 
-        bool critical = UnityEngine.Random.value < (target.CompareTag("Enemy") ? weapon.stats.CriticalHit : sourceEnemyPool.weapon.stats.CriticalHit);
+        if(source != null && source.CompareTag("Enemy") && (sourceEnemyPool == null || sourceEnemyPool.weapon == null)) return;
+
+        bool critical = UnityEngine.Random.value < (source?.CompareTag("Enemy") ?? false ? sourceEnemyPool.weapon.stats.CriticalHit : weapon.stats.CriticalHit);
         int damage = Mathf.CeilToInt(GetCalcDamage(Player.playerData.data.stats.Power, GetWeaponPower(critical, weapon.stats), penetrate * weapon.stats.DecreasePower) * (plusForce + 1));
         if(sourceEnemyPool != null) damage = GetCalcDamage(sourceEnemyPool.data.stats.Power, GetWeaponPower(critical, sourceEnemyPool.weapon.stats), penetrate * sourceEnemyPool.weapon.stats.DecreasePower);
         if(target.CompareTag("Player"))
@@ -50,7 +54,7 @@ public static class AttackManager
         else
         {
             enemyPool.health -= damage;
-            TextManager.WriteDamage(target, damage, critical);
+            TextManager.WriteDamage(enemyPool.target, damage, critical);
         }
         if(postProcessFunc != null)
         {
@@ -71,6 +75,6 @@ public static class AttackManager
     /// <param name="decreasePower">최종 값에서 깎이는 데미지</param>
     private static int GetCalcDamage(int characterPower, int weaponPower, int decreasePower)
     {
-        return weaponPower + weaponPower / characterPower - decreasePower;
+        return Mathf.CeilToInt(weaponPower + weaponPower / characterPower - decreasePower);
     }
 }
