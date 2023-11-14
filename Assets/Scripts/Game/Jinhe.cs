@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class Jinhe : MonoBehaviour
 {
-    public float life {private get; set;}             // 진희 생존 시간
-    public GameObject weaponUser;                     // 사용할 무기를 사용하고 있는 대상
-    public EnemyManager.EnemyPool weaponOwner;       // 무기 원래 사용자
+    public float life {private get; set;}        // 진희 생존 시간
+    public GameObject weaponUser;                // 사용할 무기를 사용하고 있는 대상
+    public EnemyManager.EnemyPool weaponOwner;   // 무기 원래 사용자 (적 전용   )
     private Rigidbody2D rigid;
+    private SpriteRenderer sprite;
 
     public void Init()
     {
@@ -23,6 +24,12 @@ public class Jinhe : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
+    }
+
+    private void Update()
+    {
+        sprite.flipX = transform.position.x < weaponUser.transform.position.x;
     }
 
     private void FixedUpdate()

@@ -24,14 +24,19 @@ public class TextManager : MonoBehaviour
         GameObject text = ObjectPool.Get(instance.gameObject, "DamageText", instance.DamageText);
         text.transform.localPosition = (Vector2)target.transform.position + Vector2.up * 0.5f;
         Color color;
+        string content = value.ToString();
+        if(target.CompareTag("Player")) content = '-' + value.ToString();
+        if(value < 0) content = '+' + (-value).ToString();
         if (target.CompareTag("Player"))
             color = Color.red;
         else if (critical)
             color = Color.yellow;
         else
             color = Color.white;
+        if(value < 0)
+            color = Color.green;
         TMP_Text tmpText = text.GetComponent<TMP_Text>();
-        tmpText.text = (target.CompareTag("Player") ? '-' : string.Empty) + value.ToString();
+        tmpText.text = content;
         tmpText.color = color;
     }
 

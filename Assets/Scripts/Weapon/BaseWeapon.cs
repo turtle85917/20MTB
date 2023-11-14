@@ -44,7 +44,7 @@ public abstract class BaseWeapon : MonoBehaviour
             if((weaponUser && weaponUser.CompareTag("Enemy")) || weaponUserType == WeaponUser.Enemy)
             {
                 _count = value;
-                if(_count == stats.Count)
+                if(_count == stats.Penetrate + stats.Count)
                 {
                     gameObject.SetActive(false);
                 }

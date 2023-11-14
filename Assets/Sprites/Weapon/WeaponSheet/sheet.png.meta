@@ -515,6 +515,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: sheet_19
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46852b2f00b0cf545b590063908d2ae4
+      internalID: -948489100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -537,6 +558,7 @@ TextureImporter:
       sheet_16: 130066094
       sheet_17: -612260166
       sheet_18: -139995169
+      sheet_19: -948489100
       sheet_2: -1271728180
       sheet_3: -144393823
       sheet_4: 584060054

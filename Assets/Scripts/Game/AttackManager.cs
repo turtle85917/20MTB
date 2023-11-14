@@ -62,6 +62,21 @@ public static class AttackManager
         }
     }
 
+    public static void HealTarget(int value, GameObject target)
+    {
+        if(target.CompareTag("Player"))
+        {
+            Player.playerData.health += value;
+            TextManager.WriteDamage(Player.@object, -value, false);
+        }
+        else
+        {
+            EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(target);
+            enemyPool.health += value;
+            TextManager.WriteDamage(enemyPool.target, -value, false);
+        }
+    }
+
     private static int GetWeaponPower(bool critical, WeaponStats stats)
     {
         return critical ? stats.CriticalDamage : stats.Power;
