@@ -1,3 +1,4 @@
+using _20MTB.Utillity;
 using UnityEngine;
 
 public class MNBBeam : BaseWeapon
@@ -15,6 +16,15 @@ public class MNBBeam : BaseWeapon
     private void Awake()
     {
         animation = GetComponent<Animation>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag(GameUtils.GetTargetTag(weaponUser)))
+        {
+            penetrate++;
+            AttackManager.AttackTarget("MangnyangBeam", other.gameObject, penetrate, source:weaponUser);
+        }
     }
 
     private Vector2 GetScreenWallPos()

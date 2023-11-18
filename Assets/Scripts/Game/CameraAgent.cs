@@ -29,7 +29,7 @@ public class CameraAgent : MonoBehaviour
     {
         if(status == Status.Shaking)
         {
-            Camera.main.transform.position = lastPosition + (Vector3)Random.insideUnitCircle;
+            Camera.main.transform.position = lastPosition + (Vector3)Random.insideUnitCircle * 0.5f;
         }
     }
 
