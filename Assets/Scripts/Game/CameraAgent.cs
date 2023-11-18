@@ -11,11 +11,18 @@ public class CameraAgent : MonoBehaviour
         Shaking
     }
 
-    public void Shake()
+    public void Shake(float time = 0.5f)
     {
         status = Status.Shaking;
         lastPosition = Camera.main.transform.position;
-        StartCoroutine(ShakeReset());
+        if(time != Mathf.Infinity)
+            StartCoroutine(ShakeReset(time));
+    }
+
+    public void Reset()
+    {
+        status = Status.Idle;
+        Camera.main.transform.position = lastPosition;
     }
 
     private void Update()
@@ -32,10 +39,9 @@ public class CameraAgent : MonoBehaviour
         Camera.main.transform.position = Player.@object.transform.position + Vector3.back * 10;
     }
 
-    private IEnumerator ShakeReset()
+    private IEnumerator ShakeReset(float time)
     {
-        yield return new WaitForSeconds(0.5f);
-        status = Status.Idle;
-        Camera.main.transform.position = lastPosition;
+        yield return new WaitForSeconds(time);
+        Reset();
     }
 }

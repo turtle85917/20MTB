@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9ea539bca6ae8c54fb5126f63e175347
+guid: 96d34cedaf3ef5a4a81cbff21fdde90d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rock_0
+      name: mangnyangBeam_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 31
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6525c31809c1f9a4383b42ad2b68265f
-      internalID: 1202100803
+      spriteID: a0eea8f1b0306e74d8b672f0076b2261
+      internalID: 1339302888
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rock_1
+      name: mangnyangBeam_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 31
         y: 0
-        width: 32
-        height: 32
+        width: 31
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,8 +152,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f09ac23cdd0b9164cbad7247b766d80d
-      internalID: 1486354697
+      spriteID: 9c1498e95efcc2b4ea80d34c3693ff88
+      internalID: -1932053307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mangnyangBeam_2
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 0
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d725085b3bd4904cbf864ee76c4d3e2
+      internalID: 1785299253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mangnyangBeam_3
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 0
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ecc0b49cea58e64b812876ab4dfb71a
+      internalID: -1242036006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mangnyangBeam_4
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 0
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7f47a9c6100ac84c9d03cfc78b76598
+      internalID: -821003845
       vertices: []
       indices: 
       edges: []
@@ -169,8 +232,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Rock_0: 1202100803
-      Rock_1: 1486354697
+      mangnyangBeam_0: 1339302888
+      mangnyangBeam_1: -1932053307
+      mangnyangBeam_2: 1785299253
+      mangnyangBeam_3: -1242036006
+      mangnyangBeam_4: -821003845
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
