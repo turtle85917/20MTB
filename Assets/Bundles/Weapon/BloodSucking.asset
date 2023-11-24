@@ -13,7 +13,22 @@ MonoBehaviour:
   m_Name: BloodSucking
   m_EditorClassIdentifier: 
   weaponId: BloodSucking
+  playerDescription: "\uC77C\uC9C1\uC120 \uC0C1\uC5D0 \uC788\uB294 \uC801\uB4E4\uC758
+    \uCCB4\uB825\uC744 \uBE71\uB2C8\uB2E4."
+  enemyDescription: "\uD50C\uB808\uC774\uC5B4\uC758 \uCCB4\uB825\uC744 \uBB34\uC870\uAC74
+    \uBE71\uB2C8\uB2E4."
   logo: {fileID: -948489100, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
   weaponCycleScriptFile: {fileID: 11500000, guid: f99a438c3784c8e4b93c2a4080a9d1d7, type: 3}
   resources:
   - {fileID: 4252637621942711444, guid: e79b339ea30693f40ae30b9601468005, type: 3}
+  levels:
+  - Power: 0
+    Cooldown: 0
+    Penetrate: 0
+    DecreasePower: 0
+    Range: 0
+    Life: 0
+    CriticalDamage: 0
+    ProjectileSize: 0
+    ProjectileSpeed: 0
+    ProjectileCount: 0

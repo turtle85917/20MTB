@@ -14,6 +14,11 @@ public class WeaponBundle : MonoBehaviour
     [SerializeField] private GameObject[] Slots;
     [SerializeField] private GameObject SlotPrefab;
 
+    public static Weapon[] GetWeapons(Predicate<Weapon> predicate)
+    {
+        return assets.FindAll(predicate).ToArray();
+    }
+
     public static Weapon GetWeapon(string weaponId)
     {
         return assets.Find(item => item.weapon.weaponId.ToLower() == weaponId.ToLower());
@@ -48,7 +53,7 @@ public class WeaponBundle : MonoBehaviour
             GameObject weaponSlot = Instantiate(instance.SlotPrefab, slot.transform, false);
             weaponSlot.name = "Logo";
             weaponSlot.GetComponent<Image>().sprite = weapon.weapon.logo;
-            Player.playerData.weapons.Add(weapon);
+            Player.playerData.weapons.Add(instance.CopyWeaponData(weapon, 1));
             if(monoscript != null)
             {
                 BaseCycle baseCycle = Activator.CreateInstance(monoscript) as BaseCycle;
@@ -58,35 +63,7 @@ public class WeaponBundle : MonoBehaviour
         else
         {
             EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(target);
-            float percent = 0.4f;
-            Weapon newEnemyWeapon = new Weapon()
-            {
-                type = weapon.type,
-                name = weapon.name,
-                weapon = weapon.weapon,
-                stats = new _20MTB.Stats.WeaponStats()
-                {
-                    Power = Mathf.RoundToInt(weapon.stats.Power * percent),
-                    Cooldown = Mathf.RoundToInt(weapon.stats.Power * percent),
-                    Penetrate = Mathf.RoundToInt(weapon.stats.Penetrate * percent),
-                    DecreasePower = Mathf.RoundToInt(weapon.stats.DecreasePower * percent),
-                    Range = weapon.stats.Range,
-                    Life = Mathf.RoundToInt(weapon.stats.Life * percent),
-                    CriticalHit = Mathf.RoundToInt(weapon.stats.CriticalHit * percent),
-                    CriticalDamage = Mathf.RoundToInt(weapon.stats.CriticalDamage * percent),
-                    ProjectileName = weapon.stats.ProjectileName,
-                    ProjectileSize = weapon.stats.ProjectileSize,
-                    ProjectileSpeed = weapon.stats.ProjectileSpeed,
-                    ProjectileCount = weapon.stats.ProjectileCount,
-                    Count = weapon.stats.Count
-                }
-            };
-            enemyPool.weapon = new Weapon()
-            {
-                type = "N",
-                weapon = newEnemyWeapon.weapon,
-                stats = newEnemyWeapon.stats
-            };
+            enemyPool.weapon = instance.CopyWeaponData(weapon, 0.4f);
             BaseCycle baseCycle = Activator.CreateInstance(monoscript) as BaseCycle;
             instance.StartCoroutine(baseCycle.Cycle(enemyPool.target));
         }
@@ -124,6 +101,33 @@ public class WeaponBundle : MonoBehaviour
             };
             assets.Add(weapon);
         }
+    }
+
+    private Weapon CopyWeaponData(Weapon originWeapon, float percent)
+    {
+        return new Weapon()
+        {
+            type = originWeapon.type,
+            name = originWeapon.name,
+            weapon = originWeapon.weapon,
+            level = 1,
+            stats = new _20MTB.Stats.WeaponStats()
+            {
+                Power = Mathf.RoundToInt(originWeapon.stats.Power * percent),
+                Cooldown = Mathf.RoundToInt(originWeapon.stats.Power * percent),
+                Penetrate = Mathf.RoundToInt(originWeapon.stats.Penetrate * percent),
+                DecreasePower = Mathf.RoundToInt(originWeapon.stats.DecreasePower * percent),
+                Range = originWeapon.stats.Range,
+                Life = Mathf.RoundToInt(originWeapon.stats.Life * percent),
+                CriticalHit = Mathf.RoundToInt(originWeapon.stats.CriticalHit * percent),
+                CriticalDamage = Mathf.RoundToInt(originWeapon.stats.CriticalDamage * percent),
+                ProjectileName = originWeapon.stats.ProjectileName,
+                ProjectileSize = originWeapon.stats.ProjectileSize,
+                ProjectileSpeed = originWeapon.stats.ProjectileSpeed,
+                ProjectileCount = originWeapon.stats.ProjectileCount,
+                Count = originWeapon.stats.Count
+            }
+        };
     }
 
     private object TryGetNumValue(object value)

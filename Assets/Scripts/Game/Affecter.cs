@@ -57,7 +57,6 @@ public class Affecter : MonoBehaviour
 
     public IEnumerator ThreeComboKnockback(GameObject source)
     {
-        if(gameObject.CompareTag("Player")) yield break; // 플레이어는 밀릴 수 없음
         status = Status.Knockback;
         Vector2 direction = (transform.position - source.transform.position).normalized;
         StartCoroutine(ComboKnockback(direction, 0, source));

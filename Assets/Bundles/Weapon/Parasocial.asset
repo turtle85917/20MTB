@@ -13,6 +13,21 @@ MonoBehaviour:
   m_Name: Parasocial
   m_EditorClassIdentifier: 
   weaponId: "\u30D1\u30E9\u30BD\u30FC\u30B7\u30E3\u30EB"
+  playerDescription: "\uC801\uC774 \uACF5\uACA9\uD560 \uC2DC, 40% \uD655\uB960\uB85C
+    \uACF5\uACA9\uC774 \uBB34\uC2DC\uB418\uBA70 \uB370\uBBF8\uC9C0\uC758 \uC77C\uBD80\uAC00
+    \uACF5\uACA9\uD55C \uC801\uD55C\uD14C \uB4E4\uC5B4\uAC11\uB2C8\uB2E4."
+  enemyDescription: 
   logo: {fileID: 1801052765, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
   weaponCycleScriptFile: {fileID: 0}
   resources: []
+  levels:
+  - Power: 0
+    Cooldown: 0
+    Penetrate: 0
+    DecreasePower: 0
+    Range: 0
+    Life: 0
+    CriticalDamage: 0
+    ProjectileSize: 0
+    ProjectileSpeed: 0
+    ProjectileCount: 0

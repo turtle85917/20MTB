@@ -13,7 +13,22 @@ MonoBehaviour:
   m_Name: Potato
   m_EditorClassIdentifier: 
   weaponId: Potato
+  playerDescription: "\uD654\uBA74 \uBC16\uC5D0\uC11C \uAC10\uC790\uB97C \uB0A0\uB824
+    \uD130\uC9C0\uBA70 \uAD11\uBC94\uC704\uD558\uAC8C \uACF5\uACA9\uD569\uB2C8\uB2E4."
+  enemyDescription: "\uD50C\uB808\uC774\uC5B4\uCABD\uC73C\uB85C \uAC10\uC790\uB97C
+    \uB0A0\uB9BD\uB2C8\uB2E4."
   logo: {fileID: -577124758, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
   weaponCycleScriptFile: {fileID: 11500000, guid: 32b22e867557ac64a93ee5f0085dad5d, type: 3}
   resources:
   - {fileID: 3494872537390499528, guid: 623c6ad7045ec4b4191084b14fb395db, type: 3}
+  levels:
+  - Power: 0
+    Cooldown: 0
+    Penetrate: 0
+    DecreasePower: 0
+    Range: 0
+    Life: 0
+    CriticalDamage: 0
+    ProjectileSize: 0
+    ProjectileSpeed: 0
+    ProjectileCount: 0

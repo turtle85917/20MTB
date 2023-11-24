@@ -13,11 +13,9 @@ public static class AttackManager
     /// <param name="postProcessFunc">후처리 함수 (lambda)</param>
     /// <param name="source">무기 사용자</param>
     /// <param name="plusForce">추가적인 힘 (곱적용으로 적용함.)</param>
-    public static void AttackTarget(string weaponId, GameObject target, int penetrate, Action<Affecter> postProcessFunc = null, GameObject source = null, float plusForce = 0)
+    public static void AttackTarget(string weaponId, GameObject target, int penetrate, Action<Affecter> postProcessFunc = null, GameObject source = null)
     {
         if(target.name == "Jinhe") return;
-
-        Weapon weapon = WeaponBundle.GetWeapon(weaponId);
 
 #region 공격 대상/무기 사용자가 적일 경우, 적 데이터 가져오기
         EnemyManager.EnemyPool enemyPool = null;
@@ -28,17 +26,28 @@ public static class AttackManager
 
         if(source != null && source.CompareTag("Enemy") && (sourceEnemyPool == null || sourceEnemyPool.weapon == null)) return;
 
-        bool critical = UnityEngine.Random.value < (source?.CompareTag("Enemy") ?? false ? sourceEnemyPool.weapon.stats.CriticalHit : weapon.stats.CriticalHit);
-        int damage = Mathf.CeilToInt(GetCalcDamage(Player.playerData.data.stats.Power, GetWeaponPower(critical, weapon.stats), penetrate * weapon.stats.DecreasePower) * (plusForce + 1));
-        if(sourceEnemyPool != null) damage = GetCalcDamage(sourceEnemyPool.data.stats.Power, GetWeaponPower(critical, sourceEnemyPool.weapon.stats), penetrate * sourceEnemyPool.weapon.stats.DecreasePower);
+        // 공격력과 무기 가져오기
+        int power = Player.playerData.data.stats.Power;
+        Weapon weapon = Player.playerData.weapons.Find(item => item.weapon.weaponId == weaponId);
+        if(sourceEnemyPool != null)
+        {
+            weapon = sourceEnemyPool.weapon;
+            power = sourceEnemyPool.data.stats.Power;
+        }
+
+        // 치명타를 고려하여 들어갈 데미지 구하기
+        bool critical = UnityEngine.Random.value < weapon.stats.CriticalHit;
+        int damage = Mathf.CeilToInt(GetCalcDamage(power, critical ? weapon.stats.CriticalDamage : weapon.stats.Power, penetrate * weapon.stats.DecreasePower));
+
+        // 공격하기
         if(target.CompareTag("Player"))
         {
             Weapon parasocialWeapon = Player.playerData.weapons.Find(item => item.weapon.weaponId == "パラソーシャル");
             if(parasocialWeapon != null && UnityEngine.Random.value < 0.4f && source != null)
             {
                 sourceEnemyPool = EnemyManager.GetEnemy(source);
-                // 크리티컬 데미지가 아닌 값으로 처리하기 위함
-                damage = Mathf.CeilToInt(Mathf.RoundToInt(GetCalcDamage(sourceEnemyPool.data.stats.Power, sourceEnemyPool.weapon.stats.Power, penetrate * sourceEnemyPool.weapon.stats.DecreasePower) * 0.25f) * (plusForce + 1));
+                // 치명타가 아닌 값으로 처리하기 위함
+                damage = Mathf.CeilToInt(GetCalcDamage(sourceEnemyPool.data.stats.Power, sourceEnemyPool.weapon.stats.Power, penetrate * sourceEnemyPool.weapon.stats.DecreasePower) * 0.25f);
                 if(damage > 0)
                 {
                     sourceEnemyPool.health -= damage;
@@ -75,11 +84,6 @@ public static class AttackManager
             enemyPool.health += value;
             TextManager.WriteDamage(enemyPool.target, -value, false);
         }
-    }
-
-    private static int GetWeaponPower(bool critical, WeaponStats stats)
-    {
-        return critical ? stats.CriticalDamage : stats.Power;
     }
 
     /// <summary>

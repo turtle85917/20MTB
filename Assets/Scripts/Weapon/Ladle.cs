@@ -49,7 +49,7 @@ public class Ladle : BaseWeapon
     {
         if(other.gameObject.Equals(target))
         {
-            AttackManager.AttackTarget("Ladle", other.gameObject, penetrate, (affecter) => affecter.Knockback(gameObject), weaponUser, combo + 1);
+            AttackManager.AttackTarget("Ladle", other.gameObject, Mathf.FloorToInt(-penetrate * combo), (affecter) => affecter.Knockback(gameObject), weaponUser);
             TextManager.WriteComboText(target, Mathf.RoundToInt(combo * 1000));
             StartCoroutine(LadleGGang());
             target = null;

@@ -12,7 +12,7 @@ public class Exp : MonoBehaviour
 
     private void Update()
     {
-        if(Scanner.Scan(transform.position, 3, "Player") != null)
+        if(Scanner.Scan(transform.position, 1.4f, "Player") != null)
         {
             rigid.MovePosition(Vector3.MoveTowards(rigid.position, Player.@object.transform.position, 40 * Time.deltaTime));
         }

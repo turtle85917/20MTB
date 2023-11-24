@@ -17,7 +17,7 @@ public class Enemy : BaseController
         affecter = GetComponent<Affecter>();
     }
 
-    public void OnDie()
+    protected override void OnDie()
     {
         gameObject.SetActive(false);
         EnemyManager.RemoveEnemy(enemyPool);
@@ -25,20 +25,21 @@ public class Enemy : BaseController
 
     private void Update()
     {
-        transform.rotation = Quaternion.AngleAxis(transform.position.x > Player.@object.transform.position.x ? 180 : 0, Vector3.up);
-        animator.SetBool("isWalk", affecter.status == Affecter.Status.Idle);
         if(enemyPool.health <= 0 && !animator.GetBool("isDie"))
         {
+            affecter.Reset();
             headSprite.flipX = false;
             bodySprite.flipX = false;
             rigid.velocity = Vector2.zero;
-            animator.SetBool("isDie", true);
+            animator.SetTrigger("isDie");
             StopAllCoroutines();
-            affecter.Reset();
-            if(text != null)
-            {
-                text.SetActive(false);
-            }
+            Game.SpawnExpObject(transform.position, enemyPool.data.stats.Exp);
+            text?.SetActive(false);
+        }
+        else
+        {
+            animator.SetBool("isWalk", affecter.status == Affecter.Status.Idle);
+            transform.rotation = Quaternion.AngleAxis(Player.@object.transform.position.x < transform.position.x ? 180 : 0, Vector3.up);
         }
     }
 
@@ -52,10 +53,7 @@ public class Enemy : BaseController
 
     private void LateUpdate()
     {
-        if(text != null)
-        {
-            text.transform.localPosition = (Vector2)transform.position + Vector2.down * 1.3f;
-        }
+        if(text != null) text.transform.localPosition = (Vector2)transform.position + Vector2.down * 1.3f;
     }
 
     private void OnEnable() {
