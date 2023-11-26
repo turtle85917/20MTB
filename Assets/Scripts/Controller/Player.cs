@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using _20MTB.Utillity;
 using UnityEngine;
@@ -47,6 +48,26 @@ public class Player : BaseController
 
     protected override void OnDie()
     {
+    }
+
+    public void EndAttackAnim()
+    {
+        animator.SetInteger("AttackType", (int)Affecter.AttackType.None);
+    }
+
+    public IEnumerator RepeatAttack()
+    {
+        Weapon weapon = WeaponBundle.GetWeapon("Lilpaaaaaa");
+        for(int i = 0; i < 3; i++)
+        {
+            yield return new WaitForSeconds(i * 0.15f);
+            GameObject scream = ObjectPool.Get(Game.PoolManager, "Scream", (GameObject)weapon.weapon.resources[0]);
+            scream.transform.localScale = Vector3.one * 0.5f * (3 - i) * 0.35f;
+            scream.transform.rotation = Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.forward);
+            Scream script = scream.GetComponent<Scream>();
+            script.stats = weapon.stats;
+            script.Init();
+        }
     }
 
     private void Update()

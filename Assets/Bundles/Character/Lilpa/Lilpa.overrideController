@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Lilpa
+  m_Controller: {fileID: 9100000, guid: c818b9c22bcb1ee45a07690481be97bd, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: ddf0f15f0979e43478338533fd1d0e2f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1721b26b8628c7b47abf8871d2b3f1dc, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: c98b02a3b9c6e8c43a5270cd7dcb363e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2f38ddd0b01713f418acedf320a4b57e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: f395f22881d2ad949b67f8a0301d3f10, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5dd70ba72028a124cbc0b3a88a37ef75, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 55145eeb7d710544fbf1279e675fae59, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6dfd671059cd2d640af91c59bb8de439, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 311cc1df73d520e4db07e2c0c91c7ebd, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 77e84242df8f5c54d84d103c5502fb7c, type: 2}

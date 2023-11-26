@@ -8,6 +8,7 @@ public class Exp : MonoBehaviour
 
     private void Awake()
     {
+        anim = GetComponent<Animation>();
         rigid = GetComponent<Rigidbody2D>();
     }
 

@@ -20,7 +20,7 @@ public class Scream : BaseWeapon
         Color color = sprite.color;
         color.a -= 0.08f;
         sprite.color = color;
-        transform.localScale += new Vector3(0.4f, 0.4f);
+        transform.localScale += new Vector3(0.2f, 0.2f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -9,22 +9,14 @@ public class LilpaaaaaaCycle : BaseCycle
         while(true)
         {
             yield return new WaitForSeconds(weapon.stats.Cooldown);
-            Game.instance.StartCoroutine(RepeatAttack(weapon));
-            Player.@object.GetComponent<Affecter>().AttackAnimate();
+            Player.@object.GetComponent<Affecter>().Attack(Affecter.AttackType.Repeat);
+            Game.instance.StartCoroutine(Reset(weapon));
         }
     }
 
-    private IEnumerator RepeatAttack(Weapon weapon)
+    private IEnumerator Reset(Weapon weapon)
     {
-        for(int i = 0; i < 3; i++)
-        {
-            yield return new WaitForSeconds(i * 0.15f);
-            GameObject scream = ObjectPool.Get(Game.PoolManager, "Scream", (GameObject)weapon.weapon.resources[0]);
-            scream.transform.localScale = Vector3.one * (3 - i) * 0.35f;
-            scream.transform.rotation = Quaternion.AngleAxis(Random.Range(90f, -90f), Vector3.forward);
-            Scream script = scream.GetComponent<Scream>();
-            script.stats = weapon.stats;
-            script.Init();
-        }
+        yield return new WaitForSeconds(weapon.stats.Life);
+        Player.@object.GetComponent<Animator>().SetInteger("AttackType", (int)Affecter.AttackType.None);
     }
 }

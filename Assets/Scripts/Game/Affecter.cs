@@ -33,6 +33,12 @@ public class Affecter : MonoBehaviour
         Sturn,
         Multiple
     }
+    public enum AttackType
+    {
+        None,
+        Once,
+        Repeat
+    }
 
     public void Reset()
     {
@@ -41,9 +47,10 @@ public class Affecter : MonoBehaviour
         StopAllCoroutines();
     }
 
-    public void AttackAnimate()
+    public void Attack(AttackType attackType)
     {
-        animator.SetTrigger("Attack");
+        if(animator.GetInteger("AttackType") > 0) return;
+        animator.SetInteger("AttackType", (int)attackType);
     }
 
     public void Knockback(GameObject target)

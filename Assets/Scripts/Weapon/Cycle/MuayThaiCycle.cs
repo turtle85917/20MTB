@@ -13,7 +13,7 @@ public class MuayThaiCycle : BaseCycle
             var enemies = Scanner.ScanAll(Player.@object.transform.position, 10, "Enemy").OrderBy(item => Vector3.Distance(item.transform.position, Player.@object.transform.position)).ToList();
             if(enemies.Count > 0)
             {
-                Player.@object.GetComponent<Affecter>().AttackAnimate();
+                Player.@object.GetComponent<Affecter>().Attack(Affecter.AttackType.Once);
                 for(int i = 0; i < weapon.stats.Penetrate; i++)
                 {
                     if(enemies.Count <= i) break;
