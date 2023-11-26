@@ -4,11 +4,9 @@ public class Exp : MonoBehaviour
 {
     public int exp {private get; set;}
     private Rigidbody2D rigid;
-    private Animation anim;
 
     private void Awake()
     {
-        anim = GetComponent<Animation>();
         rigid = GetComponent<Rigidbody2D>();
     }
 
@@ -18,11 +16,6 @@ public class Exp : MonoBehaviour
         {
             rigid.MovePosition(Vector3.MoveTowards(rigid.position, Player.@object.transform.position, 40 * Time.deltaTime));
         }
-    }
-
-    private void OnEnable()
-    {
-        anim.Play("Exp_Idle");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
