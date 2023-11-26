@@ -28,8 +28,6 @@ public class Enemy : BaseController
         if(enemyPool.health <= 0 && !animator.GetBool("isDie"))
         {
             affecter.Reset();
-            headSprite.flipX = false;
-            bodySprite.flipX = false;
             rigid.velocity = Vector2.zero;
             animator.SetTrigger("isDie");
             StopAllCoroutines();

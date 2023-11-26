@@ -21,7 +21,7 @@ public class Player : BaseController
         public int health;
         public int level;
         public int exp;
-        public List<Weapon> weapons; // <<----  이 구조를 고쳐야함.
+        public List<Weapon> weapons;
         public PlayerData data;
     }
 #endregion
@@ -41,7 +41,7 @@ public class Player : BaseController
             data = data
         };
         animator.runtimeAnimatorController = data.controller;
-        headImage.sprite = data.headImage;
+        // headImage.sprite = data.headImage;
         WeaponBundle.AddWeaponToTarget(gameObject, data.defaultWeapon);
     }
 

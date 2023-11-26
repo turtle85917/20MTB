@@ -15,7 +15,7 @@ MonoBehaviour:
   playerName: "\uC6B0\uC641\uAD73"
   defaultWeapon: Wakchori
   headImage: {fileID: 1822158963, guid: ced04215445d9eb4ba1804dbcfd7badc, type: 3}
-  controller: {fileID: 9100000, guid: ef14608790c55bb4688e12d711709e93, type: 2}
+  controller: {fileID: 9100000, guid: c818b9c22bcb1ee45a07690481be97bd, type: 2}
   stats:
     MaxHealth: 20
     Power: 15

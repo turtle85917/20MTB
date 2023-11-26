@@ -107,9 +107,7 @@ public class Affecter : MonoBehaviour
 
     private void SetColor(Color color)
     {
-        BaseController baseController =  transform.GetComponent<BaseController>();
-        baseController.headSprite.color = color;
-        baseController.bodySprite.color = color;
+        GetComponent<SpriteRenderer>().color = color;
     }
 
     private void CheckCurrentStatus(Status checkStatus)

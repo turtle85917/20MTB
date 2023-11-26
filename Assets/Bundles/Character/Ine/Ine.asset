@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: "\uC544\uC774\uB124"
   defaultWeapon: MagicWand
-  headImage: {fileID: -724689676, guid: d3cf1f9168549f64cac68d7a5857bb55, type: 3}
-  controller: {fileID: 9100000, guid: 82ada20759583e7419ef045a2bc05e60, type: 2}
+  headImage: {fileID: 0}
+  controller: {fileID: 22100000, guid: 68a30843fad188a448bc13270449d606, type: 2}
   stats:
     MaxHealth: 20
     Power: 12
