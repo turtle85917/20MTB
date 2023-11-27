@@ -15,7 +15,7 @@ MonoBehaviour:
   playerName: "\uC8FC\uB974\uB974"
   defaultWeapon: StampPlump
   headImage: {fileID: -2145882027, guid: 2d755fd08d0c1d6439cb5825af73d740, type: 3}
-  controller: {fileID: 9100000, guid: 8ce04c61eabc0bb4a9b54e389691958f, type: 2}
+  controller: {fileID: 22100000, guid: 58b9d7f246489b44aa1c903090d9ebe0, type: 2}
   stats:
     MaxHealth: 20
     Power: 13

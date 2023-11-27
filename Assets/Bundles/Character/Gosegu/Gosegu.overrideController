@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Gosegu
+  m_Controller: {fileID: 9100000, guid: c818b9c22bcb1ee45a07690481be97bd, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 311cc1df73d520e4db07e2c0c91c7ebd, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: cde5af113cc075a4e908352474db29b4, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ddf0f15f0979e43478338533fd1d0e2f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6ee366ae1a901d348ad3cf7586fc5dc4, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: c98b02a3b9c6e8c43a5270cd7dcb363e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 77322da232754624fa10337584c08e0b, type: 2}

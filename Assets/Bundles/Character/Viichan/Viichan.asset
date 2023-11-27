@@ -15,7 +15,7 @@ MonoBehaviour:
   playerName: "\uBE44\uCC64"
   defaultWeapon: DiaGum
   headImage: {fileID: -186699155, guid: ea9d09fe440e1f7479c35e2c197a1ef5, type: 3}
-  controller: {fileID: 9100000, guid: bd3abc821593a4448bf52b09208a55bc, type: 2}
+  controller: {fileID: 22100000, guid: af0d698f9b7e17d45a471a0f371f11f5, type: 2}
   stats:
     MaxHealth: 20
     Power: 13
