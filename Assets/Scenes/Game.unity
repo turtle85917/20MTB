@@ -3123,7 +3123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6726bfe9f48aab4388bb0064309374d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 6
+  character: 0
   players:
   - {fileID: 11400000, guid: 439513c4e4f6bd94d93ea41b2bd8fe9e, type: 2}
   - {fileID: 11400000, guid: 2bff62d513b701146af838fe6ecfe069, type: 2}
