@@ -29,9 +29,9 @@ public class Enemy : BaseController
         {
             affecter.Reset();
             rigid.velocity = Vector2.zero;
+            Game.SpawnExpObject(transform.position, enemyPool.data.stats.Exp);
             animator.SetTrigger("isDie");
             StopAllCoroutines();
-            Game.SpawnExpObject(transform.position, enemyPool.data.stats.Exp);
             text?.SetActive(false);
         }
         else

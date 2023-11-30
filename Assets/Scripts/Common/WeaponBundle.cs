@@ -53,7 +53,7 @@ public class WeaponBundle : MonoBehaviour
             GameObject weaponSlot = Instantiate(instance.SlotPrefab, slot.transform, false);
             weaponSlot.name = "Logo";
             weaponSlot.GetComponent<Image>().sprite = weapon.weapon.logo;
-            Player.playerData.weapons.Add(instance.CopyWeaponData(weapon, 1));
+            Player.playerData.weapons.Add(weapon.Copy(1));
             if(monoscript != null)
             {
                 BaseCycle baseCycle = Activator.CreateInstance(monoscript) as BaseCycle;
@@ -63,7 +63,7 @@ public class WeaponBundle : MonoBehaviour
         else
         {
             EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(target);
-            enemyPool.weapon = instance.CopyWeaponData(weapon, 0.4f);
+            enemyPool.weapon = weapon.Copy(0.4f);
             BaseCycle baseCycle = Activator.CreateInstance(monoscript) as BaseCycle;
             instance.StartCoroutine(baseCycle.Cycle(enemyPool.target));
         }
@@ -101,33 +101,6 @@ public class WeaponBundle : MonoBehaviour
             };
             assets.Add(weapon);
         }
-    }
-
-    private Weapon CopyWeaponData(Weapon originWeapon, float percent)
-    {
-        return new Weapon()
-        {
-            type = originWeapon.type,
-            name = originWeapon.name,
-            weapon = originWeapon.weapon,
-            level = 1,
-            stats = new _20MTB.Stats.WeaponStats()
-            {
-                Power = Mathf.RoundToInt(originWeapon.stats.Power * percent),
-                Cooldown = Mathf.RoundToInt(originWeapon.stats.Power * percent),
-                Penetrate = Mathf.RoundToInt(originWeapon.stats.Penetrate * percent),
-                DecreasePower = Mathf.RoundToInt(originWeapon.stats.DecreasePower * percent),
-                Range = originWeapon.stats.Range,
-                Life = Mathf.RoundToInt(originWeapon.stats.Life * percent),
-                CriticalHit = Mathf.RoundToInt(originWeapon.stats.CriticalHit * percent),
-                CriticalDamage = Mathf.RoundToInt(originWeapon.stats.CriticalDamage * percent),
-                ProjectileName = originWeapon.stats.ProjectileName,
-                ProjectileSize = originWeapon.stats.ProjectileSize,
-                ProjectileSpeed = originWeapon.stats.ProjectileSpeed,
-                ProjectileCount = originWeapon.stats.ProjectileCount,
-                Count = originWeapon.stats.Count
-            }
-        };
     }
 
     private object TryGetNumValue(object value)
