@@ -59,7 +59,7 @@ public class LevelUpMaster : MonoBehaviour
         void AddWeapon(float random)
         {
             Weapon decideWeapon;
-            if(Random.value <= random) decideWeapon = leftWeapons[Random.Range(0, leftWeapons.Count)];
+            if(Random.value <= random || playerWeapons.Count == 0) decideWeapon = leftWeapons[Random.Range(0, leftWeapons.Count)];
             else decideWeapon = playerWeapons[Random.Range(0, playerWeapons.Count)];
             weapons.Add(decideWeapon);
             leftWeapons.Remove(decideWeapon);

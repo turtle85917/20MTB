@@ -21,7 +21,7 @@ public class WeaponPanel : MonoBehaviour
 
     public void Locking(bool isLocked)
     {
-        Desc.text = isLocked ? weapon.weapon.enemyDescription : weapon.weapon.playerDescription;
+        Desc.text = !isLocked ? weapon.weapon.enemyDescription : weapon.weapon.playerDescription;
         LockedPanel.SetActive(isLocked && weapon.type != "N");
     }
 }
