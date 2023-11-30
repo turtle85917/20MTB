@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 
 public class MuayThaiCycle : BaseCycle
@@ -10,17 +9,7 @@ public class MuayThaiCycle : BaseCycle
         while(true)
         {
             yield return new WaitForSeconds(weapon.stats.Cooldown);
-            var enemies = Scanner.ScanAll(Player.@object.transform.position, 10, "Enemy").OrderBy(item => Vector3.Distance(item.transform.position, Player.@object.transform.position)).ToList();
-            if(enemies.Count > 0)
-            {
-                Player.@object.GetComponent<Affecter>().Attack(Affecter.AttackType.Once);
-                for(int i = 0; i < weapon.stats.Penetrate; i++)
-                {
-                    if(enemies.Count <= i) break;
-                    EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(enemies[i]);
-                    AttackManager.AttackTarget(weapon.weapon.weaponId, enemies[i], i);
-                }
-            }
+            if(Scanner.IsAnyTargetAround(Player.@object.transform.position, 10, "Enmey")) Player.@object.GetComponent<Affecter>().Attack(Affecter.AttackType.Once);
         }
     }
 }

@@ -1,7 +1,7 @@
 using _20MTB.Utillity;
 using UnityEngine;
 
-public class MNBBeam : BaseWeapon
+public class MangnyangBeam : BaseWeapon
 {
     public new void Init()
     {
@@ -10,12 +10,22 @@ public class MNBBeam : BaseWeapon
         float size = (GetScreenWallPos() - (Vector2)weaponUser.transform.position).magnitude;
         transform.localScale = new Vector3(1, size, 1);
         transform.localPosition = transform.up * size;
-        Game.cameraAgent.Shake(Mathf.Infinity);
+        Game.cameraAgent.Shake(0.3f);
+    }
+
+    public void HideCore()
+    {
+        transform.parent.GetComponentInChildren<Animator>().SetTrigger("isHide");
     }
 
     private void Awake()
     {
         animation = GetComponent<Animation>();
+    }
+
+    private void OnDisable()
+    {
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

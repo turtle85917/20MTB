@@ -3,7 +3,11 @@ guid: bcd0a4e5efef5804fa923bda23b1bfff
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - MNBCenter: {instanceID: 0}
+  - MNBScream: {instanceID: 0}
+  - MNBLight: {instanceID: 0}
+  - MNBBeam: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

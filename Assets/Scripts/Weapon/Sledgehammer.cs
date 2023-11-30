@@ -33,7 +33,7 @@ public class Sledgehammer : BaseWeapon
         if(GetAngleZ() == 90 && weaponStatus == WeaponStatus.Idle)
         {
             weaponStatus = WeaponStatus.GoAway;
-            Game.cameraAgent.Shake();
+            Game.cameraAgent.Shake(0.2f);
             int rockCount = 20;
             if(weaponUser.CompareTag("Enemy")) rockCount = 5;
             for(int i = 0; i < rockCount; i++)

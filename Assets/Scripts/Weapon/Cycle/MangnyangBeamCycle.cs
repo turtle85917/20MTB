@@ -10,11 +10,10 @@ public class MangnyangBeamCycle : BaseCycle
         while(true)
         {
             yield return new WaitForSeconds(weapon.stats.Cooldown);
-            GameObject mnbDirector = ObjectPool.Get(Game.PoolManager, "MNB_Director", (GameObject)weapon.weapon.resources[0]);
-            MangnyangBeam script = mnbDirector.GetComponent<MangnyangBeam>();
-            script.stats = weapon.stats;
+            GameObject mnbCore = ObjectPool.Get(Game.PoolManager, "MNB_Core", (GameObject)weapon.weapon.resources[0]);
+            mnbCore.transform.position = weaponUser.transform.position;
+            MNB_Core script = mnbCore.GetComponentInChildren<MNB_Core>();
             script.weaponUser = weaponUser;
-            script.Init();
         }
     }
 }

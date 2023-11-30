@@ -18,7 +18,7 @@ MonoBehaviour:
   logo: {fileID: -326882986, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
   weaponCycleScriptFile: {fileID: 11500000, guid: 1ecb99f96b9625143957ea19d77e5eae, type: 3}
   resources:
-  - {fileID: 7297169239124933540, guid: 11c2bfc1852489149bdf1a57396e31d0, type: 3}
+  - {fileID: 2288112758371816991, guid: 1dffbee665c9c75488a589626885fc5b, type: 3}
   levels:
   - Power: 0
     Cooldown: 0
