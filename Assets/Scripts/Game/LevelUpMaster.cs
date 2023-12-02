@@ -22,6 +22,7 @@ public class LevelUpMaster : MonoBehaviour
         {
             int index = i;
             categoryButtons[i].onClick.AddListener(() => ChangeCategory((Category)index));
+            weaponPanels[i].GetComponent<Button>().onClick.RemoveAllListeners();
         }
         LevelUpPanel.SetActive(false);
     }
@@ -45,6 +46,21 @@ public class LevelUpMaster : MonoBehaviour
         foreach(WeaponPanel weaponPanel in weaponPanels) weaponPanel.Locking(newCategory == Category.Enemy);
     }
 
+    private void SelectWeapon(Weapon weapon)
+    {
+        bool hasAlreadyWeapon = Player.playerData.weapons.Exists(item => item.weapon.weaponId == weapon.weapon.weaponId);
+        if(hasAlreadyWeapon)
+        {
+            // TODO: 플레이어 무기 강화
+        }
+        else
+        {
+            WeaponBundle.AddWeaponToTarget(Player.@object, weapon.weapon.weaponId);
+        }
+        Game.Resume();
+        LevelUpPanel.SetActive(false);
+    }
+
     private void ChangeWeaponPanels()
     {
         List<Weapon> weapons = new List<Weapon>();
@@ -53,7 +69,12 @@ public class LevelUpMaster : MonoBehaviour
         AddWeapon(0.01f);
         AddWeapon(0.1f);
         AddWeapon(0.25f);
-        for(int i = 0; i < weapons.Count; i++) weaponPanels[i].UpdatePanel(weapons[i]);
+        for(int i = 0; i < weapons.Count; i++)
+        {
+            weaponPanels[i].UpdatePanel(weapons[i]);
+            int index = i;
+            weaponPanels[i].GetComponent<Button>().onClick.AddListener(() => SelectWeapon(weapons[index]));
+        }
         ChangeCategory(Category.Player);
 
         void AddWeapon(float random)

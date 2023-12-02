@@ -22,6 +22,7 @@ public class Enemy : BaseController
     {
         gameObject.SetActive(false);
         EnemyManager.RemoveEnemy(enemyPool);
+        Game.SpawnExpObject(transform.position, enemyPool.data.stats.Exp);
     }
 
     private void Update()
@@ -33,8 +34,7 @@ public class Enemy : BaseController
             rigid.velocity = Vector2.zero;
             StopAllCoroutines();
             affecter.Reset();
-            Game.SpawnExpObject(transform.position, enemyPool.data.stats.Exp);
-            animator.SetTrigger("isDie");
+            animator.SetTrigger("isDied");
         }
         else
         {

@@ -42,7 +42,6 @@ public class Player : BaseController
             data = data
         };
         animator.runtimeAnimatorController = data.controller;
-        // headImage.sprite = data.headImage;
         WeaponBundle.AddWeaponToTarget(gameObject, data.defaultWeapon);
     }
 
