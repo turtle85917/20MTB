@@ -8,6 +8,7 @@ public class Enemy : BaseController
     private Affecter affecter;
     public bool isSlowing {get; private set;}                       // 현재 느리게 걷고 있는 중인가?
     private bool isPlayerAttacking;                                 // 플레이어 도트 공격을 하는 중인가?
+    private bool isDied;                                            // 죽은 상태인가?
     private float slowRatio = 0f;                                   // 이동 속도 비율 (느리게 걷을 때만 적용됨.)
 
     protected override void Init()
@@ -25,14 +26,15 @@ public class Enemy : BaseController
 
     private void Update()
     {
-        if(enemyPool.health <= 0 && !animator.GetBool("isDie"))
+        if(enemyPool.health <= 0 && !isDied)
         {
-            affecter.Reset();
+            isDied = true;
+            text?.SetActive(false);
             rigid.velocity = Vector2.zero;
+            StopAllCoroutines();
+            affecter.Reset();
             Game.SpawnExpObject(transform.position, enemyPool.data.stats.Exp);
             animator.SetTrigger("isDie");
-            StopAllCoroutines();
-            text?.SetActive(false);
         }
         else
         {
@@ -43,7 +45,7 @@ public class Enemy : BaseController
 
     private void FixedUpdate()
     {
-        if(!animator.GetBool("isDie") && affecter.status == Affecter.Status.Idle)
+        if(!isDied && affecter.status == Affecter.Status.Idle)
         {
             rigid.MovePosition(Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed / 3 * (isSlowing ? slowRatio : 1) * Time.fixedDeltaTime));
         }

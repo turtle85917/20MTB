@@ -97,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2049845797921003706, guid: 5ae312150ed60e24da0875390afe9824, type: 3}
       propertyPath: m_text
-      value: 00000
+      value: 1234567890
       objectReference: {fileID: 0}
     - target: {fileID: 2049845797921003706, guid: 5ae312150ed60e24da0875390afe9824, type: 3}
       propertyPath: m_colorMode
