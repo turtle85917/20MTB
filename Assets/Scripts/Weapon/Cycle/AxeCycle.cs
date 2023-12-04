@@ -6,9 +6,9 @@ public class AxeCycle : BaseCycle
 {
     public override IEnumerator Cycle(GameObject weaponUser)
     {
-        Weapon weapon = WeaponBundle.GetWeapon("Axe");
         while(true)
         {
+            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("Axe");
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject axe = ObjectPool.Get(Game.PoolManager, "Axe", (GameObject)weapon.weapon.resources[0]);
             axe.transform.position = weaponUser.transform.position;

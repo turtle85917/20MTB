@@ -5,9 +5,9 @@ public class LoveBatCycle : BaseCycle
 {
     public override IEnumerator Cycle(GameObject weaponUser)
     {
-        Weapon weapon = WeaponBundle.GetWeapon("LoveBat");
         while(true)
         {
+            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("LoveBat");
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject lovebat = ObjectPool.Get(Game.PoolManager, "LoveBat", (GameObject)weapon.weapon.resources[0]);
             SpinManager script = lovebat.GetComponent<SpinManager>();

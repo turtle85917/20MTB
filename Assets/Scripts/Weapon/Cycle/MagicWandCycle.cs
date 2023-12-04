@@ -6,9 +6,9 @@ public class MagicWandCycle : BaseCycle
 {
     public override IEnumerator Cycle(GameObject weaponUser)
     {
-        Weapon weapon = WeaponBundle.GetWeapon("MagicWand");
         while(true)
         {
+            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("MagicWand");
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             var targets = new List<GameObject>(){};
             for(int i = 0; i < weapon.stats.ProjectileCount; i++)

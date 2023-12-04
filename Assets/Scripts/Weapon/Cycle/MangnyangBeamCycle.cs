@@ -6,9 +6,9 @@ public class MangnyangBeamCycle : BaseCycle
 {
     public override IEnumerator Cycle(GameObject weaponUser)
     {
-        Weapon weapon = WeaponBundle.GetWeapon("MangnyangBeam");
         while(true)
         {
+            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("MangnyangBeam");
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject mnbCore = ObjectPool.Get(Game.PoolManager, "MNB_Core", (GameObject)weapon.weapon.resources[0]);
             mnbCore.transform.position = weaponUser.transform.position;

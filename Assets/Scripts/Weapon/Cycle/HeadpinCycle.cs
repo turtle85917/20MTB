@@ -5,9 +5,9 @@ public class HeadpinCycle : BaseCycle
 {
     public override IEnumerator Cycle(GameObject weaponUser)
     {
-        Weapon weapon = WeaponBundle.GetWeapon("Headpin");
         while(true)
         {
+            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("Headpin");
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             for(int i = 0; i < weapon.stats.ProjectileCount; i++)
             {

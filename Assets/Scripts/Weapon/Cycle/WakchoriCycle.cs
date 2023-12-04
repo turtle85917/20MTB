@@ -6,9 +6,9 @@ public class WakchoriCycle : BaseCycle
 {
     public override IEnumerator Cycle(GameObject weaponUser)
     {
-        Weapon weapon = WeaponBundle.GetWeapon("Wakchori");
         while(true)
         {
+            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("Wakchori");
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject blow = ObjectPool.Get(Game.PoolManager, "Blow", (GameObject)weapon.weapon.resources[0]);
             Blow script = blow.GetComponent<Blow>();

@@ -6,9 +6,9 @@ public class CexCycle : BaseCycle
 {
     public override IEnumerator Cycle(GameObject weaponUser)
     {
-        Weapon weapon = WeaponBundle.GetWeapon("Cex");
         while(true)
         {
+            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("Cex");
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject cexMagicCircle = ObjectPool.Get(Game.PoolManager, "CexMagicCircle", (GameObject)weapon.weapon.resources[0]);
             cexMagicCircle.transform.position = weaponUser.transform.position;

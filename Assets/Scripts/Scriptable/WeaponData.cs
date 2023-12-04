@@ -10,7 +10,7 @@ public class WeaopnIncreaseStat
     public int DecreasePower;
     public int Range;
     public float Life;
-    public int CriticalDamage;
+    public float CriticalHit;
     public int ProjectileSize;
     public int ProjectileSpeed;
     public int ProjectileCount;

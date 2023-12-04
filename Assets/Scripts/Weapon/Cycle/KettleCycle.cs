@@ -6,12 +6,10 @@ public class KettleCycle : BaseCycle
 {
     public override IEnumerator Cycle(GameObject weaponUser)
     {
-        Weapon weapon = WeaponBundle.GetWeapon("Kettle");
-        bool oneshot = true;
-        while(oneshot)
+        while(true)
         {
+            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("Kettle");
             yield return new WaitForSeconds(2f);
-            oneshot = false;
             Weapon selectWeapon = null;
             EnemyManager.EnemyPool selectEnemyPool = null;
             switch(weaponUser.tag)

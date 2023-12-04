@@ -20,14 +20,13 @@ public class Weapon
             stats = new WeaponStats()
             {
                 Power = Mathf.RoundToInt(stats.Power * decrease),
-                Cooldown = Mathf.RoundToInt(stats.Power * decrease),
+                Cooldown = Mathf.RoundToInt(stats.Cooldown * decrease),
                 Penetrate = Mathf.RoundToInt(stats.Penetrate * decrease),
                 DecreasePower = Mathf.RoundToInt(stats.DecreasePower * decrease),
                 Range = stats.Range,
                 Life = Mathf.RoundToInt(stats.Life * decrease),
                 CriticalHit = Mathf.RoundToInt(stats.CriticalHit * decrease),
                 CriticalDamage = Mathf.RoundToInt(stats.CriticalDamage * decrease),
-                ProjectileName = stats.ProjectileName,
                 ProjectileSize = stats.ProjectileSize,
                 ProjectileSpeed = stats.ProjectileSpeed,
                 ProjectileCount = stats.ProjectileCount,

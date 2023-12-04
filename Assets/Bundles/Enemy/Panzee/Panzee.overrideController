@@ -8,4 +8,10 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Panzee
   m_Controller: {fileID: 9100000, guid: c818b9c22bcb1ee45a07690481be97bd, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 311cc1df73d520e4db07e2c0c91c7ebd, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 14ae15219f3ce7d40ba855f8359d61e9, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ddf0f15f0979e43478338533fd1d0e2f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3a9be97f17d8c714e937770aa8dabcd7, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: c98b02a3b9c6e8c43a5270cd7dcb363e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b3f0520bf2a906445a32e65a2d479b5c, type: 2}

@@ -48,10 +48,23 @@ public class LevelUpMaster : MonoBehaviour
 
     private void SelectWeapon(Weapon weapon)
     {
-        bool hasAlreadyWeapon = Player.playerData.weapons.Exists(item => item.weapon.weaponId == weapon.weapon.weaponId);
-        if(hasAlreadyWeapon)
+        Weapon foundWeapon = Player.playerData.weapons.Find(item => item.weapon.weaponId == weapon.weapon.weaponId);
+        if(foundWeapon != null)
         {
-            // TODO: 플레이어 무기 강화
+            WeaopnIncreaseStat weaopnIncreaseStat = weapon.weapon.levels[foundWeapon.level++];
+            foreach(var field in weaopnIncreaseStat.GetType().GetFields())
+            {
+                // NOTE: 발사체는 곱적용
+                var weaponField = foundWeapon.stats.GetType().GetField(field.Name);
+                if(field.FieldType.Name == "Single")
+                {
+                    weaponField.SetValue(foundWeapon.stats, (float)weaponField.GetValue(foundWeapon.stats) + (float)field.GetValue(weaopnIncreaseStat));
+                }
+                else
+                {
+                    weaponField.SetValue(foundWeapon.stats, (int)weaponField.GetValue(foundWeapon.stats) + (int)field.GetValue(weaopnIncreaseStat));
+                }
+            }
         }
         else
         {
@@ -79,12 +92,22 @@ public class LevelUpMaster : MonoBehaviour
 
         void AddWeapon(float random)
         {
-            Weapon decideWeapon;
-            if(Random.value <= random || playerWeapons.Count == 0) decideWeapon = leftWeapons[Random.Range(0, leftWeapons.Count)];
-            else decideWeapon = playerWeapons[Random.Range(0, playerWeapons.Count)];
+            GetDecideWeapon(random, out Weapon decideWeapon);
             weapons.Add(decideWeapon);
             leftWeapons.Remove(decideWeapon);
             playerWeapons.Remove(decideWeapon);
+        }
+
+        void GetDecideWeapon(float random, out Weapon decideWeapon)
+        {
+            if(Random.value <= random || playerWeapons.Count == 0) decideWeapon = leftWeapons[Random.Range(0, leftWeapons.Count)];
+            else
+            {
+                Weapon weapon = playerWeapons[Random.Range(0, playerWeapons.Count)];
+                // NOTE: 만렙일 경우, 재검색
+                if(weapon.weapon.levels.Length == weapon.level) GetDecideWeapon(random, out Weapon w);
+                decideWeapon = weapon;
+            }
         }
     }
 }

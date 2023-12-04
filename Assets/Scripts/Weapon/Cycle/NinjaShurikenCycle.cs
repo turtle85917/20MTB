@@ -6,9 +6,9 @@ public class NinjaShurikenCycle : BaseCycle
 {
     public override IEnumerator Cycle(GameObject weaponUser)
     {
-        Weapon weapon = WeaponBundle.GetWeapon("NinjaShuriken");
         while(true)
         {
+            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("NinjaShuriken");
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject target = Scanner.Scan(weaponUser.transform.position, 4, GameUtils.GetTargetTag(weaponUser));
             if(target)

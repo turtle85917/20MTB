@@ -5,9 +5,9 @@ public class StampPlumpCycle : BaseCycle
 {
     public override IEnumerator Cycle(GameObject weaponUser)
     {
-        Weapon weapon = WeaponBundle.GetWeapon("StampPlump");
         while(true)
         {
+            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("StampPlump");
             GameObject enemy = Scanner.Scan(Player.@object.transform.position, 8, "Enemy");
             if(enemy)
             {

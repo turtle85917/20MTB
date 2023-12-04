@@ -6,7 +6,7 @@ public class MusketCycle : BaseCycle
 {
     public override IEnumerator Cycle(GameObject weaponUser)
     {
-        Weapon weapon = WeaponBundle.GetWeapon("Musket");
+        Weapon weapon = WeaponBundle.GetWeaponFromPlayer("Musket");
         GameObject musket = Object.Instantiate(
             (GameObject)weapon.weapon.resources[0],
             GameUtils.FindGameObjectInChildWithTag(weaponUser, "Weapons").transform,

@@ -6,7 +6,7 @@ using System;
 
 public class WeaponBundle : MonoBehaviour
 {
-    private static WeaponBundle instance;
+    public static WeaponBundle instance {get; private set;}
     private static List<Weapon> assets;
     [Header("무기 스크립터블")]
     [SerializeField] private WeaponData[] weaponDatas;
@@ -22,6 +22,12 @@ public class WeaponBundle : MonoBehaviour
     public static Weapon GetWeapon(string weaponId)
     {
         return assets.Find(item => item.weapon.weaponId.ToLower() == weaponId.ToLower());
+    }
+
+    public static Weapon GetWeaponFromPlayer(string weaponId)
+    {
+        Weapon foundWeapon = Player.playerData.weapons.Find(item => item.weapon.weaponId == weaponId);
+        return foundWeapon ?? GetWeapon(weaponId);
     }
 
     public static Weapon GetWeaponByName(string weaponName)
@@ -92,7 +98,6 @@ public class WeaponBundle : MonoBehaviour
                     Life = (float)excelData["Life"],
                     CriticalHit = (float)excelData["CriticalHit"],
                     CriticalDamage = (int)excelData["CriticalDamage"],
-                    ProjectileName = (string)excelData["ProjectileName"],
                     ProjectileSize = (int)TryGetNumValue(excelData["ProjectileSize"]),
                     ProjectileSpeed = (int)TryGetNumValue(excelData["ProjectileSpeed"]),
                     ProjectileCount = (int)TryGetNumValue(excelData["ProjectileCount"]),

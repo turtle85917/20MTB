@@ -9,9 +9,9 @@ public class NoejeolCycle : BaseCycle
 
     public override IEnumerator Cycle(GameObject weaponUser)
     {
-        Weapon weapon = WeaponBundle.GetWeapon("Noejeol");
         while(true)
         {
+            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("Noejeol");
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             var targets = new List<GameObject>(){};
             for(int i = 0; i < weapon.stats.Penetrate; i++)

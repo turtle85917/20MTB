@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulletManager : BaseWeapon
 {
+    public string weaponId;
     [SerializeField] private GameObject Bullet;
     private GameObject target;
 
@@ -19,6 +20,7 @@ public class BulletManager : BaseWeapon
 
     private void Update()
     {
+        stats = WeaponBundle.GetWeaponFromPlayer(weaponId).stats;
         Scanner.Scan(weaponUser.transform.position, stats.Range, GameUtils.GetTargetTag(weaponUserType), out target);
         if(target != null)
         {

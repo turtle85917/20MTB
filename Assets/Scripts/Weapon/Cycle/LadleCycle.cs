@@ -6,9 +6,9 @@ public class LadleCycle : BaseCycle
 {
     public override IEnumerator Cycle(GameObject weaponUser)
     {
-        Weapon weapon = WeaponBundle.GetWeapon("Ladle");
         while(true)
         {
+            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("Ladle");
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             bool isSpawn = Scanner.IsAnyTargetAround(weaponUser.transform.position, weapon.stats.Range, GameUtils.GetTargetTag(weaponUser));
             if(isSpawn)
