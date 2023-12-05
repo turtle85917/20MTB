@@ -76,13 +76,13 @@ public class Game : MonoBehaviour
             if(maxTime - timer == timeline.time && !times.Contains(timeline.time))
             {
                 times.Add(timeline.time);
-                for(int i = 0; i < Random.Range(timeline.spawnCount[0], timeline.spawnCount[1]); i++)
+                for(int i = 0; i < Random.Range(timeline.spawnCount.x, timeline.spawnCount.y); i++)
                 {
                     EnemyData enemyData = timeline.enemies[Random.Range(0, timeline.enemies.Length)];
                     GameObject enemy = EnemyManager.NewEnemy(enemyData.enemyId);
                     if(timeline.circleRadius > 0)
                     {
-                        enemy.transform.position = GameUtils.MovePositionLimited(Player.@object.transform.position + (Vector3)Random.insideUnitCircle.normalized * timeline.circleRadius, 0);
+                        enemy.transform.position = GameUtils.MovePositionLimited(Player.@object.transform.position + (Vector3)Random.insideUnitCircle.normalized * timeline.circleRadius);
                     }
                     else
                     {

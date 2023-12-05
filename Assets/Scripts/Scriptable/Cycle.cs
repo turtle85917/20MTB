@@ -12,7 +12,7 @@ public class CycleTimeline
 {
     public int time;
     public Vector2[] spawnPosition;
-    public int[] spawnCount;
+    public Vector2 spawnCount;
     public int circleRadius;
     public EnemyData[] enemies;
 }

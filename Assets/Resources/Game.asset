@@ -15,13 +15,15 @@ MonoBehaviour:
   cycleTimelines:
   - time: 0
     spawnPosition: []
-    spawnCount: 0a0000000b000000
-    circleRadius: 10
+    spawnCount: {x: 20, y: 25}
+    circleRadius: 20
     enemies:
     - {fileID: 11400000, guid: 211c5ff8f02f5ea48a453c86f96cf0bf, type: 2}
   - time: 10
-    spawnPosition: []
-    spawnCount: 2800000032000000
-    circleRadius: 20
+    spawnPosition:
+    - {x: 10, y: 10}
+    - {x: -10, y: -10}
+    spawnCount: {x: 20, y: 20}
+    circleRadius: 0
     enemies:
     - {fileID: 11400000, guid: 211c5ff8f02f5ea48a453c86f96cf0bf, type: 2}

@@ -105,7 +105,7 @@ public class LevelUpMaster : MonoBehaviour
             {
                 Weapon weapon = playerWeapons[Random.Range(0, playerWeapons.Count)];
                 // NOTE: 만렙일 경우, 재검색
-                if(weapon.weapon.levels.Length == weapon.level) GetDecideWeapon(random, out Weapon w);
+                if(weapon.weapon.levels.Length == weapon.level + 1) GetDecideWeapon(random, out Weapon w);
                 decideWeapon = weapon;
             }
         }

@@ -42,7 +42,7 @@ namespace _20MTB.Utillity
             return Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
-        public static Vector3 MovePositionLimited(Vector3 position, float z)
+        public static Vector3 MovePositionLimited(Vector3 position)
         {
             return new(Math.Max(minPoint.x, Math.Min(position.x, maxPoint.x)), Math.Max(minPoint.y, Math.Min(position.y, maxPoint.y)), position.z);
         }

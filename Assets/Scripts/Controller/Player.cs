@@ -60,7 +60,7 @@ public class Player : BaseController
     private void FixedUpdate()
     {
         // 플레이어는 어떠한 영향도 받을 수 없는 무적이다.
-        rigid.MovePosition(GameUtils.MovePositionLimited(rigid.position + inputDirection * playerData.data.stats.MoveSpeed / 3 * Time.fixedDeltaTime, transform.position.z));
+        rigid.MovePosition(GameUtils.MovePositionLimited(rigid.position + inputDirection * playerData.data.stats.MoveSpeed * Time.fixedDeltaTime));
         if(inputDirection.magnitude != 0)
         {
             lastDirection = inputDirection;
