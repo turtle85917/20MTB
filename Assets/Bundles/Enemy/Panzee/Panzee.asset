@@ -17,6 +17,6 @@ MonoBehaviour:
   stats:
     MaxHealth: 15
     Power: 10
-    MinMoveSpeed: 5
-    MaxMoveSpeed: 8
+    MinMoveSpeed: 1
+    MaxMoveSpeed: 2
     Exp: 4

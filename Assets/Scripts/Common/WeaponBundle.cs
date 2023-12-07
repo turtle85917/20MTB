@@ -27,7 +27,7 @@ public class WeaponBundle : MonoBehaviour
     public static Weapon GetWeaponFromPlayer(string weaponId)
     {
         Weapon foundWeapon = Player.playerData.weapons.Find(item => item.weapon.weaponId == weaponId);
-        return foundWeapon ?? GetWeapon(weaponId);
+        return foundWeapon;
     }
 
     public static Weapon GetWeaponByName(string weaponName)
@@ -68,7 +68,7 @@ public class WeaponBundle : MonoBehaviour
         }
         else
         {
-            EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(target);
+            EnemyPool enemyPool = EnemyManager.GetEnemy(target);
             enemyPool.weapon = weapon.Copy(0.4f);
             BaseCycle baseCycle = Activator.CreateInstance(monoscript) as BaseCycle;
             instance.StartCoroutine(baseCycle.Cycle(enemyPool.target));

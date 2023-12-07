@@ -11,7 +11,7 @@ public class KettleCycle : BaseCycle
             Weapon weapon = WeaponBundle.GetWeaponFromPlayer("Kettle");
             yield return new WaitForSeconds(2f);
             Weapon selectWeapon = null;
-            EnemyManager.EnemyPool selectEnemyPool = null;
+            EnemyPool selectEnemyPool = null;
             switch(weaponUser.tag)
             {
                 case "Player":
@@ -20,7 +20,7 @@ public class KettleCycle : BaseCycle
                         selectWeapon = filteredArray[Random.Range(0, filteredArray.Length)];
                     break;
                 case "Enemy":
-                    EnemyManager.EnemyPool[] enemies = EnemyManager.GetEnemies().Where(item => item.weapon != null && item.weapon.weapon.weaponId != "Kettle").ToArray();
+                    EnemyPool[] enemies = EnemyManager.GetEnemies().Where(item => item.weapon != null && item.weapon.weapon.weaponId != "Kettle").ToArray();
                     if(enemies.Length > 0)
                     {
                         selectEnemyPool = enemies[Random.Range(0, enemies.Length)];

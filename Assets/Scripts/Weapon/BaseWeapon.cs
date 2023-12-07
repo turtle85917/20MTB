@@ -78,7 +78,7 @@ public abstract class BaseWeapon : MonoBehaviour
     {
         if(weaponUser != null && weaponUser.CompareTag("Enemy"))
         {
-            EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(weaponUser);
+            EnemyPool enemyPool = EnemyManager.GetEnemy(weaponUser);
             enemyPool.weapon = null;
         }
     }

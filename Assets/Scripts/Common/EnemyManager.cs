@@ -2,20 +2,21 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class EnemyPool
+{
+    public GameObject target;
+    public float health;
+    public float moveSpeed;
+    public Weapon weapon;
+    public EnemyData data;
+}
+
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private GameObject Enemies;
     [SerializeField] private EnemyData[] enemies;
     private static EnemyManager instance;
     private List<EnemyPool> enemyPools;
-    public class EnemyPool
-    {
-        public GameObject target;
-        public int health;
-        public float moveSpeed;
-        public Weapon weapon;
-        public EnemyData data;
-    }
 
     public static GameObject NewEnemy(string enemyId)
     {
@@ -38,6 +39,7 @@ public class EnemyManager : MonoBehaviour
         if(enemy.name == "Jinhe") return enemy.GetComponent<Jinhe>().weaponOwner;
         return instance.enemyPools.Find(item => item.target.Equals(enemy));
     }
+    public static bool IsEnemyAlive(GameObject enemy) => GetEnemy(enemy) != null || GetEnemy(enemy).health <= 0;
 
     public static EnemyPool[] GetEnemies()
     {

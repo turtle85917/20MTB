@@ -24,7 +24,7 @@ public class MagicCircle : BaseWeapon
         var enemies = Scanner.ScanAll(Player.@object.transform.position, 4, "Enemy").OrderBy(item => Vector3.Distance(item.transform.position, Player.@object.transform.position)).ToList();
         for(int i = 0; i < enemies.Count; i++)
         {
-            EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(enemies[i]);
+            EnemyPool enemyPool = EnemyManager.GetEnemy(enemies[i]);
             AttackManager.AttackTarget("MagicWand", enemies[i], i, (affecter) => {
                 affecter.Sturn();
                 if(i > 0)

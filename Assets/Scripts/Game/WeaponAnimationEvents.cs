@@ -40,7 +40,7 @@ public class WeaponAnimationEvents : MonoBehaviour
         for(int i = 0; i < weapon.stats.Penetrate; i++)
         {
             if(enemies.Count <= i) break;
-            EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(enemies[i]);
+            EnemyPool enemyPool = EnemyManager.GetEnemy(enemies[i]);
             AttackManager.AttackTarget(weapon.weapon.weaponId, enemies[i], i);
         }
     }

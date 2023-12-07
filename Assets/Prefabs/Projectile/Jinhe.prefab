@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3464706182979701564}
   - component: {fileID: 3179883981209954394}
   - component: {fileID: 2796325850648833963}
-  - component: {fileID: 4379754285972262478}
   m_Layer: 6
   m_Name: Jinhe
   m_TagString: Untagged
@@ -139,21 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponUser: {fileID: 0}
---- !u!114 &4379754285972262478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3179883981209954396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 145ec5ed7b218f64ea60af202ebc168a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetLayout:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &4040590289650917921
 GameObject:
   m_ObjectHideFlags: 0

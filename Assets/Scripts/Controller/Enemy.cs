@@ -4,11 +4,11 @@ using UnityEngine;
 public class Enemy : BaseController
 {
     public GameObject text {private get; set;}                      // 트위치 닉네임 텍스트
-    public EnemyManager.EnemyPool enemyPool {private get; set;}
+    public EnemyPool enemyPool {private get; set;}
     private Affecter affecter;
     public bool isSlowing {get; private set;}                       // 현재 느리게 걷고 있는 중인가?
-    private bool isPlayerAttacking;                                 // 플레이어 도트 공격을 하는 중인가?
     private bool isDied;                                            // 죽은 상태인가?
+    private IEnumerator attackPlayerCoro;
 
     protected override void Init()
     {
@@ -46,8 +46,7 @@ public class Enemy : BaseController
     {
         if(!isDied && affecter.status == Affecter.Status.Idle)
         {
-            // rigid.MovePosition(Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed / 3 * (isSlowing ? slowRatio : 1) * Time.fixedDeltaTime));
-            // rigid.MovePosition
+            rigid.MovePosition(Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed * Time.fixedDeltaTime));
         }
     }
 
@@ -58,7 +57,6 @@ public class Enemy : BaseController
 
     private void OnEnable() {
         StopAllCoroutines();
-        isPlayerAttacking = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -68,8 +66,8 @@ public class Enemy : BaseController
         {
             if(affecter.status == Affecter.Status.Idle && other.CompareTag("Player"))
             {
-                isPlayerAttacking = true;
-                StartCoroutine(AttackPlayer());
+                attackPlayerCoro = AttackPlayer();
+                StartCoroutine(attackPlayerCoro);
             }
         }
     }
@@ -81,8 +79,7 @@ public class Enemy : BaseController
         {
             if(other.CompareTag("Player"))
             {
-                isPlayerAttacking = false;
-                StopCoroutine(AttackPlayer());
+                StopCoroutine(attackPlayerCoro);
             }
             if(other.CompareTag("Enemy"))
             {
@@ -93,12 +90,10 @@ public class Enemy : BaseController
 
     private IEnumerator AttackPlayer()
     {
-        while(isPlayerAttacking)
+        while(true)
         {
             yield return new WaitForSeconds(0.3f);
-            Player.playerData.health -= 2;
-            TextManager.WriteDamage(Player.@object, 2, false);
+            AttackManager.AttackTarget(2, Player.@object, enemyPool);
         }
-        yield break;
     }
 }

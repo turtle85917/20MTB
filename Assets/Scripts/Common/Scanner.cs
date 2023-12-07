@@ -64,7 +64,7 @@ public static class Scanner
         RaycastHit2D[] raycasts = Physics2D.CircleCastAll(origin, radius, Vector2.right);
         foreach(RaycastHit2D raycast in raycasts)
         {
-            EnemyManager.EnemyPool enemyPool = EnemyManager.GetEnemy(raycast.collider.gameObject);
+            EnemyPool enemyPool = EnemyManager.GetEnemy(raycast.collider.gameObject);
             if(enemyPool == null || enemyPool.health > 0)
                 processFunc(raycast);
         }
