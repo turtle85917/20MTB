@@ -39,7 +39,7 @@ public class EnemyManager : MonoBehaviour
         if(enemy.name == "Jinhe") return enemy.GetComponent<Jinhe>().weaponOwner;
         return instance.enemyPools.Find(item => item.target.Equals(enemy));
     }
-    public static bool IsEnemyAlive(GameObject enemy) => GetEnemy(enemy) != null || GetEnemy(enemy).health <= 0;
+    public static bool IsEnemyAlive(GameObject enemy) => GetEnemy(enemy) != null || GetEnemy(enemy)?.health <= 0;
 
     public static EnemyPool[] GetEnemies()
     {

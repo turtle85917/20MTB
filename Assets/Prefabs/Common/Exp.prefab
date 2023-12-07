@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4719263599678437720}
   - component: {fileID: 4350064872955892793}
+  - component: {fileID: 165150052196640146}
   - component: {fileID: 1152091157407075263}
   - component: {fileID: 6273020409601849623}
   - component: {fileID: 2942128438689947498}
@@ -74,9 +75,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 820465501
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 75d6834a21fb77d49bea1e96e890fbb3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -88,6 +89,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!210 &165150052196640146
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6774499916034219985}
+  m_Enabled: 1
+  m_SortingLayerID: 820465501
+  m_SortingLayer: 1
+  m_SortingOrder: 0
 --- !u!70 &1152091157407075263
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
