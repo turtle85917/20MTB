@@ -17,7 +17,7 @@ public class Enemy : BaseController
         affecter = GetComponent<Affecter>();
     }
 
-    protected override void OnDie()
+    public override void OnDie()
     {
         gameObject.SetActive(false);
         EnemyManager.RemoveEnemy(enemyPool);
@@ -26,6 +26,7 @@ public class Enemy : BaseController
 
     private void Update()
     {
+        if(Game.isGameOver) return;
         if(enemyPool.health <= 0 && !isDied)
         {
             isDied = true;
@@ -44,6 +45,7 @@ public class Enemy : BaseController
 
     private void FixedUpdate()
     {
+        if(Game.isGameOver) return;
         if(!isDied && affecter.status == Affecter.Status.Idle)
         {
             rigid.MovePosition(Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed * Time.fixedDeltaTime));

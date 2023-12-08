@@ -10,6 +10,11 @@ public class CameraAgent : MonoBehaviour
         Shaking
     }
 
+    public void PlayPlayerDie()
+    {
+        Player.@object.GetComponent<Animator>().SetTrigger("isDied");
+    }
+
     public void Shake(float time)
     {
         status = Status.Shaking;

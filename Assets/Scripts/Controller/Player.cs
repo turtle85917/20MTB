@@ -1,8 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using _20MTB.Utillity;
 using UnityEngine;
 using UnityEngine.UI;
+
+public class PlayerStatus
+{
+    public int health;
+    public int level;
+    public int exp;
+    public List<Weapon> weapons;
+    public PlayerData data;
+}
 
 public class Player : BaseController
 {
@@ -16,16 +24,6 @@ public class Player : BaseController
     [SerializeField] private PlayerData[] players;
     [Header("UI")]
     [SerializeField] private Image headImage;
-#region 플레이어 데이터
-    public class PlayerStatus
-    {
-        public int health;
-        public int level;
-        public int exp;
-        public List<Weapon> weapons;
-        public PlayerData data;
-    }
-#endregion
 
     protected override void Init()
     {
@@ -45,8 +43,10 @@ public class Player : BaseController
         WeaponBundle.AddWeaponToTarget(gameObject, data.defaultWeapon);
     }
 
-    protected override void OnDie()
+    public override void OnDie()
     {
+        UIManager.instance.GameOverPanel.SetActive(true);
+        UIManager.instance.GameOverPanel.GetComponent<Animation>().Play("GameOverPanel_Show");
     }
 
     private void Update()

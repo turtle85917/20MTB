@@ -20,7 +20,7 @@ public class WinterFlower : BaseWeapon
             switch(weaponUser.tag)
             {
                 case "Enemy":
-                    Time.timeScale = 0.6f;
+                    Time.timeScale = 0.3f;
                     break;
                 case "Player":
                     StartCoroutine(AttackEnemy(other.gameObject));
@@ -53,6 +53,15 @@ public class WinterFlower : BaseWeapon
         {
             yield return new WaitForSeconds(0.4f);
             AttackManager.AttackTarget(3, enemy, null);
+        }
+    }
+
+    private IEnumerator AttackPlayer()
+    {
+        while(!Game.isGameOver)
+        {
+            yield return new WaitForSeconds(0.4f);
+            AttackManager.AttackTarget(2, Player.@object, EnemyManager.GetEnemy(weaponUser));
         }
     }
 

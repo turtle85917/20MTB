@@ -11,18 +11,14 @@ public class Game : MonoBehaviour
     public static GameObject PoolManager {get; private set;}
     public static CameraAgent cameraAgent {get; private set;}
     public static bool isPaused {get; private set;}
+    public static bool isGameOver {get; private set;}
     public static Game instance {get; private set;}
     [Header("Game")]
     [SerializeField] private GameObject ExpPrefab;
     [SerializeField] private Cycle cycle;
-    [Header("UI - Player Status")]
-    [SerializeField] private Slider HealthSlider;
-    [SerializeField] private Slider ExpSlider;
-    [SerializeField] private TMP_Text HealthText;
-    [SerializeField] private TMP_Text LevelText;
     [Header("UI")]
     [SerializeField] private TMP_Text TimerText;
-    private List<int> times;                // 소화된 시간 기록
+    private List<int> times;                // 소환된 시간 기록
     private int timer = 20 * 60;            // 기본 20분
     private readonly int maxTime = 20 * 60; // 최대 시간 20분
 
@@ -49,24 +45,27 @@ public class Game : MonoBehaviour
     {
         instance = this;
         times = new List<int>(){};
-        cameraAgent = GetComponent<CameraAgent>();
+        cameraAgent = Camera.main.GetComponent<CameraAgent>();
     }
 
     private void Start()
     {
         PoolManager = GameObject.FindWithTag("PoolManager");
         maxPosition = new Vector2(Camera.main.orthographicSize * Camera.main.aspect, Camera.main.orthographicSize);
-        StartCoroutine(Timer());
+        StartCoroutine(CheckTime());
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        TimerText.text = System.TimeSpan.FromSeconds(timer).ToString(@"mm\:ss");
-        HealthSlider.value = (float)Player.playerData.health / Player.playerData.data.stats.MaxHealth;
-        ExpSlider.value = (float)Player.playerData.exp / GameUtils.GetNeedExpFromLevel();
-        HealthText.text = Player.playerData.health + " / " + Player.playerData.data.stats.MaxHealth;
-        LevelText.text = "Lv " + Player.playerData.level;
-        SpawnEnemies();
+        if(Player.playerData.health <= 0 && !isGameOver)
+        {
+            isGameOver = true;
+            Camera.main.GetComponent<Animation>().Play("Camera_ZoomIn");
+            Player.@object.GetComponent<Player>().enabled = false;
+            Player.@object.GetComponent<Affecter>().Reset();
+            StopAllCoroutines();
+            WeaponBundle.instance.StopAllCoroutines();
+        }
     }
 
     private void SpawnEnemies()
@@ -103,12 +102,14 @@ public class Game : MonoBehaviour
         }
     }
 
-    private IEnumerator Timer()
+    private IEnumerator CheckTime()
     {
         while(timer > 0)
         {
+            SpawnEnemies();
             yield return new WaitForSeconds(1f);
             timer -= 1;
+            TimerText.text = System.TimeSpan.FromSeconds(timer).ToString(@"mm\:ss");
         }
     }
 }
