@@ -28,7 +28,8 @@ MonoBehaviour:
     DecreasePower: 0
     Range: 0
     Life: 0
-    CriticalDamage: 0
+    CriticalHit: 0
     ProjectileSize: 0
     ProjectileSpeed: 0
     ProjectileCount: 0
+  isFullLogo: 1

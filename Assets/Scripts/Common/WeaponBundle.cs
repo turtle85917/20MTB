@@ -60,7 +60,9 @@ public class WeaponBundle : MonoBehaviour
             }
             GameObject weaponSlot = Instantiate(instance.SlotPrefab, slot.transform, false);
             weaponSlot.name = "Logo";
-            weaponSlot.GetComponent<Image>().sprite = weapon.weapon.logo;
+            Image image = weaponSlot.GetComponent<Image>();
+            image.sprite = weapon.weapon.logo;
+            image.maskable = weapon.weapon.isFullLogo;
             Player.playerData.weapons.Add(weapon.Copy(1));
             if(monoscript != null)
             {

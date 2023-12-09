@@ -26,4 +26,5 @@ public class WeaponData : ScriptableObject
     public MonoScript weaponCycleScriptFile;
     public Object[] resources;
     public WeaopnIncreaseStat[] levels;
+    public bool isFullLogo;
 }

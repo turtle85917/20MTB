@@ -33,3 +33,4 @@ MonoBehaviour:
     ProjectileSize: 0
     ProjectileSpeed: 0
     ProjectileCount: 0
+  isFullLogo: 1
