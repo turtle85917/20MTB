@@ -500,8 +500,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uBB34\uC5D0\uD0C0\uC774"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0c34431862676984f9d13ce495b19eb3, type: 2}
-  m_sharedMaterial: {fileID: 5092230480352266154, guid: 0c34431862676984f9d13ce495b19eb3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dec575a20c40ac34898eef67146e5c20, type: 2}
+  m_sharedMaterial: {fileID: 6978077773989395553, guid: dec575a20c40ac34898eef67146e5c20, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

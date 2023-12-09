@@ -16,10 +16,11 @@ public class Game : MonoBehaviour
     [Header("Game")]
     [SerializeField] private GameObject ExpPrefab;
     [SerializeField] private Cycle cycle;
+    public EnemyWeapons enemyWeapons;
     [Header("UI")]
     [SerializeField] private TMP_Text TimerText;
     private List<int> times;                // 소환된 시간 기록
-    private int timer = 20 * 60;            // 기본 20분
+    private int time = 0;            // 기본 20분
     private readonly int maxTime = 20 * 60; // 최대 시간 20분
 
     public static void Pause()
@@ -73,7 +74,7 @@ public class Game : MonoBehaviour
     {
         foreach(CycleTimeline timeline in cycle.cycleTimelines)
         {
-            if(maxTime - timer == timeline.time && !times.Contains(timeline.time))
+            if(time == timeline.time && !times.Contains(timeline.time))
             {
                 times.Add(timeline.time);
                 for(int i = 0; i < Random.Range(timeline.spawnCount.x, timeline.spawnCount.y); i++)
@@ -105,12 +106,16 @@ public class Game : MonoBehaviour
 
     private IEnumerator CheckTime()
     {
-        while(timer > 0)
+        while(time < maxTime)
         {
             SpawnEnemies();
+            if(time > 0 && time % 15 == 0)
+            {
+                enemyWeapons.PickupWeapons();
+            }
             yield return new WaitForSeconds(1f);
-            timer -= 1;
-            TimerText.text = System.TimeSpan.FromSeconds(timer).ToString(@"mm\:ss");
+            time += 1;
+            TimerText.text = System.TimeSpan.FromSeconds(maxTime - time).ToString(@"mm\:ss");
         }
     }
 }

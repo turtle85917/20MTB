@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
-using _20MTB.Utillity;
 using UnityEngine;
 
 public class Connect : MonoBehaviour
@@ -79,14 +78,9 @@ public class Connect : MonoBehaviour
                     {
                         case "spawn":
                             string weaponName = chunk[1];
-                            Weapon weapon = WeaponBundle.GetWeaponByName(weaponName);
-                            if(weapon != null)
-                            {
-                                GameObject enemy = EnemyManager.NewEnemy("Panzee");
-                                WeaponBundle.AddWeaponToTarget(enemy, weapon.weapon.weaponId);
-                                enemy.transform.position = GameUtils.MovePositionLimited(Player.@object.transform.position + (Vector3)Random.insideUnitCircle.normalized * 15);
+                            GameObject enemy = Game.instance.enemyWeapons.SpawnEnemy(chat.userId, weaponName);
+                            if(enemy != null)
                                 TextManager.WriteTwitchNickname(enemy, chat);
-                            }
                             break;
                     }
                 }
