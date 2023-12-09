@@ -8,7 +8,8 @@ public class CexCycle : BaseCycle
     {
         while(true)
         {
-            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("Cex");
+            Weapon weapon = WeaponBundle.GetWeaponFromTarget("Cex", weaponUser);
+			if(weapon == null) yield break;
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject cexMagicCircle = ObjectPool.Get(Game.PoolManager, "CexMagicCircle", (GameObject)weapon.weapon.resources[0]);
             cexMagicCircle.transform.position = weaponUser.transform.position;

@@ -12,6 +12,7 @@ public class EnemyWeapons : MonoBehaviour
 
     public void PickupWeapons()
     {
+        if(spawners.Count > 0) return;
         gameObject.SetActive(true);
         Weapon[] useableWeapons = WeaponBundle.GetWeapons(item => item.type == "N");
         List<Weapon> duplicatedWeapons = new List<Weapon>(3);
@@ -30,10 +31,10 @@ public class EnemyWeapons : MonoBehaviour
     public GameObject SpawnEnemy(string twitchUserId, string weaponId)
     {
         Weapon weapon = WeaponBundle.GetWeaponByName(weaponId);
+        if(spawners.Values.ToList().Exists(item => item.Contains(twitchUserId))) return null;
         if(spawners.ContainsKey(weapon.weapon.weaponId))
         {
             spawners.TryGetValue(weapon.weapon.weaponId, out List<string> users);
-            if(users.Contains(twitchUserId)) return null;
             users.Add(twitchUserId);
             userCount++;
             if(userCount > 50) return null;

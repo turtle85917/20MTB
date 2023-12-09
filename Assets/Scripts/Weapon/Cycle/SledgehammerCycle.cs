@@ -11,7 +11,8 @@ public class SledgehammerCycle : BaseCycle
     {
         while(true)
         {
-            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("Sledgehammer");
+            Weapon weapon = WeaponBundle.GetWeaponFromTarget("Sledgehammer", weaponUser);
+			if(weapon == null) yield break;
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject sledgehammer = ObjectPool.Get(Game.PoolManager, "Sledgehammer", (GameObject)weapon.weapon.resources[0]);
             bool isRight = GameUtils.GetDirectionFromTarget(weaponUser) == 1;

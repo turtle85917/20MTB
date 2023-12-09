@@ -7,7 +7,8 @@ public class MuayThaiCycle : BaseCycle
     {
         while(true)
         {
-            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("MuayThai");
+            Weapon weapon = WeaponBundle.GetWeaponFromTarget("MuayThai", weaponUser);
+			if(weapon == null) yield break;
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             if(Scanner.IsAnyTargetAround(Player.@object.transform.position, 10, "Enmey")) Player.@object.GetComponent<Affecter>().Attack(Affecter.AttackType.Once);
         }

@@ -60,10 +60,10 @@ public abstract class BaseWeapon : MonoBehaviour
 
     public void Init()
     {
-        count = 0;
-        penetrate = 0;
         _count = 0;
         _penetrate = 0;
+        count = 0;
+        penetrate = 0;
         weaponStatus = WeaponStatus.Idle;
         StartCoroutine(FinisingLifeTime());
     }

@@ -11,7 +11,8 @@ public class NoejeolCycle : BaseCycle
     {
         while(true)
         {
-            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("Noejeol");
+            Weapon weapon = WeaponBundle.GetWeaponFromTarget("Noejeol", weaponUser);
+			if(weapon == null) yield break;
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             var targets = new List<GameObject>(){};
             for(int i = 0; i < weapon.stats.Penetrate; i++)

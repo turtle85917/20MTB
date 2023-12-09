@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uAC1C\uBC1C\uC790"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0c34431862676984f9d13ce495b19eb3, type: 2}
-  m_sharedMaterial: {fileID: 5092230480352266154, guid: 0c34431862676984f9d13ce495b19eb3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dec575a20c40ac34898eef67146e5c20, type: 2}
+  m_sharedMaterial: {fileID: 6978077773989395553, guid: dec575a20c40ac34898eef67146e5c20, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -93,12 +93,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.3
+  m_fontSize: 0.23
   m_fontSizeBase: 0.3
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0.12
-  m_fontSizeMax: 0.3
+  m_fontSizeMax: 0.23
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 4096

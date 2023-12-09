@@ -8,7 +8,8 @@ public class PotatoCycle : BaseCycle
     {
         while(true)
         {
-            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("Potato");
+            Weapon weapon = WeaponBundle.GetWeaponFromTarget("Potato", weaponUser);
+			if(weapon == null) yield break;
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject potato = ObjectPool.Get(Game.PoolManager, "Potato", (GameObject)weapon.weapon.resources[0]);
             Vector3 position = new Vector3(weaponUser.transform.position.x + -9.265f, weaponUser.transform.position.y + Random.Range(0.3f, Camera.main.orthographicSize + Camera.main.transform.position.y));

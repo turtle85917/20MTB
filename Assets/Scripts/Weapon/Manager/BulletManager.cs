@@ -20,9 +20,7 @@ public class BulletManager : BaseWeapon
 
     private void Update()
     {
-        stats = WeaponBundle.GetWeaponFromPlayer(weaponId).stats;
-        Debug.Log(weaponId);
-        Debug.Log(WeaponBundle.GetWeaponFromPlayer(weaponId));
+        stats = WeaponBundle.GetWeaponFromTarget(weaponId, weaponUser).stats;
         Scanner.Scan(weaponUser.transform.position, stats.Range, GameUtils.GetTargetTag(weaponUserType), out target);
         if(target != null)
         {

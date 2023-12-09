@@ -24,9 +24,11 @@ public class WeaponBundle : MonoBehaviour
         return assets.Find(item => item.weapon.weaponId.ToLower() == weaponId.ToLower());
     }
 
-    public static Weapon GetWeaponFromPlayer(string weaponId)
+    public static Weapon GetWeaponFromTarget(string weaponId, GameObject weaponUser)
     {
-        Weapon foundWeapon = Player.playerData.weapons.Find(item => item.weapon.weaponId == weaponId);
+        Weapon foundWeapon = null;
+        if(weaponUser.CompareTag("Player")) foundWeapon = Player.playerData.weapons.Find(item => item.weapon.weaponId == weaponId);
+        else foundWeapon = EnemyManager.GetEnemy(weaponUser)?.weapon;
         return foundWeapon;
     }
 

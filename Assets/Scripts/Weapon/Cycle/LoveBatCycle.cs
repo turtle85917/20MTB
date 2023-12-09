@@ -7,7 +7,8 @@ public class LoveBatCycle : BaseCycle
     {
         while(true)
         {
-            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("LoveBat");
+            Weapon weapon = WeaponBundle.GetWeaponFromTarget("LoveBat", weaponUser);
+			if(weapon == null) yield break;
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject lovebat = ObjectPool.Get(Game.PoolManager, "LoveBat", (GameObject)weapon.weapon.resources[0]);
             SpinManager script = lovebat.GetComponent<SpinManager>();

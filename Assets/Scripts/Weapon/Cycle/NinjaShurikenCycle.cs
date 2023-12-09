@@ -8,7 +8,8 @@ public class NinjaShurikenCycle : BaseCycle
     {
         while(true)
         {
-            Weapon weapon = WeaponBundle.GetWeaponFromPlayer("NinjaShuriken");
+            Weapon weapon = WeaponBundle.GetWeaponFromTarget("NinjaShuriken", weaponUser);
+			if(weapon == null) yield break;
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject target = Scanner.Scan(weaponUser.transform.position, 4, GameUtils.GetTargetTag(weaponUser));
             if(target)
