@@ -22,7 +22,6 @@ public class LevelUpMaster : MonoBehaviour
         {
             int index = i;
             categoryButtons[i].onClick.AddListener(() => ChangeCategory((Category)index));
-            weaponPanels[i].GetComponent<Button>().onClick.RemoveAllListeners();
         }
         LevelUpPanel.SetActive(false);
     }
@@ -54,7 +53,6 @@ public class LevelUpMaster : MonoBehaviour
             WeaopnIncreaseStat weaopnIncreaseStat = weapon.weapon.levels[foundWeapon.level++];
             foreach(var field in weaopnIncreaseStat.GetType().GetFields())
             {
-                // NOTE: 발사체는 곱적용
                 var weaponField = foundWeapon.stats.GetType().GetField(field.Name);
                 if(field.FieldType.Name == "Single")
                 {
@@ -78,14 +76,14 @@ public class LevelUpMaster : MonoBehaviour
     {
         List<Weapon> weapons = new List<Weapon>();
         List<Weapon> leftWeapons = WeaponBundle.GetWeapons(item => !Player.playerData.weapons.Exists(w => w.weapon.weaponId == item.weapon.weaponId) && !weapons.Exists(w => w.weapon.weaponId == item.weapon.weaponId) && item.type != "D").ToList();
-        List<Weapon> playerWeapons = Player.playerData.weapons.FindAll(item => !weapons.Exists(w => w.weapon.weaponId == item.weapon.weaponId)).ToList();
-        AddWeapon(0.01f);
-        AddWeapon(0.1f);
-        AddWeapon(0.25f);
+        AddWeapon(0.05f);
+        AddWeapon(0.2f);
+        AddWeapon(0.35f);
         for(int i = 0; i < weapons.Count; i++)
         {
             weaponPanels[i].UpdatePanel(weapons[i]);
             int index = i;
+            weaponPanels[i].GetComponent<Button>().onClick.RemoveAllListeners();
             weaponPanels[i].GetComponent<Button>().onClick.AddListener(() => SelectWeapon(weapons[index]));
         }
         ChangeCategory(Category.Player);
@@ -95,19 +93,20 @@ public class LevelUpMaster : MonoBehaviour
             GetDecideWeapon(random, out Weapon decideWeapon);
             weapons.Add(decideWeapon);
             leftWeapons.Remove(decideWeapon);
-            playerWeapons.Remove(decideWeapon);
         }
 
         void GetDecideWeapon(float random, out Weapon decideWeapon)
         {
-            if(Random.value <= random || playerWeapons.Count == 0) decideWeapon = leftWeapons[Random.Range(0, leftWeapons.Count)];
-            else
+            Weapon[] usableWeapons = Player.playerData.weapons.FindAll(item => !weapons.Exists(w => w.weapon.weaponId == item.weapon.weaponId)).ToArray();
+            if(usableWeapons.Length == 0) decideWeapon = leftWeapons[Random.Range(0, leftWeapons.Count)];
+            else if(usableWeapons.Length == 6 || Random.value > random)
             {
-                Weapon weapon = playerWeapons[Random.Range(0, playerWeapons.Count)];
-                // NOTE: 만렙일 경우, 재검색
-                if(weapon.weapon.levels.Length == weapon.level + 1) GetDecideWeapon(random, out Weapon w);
+                Weapon weapon;
+                do weapon = usableWeapons[Random.Range(0, usableWeapons.Length)];
+                while(weapon.weapon.levels.Length == weapon.level + 1);
                 decideWeapon = weapon;
             }
+            else decideWeapon = leftWeapons[Random.Range(0, leftWeapons.Count)];
         }
     }
 }

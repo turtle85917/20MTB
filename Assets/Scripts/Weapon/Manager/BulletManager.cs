@@ -25,7 +25,7 @@ public class BulletManager : BaseWeapon
         if(target != null)
         {
             transform.rotation = GameUtils.LookAtTarget(transform.position, target.transform.position);
-            sprite.flipY = 90 < transform.rotation.eulerAngles.z || transform.rotation.eulerAngles.z < -90;
+            sprite.flipY = 90 < transform.rotation.eulerAngles.z && transform.rotation.eulerAngles.z < 260;
         }
         else
         {
@@ -45,6 +45,7 @@ public class BulletManager : BaseWeapon
                 Bullet script = bullet.GetComponent<Bullet>();
                 script.target = target;
                 script.stats = stats;
+                script.weaponId = weaponId;
                 script.weaponUser = weaponUser;
                 script.weaponUserType = weaponUserType;
                 script.Init();

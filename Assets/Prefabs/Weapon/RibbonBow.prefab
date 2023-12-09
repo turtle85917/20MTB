@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c76d6e63904634e9ed0063ebc53aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponId: 
+  weaponId: RibbonBow
   Bullet: {fileID: 8431289013705592357, guid: bb6f34e3fd9532a44849b2cd10ece961, type: 3}

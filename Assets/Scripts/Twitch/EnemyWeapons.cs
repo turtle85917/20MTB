@@ -15,14 +15,12 @@ public class EnemyWeapons : MonoBehaviour
         if(spawners.Count > 0) return;
         gameObject.SetActive(true);
         Weapon[] useableWeapons = WeaponBundle.GetWeapons(item => item.type == "N");
-        List<Weapon> duplicatedWeapons = new List<Weapon>(3);
         foreach(WeaponItem weaponItem in weaponItems)
         {
             Weapon weapon;
             do weapon = useableWeapons[Random.Range(0, useableWeapons.Length)];
-            while(duplicatedWeapons.Exists(item => item.weapon.weaponId == weapon.weapon.weaponId));
+            while(weapons.Exists(item => item.weapon.weaponId == weapon.weapon.weaponId));
             weapons.Add(weapon);
-            duplicatedWeapons.Add(weapon);
             spawners.Add(weapon.weapon.weaponId, new List<string>(){});
             weaponItem.UpdatePanel(weapon);
         }
