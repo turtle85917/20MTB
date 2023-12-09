@@ -20,7 +20,7 @@ public class Bullet : BaseWeapon
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag(GameUtils.GetTargetTag(weaponUserType)))
+        if(other.CompareTag(GameUtils.GetTargetTag(weaponUser)))
         {
             AttackManager.AttackTarget(weaponId, other.gameObject, penetrate, source:weaponUser);
             penetrate++;

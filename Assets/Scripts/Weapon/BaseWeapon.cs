@@ -6,7 +6,6 @@ public abstract class BaseWeapon : MonoBehaviour
 {
     public WeaponStats stats {protected get; set;}
     public GameObject weaponUser {protected get; set;}
-    public WeaponUser weaponUserType {protected get; set;}
     protected int penetrate // 관통 수
     {
         get
@@ -41,7 +40,7 @@ public abstract class BaseWeapon : MonoBehaviour
         }
         set
         {
-            if((weaponUser && weaponUser.CompareTag("Enemy")) || weaponUserType == WeaponUser.Enemy)
+            if(weaponUser && weaponUser.CompareTag("Enemy"))
             {
                 _count = value;
                 if(_count == stats.Penetrate + stats.Count)

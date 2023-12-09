@@ -1,5 +1,4 @@
 using System.Collections;
-using _20MTB.Utillity;
 using UnityEngine;
 
 public class PotatoCycle : BaseCycle
@@ -18,7 +17,7 @@ public class PotatoCycle : BaseCycle
             potato.transform.position = position;
             Potato script = potato.GetComponent<Potato>();
             script.stats = weapon.stats;
-            script.weaponUserType = GameUtils.GetWeaponUserType(weaponUser);
+            script.weaponUser = weaponUser;
             script.direction = new Vector2(Random.Range(7f, 9f), 12f);
             script.Init();
         }

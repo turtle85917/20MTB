@@ -1,5 +1,4 @@
 using System.Collections;
-using _20MTB.Utillity;
 using UnityEngine;
 
 public class CexCycle : BaseCycle
@@ -16,7 +15,6 @@ public class CexCycle : BaseCycle
             Cex script = cexMagicCircle.GetComponent<Cex>();
             script.stats = weapon.stats;
             script.weaponUser = weaponUser;
-            script.weaponUserType = GameUtils.GetWeaponUserType(weaponUser);
             script.Init();
         }
     }

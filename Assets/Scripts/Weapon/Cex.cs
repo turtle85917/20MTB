@@ -17,7 +17,7 @@ public class Cex : BaseWeapon
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag(GameUtils.GetTargetTag(weaponUserType)))
+        if(other.CompareTag(GameUtils.GetTargetTag(weaponUser)))
         {
             Affecter script = other.GetComponent<Affecter>();
             script.StartCoroutine(script.ThreeComboKnockback(weaponUser));

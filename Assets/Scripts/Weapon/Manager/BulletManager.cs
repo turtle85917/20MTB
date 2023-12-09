@@ -21,7 +21,7 @@ public class BulletManager : BaseWeapon
     private void Update()
     {
         stats = WeaponBundle.GetWeaponFromTarget(weaponId, weaponUser).stats;
-        Scanner.Scan(weaponUser.transform.position, stats.Range, GameUtils.GetTargetTag(weaponUserType), out target);
+        Scanner.Scan(weaponUser.transform.position, stats.Range, GameUtils.GetTargetTag(weaponUser), out target);
         if(target != null)
         {
             transform.rotation = GameUtils.LookAtTarget(transform.position, target.transform.position);
@@ -47,7 +47,6 @@ public class BulletManager : BaseWeapon
                 script.stats = stats;
                 script.weaponId = weaponId;
                 script.weaponUser = weaponUser;
-                script.weaponUserType = weaponUserType;
                 script.Init();
                 count++;
             }

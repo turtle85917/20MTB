@@ -18,7 +18,6 @@ public class MusketCycle : BaseCycle
         BulletManager script = musket.GetComponent<BulletManager>();
         script.stats = weapon.stats;
         script.weaponUser = weaponUser;
-        script.weaponUserType = GameUtils.GetWeaponUserType(weaponUser);
         script.Init();
         yield return null;
     }

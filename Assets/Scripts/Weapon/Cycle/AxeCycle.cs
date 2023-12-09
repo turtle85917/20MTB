@@ -1,5 +1,4 @@
 using System.Collections;
-using _20MTB.Utillity;
 using UnityEngine;
 
 public class AxeCycle : BaseCycle
@@ -16,7 +15,6 @@ public class AxeCycle : BaseCycle
             Axe script = axe.GetComponent<Axe>();
             script.stats = weapon.stats;
             script.weaponUser = weaponUser;
-            script.weaponUserType = GameUtils.GetWeaponUserType(weaponUser);
             script.Init();
         }
     }

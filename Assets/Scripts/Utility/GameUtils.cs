@@ -5,25 +5,12 @@ namespace _20MTB.Utillity
 {
     public static class GameUtils
     {
-        private static readonly Vector2 maxPoint = new Vector2(29.625f, 17.4f);
-        private static readonly Vector2 minPoint = new Vector2(-29.7f, -16.35f);
-
-        public static WeaponUser GetWeaponUserType(GameObject target)
-        {
-            return target.CompareTag("Player")
-                ? WeaponUser.Player
-                : WeaponUser.Enemy
-            ;
-        }
+        private static readonly Vector2 maxPoint = new Vector2(29.72f, 17.56f);
+        private static readonly Vector2 minPoint = new Vector2(-29.72f, -16.19f);
 
         public static string GetTargetTag(GameObject target)
         {
             return target.CompareTag("Player") ? "Enemy" : "Player";
-        }
-
-        public static string GetTargetTag(WeaponUser weaponUserType)
-        {
-            return weaponUserType == WeaponUser.Player ? "Enemy" : "Player";
         }
 
         public static int GetDirectionFromTarget(GameObject target)

@@ -1,5 +1,4 @@
 using System.Collections;
-using _20MTB.Utillity;
 using UnityEngine;
 
 public class WakchoriCycle : BaseCycle
@@ -15,7 +14,6 @@ public class WakchoriCycle : BaseCycle
             Blow script = blow.GetComponent<Blow>();
             script.stats = weapon.stats;
             script.weaponUser = weaponUser;
-            script.weaponUserType = GameUtils.GetWeaponUserType(weaponUser);
             script.Init();
         }
     }
