@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using _20MTB.Utillity;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Rendering;
 
 public class Game : MonoBehaviour
 {
@@ -62,6 +62,7 @@ public class Game : MonoBehaviour
             isGameOver = true;
             Camera.main.GetComponent<Animation>().Play("Camera_ZoomIn");
             Player.@object.GetComponent<Player>().enabled = false;
+            Player.@object.GetComponent<SortingGroup>().enabled = false;
             Player.@object.GetComponent<Affecter>().Reset();
             StopAllCoroutines();
             WeaponBundle.instance.StopAllCoroutines();

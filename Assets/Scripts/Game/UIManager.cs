@@ -1,6 +1,7 @@
 using _20MTB.Utillity;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -11,6 +12,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Slider ExpSlider;
     [SerializeField] private TMP_Text HealthText;
     [SerializeField] private TMP_Text LevelText;
+
+    public void OnReturnBtnClick()
+    {
+        SceneManager.LoadScene("Main");
+    }
 
     private void Awake()
     {
