@@ -1,4 +1,5 @@
 using System.Collections;
+using _20MTB.Utillity;
 using UnityEngine;
 
 public class Enemy : BaseController
@@ -48,7 +49,8 @@ public class Enemy : BaseController
         if(Game.isGameOver) return;
         if(!isDied && affecter.status == Affecter.Status.Idle)
         {
-            rigid.MovePosition(Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed * Time.fixedDeltaTime));
+            Vector3 position = Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed * Time.fixedDeltaTime);
+            rigid.MovePosition(GameUtils.MovePositionLimited(position));
         }
     }
 
