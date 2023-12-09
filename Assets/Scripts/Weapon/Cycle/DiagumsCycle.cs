@@ -8,7 +8,7 @@ public class DiagumsCycle : BaseCycle
         while(true)
         {
             Weapon weapon = WeaponBundle.GetWeaponFromTarget("DiaGum", weaponUser);
-			if(weapon == null) yield break;
+            if(weapon == null) yield break;
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject diagums = ObjectPool.Get(Game.PoolManager, "Diagums", (GameObject)weapon.weapon.resources[0]);
             SpinManager script = diagums.GetComponent<SpinManager>();

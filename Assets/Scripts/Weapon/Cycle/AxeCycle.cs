@@ -9,7 +9,7 @@ public class AxeCycle : BaseCycle
         while(true)
         {
             Weapon weapon = WeaponBundle.GetWeaponFromTarget("Axe", weaponUser);
-			if(weapon == null) yield break;
+            if(weapon == null) yield break;
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject axe = ObjectPool.Get(Game.PoolManager, "Axe", (GameObject)weapon.weapon.resources[0]);
             axe.transform.position = weaponUser.transform.position;

@@ -50,9 +50,9 @@ float3 GetSurfaceNormal(float2 uv, float bias, float3 delta)
 {
 	// Read "height field"
   float4 h = {tex2D(_MainTex, uv - delta.xz).a,
-				tex2D(_MainTex, uv + delta.xz).a,
-				tex2D(_MainTex, uv - delta.zy).a,
-				tex2D(_MainTex, uv + delta.zy).a};
+            	tex2D(_MainTex, uv + delta.xz).a,
+            	tex2D(_MainTex, uv - delta.zy).a,
+            	tex2D(_MainTex, uv + delta.zy).a};
 
 	return GetSurfaceNormal(h, bias);
 }

@@ -8,7 +8,7 @@ public class StampPlumpCycle : BaseCycle
         while(true)
         {
             Weapon weapon = WeaponBundle.GetWeaponFromTarget("StampPlump", weaponUser);
-			if(weapon == null) yield break;
+            if(weapon == null) yield break;
             GameObject enemy = Scanner.Scan(Player.@object.transform.position, 8, "Enemy");
             if(enemy)
             {

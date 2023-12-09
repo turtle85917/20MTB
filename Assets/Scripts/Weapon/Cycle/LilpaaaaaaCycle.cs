@@ -8,7 +8,7 @@ public class LilpaaaaaaCycle : BaseCycle
         while(true)
         {
             Weapon weapon = WeaponBundle.GetWeaponFromTarget("Lilpaaaaaa", weaponUser);
-			if(weapon == null) yield break;
+            if(weapon == null) yield break;
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             Player.@object.GetComponent<Affecter>().Attack(Affecter.AttackType.Repeat);
         }

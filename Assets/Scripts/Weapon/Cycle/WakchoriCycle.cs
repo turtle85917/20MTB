@@ -9,7 +9,7 @@ public class WakchoriCycle : BaseCycle
         while(true)
         {
             Weapon weapon = WeaponBundle.GetWeaponFromTarget("Wakchori", weaponUser);
-			if(weapon == null) yield break;
+            if(weapon == null) yield break;
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject blow = ObjectPool.Get(Game.PoolManager, "Blow", (GameObject)weapon.weapon.resources[0]);
             Blow script = blow.GetComponent<Blow>();

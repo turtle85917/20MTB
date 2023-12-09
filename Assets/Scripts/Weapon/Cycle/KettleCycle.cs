@@ -9,7 +9,7 @@ public class KettleCycle : BaseCycle
         while(true)
         {
             Weapon weapon = WeaponBundle.GetWeaponFromTarget("Kettle", weaponUser);
-			if(weapon == null) yield break;
+            if(weapon == null) yield break;
             yield return new WaitForSeconds(2f);
             Weapon selectWeapon = null;
             EnemyPool selectEnemyPool = null;

@@ -9,7 +9,7 @@ public class MangnyangBeamCycle : BaseCycle
         while(true)
         {
             Weapon weapon = WeaponBundle.GetWeaponFromTarget("MangnyangBeam", weaponUser);
-			if(weapon == null) yield break;
+            if(weapon == null) yield break;
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject mnbCore = ObjectPool.Get(Game.PoolManager, "MNB_Core", (GameObject)weapon.weapon.resources[0]);
             mnbCore.transform.position = weaponUser.transform.position;
