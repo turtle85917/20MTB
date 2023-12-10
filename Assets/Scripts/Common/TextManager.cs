@@ -12,7 +12,7 @@ public class TextManager : MonoBehaviour
         GameObject text = ObjectPool.Get(instance.gameObject, "TwitchNickname", instance.TwitchNickname);
         text.transform.localPosition = (Vector2)target.transform.position + Vector2.down * 1.3f;
         TMP_Text tmpText = text.GetComponent<TMP_Text>();
-        tmpText.text = chat.username;
+        tmpText.text = chat.userName;
         ColorUtility.TryParseHtmlString(chat.color, out Color color);
         tmpText.color = color;
         target.GetComponent<Enemy>().text = text;

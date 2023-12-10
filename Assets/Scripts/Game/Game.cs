@@ -109,7 +109,7 @@ public class Game : MonoBehaviour
         while(time < maxTime)
         {
             SpawnEnemies();
-            if(time > 0 && time % 7 == 0)
+            if(time > 0 && time % 5 == 0)
             {
                 enemyWeapons.PickupWeapons();
             }

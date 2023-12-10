@@ -47,22 +47,9 @@ public class LevelUpMaster : MonoBehaviour
 
     private void SelectWeapon(Weapon weapon)
     {
-        Weapon foundWeapon = Player.playerData.weapons.Find(item => item.weapon.weaponId == weapon.weapon.weaponId);
-        if(foundWeapon != null)
+        if(Player.playerData.weapons.Exists(item => item.weapon.weaponId == weapon.weapon.weaponId))
         {
-            WeaopnIncreaseStat weaopnIncreaseStat = weapon.weapon.levels[foundWeapon.level++];
-            foreach(var field in weaopnIncreaseStat.GetType().GetFields())
-            {
-                var weaponField = foundWeapon.stats.GetType().GetField(field.Name);
-                if(field.FieldType.Name == "Single")
-                {
-                    weaponField.SetValue(foundWeapon.stats, (float)weaponField.GetValue(foundWeapon.stats) + (float)field.GetValue(weaopnIncreaseStat));
-                }
-                else
-                {
-                    weaponField.SetValue(foundWeapon.stats, (int)weaponField.GetValue(foundWeapon.stats) + (int)field.GetValue(weaopnIncreaseStat));
-                }
-            }
+            WeaponBundle.UpgradeTargetsWeapon(Player.@object, weapon.weapon.weaponId);
         }
         else
         {

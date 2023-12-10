@@ -78,7 +78,7 @@ public class Connect : MonoBehaviour
                     {
                         case "spawn":
                             string weaponName = chunk[1];
-                            GameObject enemy = Game.instance.enemyWeapons.SpawnEnemy(chat.userId, weaponName);
+                            GameObject enemy = Game.instance.enemyWeapons.SpawnEnemy(chat, weaponName);
                             if(enemy != null)
                                 TextManager.WriteTwitchNickname(enemy, chat);
                             break;

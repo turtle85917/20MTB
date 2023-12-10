@@ -16,7 +16,7 @@ public class ChatPanel : MonoBehaviour
 
     public void WriteContent(Chat chat)
     {
-        Nickname.text = chat.username;
+        Nickname.text = chat.userName;
         ColorUtility.TryParseHtmlString(chat.color, out Color color);
         Nickname.color = color;
         Content.text = chat.message;

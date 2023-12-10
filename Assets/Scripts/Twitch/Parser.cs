@@ -36,7 +36,7 @@ public static class Parser
                     chat.userId = v;
                     break;
                 case "display-name":
-                    chat.username = v;
+                    chat.userName = v;
                     break;
             }
         }

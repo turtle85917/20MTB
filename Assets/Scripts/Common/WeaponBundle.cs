@@ -23,7 +23,6 @@ public class WeaponBundle : MonoBehaviour
     {
         return assets.Find(item => item.weapon.weaponId.ToLower() == weaponId.ToLower());
     }
-
     public static Weapon GetWeaponFromTarget(string weaponId, GameObject weaponUser)
     {
         Weapon foundWeapon = null;
@@ -31,7 +30,6 @@ public class WeaponBundle : MonoBehaviour
         else foundWeapon = EnemyManager.GetEnemy(weaponUser)?.weapon;
         return foundWeapon;
     }
-
     public static Weapon GetWeaponByName(string weaponName)
     {
         return assets.Find(item => item.name.Equals(weaponName)) ?? GetWeapon(weaponName); // 이름을 구할 수 없을 경우, id로도 구해본다.
@@ -76,6 +74,34 @@ public class WeaponBundle : MonoBehaviour
             enemyPool.weapon = weapon.Copy(0.4f);
             BaseCycle baseCycle = Activator.CreateInstance(monoscript) as BaseCycle;
             instance.StartCoroutine(baseCycle.Cycle(enemyPool.target));
+        }
+    }
+
+    public static void UpgradeTargetsWeapon(GameObject target, string weaponId)
+    {
+        Weapon weapon = GetWeaponFromTarget(weaponId, target);
+        if(weapon == null)
+        {
+            Debug.Log("Target not has weapon.");
+            return;
+        }
+        if(weapon.level == weapon.weapon.levels.Length)
+        {
+            Debug.Log("Target's weapon is max level");
+            return;
+        }
+        WeaopnIncreaseStat weaopnIncreaseStat = weapon.weapon.levels[weapon.level++];
+        foreach(var field in weaopnIncreaseStat.GetType().GetFields())
+        {
+            var weaponField = weapon.stats.GetType().GetField(field.Name);
+            if(field.FieldType.Name == "Single")
+            {
+                weaponField.SetValue(weapon.stats, (float)weaponField.GetValue(weapon.stats) + (float)field.GetValue(weaopnIncreaseStat));
+            }
+            else
+            {
+                weaponField.SetValue(weapon.stats, (int)weaponField.GetValue(weapon.stats) + (int)field.GetValue(weaopnIncreaseStat));
+            }
         }
     }
 
