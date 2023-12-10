@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: "\uACE0\uC138\uAD6C"
   defaultWeapon: Headpin
-  headImage: {fileID: -739936313, guid: 7935b83615ef56546b80d20fb88768a7, type: 3}
+  twitchAvatar: {fileID: 21300000, guid: 7b65aaa03db324f4b8e025314da5ecd7, type: 3}
   controller: {fileID: 22100000, guid: e37bb15708ffee04593f3dafa32b26b1, type: 2}
   stats:
     MaxHealth: 20

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: "\uC8FC\uB974\uB974"
   defaultWeapon: StampPlump
-  headImage: {fileID: -2145882027, guid: 2d755fd08d0c1d6439cb5825af73d740, type: 3}
+  twitchAvatar: {fileID: 21300000, guid: 84b379643e6ef9f4bb3a605e0ed2e712, type: 3}
   controller: {fileID: 22100000, guid: 58b9d7f246489b44aa1c903090d9ebe0, type: 2}
   stats:
     MaxHealth: 20

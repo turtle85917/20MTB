@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: "\uC9D5\uBC84\uAC70"
   defaultWeapon: MuayThai
-  headImage: {fileID: 1627126936, guid: 3caad957cb518ac4aa10e19a9479bb53, type: 3}
+  twitchAvatar: {fileID: 21300000, guid: ecf8d45e74783bd40a75a2f3b98e0a4e, type: 3}
   controller: {fileID: 22100000, guid: 7dc3d34246500e441b8e0f2b8efb4ca5, type: 2}
   stats:
     MaxHealth: 19

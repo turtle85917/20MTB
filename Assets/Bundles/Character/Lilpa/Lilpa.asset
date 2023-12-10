@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: "\uB9B4\uD30C"
   defaultWeapon: Lilpaaaaaa
-  headImage: {fileID: -794333072, guid: 35f5852c1a84d884eae50b444b4fac09, type: 3}
+  twitchAvatar: {fileID: 21300000, guid: dc70d342c4dee3d43adf5d393de6acd6, type: 3}
   controller: {fileID: 22100000, guid: 377ec40fc3f0f25478c33f1eda875235, type: 2}
   stats:
     MaxHealth: 20

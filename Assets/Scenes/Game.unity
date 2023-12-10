@@ -3425,7 +3425,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -690, y: 25}
+  m_AnchoredPosition: {x: -693.3, y: 20.3}
   m_SizeDelta: {x: 400, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &995665493
@@ -3713,7 +3713,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f4608e70d2121c249a0f26b4e44c8f28, type: 2}
   - {fileID: 11400000, guid: b3fe73e5fd9232e44bf2399584a69b52, type: 2}
   - {fileID: 11400000, guid: d3c7dfac48d61d048b5a416452dd6444, type: 2}
-  headImage: {fileID: 0}
+  twitchAvatar: {fileID: 598048657}
 --- !u!114 &1062170217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4396,8 +4396,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 35, y: 0}
-  m_SizeDelta: {x: 52, y: 52}
+  m_AnchoredPosition: {x: 35.700012, y: -0.0000052452}
+  m_SizeDelta: {x: 62, y: 62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1289315308
 MonoBehaviour:
@@ -6842,7 +6842,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -690, y: -25}
+  m_AnchoredPosition: {x: -693.3, y: -20.2}
   m_SizeDelta: {x: 400, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2024055702

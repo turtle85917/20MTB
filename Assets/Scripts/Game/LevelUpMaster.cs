@@ -84,15 +84,13 @@ public class LevelUpMaster : MonoBehaviour
 
         void GetDecideWeapon(float random, out Weapon decideWeapon)
         {
-            Weapon[] usableWeapons = Player.playerData.weapons.FindAll(item => !weapons.Exists(w => w.weapon.weaponId == item.weapon.weaponId)).ToArray();
+            Weapon[] usableWeapons = Player.playerData.weapons
+                .FindAll(item => !weapons.Exists(w => w.weapon.weaponId == item.weapon.weaponId))
+                .Where(item => item.weapon.levels.Length > item.level)
+                .ToArray()
+            ;
             if(usableWeapons.Length == 0) decideWeapon = leftWeapons[Random.Range(0, leftWeapons.Count)];
-            else if(usableWeapons.Length == 6 || Random.value > random)
-            {
-                Weapon weapon;
-                do weapon = usableWeapons[Random.Range(0, usableWeapons.Length)];
-                while(weapon.weapon.levels.Length == weapon.level + 1);
-                decideWeapon = weapon;
-            }
+            else if(usableWeapons.Length == 6 || Random.value > random) decideWeapon = usableWeapons[Random.Range(0, usableWeapons.Length)];
             else decideWeapon = leftWeapons[Random.Range(0, leftWeapons.Count)];
         }
     }
