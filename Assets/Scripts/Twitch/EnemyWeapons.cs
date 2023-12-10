@@ -112,7 +112,7 @@ public class EnemyWeapons : MonoBehaviour
         int[] participantValues = spawners.Select(item => item.Value.Count).ToArray();
         // NOTE: 편차 구하여 편차가 1 이하일 경우 (값이 일정한 비율)
         float averageValue = participantValues.Sum() / participantValues.Length;
-        float variance = participantValues.Aggregate(0f, (acc, curr) => acc + Mathf.Pow(curr - averageValue, 2f));
+        float variance = participantValues.Aggregate(0f, (acc, curr) => acc + Mathf.Pow(curr - averageValue, 2f)) / participantValues.Length;
         string weaponId;
         Chat twitchUser;
         if(variance <= 1f)
