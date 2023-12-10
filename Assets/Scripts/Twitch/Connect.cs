@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -77,7 +78,7 @@ public class Connect : MonoBehaviour
                     switch(key)
                     {
                         case "spawn":
-                            string weaponName = chunk[1];
+                            string weaponName = string.Join(' ', chunk[1..]);
                             GameObject enemy = Game.instance.enemyWeapons.SpawnEnemy(chat, weaponName);
                             if(enemy != null)
                                 TextManager.WriteTwitchNickname(enemy, chat);
