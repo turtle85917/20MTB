@@ -500,8 +500,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uBB34\uC5D0\uD0C0\uC774"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dec575a20c40ac34898eef67146e5c20, type: 2}
-  m_sharedMaterial: {fileID: 6978077773989395553, guid: dec575a20c40ac34898eef67146e5c20, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f6364afd58a237e4499289754716dcfa, type: 2}
+  m_sharedMaterial: {fileID: 2349149825680611781, guid: f6364afd58a237e4499289754716dcfa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
@@ -635,8 +635,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uD50C\uB808\uC774\uC5B4\uB9CC \uC4F8 \uC218 \uC788\uB294 \uBB34\uAE30\uC785\uB2C8\uB2E4."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0c34431862676984f9d13ce495b19eb3, type: 2}
-  m_sharedMaterial: {fileID: 5092230480352266154, guid: 0c34431862676984f9d13ce495b19eb3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f6364afd58a237e4499289754716dcfa, type: 2}
+  m_sharedMaterial: {fileID: 2349149825680611781, guid: f6364afd58a237e4499289754716dcfa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -771,8 +771,8 @@ MonoBehaviour:
   m_text: "\uC058\uC544\uAE4C\uC624\uCC98\uB7FC \uD6CC\uB8E1\uD55C \uBB34\uC5D0\uD0C0\uC774
     \uC2E4\uB825\uC744 \uBFDC\uB0C5\uB2C8\uB2E4."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0c34431862676984f9d13ce495b19eb3, type: 2}
-  m_sharedMaterial: {fileID: 5092230480352266154, guid: 0c34431862676984f9d13ce495b19eb3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f6364afd58a237e4499289754716dcfa, type: 2}
+  m_sharedMaterial: {fileID: 2349149825680611781, guid: f6364afd58a237e4499289754716dcfa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

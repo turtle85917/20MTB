@@ -15,7 +15,7 @@ public class EnemyPool
 public enum Present
 {
     Exp,
-    DonateBox
+    DonatedBox
 }
 
 public class EnemyManager : MonoBehaviour
@@ -25,8 +25,6 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private EnemyData[] enemies;
     private static EnemyManager instance;
     private List<EnemyPool> enemyPools;
-
-    
 
     public static GameObject NewEnemy(string enemyId, string twitchUserId = null)
     {
