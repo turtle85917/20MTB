@@ -12,12 +12,21 @@ public class EnemyPool
     public EnemyData data;
 }
 
+public enum Present
+{
+    Exp,
+    DonateBox
+}
+
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] private GameObject exp;
     [SerializeField] private GameObject Enemies;
     [SerializeField] private EnemyData[] enemies;
     private static EnemyManager instance;
     private List<EnemyPool> enemyPools;
+
+    
 
     public static GameObject NewEnemy(string enemyId, string twitchUserId = null)
     {
@@ -45,6 +54,7 @@ public class EnemyManager : MonoBehaviour
     {
         return instance.enemyPools.Find(item => item.twitchUserId == twitchUserId);
     }
+
     public static bool IsEnemyAlive(GameObject enemy) => GetEnemy(enemy) != null || GetEnemy(enemy)?.health <= 0;
 
     public static EnemyPool[] GetEnemies()
@@ -55,6 +65,18 @@ public class EnemyManager : MonoBehaviour
     public static void RemoveEnemy(EnemyPool pool)
     {
         instance.enemyPools.Remove(pool);
+    }
+
+    public static void DropPresent(EnemyPool enemyPool, Present present)
+    {
+        switch(present)
+        {
+            case Present.Exp:
+                GameObject exp = ObjectPool.Get(Game.PoolManager, "Exp", instance.exp);
+                exp.transform.position = enemyPool.target.transform.position;
+                exp.GetComponent<Exp>().exp = enemyPool.data.stats.Exp;
+                break;
+        }
     }
 
     private void Awake()

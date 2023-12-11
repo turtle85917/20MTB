@@ -14,13 +14,12 @@ public class Game : MonoBehaviour
     public static bool isGameOver {get; private set;}
     public static Game instance {get; private set;}
     [Header("Game")]
-    [SerializeField] private GameObject ExpPrefab;
     [SerializeField] private Cycle cycle;
     public EnemyWeapons enemyWeapons;
     [Header("UI")]
     [SerializeField] private TMP_Text TimerText;
-    private List<int> times;                // 소환된 시간 기록
-    private int time = 0;            // 기본 20분
+    private List<int> times;
+    private int time = 0;
     private readonly int maxTime = 20 * 60; // 최대 시간 20분
 
     public static void Pause()
@@ -29,17 +28,10 @@ public class Game : MonoBehaviour
         isPaused = true;
     }
 
-    public static void Resume()
+    public static void Resum()
     {
         Time.timeScale = 1;
         isPaused = false;
-    }
-
-    public static void SpawnExpObject(Vector3 targetPosition, int value)
-    {
-        GameObject exp = ObjectPool.Get(PoolManager, "Exp", instance.ExpPrefab);
-        exp.transform.position = targetPosition;
-        exp.GetComponent<Exp>().exp = value;
     }
 
     private void Awake()

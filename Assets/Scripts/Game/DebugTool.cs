@@ -49,7 +49,7 @@ public class DebugTool : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             Reset();
-            Game.Resume();
+            Game.Resum();
         }
         if(Input.GetKeyDown(KeyCode.Return))
         {
