@@ -43,7 +43,7 @@ public class CameraAgent : MonoBehaviour
 
     private IEnumerator ShakeReset(float time)
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSecondsRealtime(time);
         Reset();
     }
 

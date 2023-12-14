@@ -15,7 +15,8 @@ public class Game : MonoBehaviour
     public static Game instance {get; private set;}
     [Header("Game")]
     [SerializeField] private Cycle cycle;
-    public EnemyWeapons enemyWeapons;
+    public EnemyWeapons usableWeaponsPanel;
+    public DonatedBox donatedBoxPanel;
     [Header("UI")]
     [SerializeField] private TMP_Text TimerText;
     private List<int> times;
@@ -28,7 +29,7 @@ public class Game : MonoBehaviour
         isPaused = true;
     }
 
-    public static void Resum()
+    public static void Resume()
     {
         Time.timeScale = 1;
         isPaused = false;
@@ -46,6 +47,14 @@ public class Game : MonoBehaviour
         PoolManager = GameObject.FindWithTag("PoolManager");
         maxPosition = new Vector2(Camera.main.orthographicSize * Camera.main.aspect, Camera.main.orthographicSize);
         StartCoroutine(CheckTime());
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            donatedBoxPanel.Open();
+        }
     }
 
     private void LateUpdate()
@@ -103,7 +112,7 @@ public class Game : MonoBehaviour
             SpawnEnemies();
             if(time > 0 && time % 5 == 0)
             {
-                enemyWeapons.PickupWeapons();
+                usableWeaponsPanel.PickupWeapons();
             }
             yield return new WaitForSeconds(1f);
             time += 1;

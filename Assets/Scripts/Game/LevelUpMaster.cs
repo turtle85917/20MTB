@@ -55,7 +55,7 @@ public class LevelUpMaster : MonoBehaviour
         {
             WeaponBundle.AddWeaponToTarget(Player.@object, weapon.weapon.weaponId);
         }
-        Game.Resum();
+        Game.Resume();
         LevelUpPanel.SetActive(false);
     }
 
