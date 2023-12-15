@@ -133,15 +133,15 @@ public class DonatedBox : MonoBehaviour
                 item.color = Color.white;
                 itemName.text = decideWeapon.name;
 
+                int maxLevel = GetWeaponUpgradeLevel();
                 bool hasWeapon = Player.playerData.weapons.Exists(item => item.weapon.weaponId == decideWeapon.weapon.weaponId);
-                if(hasWeapon)
+                if(!hasWeapon)
                 {
-                    WeaponBundle.UpgradeTargetsWeapon(Player.@object, decideWeapon.weapon.weaponId);
-                }
-                else
-                {
+                    maxLevel -= 1;
                     WeaponBundle.AddWeaponToTarget(Player.@object, decideWeapon.weapon.weaponId);
                 }
+                for(int i = 0; i < Mathf.Min(maxLevel, decideWeapon.weapon.levels.Length); i++)
+                    WeaponBundle.UpgradeTargetsWeapon(Player.@object, decideWeapon.weapon.weaponId);
 
                 Weapon GetRandomWeapon()
                 {
@@ -156,15 +156,15 @@ public class DonatedBox : MonoBehaviour
                 {
                     case 0:
                         value = Random.Range(3, 8);
-                        Player.playerData.health += value;
+                        Player.playerData.health += Mathf.RoundToInt(value * GetValueRatio());
                         break;
                     case 1:
                         value = Random.Range(20, 50);
-                        Player.playerData.exp += value;
+                        Player.playerData.exp += Mathf.RoundToInt(value * GetValueRatio());
                         break;
                     case 2:
                         value = Random.Range(100, 300);
-                        Player.playerData.hypeTrain.meter += value;
+                        Player.playerData.hypeTrain.meter += Mathf.RoundToInt(value * GetValueRatio());
                         break;
                 }
                 item.sprite = presentSprites[present];
@@ -185,6 +185,18 @@ public class DonatedBox : MonoBehaviour
             Player.playerData.hypeTrain.beforeMeter = Player.playerData.hypeTrain.meter;
             CheckLevelUp();
         }
+    }
+
+    private float GetValueRatio() => Mathf.Log(Player.playerData.hypeTrain.level);
+
+    private int GetWeaponUpgradeLevel()
+    {
+        int level = Player.playerData.hypeTrain.level;
+        if(1 <= level && level <= 4) return 1;
+        else if(4 < level && level <= 7) return 2;
+        else if(7 < level && level <= 10) return 3;
+        else if(10 < level && level <= 18) return 4;
+        else return 5;
     }
 
     private int GetMaxHypeTrainMeter()
