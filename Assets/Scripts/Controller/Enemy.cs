@@ -22,7 +22,7 @@ public class Enemy : BaseController
     {
         gameObject.SetActive(false);
         EnemyManager.RemoveEnemy(enemyPool);
-        EnemyManager.DropPresent(enemyPool, Present.Exp);
+        EnemyManager.DropPresent(enemyPool);
     }
 
     private void Update()

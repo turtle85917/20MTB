@@ -49,14 +49,6 @@ public class Game : MonoBehaviour
         StartCoroutine(CheckTime());
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Z))
-        {
-            donatedBoxPanel.Open();
-        }
-    }
-
     private void LateUpdate()
     {
         if(Player.playerData.health <= 0 && !isGameOver)

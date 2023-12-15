@@ -10,8 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8549622960818389329}
   - component: {fileID: 8549622960818389335}
+  - component: {fileID: 8089048423199221996}
   - component: {fileID: 8549622960818389334}
-  m_Layer: 0
+  - component: {fileID: 1617406265083477683}
+  - component: {fileID: 2923032789792379708}
+  m_Layer: 6
   m_Name: DonatedBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8549622960818389328}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.29, y: 0.449, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -85,6 +88,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!210 &8089048423199221996
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8549622960818389328}
+  m_Enabled: 1
+  m_SortingLayerID: 820465501
+  m_SortingLayer: 1
+  m_SortingOrder: 0
 --- !u!61 &8549622960818389334
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -111,3 +125,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0625, y: 0.677439}
   m_EdgeRadius: 0
+--- !u!50 &1617406265083477683
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8549622960818389328}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &2923032789792379708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8549622960818389328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb69c8c739a9854abdd5ed2043ea937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  presentType: 1

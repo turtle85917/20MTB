@@ -5125,6 +5125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exp: {fileID: 6774499916034219985, guid: 86e418ff4e317694da5bad3a7514086b, type: 3}
+  donatedBox: {fileID: 8549622960818389328, guid: af5d3a92c42cc264aa662382149d98cf, type: 3}
   Enemies: {fileID: 1145575509}
   enemies:
   - {fileID: 11400000, guid: 211c5ff8f02f5ea48a453c86f96cf0bf, type: 2}

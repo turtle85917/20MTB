@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class Exp : MonoBehaviour
+public class Present : MonoBehaviour
 {
+    public PresentType presentType;
     public int exp {private get; set;}
     private Rigidbody2D rigid;
 
@@ -23,7 +24,15 @@ public class Exp : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             gameObject.SetActive(false);
-            Player.playerData.exp += exp;
+            switch(presentType)
+            {
+                case PresentType.Exp:
+                    Player.playerData.exp += exp;
+                    break;
+                case PresentType.DonatedBox:
+                    Game.instance.donatedBoxPanel.Open();
+                    break;
+            }
         }
     }
 }

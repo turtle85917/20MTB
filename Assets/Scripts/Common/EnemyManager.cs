@@ -12,7 +12,7 @@ public class EnemyPool
     public EnemyData data;
 }
 
-public enum Present
+public enum PresentType
 {
     Exp,
     DonatedBox
@@ -21,9 +21,11 @@ public enum Present
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private GameObject exp;
+    [SerializeField] private GameObject donatedBox;
     [SerializeField] private GameObject Enemies;
     [SerializeField] private EnemyData[] enemies;
     private static EnemyManager instance;
+    private int killStack;
     private List<EnemyPool> enemyPools;
 
     public static GameObject NewEnemy(string enemyId, string twitchUserId = null)
@@ -65,14 +67,33 @@ public class EnemyManager : MonoBehaviour
         instance.enemyPools.Remove(pool);
     }
 
-    public static void DropPresent(EnemyPool enemyPool, Present present)
+    public static void DropPresent(EnemyPool enemyPool)
+    {
+        instance.killStack++;
+        if(instance.killStack >= 4)
+        {
+            instance.killStack = 0;
+            if(UnityEngine.Random.value < 0.3)
+            {
+                instance.DropPresent(enemyPool, PresentType.DonatedBox);
+            }
+        }
+        else if(UnityEngine.Random.value < 0.6f)
+            instance.DropPresent(enemyPool, PresentType.Exp);
+    }
+
+    private void DropPresent(EnemyPool enemyPool, PresentType present)
     {
         switch(present)
         {
-            case Present.Exp:
+            case PresentType.Exp:
                 GameObject exp = ObjectPool.Get(Game.PoolManager, "Exp", instance.exp);
                 exp.transform.position = enemyPool.target.transform.position;
-                exp.GetComponent<Exp>().exp = enemyPool.data.stats.Exp;
+                exp.GetComponent<Present>().exp = enemyPool.data.stats.Exp;
+                break;
+            case PresentType.DonatedBox:
+                GameObject donatedBox = ObjectPool.Get(Game.PoolManager, "DonatedBox", instance.donatedBox);
+                donatedBox.transform.position = enemyPool.target.transform.position;
                 break;
         }
     }

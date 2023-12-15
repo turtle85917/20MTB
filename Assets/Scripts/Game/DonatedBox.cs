@@ -16,7 +16,7 @@ public class DonatedBox : MonoBehaviour
     private float lastInputTime;
     private bool isPress;
     private readonly float delay = 0.15f;
-    private readonly Color APColor = new Color(153f / 255f, 72f / 255f, 214f / 255f);
+    private readonly Color MeterColor = new Color(153f / 255f, 72f / 255f, 214f / 255f);
     private readonly string[] presentNames = new string[]{
         "체력",
         "경험치",
@@ -47,7 +47,7 @@ public class DonatedBox : MonoBehaviour
                 if(Time.time - lastInputTime < delay)
                 {
                     combo++;
-                    ((RectTransform)DonatedBoxPanel.transform).anchoredPosition = Random.insideUnitCircle * 4f * combo;
+                    ((RectTransform)DonatedBoxPanel.transform).anchoredPosition = Random.insideUnitCircle * 3f * combo;
                 }
                 lastInputTime = Time.time;
             }
@@ -117,7 +117,7 @@ public class DonatedBox : MonoBehaviour
                             break;
                     }
                     item.sprite = presentSprites[present];
-                    item.color = present == 2 ? APColor : Color.white;
+                    item.color = present == 2 ? MeterColor : Color.white;
                     itemName.text = presentNames[present] + " +" + value;
                     break;
             }
