@@ -66,6 +66,7 @@ public class DonatedBox : MonoBehaviour
                 if(Time.time - lastInputTime < delay)
                 {
                     combo++;
+                    Camera.main.transform.position = FixedPosition() + (Vector3)Random.insideUnitCircle * 0.5f;
                     ((RectTransform)DonatedBoxPanel.transform).anchoredPosition = Random.insideUnitCircle * 3f * combo;
                 }
                 lastInputTime = Time.time;
@@ -78,6 +79,7 @@ public class DonatedBox : MonoBehaviour
         }
         if(Input.GetKeyUp(KeyCode.Space) && isPress)
         {
+            Camera.main.transform.position = FixedPosition();
             ((RectTransform)DonatedBoxPanel.transform).anchoredPosition = Vector2.zero;
         }
         if(combo == 20 && isPress)
@@ -111,6 +113,7 @@ public class DonatedBox : MonoBehaviour
     {
         PressSpace.SetActive(false);
         donatedBoxAnimator.SetTrigger("Open");
+        Camera.main.transform.position = FixedPosition();
         ((RectTransform)DonatedBoxPanel.transform).anchoredPosition = Vector2.zero;
 
         ItemType itemType;
@@ -173,10 +176,14 @@ public class DonatedBox : MonoBehaviour
     private IEnumerator HypeTrain()
     {
         yield return new WaitForSecondsRealtime(2.5f);
-        HypeTrainPanel.gameObject.SetActive(true);
-        HypeTrainLevelUpPanel.gameObject.SetActive(false);
-        HypeTrainPanel.SetTrigger("Open");
-        CheckLevelUp();
+        if(Player.playerData.hypeTrain.beforeMeter != Player.playerData.hypeTrain.meter)
+        {
+            HypeTrainPanel.gameObject.SetActive(true);
+            HypeTrainLevelUpPanel.gameObject.SetActive(false);
+            HypeTrainPanel.SetTrigger("Open");
+            Player.playerData.hypeTrain.beforeMeter = Player.playerData.hypeTrain.meter;
+            CheckLevelUp();
+        }
     }
 
     private int GetMaxHypeTrainMeter()
@@ -186,4 +193,6 @@ public class DonatedBox : MonoBehaviour
         for(int i = 0; i < level; i++) result += (level - i) * 1000;
         return result;
     }
+
+    private Vector3 FixedPosition() => new Vector3(Player.@object.transform.position.x, Player.@object.transform.position.y, -10);
 }

@@ -18,6 +18,7 @@ public class HypeTrain
 {
     public int level;
     public int meter;
+    public int beforeMeter;
 }
 
 public class Player : BaseController
