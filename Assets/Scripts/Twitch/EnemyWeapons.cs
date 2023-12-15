@@ -51,7 +51,7 @@ public class EnemyWeapons : MonoBehaviour
         if(spawners.Count > 0) return;
         level = Level.Voting;
         ShowContent(0);
-        animation.Play("UsableWeaponsPanel_Show");
+        animation.Play("Panel_Show");
         Weapon[] useableWeapons = WeaponBundle.GetWeapons(item => item.type == "N");
         foreach(WeaponItem weaponItem in weaponItems)
         {
@@ -145,6 +145,6 @@ public class EnemyWeapons : MonoBehaviour
     private IEnumerator HidePanel()
     {
         yield return new WaitForSecondsRealtime(3f);
-        animation.Play("UsableWeaponsPanel_Hide");
+        animation.Play("Panel_Hide");
     }
 }

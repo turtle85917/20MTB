@@ -36,7 +36,7 @@ namespace _20MTB.Utillity
 
         public static int GetNeedExpFromLevel()
         {
-            return 50 * Player.playerData.level + 10;
+            return 50 * Mathf.Max(Player.playerData.level, 1);
         }
 
         public static GameObject FindGameObjectInChildWithTag(GameObject parent, string tag)

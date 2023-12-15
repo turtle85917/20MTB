@@ -6,10 +6,18 @@ using UnityEngine.UI;
 public class PlayerStatus
 {
     public int health;
+    public int maxHealth;
     public int level;
     public int exp;
     public List<Weapon> weapons;
+    public HypeTrain hypeTrain;
     public PlayerData data;
+}
+
+public class HypeTrain
+{
+    public int level;
+    public int meter;
 }
 
 public class Player : BaseController
@@ -37,6 +45,11 @@ public class Player : BaseController
             health = data.stats.MaxHealth,
             level = 0, exp = 0,
             weapons = new List<Weapon>(){},
+            hypeTrain = new HypeTrain()
+            {
+                level = 1,
+                meter = 0
+            },
             data = data
         };
         animator.runtimeAnimatorController = data.controller;
