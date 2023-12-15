@@ -1,4 +1,5 @@
 using System.Collections;
+using _20MTB.Utillity;
 using UnityEngine;
 
 public class CameraAgent : MonoBehaviour
@@ -24,21 +25,21 @@ public class CameraAgent : MonoBehaviour
     public void Reset()
     {
         status = Status.Idle;
-        Camera.main.transform.position = FixedPosition();
+        Camera.main.transform.position = GameUtils.FixedPosition();
     }
 
     private void Update()
     {
         if(status == Status.Shaking)
         {
-            Camera.main.transform.position = FixedPosition() + (Vector3)Random.insideUnitCircle * 0.5f;
+            Camera.main.transform.position = GameUtils.FixedPosition() + (Vector3)Random.insideUnitCircle * 0.5f;
         }
     }
 
     private void LateUpdate()
     {
         if(Game.isPaused || status == Status.Shaking) return;
-        Camera.main.transform.position = FixedPosition();
+        Camera.main.transform.position = GameUtils.FixedPosition();
     }
 
     private IEnumerator ShakeReset(float time)
@@ -46,6 +47,4 @@ public class CameraAgent : MonoBehaviour
         yield return new WaitForSeconds(time);
         Reset();
     }
-
-    private Vector3 FixedPosition() => new Vector3(Player.@object.transform.position.x, Player.@object.transform.position.y, -10);
 }

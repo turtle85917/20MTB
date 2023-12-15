@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using _20MTB.Utillity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -66,7 +67,7 @@ public class DonatedBox : MonoBehaviour
                 if(Time.time - lastInputTime < delay)
                 {
                     combo++;
-                    Camera.main.transform.position = FixedPosition() + (Vector3)Random.insideUnitCircle * 0.5f;
+                    Camera.main.transform.position = GameUtils.FixedPosition() + (Vector3)Random.insideUnitCircle * 0.5f;
                     ((RectTransform)DonatedBoxPanel.transform).anchoredPosition = Random.insideUnitCircle * 3f * combo;
                 }
                 lastInputTime = Time.time;
@@ -79,7 +80,7 @@ public class DonatedBox : MonoBehaviour
         }
         if(Input.GetKeyUp(KeyCode.Space) && isPress)
         {
-            Camera.main.transform.position = FixedPosition();
+            Camera.main.transform.position = GameUtils.FixedPosition();
             ((RectTransform)DonatedBoxPanel.transform).anchoredPosition = Vector2.zero;
         }
         if(combo == 20 && isPress)
@@ -113,7 +114,7 @@ public class DonatedBox : MonoBehaviour
     {
         PressSpace.SetActive(false);
         donatedBoxAnimator.SetTrigger("Open");
-        Camera.main.transform.position = FixedPosition();
+        Camera.main.transform.position = GameUtils.FixedPosition();
         ((RectTransform)DonatedBoxPanel.transform).anchoredPosition = Vector2.zero;
 
         ItemType itemType;
@@ -193,6 +194,4 @@ public class DonatedBox : MonoBehaviour
         for(int i = 0; i < level; i++) result += (level - i) * 1000;
         return result;
     }
-
-    private Vector3 FixedPosition() => new Vector3(Player.@object.transform.position.x, Player.@object.transform.position.y, -10);
 }

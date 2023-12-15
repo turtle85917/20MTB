@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using _20MTB.Utillity;
 using TMPro;
 using UnityEngine;
 
@@ -41,12 +42,11 @@ public class DebugTool : MonoBehaviour
                 Panel.SetActive(true);
                 Contents[(int)contentShortcut[key]].SetActive(true);
                 openContent = contentShortcut[key];
-                if(!Game.isPaused)
-                    Game.Pause();
+                Game.Pause();
                 break;
             }
         }
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && Panel.activeSelf)
         {
             Reset();
             Game.Resume();
@@ -104,8 +104,8 @@ public class DebugTool : MonoBehaviour
     {
         level = 0;
         selectTarget = null;
-        Camera.main.transform.position = Player.@object.transform.position + Vector3.back * 10;
         Panel.SetActive(false);
+        Camera.main.transform.position = GameUtils.FixedPosition();
         foreach(GameObject Content in Contents)
             Content.SetActive(false);
     }

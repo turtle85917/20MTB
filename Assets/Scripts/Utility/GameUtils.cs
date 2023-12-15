@@ -51,5 +51,7 @@ namespace _20MTB.Utillity
             }
             return null;
         }
+
+        public static Vector3 FixedPosition() => new Vector3(Player.@object.transform.position.x, Player.@object.transform.position.y, -10);
     }
 }
