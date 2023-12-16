@@ -19,4 +19,4 @@ MonoBehaviour:
     Power: 10
     MinMoveSpeed: 1
     MaxMoveSpeed: 2
-    Exp: 50
+    Exp: 0

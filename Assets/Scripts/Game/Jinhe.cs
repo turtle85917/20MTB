@@ -1,47 +1,85 @@
 using System.Collections;
+using _20MTB.Utillity;
 using UnityEngine;
 
 public class Jinhe : MonoBehaviour
 {
-    public float life {private get; set;}        // 진희 생존 시간
-    public GameObject weaponUser;                // 사용할 무기를 사용하고 있는 대상
-    public EnemyPool weaponOwner;   // 무기 원래 사용자 (적 전용)
+    public float life {private get; set;}
+    public string targetTag {private get; set;}
+    public EnemyPool weaponOwner;
+    private GameObject followTarget;
     private Rigidbody2D rigid;
+    private Animator animator;
     private SpriteRenderer sprite;
+    private bool isDie;
 
     public void Init()
     {
+        isDie = false;
         rigid.velocity = Vector2.zero;
-        StartCoroutine(Dead());
+        StartCoroutine(FinishingWeaponLifetime());
     }
 
-    public void OnBrokenWeapon()
+    public void OnDie()
     {
-        StopAllCoroutines();
-        gameObject.SetActive(false);
+        isDie = true;
+        animator.SetTrigger("isDied");
     }
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        sprite.flipX = transform.position.x < weaponUser.transform.position.x;
+        if(isDie) return;
+        if(followTarget == null)
+        {
+            GameObject[] targets = Scanner.ScanAll(transform.position, 80f, targetTag);
+            followTarget = targets.Length == 0 ? null : targets[Random.Range(0, targets.Length)];
+        }
+        else if(Vector3.Distance(followTarget.transform.position, Player.@object.transform.position) > 10f)
+        {
+            followTarget = null;
+        }
     }
 
     private void FixedUpdate()
     {
-        // 자기 편을 따라감
-        Vector3 distance = weaponUser.transform.position - transform.position;
-        rigid.MovePosition(Vector3.MoveTowards(rigid.position, weaponUser.transform.position - distance.normalized * 3, 15 * Time.fixedDeltaTime));
+        if(isDie) return;
+        if(followTarget == null)
+        {
+            animator.SetBool("isWalk", false);
+        }
+        else
+        {
+            animator.SetBool("isWalk", true);
+            sprite.flipX = transform.position.x < followTarget.transform.position.x;
+            Vector3 position = Vector3.MoveTowards(rigid.position, followTarget.transform.position, 1.4f * Time.fixedDeltaTime);
+            rigid.MovePosition(GameUtils.MovePositionLimited(position));
+        }
     }
 
-    private IEnumerator Dead()
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.Equals(followTarget))
+        {
+            followTarget = null;
+        }
+    }
+
+    private void OnDieAnimEnd()
+    {
+        StopAllCoroutines();
+        gameObject.SetActive(false);
+    }
+
+    private IEnumerator FinishingWeaponLifetime()
     {
         yield return new WaitForSeconds(life);
-        gameObject.SetActive(false);
+        OnDie();
     }
 }

@@ -133,14 +133,14 @@ public class DonatedBox : MonoBehaviour
                 item.color = Color.white;
                 itemName.text = decideWeapon.name;
 
-                int maxLevel = GetWeaponUpgradeLevel();
-                bool hasWeapon = Player.playerData.weapons.Exists(item => item.weapon.weaponId == decideWeapon.weapon.weaponId);
-                if(!hasWeapon)
+                int maxUpLevel = GetWeaponUpgradeLevel();
+                Weapon playerWeapon = Player.playerData.weapons.Find(item => item.weapon.weaponId == decideWeapon.weapon.weaponId);
+                if(playerWeapon == null)
                 {
-                    maxLevel -= 1;
+                    maxUpLevel -= 1;
                     WeaponBundle.AddWeaponToTarget(Player.@object, decideWeapon.weapon.weaponId);
                 }
-                for(int i = 0; i < Mathf.Min(maxLevel, decideWeapon.weapon.levels.Length); i++)
+                for(int i = 0; i < Mathf.Min(maxUpLevel, decideWeapon.weapon.levels.Length - playerWeapon.level); i++)
                     WeaponBundle.UpgradeTargetsWeapon(Player.@object, decideWeapon.weapon.weaponId);
 
                 Weapon GetRandomWeapon()

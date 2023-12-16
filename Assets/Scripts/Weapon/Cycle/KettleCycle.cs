@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using _20MTB.Utillity;
 using UnityEngine;
 
 public class KettleCycle : BaseCycle
@@ -10,7 +11,7 @@ public class KettleCycle : BaseCycle
         {
             Weapon weapon = WeaponBundle.GetWeaponFromTarget("Kettle", weaponUser);
             if(weapon == null) yield break;
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(weapon.stats.Cooldown);
             Weapon selectWeapon = null;
             EnemyPool selectEnemyPool = null;
             switch(weaponUser.tag)
@@ -40,8 +41,8 @@ public class KettleCycle : BaseCycle
                     ? EnemyManager.GetEnemy(weaponUser).weapon.stats.Life
                     : weapon.stats.Life
                 ;
-                script.weaponUser = weaponUser;
                 script.weaponOwner = selectEnemyPool;
+                script.targetTag = GameUtils.GetTargetTag(weaponUser);
                 script.Init();
                 System.Type monoscript = selectWeapon.weapon.weaponCycleScriptFile.GetClass();
                 BaseCycle baseCycle = System.Activator.CreateInstance(monoscript) as BaseCycle;

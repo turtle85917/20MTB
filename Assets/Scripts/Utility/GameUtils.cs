@@ -39,12 +39,12 @@ namespace _20MTB.Utillity
             return 50 * Mathf.Max(Player.playerData.level, 1);
         }
 
-        public static GameObject FindGameObjectInChildWithTag(GameObject parent, string tag)
+        public static GameObject GetWeaponsObject(GameObject parent)
         {
             Transform transform = parent.transform;
             for (int i = 0; i < transform.childCount; i++) 
             {
-                if(transform.GetChild(i).CompareTag(tag))
+                if(transform.GetChild(i).CompareTag("Weapons"))
                 {
                     return transform.GetChild(i).gameObject;
                 }

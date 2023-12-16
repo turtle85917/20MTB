@@ -20,7 +20,7 @@ public abstract class BaseWeapon : MonoBehaviour
             {
                 if(_penetrate == stats.Penetrate + stats.Count)
                 {
-                    weaponUser.GetComponent<Jinhe>().OnBrokenWeapon();
+                    weaponUser.GetComponent<Jinhe>().OnDie();
                 }
             }
             else

@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3179883981209954397}
   - component: {fileID: 3179883981209954395}
+  - component: {fileID: 4604346619405758123}
   - component: {fileID: 3464706182979701564}
   - component: {fileID: 3179883981209954394}
   - component: {fileID: 2796325850648833963}
+  - component: {fileID: 6891959932741326411}
   m_Layer: 6
   m_Name: Jinhe
   m_TagString: Untagged
@@ -29,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3179883981209954396}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5916234219001956446}
@@ -76,8 +78,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: d2394e0a3b2fd1c4dbf629e71a31e6ef, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -1560267923, guid: d2394e0a3b2fd1c4dbf629e71a31e6ef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -88,6 +90,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!210 &4604346619405758123
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3179883981209954396}
+  m_Enabled: 1
+  m_SortingLayerID: 820465501
+  m_SortingLayer: 1
+  m_SortingOrder: 0
 --- !u!70 &3464706182979701564
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -98,7 +111,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.09340376, y: 0.099120036}
@@ -137,7 +150,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f44df76d20e2204a9e680622b8eb16b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponUser: {fileID: 0}
+--- !u!95 &6891959932741326411
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3179883981209954396}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 80aaab1eefee84b4badde3a368251fbd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &4040590289650917921
 GameObject:
   m_ObjectHideFlags: 0

@@ -131,7 +131,7 @@ public class WeaponBundle : MonoBehaviour
                     ProjectileSize = (int)TryGetNumValue(excelData["ProjectileSize"]),
                     ProjectileSpeed = (int)TryGetNumValue(excelData["ProjectileSpeed"]),
                     ProjectileCount = (int)TryGetNumValue(excelData["ProjectileCount"]),
-                    Count = (int)TryGetNumValue(excelData["Count"])
+                    Count = 0
                 }
             };
             assets.Add(weapon);

@@ -7,7 +7,7 @@ public static class Scanner
 {
     public static bool IsAnyTargetAround(Vector2 origin, float radius, string tag) => Physics2D.CircleCastAll(origin, radius, Vector2.right).Where(item => item.collider.CompareTag(tag)).ToArray().Length > 0;
 
-    public static List<GameObject> ScanAll(Vector2 origin, float radius, string tag, int limit = 0)
+    public static GameObject[] ScanAll(Vector2 origin, float radius, string tag, int limit = 0)
     {
         List<GameObject> result = new List<GameObject>(){};
         ProcessRaycast(origin, radius, (RaycastHit2D raycast) => {
@@ -17,7 +17,7 @@ public static class Scanner
                 result.Add(raycast.collider.gameObject);
             }
         });
-        return result;
+        return result.ToArray();
     }
 
     public static GameObject Scan(Vector2 origin, float radius, string tag, GameObject[] list = null)
