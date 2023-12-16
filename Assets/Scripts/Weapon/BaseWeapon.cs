@@ -18,7 +18,7 @@ public abstract class BaseWeapon : MonoBehaviour
             if(value > 0) count++;
             if(weaponUser?.name == "Jinhe")
             {
-                if(_penetrate == stats.Penetrate + stats.Count)
+                if(_penetrate == stats.Penetrate)
                 {
                     weaponUser.GetComponent<Jinhe>().OnDie();
                 }
@@ -43,10 +43,7 @@ public abstract class BaseWeapon : MonoBehaviour
             if(weaponUser && weaponUser.CompareTag("Enemy"))
             {
                 _count = value;
-                if(_count == stats.Penetrate + stats.Count)
-                {
-                    gameObject.SetActive(false);
-                }
+                if(_count == stats.Penetrate) gameObject.SetActive(false);
             }
         }
     }

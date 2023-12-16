@@ -29,8 +29,7 @@ public class Weapon
                 CriticalDamage = Mathf.CeilToInt(stats.CriticalDamage * decrease),
                 ProjectileSize = stats.ProjectileSize,
                 ProjectileSpeed = stats.ProjectileSpeed,
-                ProjectileCount = stats.ProjectileCount,
-                Count = stats.Count
+                ProjectileCount = stats.ProjectileCount
             }
         };
     }

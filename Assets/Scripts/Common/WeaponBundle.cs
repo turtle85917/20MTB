@@ -130,8 +130,7 @@ public class WeaponBundle : MonoBehaviour
                     CriticalDamage = (int)excelData["CriticalDamage"],
                     ProjectileSize = (int)TryGetNumValue(excelData["ProjectileSize"]),
                     ProjectileSpeed = (int)TryGetNumValue(excelData["ProjectileSpeed"]),
-                    ProjectileCount = (int)TryGetNumValue(excelData["ProjectileCount"]),
-                    Count = 0
+                    ProjectileCount = (int)TryGetNumValue(excelData["ProjectileCount"])
                 }
             };
             assets.Add(weapon);
