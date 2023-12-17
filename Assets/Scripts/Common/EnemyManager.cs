@@ -35,7 +35,7 @@ public class EnemyManager : MonoBehaviour
         EnemyPool enemyPool = new EnemyPool(){
             target = enemy,
             health = enemyData.stats.MaxHealth,
-            moveSpeed = UnityEngine.Random.Range(enemyData.stats.MinMoveSpeed, enemyData.stats.MaxMoveSpeed),
+            moveSpeed = enemyData.stats.MoveSpeed * (UnityEngine.Random.value * 0.5f + 1),
             twitchUserId = twitchUserId,
             weapon = null,
             data = enemyData

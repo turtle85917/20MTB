@@ -7,7 +7,6 @@ public class Enemy : BaseController
     public GameObject text {private get; set;}                      // 트위치 닉네임 텍스트
     public EnemyPool enemyPool {private get; set;}
     private Affecter affecter;
-    public bool isSlowing {get; private set;}                       // 현재 느리게 걷고 있는 중인가?
     private bool isDied;                                            // 죽은 상태인가?
     private IEnumerator attackPlayerCoro;
 
@@ -84,10 +83,6 @@ public class Enemy : BaseController
             if(other.CompareTag("Player"))
             {
                 StopCoroutine(attackPlayerCoro);
-            }
-            if(other.CompareTag("Enemy"))
-            {
-                isSlowing = false;
             }
         }
     }

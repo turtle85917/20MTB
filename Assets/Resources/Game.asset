@@ -19,3 +19,4 @@ MonoBehaviour:
     circleRadius: 11
     enemies:
     - {fileID: 11400000, guid: 211c5ff8f02f5ea48a453c86f96cf0bf, type: 2}
+    - {fileID: 11400000, guid: 153bf67d650addb4290c7fc983a6512a, type: 2}

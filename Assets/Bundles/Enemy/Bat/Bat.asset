@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7d1362e8a2a5b04bbe4ecfb0c80bc0e, type: 3}
-  m_Name: Panzee
+  m_Name: Bat
   m_EditorClassIdentifier: 
-  enemyId: Panzee
-  Prefab: {fileID: 4546626817620932141, guid: 7abde2c39dd6d59438abb0422d91fcf0, type: 3}
+  enemyId: Bat
+  Prefab: {fileID: 7122818673450888234, guid: 52a84e72b4cadb24e82e66e9da4a0375, type: 3}
   stats:
-    MaxHealth: 15
-    Power: 10
-    MoveSpeed: 2
-    Exp: 4
+    MaxHealth: 4
+    Power: 8
+    MoveSpeed: 3
+    Exp: 6

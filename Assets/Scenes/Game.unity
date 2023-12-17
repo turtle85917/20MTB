@@ -2876,7 +2876,7 @@ Camera:
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
-  m_FOVAxisMode: 0
+  m_FOVAxisMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
   m_FocalLength: 50
@@ -4877,8 +4877,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uAC8C\uC784 \uC624\uBC84...!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dec575a20c40ac34898eef67146e5c20, type: 2}
-  m_sharedMaterial: {fileID: 6978077773989395553, guid: dec575a20c40ac34898eef67146e5c20, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d918d5a1bb11883458435ae1d9d3074d, type: 2}
+  m_sharedMaterial: {fileID: -732964487156647326, guid: d918d5a1bb11883458435ae1d9d3074d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5404,6 +5404,7 @@ MonoBehaviour:
   Enemies: {fileID: 1145575509}
   enemies:
   - {fileID: 11400000, guid: 211c5ff8f02f5ea48a453c86f96cf0bf, type: 2}
+  - {fileID: 11400000, guid: 153bf67d650addb4290c7fc983a6512a, type: 2}
 --- !u!114 &1210831723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5799,8 +5800,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uB3CC\uC544\uAC00\uAE30"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dec575a20c40ac34898eef67146e5c20, type: 2}
-  m_sharedMaterial: {fileID: 6978077773989395553, guid: dec575a20c40ac34898eef67146e5c20, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d918d5a1bb11883458435ae1d9d3074d, type: 2}
+  m_sharedMaterial: {fileID: -732964487156647326, guid: d918d5a1bb11883458435ae1d9d3074d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -18,8 +18,7 @@ namespace _20MTB.Stats
     {
         public int MaxHealth;
         public int Power;
-        public float MinMoveSpeed;
-        public float MaxMoveSpeed;
+        public float MoveSpeed;
         public int Exp;
     }
     #endregion
