@@ -15,7 +15,7 @@ public class TextManager : MonoBehaviour
         tmpText.text = chat.userName;
         ColorUtility.TryParseHtmlString(chat.color, out Color color);
         tmpText.color = color;
-        target.GetComponent<Enemy>().text = text;
+        target.GetComponent<EnemyAIStruct>().text = text;
     }
 
     public static void WriteDamage(GameObject target, int value, bool critical)

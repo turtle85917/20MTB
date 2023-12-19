@@ -2,20 +2,13 @@ using System.Collections;
 using _20MTB.Utillity;
 using UnityEngine;
 
-public class Enemy : BaseController
+public class EnemyAIStruct : BaseController
 {
-    public GameObject text {private get; set;}                      // 트위치 닉네임 텍스트
-    public EnemyPool enemyPool {private get; set;}
-    private Affecter affecter;
-    private bool isDied;                                            // 죽은 상태인가?
+    public GameObject text {protected get; set;}
+    public EnemyPool enemyPool {protected get; set;}
+    protected Affecter affecter;
+    protected bool isDied;
     private IEnumerator attackPlayerCoro;
-
-    protected override void Init()
-    {
-        rigid = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        affecter = GetComponent<Affecter>();
-    }
 
     public override void OnDie()
     {
@@ -24,23 +17,11 @@ public class Enemy : BaseController
         EnemyManager.DropPresent(enemyPool);
     }
 
-    private void Update()
+    protected override void Init()
     {
-        if(Game.isGameOver) return;
-        if(enemyPool.health <= 0 && !isDied)
-        {
-            isDied = true;
-            text?.SetActive(false);
-            rigid.velocity = Vector2.zero;
-            StopAllCoroutines();
-            affecter.Reset();
-            animator.SetTrigger("isDied");
-        }
-        else
-        {
-            animator.SetBool("isWalk", affecter.status == Affecter.Status.Idle);
-            transform.rotation = Quaternion.AngleAxis(Player.@object.transform.position.x < transform.position.x ? 180 : 0, Vector3.up);
-        }
+        rigid = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        affecter = GetComponent<Affecter>();
     }
 
     private void FixedUpdate()
@@ -50,6 +31,19 @@ public class Enemy : BaseController
         {
             Vector3 position = Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed * Time.fixedDeltaTime);
             rigid.MovePosition(GameUtils.MovePositionLimited(position));
+        }
+    }
+
+    protected void Update()
+    {
+        if(enemyPool.health <= 0 && !isDied)
+        {
+            isDied = true;
+            text?.SetActive(false);
+            rigid.velocity = Vector2.zero;
+            StopAllCoroutines();
+            affecter.Reset();
+            animator.SetTrigger("isDied");
         }
     }
 

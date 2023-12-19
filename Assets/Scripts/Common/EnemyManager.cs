@@ -40,7 +40,7 @@ public class EnemyManager : MonoBehaviour
             weapon = null,
             data = enemyData
         };
-        enemy.GetComponent<Enemy>().enemyPool = enemyPool;
+        enemy.GetComponent<EnemyAIStruct>().enemyPool = enemyPool;
         instance.enemyPools.Add(enemyPool);
         return enemy;
     }
