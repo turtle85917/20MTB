@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using _20MTB.Utillity;
 using UnityEngine;
@@ -62,6 +63,7 @@ public class Player : BaseController
     {
         UIManager.instance.GameOverPanel.SetActive(true);
         UIManager.instance.GameOverPanel.GetComponent<Animation>().Play("GameOverPanel_Show");
+        StartCoroutine(DelayedPause());
     }
 
     private void Update()
@@ -80,5 +82,11 @@ public class Player : BaseController
         {
             lastDirection = inputDirection;
         }
+    }
+
+    private IEnumerator DelayedPause()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Game.Pause();
     }
 }

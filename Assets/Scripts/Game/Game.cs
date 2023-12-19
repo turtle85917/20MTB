@@ -101,11 +101,37 @@ public class Game : MonoBehaviour
     {
         while(time < maxTime)
         {
-            SpawnEnemies();
-            if(time > 0 && time % 5 == 0)
+            if(time > 0 && time % 12 == 0)
             {
                 usableWeaponsPanel.PickupWeapons();
             }
+            if(time > 0 && time % 5 == 0)
+            {
+                int spot = Random.Range(0, 4);
+                Vector2 direction;
+                switch(spot)
+                {
+                    default:
+                    case 0:
+                        direction = Vector2.up;
+                        break;
+                    case 1:
+                        direction = Vector2.down;
+                        break;
+                    case 2:
+                        direction = Vector2.right;
+                        break;
+                    case 3:
+                        direction = Vector2.left;
+                        break;
+                }
+                for(int i = 0; i < 10; i++)
+                {
+                    GameObject enemy = EnemyManager.NewRandomEnemy();
+                    enemy.transform.position = (Vector2)Player.@object.transform.position + direction * 10f + Random.insideUnitCircle * 3f;
+                }
+            }
+            SpawnEnemies();
             yield return new WaitForSeconds(1f);
             time += 1;
             TimerText.text = System.TimeSpan.FromSeconds(maxTime - time).ToString(@"mm\:ss");

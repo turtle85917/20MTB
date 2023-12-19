@@ -44,6 +44,11 @@ public class EnemyManager : MonoBehaviour
         instance.enemyPools.Add(enemyPool);
         return enemy;
     }
+    public static GameObject NewRandomEnemy()
+    {
+        EnemyData enemy = instance.enemies[UnityEngine.Random.Range(0, instance.enemies.Length)];
+        return NewEnemy(enemy.enemyId);
+    }
 
     public static EnemyPool GetEnemy(GameObject enemy)
     {
