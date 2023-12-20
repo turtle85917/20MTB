@@ -1,5 +1,4 @@
 using System;
-using _20MTB.Stats;
 using UnityEngine;
 
 public static class AttackManager
@@ -98,21 +97,6 @@ public static class AttackManager
             if(enemyPool == null) return;
             enemyPool.health -= value;
             TextManager.WriteDamage(target, value, false);
-        }
-    }
-
-    public static void HealTarget(int value, GameObject target)
-    {
-        if(target.CompareTag("Player"))
-        {
-            Player.playerData.health += value;
-            TextManager.WriteDamage(Player.@object, -value, false);
-        }
-        else
-        {
-            EnemyPool enemyPool = EnemyManager.GetEnemy(target);
-            enemyPool.health += value;
-            TextManager.WriteDamage(enemyPool.target, -value, false);
         }
     }
 

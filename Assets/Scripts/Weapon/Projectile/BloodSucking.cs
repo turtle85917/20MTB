@@ -33,7 +33,7 @@ public class BloodSucking : BaseWeapon
         yield return new WaitForSeconds(0.3f);
         transform.position = Player.@object.transform.position;
         AttackManager.AttackTarget("BloodSucking", Player.@object, 0, source:weaponUser);
-        AttackManager.HealTarget(10, weaponUser);
+        AttackManager.AttackTarget(-10, weaponUser, EnemyManager.GetEnemy(weaponUser));
     }
 
     private IEnumerator AttackEnemy()
@@ -50,7 +50,7 @@ public class BloodSucking : BaseWeapon
                 if(++i == stats.Penetrate) break;
                 AttackManager.AttackTarget("BloodSucking", raycast.collider.gameObject, 0, source:weaponUser);
                 if(i < stats.Penetrate / 2)
-                    AttackManager.HealTarget(i, weaponUser);
+                    AttackManager.AttackTarget(-i, weaponUser, null);
             }
         }
     }

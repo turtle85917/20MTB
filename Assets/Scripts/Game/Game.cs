@@ -105,7 +105,7 @@ public class Game : MonoBehaviour
             {
                 usableWeaponsPanel.PickupWeapons();
             }
-            if(time > 0 && time % 5 == 0)
+            if(time > 0 && time % 4 == 0)
             {
                 int spot = Random.Range(0, 4);
                 Vector2 direction;
@@ -125,7 +125,7 @@ public class Game : MonoBehaviour
                         direction = Vector2.left;
                         break;
                 }
-                for(int i = 0; i < 10; i++)
+                for(int i = 0; i < 5; i++)
                 {
                     GameObject enemy = EnemyManager.NewRandomEnemy();
                     enemy.transform.position = (Vector2)Player.@object.transform.position + direction * 10f + Random.insideUnitCircle * 3f;

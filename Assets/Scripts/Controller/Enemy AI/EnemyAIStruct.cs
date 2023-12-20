@@ -27,6 +27,7 @@ public class EnemyAIStruct : BaseController
     private void FixedUpdate()
     {
         if(Game.isGameOver) return;
+        Debug.Log(affecter.status);
         if(!isDied && affecter.status == Affecter.Status.Idle)
         {
             Vector3 position = Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed * Time.fixedDeltaTime);
@@ -52,11 +53,14 @@ public class EnemyAIStruct : BaseController
         if(text != null) text.transform.localPosition = (Vector2)transform.position + Vector2.down * 1.3f;
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
+        affecter?.Reset();
+        isDied = false;
         StopAllCoroutines();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected void OnTriggerEnter2D(Collider2D other)
     {
         // 진희가 어느 편이든 무시하기
         if(other.name != "Jinhe")
@@ -69,7 +73,7 @@ public class EnemyAIStruct : BaseController
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    protected void OnTriggerExit2D(Collider2D other)
     {
         // 진희가 어느 편이든 무시하기
         if(other.name != "Jinhe")

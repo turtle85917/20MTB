@@ -42,8 +42,8 @@ public class Affecter : MonoBehaviour
 
     public void Reset()
     {
-        status = Status.Idle;
         _status = Status.Idle;
+        status = Status.Idle;
         StopAllCoroutines();
     }
 

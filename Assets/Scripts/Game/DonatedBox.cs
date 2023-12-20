@@ -140,7 +140,7 @@ public class DonatedBox : MonoBehaviour
                     maxUpLevel -= 1;
                     WeaponBundle.AddWeaponToTarget(Player.@object, decideWeapon.weapon.weaponId);
                 }
-                for(int i = 0; i < Mathf.Min(maxUpLevel, decideWeapon.weapon.levels.Length - playerWeapon.level); i++)
+                for(int i = 0; i < Mathf.Min(maxUpLevel, decideWeapon.weapon.levels.Length - playerWeapon?.level ?? 0); i++)
                     WeaponBundle.UpgradeTargetsWeapon(Player.@object, decideWeapon.weapon.weaponId);
 
                 Weapon GetRandomWeapon()
