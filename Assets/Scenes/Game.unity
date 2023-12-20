@@ -5404,6 +5404,7 @@ MonoBehaviour:
   Enemies: {fileID: 1145575509}
   enemies:
   - {fileID: 11400000, guid: 211c5ff8f02f5ea48a453c86f96cf0bf, type: 2}
+  - {fileID: 11400000, guid: 879e6859e58fe264c9a1988bb20f1a4b, type: 2}
   - {fileID: 11400000, guid: 153bf67d650addb4290c7fc983a6512a, type: 2}
 --- !u!114 &1210831723
 MonoBehaviour:
