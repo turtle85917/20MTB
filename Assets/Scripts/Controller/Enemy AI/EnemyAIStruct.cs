@@ -1,4 +1,3 @@
-using System.Collections;
 using _20MTB.Utillity;
 using UnityEngine;
 
@@ -8,7 +7,6 @@ public class EnemyAIStruct : BaseController
     public EnemyPool enemyPool {protected get; set;}
     protected Affecter affecter;
     protected bool isDied;
-    private IEnumerator attackPlayerCoro;
 
     public override void OnDie()
     {
@@ -27,7 +25,6 @@ public class EnemyAIStruct : BaseController
     private void FixedUpdate()
     {
         if(Game.isGameOver) return;
-        Debug.Log(affecter.status);
         if(!isDied && affecter.status == Affecter.Status.Idle)
         {
             Vector3 position = Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed * Time.fixedDeltaTime);
@@ -46,6 +43,7 @@ public class EnemyAIStruct : BaseController
             affecter.Reset();
             animator.SetTrigger("isDied");
         }
+        transform.rotation = Quaternion.AngleAxis(Player.@object.transform.position.x < transform.position.x ? 180 : 0, Vector3.up);
     }
 
     private void LateUpdate()
@@ -58,39 +56,5 @@ public class EnemyAIStruct : BaseController
         affecter?.Reset();
         isDied = false;
         StopAllCoroutines();
-    }
-
-    protected void OnTriggerEnter2D(Collider2D other)
-    {
-        // 진희가 어느 편이든 무시하기
-        if(other.name != "Jinhe")
-        {
-            if(affecter.status == Affecter.Status.Idle && other.CompareTag("Player"))
-            {
-                attackPlayerCoro = AttackPlayer();
-                StartCoroutine(attackPlayerCoro);
-            }
-        }
-    }
-
-    protected void OnTriggerExit2D(Collider2D other)
-    {
-        // 진희가 어느 편이든 무시하기
-        if(other.name != "Jinhe")
-        {
-            if(other.CompareTag("Player"))
-            {
-                StopCoroutine(attackPlayerCoro);
-            }
-        }
-    }
-
-    private IEnumerator AttackPlayer()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(0.3f);
-            AttackManager.AttackTarget(2, Player.@object, enemyPool);
-        }
     }
 }

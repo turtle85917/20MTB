@@ -31,7 +31,7 @@ public class EnemyManager : MonoBehaviour
     public static GameObject NewEnemy(string enemyId, string twitchUserId = null)
     {
         EnemyData enemyData = Array.Find(instance.enemies, item => item.enemyId == enemyId);
-        GameObject enemy = ObjectPool.Get(instance.Enemies, "Enemy", enemyData.Prefab);
+        GameObject enemy = ObjectPool.Get(instance.Enemies, enemyData.Prefab.name, enemyData.Prefab);
         EnemyPool enemyPool = new EnemyPool(){
             target = enemy,
             health = enemyData.stats.MaxHealth,

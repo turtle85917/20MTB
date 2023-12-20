@@ -14,32 +14,25 @@ public class Bat : EnemyAIStruct
     {
         if(Game.isGameOver) return;
         if(isDied) return;
-        if(stack > 6)
-        {
-            enemyPool.health = 0;
-            return;
-        }
+        if(stack >= 3) enemyPool.health = 0;
         base.Update();
-        animator.SetBool("isWalk", affecter.status == Affecter.Status.Idle);
-        transform.rotation = Quaternion.AngleAxis(Player.@object.transform.position.x < transform.position.x ? 180 : 0, Vector3.up);
     }
 
-    protected new void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        base.OnTriggerEnter2D(other);
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") && Random.value < 0.3f)
         {
-            AttackManager.AttackTarget(++stack, other.gameObject, enemyPool);
-            AttackManager.AttackTarget(-stack, gameObject, null);
+            AttackManager.AttackTarget(1, other.gameObject, enemyPool);
+            AttackManager.AttackTarget(-++stack * 2, gameObject, null);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.CompareTag("Enemy"))
+        if(other.gameObject.CompareTag("Enemy") && Random.value < 0.3f)
         {
-            AttackManager.AttackTarget(++stack, other.gameObject, null);
-            AttackManager.AttackTarget(-stack, gameObject, null);
+            AttackManager.AttackTarget(1, other.gameObject, null);
+            AttackManager.AttackTarget(-++stack * 2, gameObject, null);
         }
     }
 }
