@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Bullet : BaseWeapon
 {
-    public string weaponId;
-    public GameObject target;
+    [HideInInspector] public string weaponId;
+    [HideInInspector] public GameObject target;
 
     public new void Init()
     {

@@ -34,6 +34,8 @@ public class EnemyAIStruct : BaseController
 
     protected void Update()
     {
+        if(Game.isGameOver) return;
+        if(isDied) return;
         if(enemyPool.health <= 0 && !isDied)
         {
             isDied = true;

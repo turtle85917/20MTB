@@ -37,7 +37,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2367642861835649063, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3513722089968042373, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_RootOrder
@@ -115,5 +115,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pigeon
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6809265018217290372, guid: 2629699363907f140ae8cde127294155, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2629699363907f140ae8cde127294155, type: 3}
+--- !u!1 &8880323280879595638 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7269920893591983069, guid: 2629699363907f140ae8cde127294155, type: 3}
+  m_PrefabInstance: {fileID: 2296497648406373291}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7908647920557844942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8880323280879595638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b5aea622927d1947889564593e2456a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
