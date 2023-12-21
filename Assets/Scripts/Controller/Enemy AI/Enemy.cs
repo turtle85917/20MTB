@@ -13,7 +13,7 @@ public class Enemy : EnemyAIStruct
         animator.SetBool("isWalk", affecter.status == Affecter.Status.Idle);
     }
 
-    protected void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         // 진희가 어느 편이든 무시하기
         if(other.name != "Jinhe")
@@ -26,7 +26,7 @@ public class Enemy : EnemyAIStruct
         }
     }
 
-    protected void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         // 진희가 어느 편이든 무시하기
         if(other.name != "Jinhe")
