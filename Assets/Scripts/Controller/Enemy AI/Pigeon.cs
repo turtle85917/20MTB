@@ -13,7 +13,7 @@ public class Pigeon : EnemyAIStruct
         if(isDied) return;
         base.Update();
         if(@object?.activeSelf != true) @object = null;
-        if(@object == null || Time.time - findedAt > 3f)
+        if(@object == null || Time.time - findedAt > 2f)
         {
             CastLayerdObject();
             findedAt = Time.time;
@@ -28,6 +28,16 @@ public class Pigeon : EnemyAIStruct
         {
             Vector3 position = Vector3.MoveTowards(rigid.position, @object.transform.position, enemyPool.moveSpeed * Time.fixedDeltaTime);
             rigid.MovePosition(GameUtils.MovePositionLimited(position));
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.Equals(@object))
+        {
+            @object = null;
+            findedAt = Time.time;
+            AttackManager.AttackTarget(2, other.gameObject, enemyPool);
         }
     }
 
