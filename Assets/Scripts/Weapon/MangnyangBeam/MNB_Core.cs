@@ -10,6 +10,7 @@ public class MNB_Core : MonoBehaviour
     {
         Weapon weapon = WeaponBundle.GetWeapon("MangnyangBeam");
         GameObject beam = Instantiate(Beam, transform.parent, false);
+        beam.transform.rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.forward);
         MangnyangBeam script = beam.GetComponent<MangnyangBeam>();
         script.stats = weapon.stats;
         script.weaponUser = weaponUser;
