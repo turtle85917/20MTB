@@ -41,7 +41,6 @@ public class Germ : EnemyAIStruct
         foreach(RaycastHit2D raycast in raycasts)
         {
             if(raycast.collider.name == "Germ") continue;
-            if(!raycast.collider.CompareTag("Enemy")) continue;
             AttackManager.AttackTarget(3, raycast.collider.gameObject, null);
             AttackManager.AttackTarget(4, gameObject, null);
             break;
@@ -73,15 +72,6 @@ public class Germ : EnemyAIStruct
             teleportVec.x = Random.Range(0, 1) == 1 ? -Game.maxPosition.x + cameraPosition.x : Game.maxPosition.x + cameraPosition.x;
             teleportVec.y = Random.Range(0, 1) == 1 ? -Game.maxPosition.y + cameraPosition.y : Game.maxPosition.y + cameraPosition.y;
             transform.position = teleportVec;
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            AttackManager.AttackTarget(5, other.gameObject, enemyPool);
-            AttackManager.AttackTarget(3, gameObject, null);
         }
     }
 
