@@ -4,12 +4,6 @@ public class Bat : EnemyAIStruct
 {
     private int stack;
 
-    protected override void Init()
-    {
-        base.Init();
-        stack = 0;
-    }
-
     protected new void Update()
     {
         if(Game.isGameOver) return;
@@ -35,5 +29,11 @@ public class Bat : EnemyAIStruct
             AttackManager.AttackTarget(1, other.gameObject, null);
             AttackManager.AttackTarget(-++stack * 2, gameObject, null);
         }
+    }
+
+    protected new void OnEnable()
+    {
+        base.OnEnable();
+        stack = 0;
     }
 }

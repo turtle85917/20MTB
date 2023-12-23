@@ -13,14 +13,21 @@ public class Pigeon : EnemyAIStruct
         if(isDied) return;
         base.Update();
         if(@object?.activeSelf != true) @object = null;
-        if(@object != null && Vector2.Distance(@object.transform.position, transform.position) > 10) @object = null;
-        if(@object == null || Time.time - findedAt > 2f)
+        if(@object != null && Vector2.Distance(@object.transform.position, transform.position) > 5f) @object = null;
+        if(@object == null || Time.time - findedAt > 1f)
         {
             CastLayerdObject();
             findedAt = Time.time;
         }
-        FlipObject();
+        transform.rotation = Quaternion.AngleAxis(@object?.transform.position.x < transform.position.x ? 180 : 0, Vector3.up);
         animator.SetBool("isWalk", affecter.status == Affecter.Status.Idle && @object != null);
+
+        if(@object && Scanner.IsAnyTargetAround(transform.position, 5f * @object.transform.localScale.magnitude, @object))
+        {
+            @object = null;
+            findedAt = Time.time - 10f;
+            AttackManager.AttackTarget(2, @object, enemyPool);
+        }
     }
 
     private void FixedUpdate()
@@ -33,25 +40,21 @@ public class Pigeon : EnemyAIStruct
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected new void OnEnable()
     {
-        if(other.gameObject.Equals(@object))
-        {
-            @object = null;
-            findedAt = Time.time;
-            AttackManager.AttackTarget(2, other.gameObject, enemyPool);
-        }
+        base.OnEnable();
+        @object = null;
+        findedAt = Time.time;
     }
 
     private void CastLayerdObject()
     {
-        RaycastHit2D[] raycasts = Physics2D.CircleCastAll(transform.position, 3f, Vector2.right, 0, 64)
-            .Where(item => item.collider.gameObject.name != "Pigeon" && item.collider.gameObject.activeSelf).ToArray()
-        ;
+        RaycastHit2D[] raycasts = Physics2D.CircleCastAll(transform.position, 3f, Vector2.right, 0, 64).Where(item => item.collider.gameObject.activeSelf).ToArray();
         GameObject result = null;
         float minDistance = 0;
         foreach(RaycastHit2D raycast in raycasts)
         {
+            if(raycast.collider.name == "Pigeon") continue;
             float distance = Vector3.Distance(transform.position, raycast.transform.position);
             if(raycast.collider.gameObject.CompareTag("Player"))
             {
