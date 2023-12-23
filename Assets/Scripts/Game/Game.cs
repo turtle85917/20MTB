@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using _20MTB.Utillity;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -22,6 +24,12 @@ public class Game : MonoBehaviour
     private List<int> times;
     private int time = 0;
     private readonly int maxTime = 20 * 60; // 최대 시간 20분
+    private readonly Vector2[] directions = new Vector2[]{
+        Vector2.up,
+        Vector2.down,
+        Vector2.right,
+        Vector2.left
+    };
 
     public static void Pause()
     {
@@ -107,28 +115,19 @@ public class Game : MonoBehaviour
             }
             if(time > 0 && time % 4 == 0)
             {
-                int spot = Random.Range(0, 4);
-                Vector2 direction;
-                switch(spot)
-                {
-                    default:
-                    case 0:
-                        direction = Vector2.up;
-                        break;
-                    case 1:
-                        direction = Vector2.down;
-                        break;
-                    case 2:
-                        direction = Vector2.right;
-                        break;
-                    case 3:
-                        direction = Vector2.left;
-                        break;
-                }
+                Vector2[] spawnableDirections = directions.Where(CheckSpawnablePosition).ToArray();
+                Vector2 direction = spawnableDirections[Random.Range(0, spawnableDirections.Length)];
+                string enemyId = EnemyManager.GetRandomEnemy();
                 for(int i = 0; i < 5; i++)
                 {
-                    GameObject enemy = EnemyManager.NewRandomEnemy();
-                    enemy.transform.position = (Vector2)Player.@object.transform.position + direction * 10f + Random.insideUnitCircle * 3f;
+                    GameObject enemy = EnemyManager.NewEnemy(enemyId);
+                    enemy.transform.position = (Vector2)Player.@object.transform.position + direction * 10f + Random.insideUnitCircle * 5f;
+                }
+
+                bool CheckSpawnablePosition(Vector2 direction)
+                {
+                    Vector2 fixedPosition = (Vector2)Player.@object.transform.position + direction * 10f;
+                    return GameUtils.maxPosition.x >= fixedPosition.x && GameUtils.maxPosition.y >= fixedPosition.y && GameUtils.minPosition.x <= fixedPosition.x && GameUtils.minPosition.y <= fixedPosition.y;
                 }
             }
             SpawnEnemies();

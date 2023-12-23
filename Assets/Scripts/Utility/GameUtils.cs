@@ -6,7 +6,7 @@ namespace _20MTB.Utillity
     public static class GameUtils
     {
         public static readonly Vector2 maxPosition = new Vector2(29.72f, 17.56f);
-        private static readonly Vector2 minPosition = new Vector2(-29.72f, -16.19f);
+        public static readonly Vector2 minPosition = new Vector2(-29.72f, -16.19f);
 
         public static string GetTargetTag(GameObject target)
         {
