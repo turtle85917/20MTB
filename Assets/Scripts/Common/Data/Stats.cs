@@ -39,4 +39,19 @@ namespace _20MTB.Stats
         public int ProjectileCount;
     }
     #endregion
+
+    #region 이동속도 복제 관련 스탯
+    public class MoveSpeedStats
+    {
+        public float originMoveSpeed;
+        public float otherMoveSpeed;
+        public float value
+        {
+            get
+            {
+                return originMoveSpeed * otherMoveSpeed;
+            }
+        }
+    }
+    #endregion
 }

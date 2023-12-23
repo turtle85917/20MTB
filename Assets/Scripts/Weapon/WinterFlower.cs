@@ -5,6 +5,7 @@ using UnityEngine;
 public class WinterFlower : BaseWeapon
 {
     [SerializeField] private GameObject Circle;
+    private readonly float slowMoveSpeed = 0.6f;
 
     public new void Init()
     {
@@ -20,7 +21,8 @@ public class WinterFlower : BaseWeapon
             switch(weaponUser.tag)
             {
                 case "Enemy":
-                    Time.timeScale = 0.3f;
+                    Player.playerData.moveSpeed.otherMoveSpeed -= slowMoveSpeed;
+                    StartCoroutine(AttackPlayer());
                     break;
                 case "Player":
                     StartCoroutine(AttackEnemy(other.gameObject));
@@ -37,9 +39,11 @@ public class WinterFlower : BaseWeapon
             switch(weaponUser.tag)
             {
                 case "Enemy":
-                    Time.timeScale = 1f;
+                    Player.playerData.moveSpeed.otherMoveSpeed += slowMoveSpeed;
+                    StopCoroutine(AttackPlayer());
                     break;
                 case "Player":
+                    EnemyManager.GetEnemy(other.gameObject).moveSpeed.otherMoveSpeed += slowMoveSpeed;
                     StopCoroutine(AttackEnemy(other.gameObject));
                     StopCoroutine(DelaySturn(other.gameObject));
                     break;
@@ -49,9 +53,11 @@ public class WinterFlower : BaseWeapon
 
     private IEnumerator AttackEnemy(GameObject enemy)
     {
+        EnemyPool enemyPool = EnemyManager.GetEnemy(enemy);
         while(EnemyManager.IsEnemyAlive(enemy))
         {
             yield return new WaitForSeconds(0.4f);
+            enemyPool.moveSpeed.otherMoveSpeed -= slowMoveSpeed;
             AttackManager.AttackTarget(3, enemy, null);
         }
     }
@@ -60,8 +66,8 @@ public class WinterFlower : BaseWeapon
     {
         while(!Game.isGameOver)
         {
-            yield return new WaitForSeconds(0.4f);
-            AttackManager.AttackTarget(2, Player.@object, EnemyManager.GetEnemy(weaponUser));
+            yield return new WaitForSeconds(0.8f);
+            AttackManager.AttackTarget(4, Player.@object, EnemyManager.GetEnemy(weaponUser));
         }
     }
 

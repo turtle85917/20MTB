@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using _20MTB.Stats;
 using UnityEngine;
 
 public class EnemyPool
 {
     public GameObject target;
     public float health;
-    public float moveSpeed;
+    public MoveSpeedStats moveSpeed;
     public string twitchUserId;
     public Weapon weapon;
     public EnemyData data;
@@ -35,7 +36,10 @@ public class EnemyManager : MonoBehaviour
         EnemyPool enemyPool = new EnemyPool(){
             target = enemy,
             health = enemyData.stats.MaxHealth,
-            moveSpeed = enemyData.stats.MoveSpeed * (UnityEngine.Random.value * 0.5f + 1),
+            moveSpeed = new MoveSpeedStats(){
+                originMoveSpeed = enemyData.stats.MoveSpeed * (UnityEngine.Random.value * 0.5f + 1),
+                otherMoveSpeed = 1
+            },
             twitchUserId = twitchUserId,
             weapon = null,
             data = enemyData

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _20MTB.Stats;
 using _20MTB.Utillity;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ public class PlayerStatus
     public int maxHealth;
     public int level;
     public int exp;
+    public MoveSpeedStats moveSpeed;
     public List<Weapon> weapons;
     public HypeTrain hypeTrain;
     public PlayerData data;
@@ -45,7 +47,12 @@ public class Player : BaseController
         playerData = new PlayerStatus()
         {
             health = data.stats.MaxHealth,
+            maxHealth = data.stats.MaxHealth,
             level = 0, exp = 0,
+            moveSpeed = new MoveSpeedStats(){
+                originMoveSpeed = data.stats.MoveSpeed,
+                otherMoveSpeed = 1
+            },
             weapons = new List<Weapon>(){},
             hypeTrain = new HypeTrain()
             {
@@ -77,7 +84,7 @@ public class Player : BaseController
     private void FixedUpdate()
     {
         // 플레이어는 어떠한 영향도 받을 수 없는 무적이다.
-        rigid.MovePosition(GameUtils.MovePositionLimited(rigid.position + inputDirection * playerData.data.stats.MoveSpeed * Time.fixedDeltaTime));
+        rigid.MovePosition(GameUtils.MovePositionLimited(rigid.position + inputDirection * playerData.moveSpeed.value * Time.fixedDeltaTime));
         if(inputDirection.magnitude != 0)
         {
             lastDirection = inputDirection;

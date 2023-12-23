@@ -35,7 +35,7 @@ public class Pigeon : EnemyAIStruct
         if(Game.isGameOver) return;
         if(@object != null && !isDied && affecter.status == Affecter.Status.Idle)
         {
-            Vector3 position = Vector3.MoveTowards(rigid.position, @object.transform.position, enemyPool.moveSpeed * Time.fixedDeltaTime);
+            Vector3 position = Vector3.MoveTowards(rigid.position, @object.transform.position, enemyPool.moveSpeed.value * Time.fixedDeltaTime);
             rigid.MovePosition(GameUtils.MovePositionLimited(position));
         }
     }

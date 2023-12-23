@@ -42,7 +42,7 @@ public class EnemyAIStruct : BaseController
         if(Game.isGameOver) return;
         if(!isDied && affecter.status == Affecter.Status.Idle)
         {
-            Vector3 position = Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed * Time.fixedDeltaTime);
+            Vector3 position = Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed.value * Time.fixedDeltaTime);
             rigid.MovePosition(GameUtils.MovePositionLimited(position));
         }
     }
