@@ -22,16 +22,6 @@ public class EnemyAIStruct : BaseController
         affecter = GetComponent<Affecter>();
     }
 
-    private void FixedUpdate()
-    {
-        if(Game.isGameOver) return;
-        if(!isDied && affecter.status == Affecter.Status.Idle)
-        {
-            Vector3 position = Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed * Time.fixedDeltaTime);
-            rigid.MovePosition(GameUtils.MovePositionLimited(position));
-        }
-    }
-
     protected void Update()
     {
         if(Game.isGameOver) return;
@@ -45,7 +35,16 @@ public class EnemyAIStruct : BaseController
             affecter.Reset();
             animator.SetTrigger("isDied");
         }
-        transform.rotation = Quaternion.AngleAxis(Player.@object.transform.position.x < transform.position.x ? 180 : 0, Vector3.up);
+    }
+
+    private void FixedUpdate()
+    {
+        if(Game.isGameOver) return;
+        if(!isDied && affecter.status == Affecter.Status.Idle)
+        {
+            Vector3 position = Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed * Time.fixedDeltaTime);
+            rigid.MovePosition(GameUtils.MovePositionLimited(position));
+        }
     }
 
     private void LateUpdate()
@@ -53,10 +52,12 @@ public class EnemyAIStruct : BaseController
         if(text != null) text.transform.localPosition = (Vector2)transform.position + Vector2.down * 1.3f;
     }
 
-    private void OnEnable()
+    protected void OnEnable()
     {
         affecter?.Reset();
         isDied = false;
         StopAllCoroutines();
     }
+
+    protected void FlipObject() => transform.rotation = Quaternion.AngleAxis(Player.@object.transform.position.x < transform.position.x ? 180 : 0, Vector3.up);
 }

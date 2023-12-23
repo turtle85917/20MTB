@@ -5,8 +5,8 @@ namespace _20MTB.Utillity
 {
     public static class GameUtils
     {
-        private static readonly Vector2 maxPoint = new Vector2(29.72f, 17.56f);
-        private static readonly Vector2 minPoint = new Vector2(-29.72f, -16.19f);
+        public static readonly Vector2 maxPosition = new Vector2(29.72f, 17.56f);
+        private static readonly Vector2 minPosition = new Vector2(-29.72f, -16.19f);
 
         public static string GetTargetTag(GameObject target)
         {
@@ -21,7 +21,6 @@ namespace _20MTB.Utillity
             }
             return target.transform.position.x > Player.lastDirection.x ? 1 : -1;
         }
-
         public static Quaternion LookAtTarget(Vector3 origin, Vector3 target)
         {
             Vector3 distance = target - origin;
@@ -31,7 +30,7 @@ namespace _20MTB.Utillity
 
         public static Vector3 MovePositionLimited(Vector3 position)
         {
-            return new(Math.Max(minPoint.x, Math.Min(position.x, maxPoint.x)), Math.Max(minPoint.y, Math.Min(position.y, maxPoint.y)), position.z);
+            return new(Math.Max(minPosition.x, Math.Min(position.x, maxPosition.x)), Math.Max(minPosition.y, Math.Min(position.y, maxPosition.y)), position.z);
         }
 
         public static int GetNeedExpFromLevel()

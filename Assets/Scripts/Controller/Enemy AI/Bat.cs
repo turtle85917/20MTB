@@ -16,6 +16,7 @@ public class Bat : EnemyAIStruct
         if(isDied) return;
         if(stack >= 3) enemyPool.health = 0;
         base.Update();
+        FlipObject();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

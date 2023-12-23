@@ -10,6 +10,7 @@ public class Enemy : EnemyAIStruct
         if(Game.isGameOver) return;
         if(isDied) return;
         base.Update();
+        FlipObject();
         animator.SetBool("isWalk", affecter.status == Affecter.Status.Idle);
     }
 

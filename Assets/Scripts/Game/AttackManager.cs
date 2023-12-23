@@ -100,12 +100,6 @@ public static class AttackManager
         }
     }
 
-    /// <summary>
-    /// 계산된 데미지를 반환합니다.
-    /// </summary>
-    /// <param name="characterPower">공격하는 대상의 힘</param>
-    /// <param name="weaponPower">무기의 공격력</param>
-    /// <param name="decreasePower">최종 값에서 깎이는 데미지</param>
     private static int GetCalcDamage(int characterPower, int weaponPower, int decreasePower)
     {
         return Mathf.CeilToInt(weaponPower + weaponPower / characterPower - decreasePower);

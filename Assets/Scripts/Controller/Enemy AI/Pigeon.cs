@@ -13,11 +13,13 @@ public class Pigeon : EnemyAIStruct
         if(isDied) return;
         base.Update();
         if(@object?.activeSelf != true) @object = null;
+        if(@object != null && Vector2.Distance(@object.transform.position, transform.position) > 10) @object = null;
         if(@object == null || Time.time - findedAt > 2f)
         {
             CastLayerdObject();
             findedAt = Time.time;
         }
+        FlipObject();
         animator.SetBool("isWalk", affecter.status == Affecter.Status.Idle && @object != null);
     }
 
