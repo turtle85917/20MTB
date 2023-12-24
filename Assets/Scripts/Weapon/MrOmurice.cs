@@ -14,7 +14,6 @@ public class MrOmurice : BaseWeapon
     public void AttackEnemies()
     {
         GameObject[] enemies = Scanner.ScanAll(transform.position, stats.Range, "Enemy");
-        Debug.Log("wtf");
         foreach(GameObject enemy in enemies)
         {
             if(!EnemyManager.IsEnemyAlive(enemy)) continue;
