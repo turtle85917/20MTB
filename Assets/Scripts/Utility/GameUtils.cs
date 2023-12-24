@@ -35,7 +35,7 @@ namespace _20MTB.Utillity
 
         public static int GetNeedExpFromLevel()
         {
-            return 50 * Mathf.Max(Player.playerData.level, 1);
+            return 20 * Mathf.Max(Player.playerData.level, 1);
         }
 
         public static GameObject GetWeaponsObject(GameObject parent)

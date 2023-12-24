@@ -4699,7 +4699,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062170207}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -9221,7 +9221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2404503831571019340, guid: d1632b7cb80f189429c626de7f562ab3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -86.66666
+      value: -86.666664
       objectReference: {fileID: 0}
     - target: {fileID: 2404503831571019340, guid: d1632b7cb80f189429c626de7f562ab3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
