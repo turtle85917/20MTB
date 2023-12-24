@@ -7,6 +7,7 @@ public class EnemyAIStruct : BaseController
     public EnemyPool enemyPool {protected get; set;}
     protected Affecter affecter;
     protected bool isDied;
+    private SpriteRenderer sprite;
 
     public override void OnDie()
     {
@@ -20,6 +21,7 @@ public class EnemyAIStruct : BaseController
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         affecter = GetComponent<Affecter>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     protected void Update()
@@ -56,6 +58,7 @@ public class EnemyAIStruct : BaseController
     {
         affecter?.Reset();
         isDied = false;
+        if(sprite) sprite.color = Color.white;
         StopAllCoroutines();
     }
 

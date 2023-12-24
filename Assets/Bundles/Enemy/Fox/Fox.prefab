@@ -107,6 +107,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6809265018217290372, guid: 2629699363907f140ae8cde127294155, type: 3}
+      propertyPath: isForceWalk
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7269920893591983069, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_Name
       value: Fox

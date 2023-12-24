@@ -23,6 +23,7 @@ public class Affecter : MonoBehaviour
     }
     private Animator animator;
     private Rigidbody2D rigid;
+    private SpriteRenderer sprite;
     private Status _status = Status.Idle;
     private Status lastStatus;
     private readonly int forcePower = 10;
@@ -80,7 +81,7 @@ public class Affecter : MonoBehaviour
         if(gameObject.CompareTag("Player")) return; // 플레이어는 기절할 수 없음
         status = Status.Sturn;
         animator.SetBool("isWalk", false);
-        SetColor(Color.yellow);
+        sprite.color = Color.yellow;
         StartCoroutine(SturnReset());
     }
 
@@ -88,6 +89,7 @@ public class Affecter : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     private IEnumerator ComboKnockback(Vector2 direction, int i, GameObject source)
@@ -108,13 +110,8 @@ public class Affecter : MonoBehaviour
     private IEnumerator SturnReset()
     {
         yield return new WaitForSeconds(3f);
-        SetColor(Color.white);
+        sprite.color = Color.white;
         CheckCurrentStatus(Status.Sturn);
-    }
-
-    private void SetColor(Color color)
-    {
-        GetComponent<SpriteRenderer>().color = color;
     }
 
     private void CheckCurrentStatus(Status checkStatus)

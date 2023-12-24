@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Enemy : EnemyAIStruct
 {
+    [SerializeField] private bool isForceWalk;
     private IEnumerator attackPlayerCoroutine;
 
     protected new void Update()
@@ -11,7 +12,7 @@ public class Enemy : EnemyAIStruct
         if(isDied) return;
         base.Update();
         FlipObject();
-        animator.SetBool("isWalk", affecter.status == Affecter.Status.Idle);
+        animator.SetBool("isWalk", isForceWalk || affecter.status == Affecter.Status.Idle);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
