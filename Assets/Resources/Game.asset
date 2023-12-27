@@ -15,8 +15,25 @@ MonoBehaviour:
   cycleTimelines:
   - time: 0
     spawnPosition: []
-    spawnCount: {x: 10, y: 12}
-    circleRadius: 11
+    spawnCount: {x: 2, y: 2}
+    circleRadius: 5
     enemies:
     - {fileID: 11400000, guid: 153bf67d650addb4290c7fc983a6512a, type: 2}
-    - {fileID: 11400000, guid: 879e6859e58fe264c9a1988bb20f1a4b, type: 2}
+  - time: 2
+    spawnPosition: []
+    spawnCount: {x: 3, y: 3}
+    circleRadius: 5
+    enemies:
+    - {fileID: 11400000, guid: 153bf67d650addb4290c7fc983a6512a, type: 2}
+  - time: 4
+    spawnPosition: []
+    spawnCount: {x: 4, y: 4}
+    circleRadius: 12
+    enemies:
+    - {fileID: 11400000, guid: 153bf67d650addb4290c7fc983a6512a, type: 2}
+  - time: 5
+    spawnPosition: []
+    spawnCount: {x: 4, y: 4}
+    circleRadius: 12
+    enemies:
+    - {fileID: 11400000, guid: 153bf67d650addb4290c7fc983a6512a, type: 2}

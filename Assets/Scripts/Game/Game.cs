@@ -108,19 +108,39 @@ public class Game : MonoBehaviour
     {
         while(time < maxTime)
         {
-            if(time > 0 && time % 12 == 0)
+            if(time > 0 && time % 15 == 0)
             {
                 usableWeaponsPanel.PickupWeapons();
             }
-            if(time > 0 && time % 4 == 0)
+            if(time > 0 && time % 10 == 0 && Random.value <= 0.3f)
             {
                 Vector2[] spawnableDirections = directions.Where(CheckSpawnablePosition).ToArray();
                 Vector2 direction = spawnableDirections[Random.Range(0, spawnableDirections.Length)];
                 string enemyId = EnemyManager.GetRandomEnemy();
-                for(int i = 0; i < 5; i++)
+                int spawnCount = 5;
+                float range = 5f;
+                bool isNormalized = false;
+
+                switch(enemyId)
+                {
+                    case "Pigeon":
+                        spawnCount = 6;
+                        isNormalized = true;
+                        break;
+                    case "Bat":
+                        spawnCount = 7;
+                        break;
+                    case "Fox":
+                        if(time < 240) enemyId = "Panzee";
+                        break;
+                }
+
+                for(int i = 0; i < spawnCount; i++)
                 {
                     GameObject enemy = EnemyManager.NewEnemy(enemyId);
-                    enemy.transform.position = (Vector2)Player.@object.transform.position + direction * 10f + Random.insideUnitCircle * 5f;
+                    Vector2 newRange = Random.insideUnitCircle * range;
+                    if(isNormalized) newRange.Normalize();
+                    enemy.transform.position = (Vector2)Player.@object.transform.position + direction * 10f + newRange;
                 }
 
                 bool CheckSpawnablePosition(Vector2 direction)

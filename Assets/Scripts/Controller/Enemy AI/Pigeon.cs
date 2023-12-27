@@ -49,6 +49,11 @@ public class Pigeon : EnemyAIStruct
 
     private void CastLayerdObject()
     {
+        if(Random.value < 0.3)
+        {
+            @object = null;
+            return;
+        }
         RaycastHit2D[] raycasts = Physics2D.CircleCastAll(transform.position, 3f, Vector2.right, 0, 64).Where(item => item.collider.gameObject.activeSelf).ToArray();
         GameObject result = null;
         float minDistance = 0;

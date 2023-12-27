@@ -6,12 +6,9 @@ public static class Parser
         switch(chunk[2])
         {
             case "PRIVMSG":
-                string channel = ParseChannel(chunk[3]);
                 Chat chat =  new Chat()
                 {
-                    channel = channel,
-                    message = ParseMessage(message),
-                    target = null
+                    message = ParseMessage(message)
                 };
                 ParseBadges(chat, message);
                 return chat;
@@ -40,11 +37,6 @@ public static class Parser
                     break;
             }
         }
-    }
-
-    private static string ParseChannel(string value)
-    {
-        return value.Substring(1);
     }
 
     private static string ParseMessage(string value)

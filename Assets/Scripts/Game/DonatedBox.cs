@@ -83,7 +83,7 @@ public class DonatedBox : MonoBehaviour
             Camera.main.transform.position = GameUtils.FixedPosition();
             ((RectTransform)DonatedBoxPanel.transform).anchoredPosition = Vector2.zero;
         }
-        if(combo == 20 && isPress)
+        if(combo == 13 && isPress)
         {
             isPress = false;
             OpenBox();

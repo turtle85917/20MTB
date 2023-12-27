@@ -14,10 +14,11 @@ public class Connect : MonoBehaviour
     private TcpClient twitchClient;
     private StreamReader reader;
     private StreamWriter writer;
-    private List<Chat> chatQueue;
+    private float maxHeight;
     private readonly Dictionary<string, string[]> commands = new()
     {
-        {"spawn", new string[]{"spawn", "create", "생성"}}
+        {"spawn", new string[]{"spawn", "create", "생성"}},
+        {"drops", new string[]{"드롭스", "drops"}}
     };
 
     private void Awake()
@@ -25,7 +26,6 @@ public class Connect : MonoBehaviour
         twitchClient = new("irc.chat.twitch.tv", 6667);
         reader = new(twitchClient.GetStream());
         writer = new(twitchClient.GetStream());
-        chatQueue = new(){};
     }
 
     private void Start()
@@ -33,10 +33,11 @@ public class Connect : MonoBehaviour
         writer.WriteLine("PASS " + oauth);
         writer.WriteLine("NICK " + nick);
         writer.WriteLine("USER " + username + " 8 * : " + username);
-        writer.WriteLine("JOIN #pulto__");
+        writer.WriteLine("JOIN #viichan6");
         writer.WriteLine("CAP REQ :twitch.tv/commands twitch.tv/tags");
         writer.Flush();
         Debug.Log("Connect twitch chatting");
+        maxHeight = ((RectTransform)transform).sizeDelta.y;
     }
 
     private void Update()
@@ -62,45 +63,50 @@ public class Connect : MonoBehaviour
                 return;
             }
             Chat chat = Parser.GetMessage(message);
-            if(chatQueue.Count > 4)
-            {
-                Chat oldChat = chatQueue.First();
-                oldChat.target.SetActive(false);
-                chatQueue.Remove(oldChat);
-            }
             if(chat != null)
             {
-                CreateNewChatObject(chat);
-                if(chat.message.StartsWith("!"))
-                {
-                    string[] chunk = chat.message.Substring(1).Split(' ');
-                    string key = commands.FirstOrDefault(item => item.Value.Contains(chunk[0])).Key;
-                    switch(key)
-                    {
-                        case "spawn":
-                            string weaponName = string.Join(' ', chunk[1..]);
-                            GameObject enemy = Game.instance.usableWeaponsPanel.SpawnEnemy(chat, weaponName);
-                            if(enemy != null)
-                                TextManager.WriteTwitchNickname(enemy, chat);
-                            break;
-                    }
-                }
+                CreateChatObject(chat);
+                RunCommand(chat);
             }
         }
     }
 
-    private void CreateNewChatObject(Chat chat)
+    private void CreateChatObject(Chat chat)
     {
-        GameObject chat_ = ObjectPool.Get(gameObject, "Chat", Chat);
-        chat_.GetComponent<ChatPanel>().RectTransform.anchoredPosition = new Vector2(0, -40);
+        GameObject chatObject = ObjectPool.Get(gameObject, "Chat", Chat);
+        ((RectTransform)chatObject.transform).anchoredPosition = new Vector2(0, -40);
         for(int i = 0; i < transform.childCount; i++)
         {
             GameObject child = transform.GetChild(i).gameObject;
-            child.GetComponent<ChatPanel>().RectTransform.anchoredPosition += new Vector2(0, 80);
+            RectTransform rectTransform = (RectTransform)child.transform;
+            rectTransform.anchoredPosition += new Vector2(0, 80);
+            if(rectTransform.anchoredPosition.y > maxHeight + 80)
+            {
+                child.SetActive(false);
+                child.transform.SetAsLastSibling();
+            }
         }
-        ChatPanel script = chat_.GetComponent<ChatPanel>();
+        ChatPanel script = chatObject.GetComponent<ChatPanel>();
         script.WriteContent(chat);
-        chat.target = chat_;
-        chatQueue.Add(chat);
+    }
+
+    private void RunCommand(Chat chat)
+    {
+        if(chat.message.StartsWith("!"))
+        {
+            string[] chunk = chat.message.Substring(1).Split(' ');
+            string key = commands.FirstOrDefault(item => item.Value.Contains(chunk[0])).Key;
+            switch(key)
+            {
+                case "spawn":
+                    string weaponName = string.Join(' ', chunk[1..]);
+                    GameObject enemy = Game.instance.usableWeaponsPanel.SpawnEnemy(chat, weaponName);
+                    if(enemy != null)
+                        TextManager.WriteTwitchNickname(enemy, chat);
+                    break;
+                case "drops":
+                    break;
+            }
+        }
     }
 }
