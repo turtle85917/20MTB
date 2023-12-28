@@ -87,7 +87,7 @@ public class EnemyManager : MonoBehaviour
                 instance.DropPresent(enemyPool, PresentType.DonatedBox);
             }
         }
-        else if(UnityEngine.Random.value < 0.6f)
+        else if(UnityEngine.Random.value < 0.7f)
             instance.DropPresent(enemyPool, PresentType.Exp);
     }
 

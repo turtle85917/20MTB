@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 public static class Parser
 {
     public static Chat GetMessage(string message)
@@ -27,7 +29,7 @@ public static class Parser
             switch(key)
             {
                 case "color":
-                    chat.color = v;
+                    chat.color = string.IsNullOrEmpty(v) ? "#ffffff" : v;
                     break;
                 case "user-id":
                     chat.userId = v;
@@ -41,6 +43,6 @@ public static class Parser
 
     private static string ParseMessage(string value)
     {
-        return value.Split(':')[^1];
+        return new Regex("PRIVMSG #.+? :(.+)").Match(value).Groups[1].Value;
     }
 }
