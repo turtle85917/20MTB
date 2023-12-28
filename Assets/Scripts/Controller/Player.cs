@@ -32,7 +32,6 @@ public class Player : BaseController
     public static GameObject weapons;
     private Vector2 inputDirection;
     [Header("플레이어 스크립터블")]
-    [SerializeField] private Character character;
     [SerializeField] private PlayerData[] players;
     [Header("UI")]
     [SerializeField] private Image twitchAvatar;
@@ -43,7 +42,7 @@ public class Player : BaseController
         animator = GetComponent<Animator>();
         @object = gameObject;
         weapons = GameObject.FindWithTag("Weapons");
-        PlayerData data = players[(int)character];
+        PlayerData data = players[(int)GlobalSetting.instance.playingCharacter];
         playerData = new PlayerStatus()
         {
             health = data.stats.MaxHealth,

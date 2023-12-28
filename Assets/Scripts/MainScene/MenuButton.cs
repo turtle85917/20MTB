@@ -1,11 +1,17 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuButton : MonoBehaviour
 {
+    public void OnStartBtnClick()
+    {
+        SceneManager.LoadScene("SelectCharacter");
+    }
+
     public void OpenPanel(GameObject Panel)
     {
         Panel.SetActive(true);
-        Panel.GetComponent<Animation>()?.Play("Panel_Show2");
+        Panel.GetComponent<Animation>().Play("Panel_Show2");
     }
 
     public void PanelCancel(GameObject Panel)

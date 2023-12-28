@@ -53,6 +53,7 @@ public class Game : MonoBehaviour
     {
         PoolManager = GameObject.FindWithTag("PoolManager");
         maxPosition = new Vector2(Camera.main.orthographicSize * Camera.main.aspect, Camera.main.orthographicSize);
+        Camera.main.transparencySortAxis = new Vector3(0, 1, 0);
         StartCoroutine(CheckTime());
     }
 
