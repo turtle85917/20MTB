@@ -11,6 +11,7 @@ public class Connect : MonoBehaviour
     [SerializeField] private string username;
     [SerializeField] private string oauth;
     [SerializeField] private GameObject Chat;
+    private string channelName;
     private TcpClient twitchClient;
     private StreamReader reader;
     private StreamWriter writer;
@@ -20,28 +21,60 @@ public class Connect : MonoBehaviour
         {"spawn", new string[]{"spawn", "create", "생성"}},
         {"drops", new string[]{"드롭스", "drops"}}
     };
-
-    private void Awake()
+    private readonly Dictionary<Character, string> twitchChannelIds = new Dictionary<Character, string>()
     {
+        {Character.Woowakgood, "woowakgood"},
+        {Character.Ine, "vo_ine"},
+        {Character.Jingburger, "jingburger"},
+        {Character.Lilpa, "lilpaaaaaa"},
+        {Character.Jururu, "cotton__123"},
+        {Character.Gosegu, "gosegugosegu"},
+        {Character.Viichan, "viichan6"}
+    };
+
+    public void ReconnectChannel(int character)
+    {
+        channelName = twitchChannelIds.GetValueOrDefault((Character)character);
+        ConnectTwitchServer();
+    }
+
+    private void ConnectTwitchServer()
+    {
+        if(twitchClient?.Connected == true)
+        {
+            twitchClient.Close();
+            reader.Close();
+            writer.Close();
+            for(int i = 0; i < transform.childCount; i++)
+                transform.GetChild(i).gameObject.SetActive(false);
+        }
         twitchClient = new("irc.chat.twitch.tv", 6667);
         reader = new(twitchClient.GetStream());
         writer = new(twitchClient.GetStream());
+        Init();
     }
 
-    private void Start()
+    private void Init()
     {
         writer.WriteLine("PASS " + oauth);
         writer.WriteLine("NICK " + nick);
         writer.WriteLine("USER " + username + " 8 * : " + username);
-        writer.WriteLine("JOIN #viichan6");
+        writer.WriteLine("JOIN #" + channelName);
         writer.WriteLine("CAP REQ :twitch.tv/commands twitch.tv/tags");
         writer.Flush();
-        Debug.Log("Connect twitch chatting");
+        Debug.Log("Connect twitch server");
         maxHeight = ((RectTransform)transform).sizeDelta.y;
+    }
+
+    private void Start()
+    {
+        int index = PlayerPrefs.GetInt("SelectedChannel");
+        ReconnectChannel(index);
     }
 
     private void Update()
     {
+        if(twitchClient == null) return;
         if(!twitchClient.Connected)
         {
             Debug.Log("Disconnect");
