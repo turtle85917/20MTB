@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class Star : BaseWeapon
 {
-    public GameObject target;
+    [HideInInspector] public GameObject target;
+    private Vector2 lastDirection;
     private readonly Color[] colors = new Color[4]{
         new Color(0.8f, 0.3f, 0.3f),
         new Color(0.3f, 0.8f, 0.5f),
@@ -31,9 +32,10 @@ public class Star : BaseWeapon
         {
             rigid.MovePosition(Vector3.MoveTowards(rigid.position, target.transform.position, stats.ProjectileSpeed * Time.deltaTime));
         }
-        else
+        else if(weaponStatus != WeaponStatus.GoAway)
         {
             weaponStatus = WeaponStatus.GoAway;
+            lastDirection = Player.lastDirection;
         }
     }
 
@@ -41,7 +43,7 @@ public class Star : BaseWeapon
     {
         if(weaponStatus == WeaponStatus.GoAway)
         {
-            rigid.AddForce(Player.lastDirection * 20);
+            rigid.AddForce(lastDirection * 20);
         }
     }
 
@@ -68,7 +70,7 @@ public class Star : BaseWeapon
         {
             yield return new WaitForSeconds(0.5f);
             if(target == null) break;
-            AttackManager.AttackTarget("Star", target, penetrate);
+            AttackManager.AttackTarget("MagicWand", target, penetrate);
             var enemyPool = EnemyManager.GetEnemy(target);
             if(enemyPool.health <= 0)
             {

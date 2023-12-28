@@ -4804,7 +4804,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6726bfe9f48aab4388bb0064309374d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 0
   players:
   - {fileID: 11400000, guid: 439513c4e4f6bd94d93ea41b2bd8fe9e, type: 2}
   - {fileID: 11400000, guid: 2bff62d513b701146af838fe6ecfe069, type: 2}
@@ -5492,7 +5491,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 879e6859e58fe264c9a1988bb20f1a4b, type: 2}
   - {fileID: 11400000, guid: 153bf67d650addb4290c7fc983a6512a, type: 2}
   - {fileID: 11400000, guid: cc658f863528a5e42afc7e791cb27afb, type: 2}
-  - {fileID: 11400000, guid: d0f4cc7bf03d1dc4185b6fe7c9d6723c, type: 2}
 --- !u!114 &1210831723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6905,7 +6903,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 110, y: -220}
+  m_AnchoredPosition: {x: 109.99994, y: -220}
   m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1578178851

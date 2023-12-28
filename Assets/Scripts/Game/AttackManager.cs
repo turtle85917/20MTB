@@ -26,7 +26,7 @@ public static class AttackManager
 
         // 공격력과 무기 가져오기
         int power = Player.playerData.data.stats.Power;
-        Weapon weapon = Player.playerData.weapons.Find(item => item.weapon.weaponId == weaponId);
+        Weapon weapon = WeaponBundle.GetWeaponFromTarget(weaponId, Player.@object);
         if(sourceEnemyPool != null)
         {
             weapon = sourceEnemyPool.weapon;

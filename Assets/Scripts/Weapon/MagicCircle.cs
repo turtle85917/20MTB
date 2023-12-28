@@ -21,11 +21,11 @@ public class MagicCircle : BaseWeapon
     private IEnumerator AttackDelay()
     {
         yield return new WaitForSeconds(stats.Life);
-        var enemies = Scanner.ScanAll(Player.@object.transform.position, 4, "Enemy").OrderBy(item => Vector3.Distance(item.transform.position, Player.@object.transform.position)).ToList();
+        var enemies = Scanner.ScanAll(Player.@object.transform.position, 1.5f, "Enemy", 10).OrderBy(item => Vector3.Distance(item.transform.position, Player.@object.transform.position)).ToList();
         for(int i = 0; i < enemies.Count; i++)
         {
             EnemyPool enemyPool = EnemyManager.GetEnemy(enemies[i]);
-            AttackManager.AttackTarget("MagicWand", enemies[i], i, (affecter) => {
+            AttackManager.AttackTarget("StampPlump", enemies[i], i, (affecter) => {
                 affecter.Sturn();
                 if(i > 0)
                     affecter.Knockback(Player.@object.gameObject);

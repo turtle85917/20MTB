@@ -5,7 +5,6 @@ public class Scream : BaseWeapon
     public new void Init()
     {
         base.Init();
-        transform.localScale = new Vector2(1, 1);
         transform.localPosition = Player.@object.transform.position;
         sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1);
     }
@@ -18,16 +17,16 @@ public class Scream : BaseWeapon
     private void Update()
     {
         Color color = sprite.color;
-        color.a -= 0.08f;
+        color.a -= 0.02f;
         sprite.color = color;
-        transform.localScale += new Vector3(0.2f, 0.2f);
+        transform.localScale += new Vector3(0.15f, 0.15f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Enemy") && penetrate < stats.Penetrate)
         {
-            AttackManager.AttackTarget("Scream", other.gameObject, penetrate);
+            AttackManager.AttackTarget("Lilpaaaaaa", other.gameObject, penetrate);
             penetrate++;
         }
     }

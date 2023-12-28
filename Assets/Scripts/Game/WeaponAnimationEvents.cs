@@ -17,7 +17,7 @@ public class WeaponAnimationEvents : MonoBehaviour
         StartCoroutine(LilpaaaaaaReset());
         for(int i = 0; i < 3; i++)
         {
-            yield return new WaitForSeconds(i * 0.15f);
+            yield return new WaitForSeconds(i * 0.2f);
             GameObject scream = ObjectPool.Get(Game.PoolManager, "Scream", (GameObject)weapon.weapon.resources[0]);
             scream.transform.localScale = Vector3.one * i * 0.1f;
             scream.transform.rotation = Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.forward);
