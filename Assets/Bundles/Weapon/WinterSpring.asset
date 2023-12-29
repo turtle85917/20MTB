@@ -48,7 +48,7 @@ MonoBehaviour:
     Cooldown: -0.5
     Penetrate: 0
     DecreasePower: 0
-    Range: 3
+    Range: 5
     Life: 0
     CriticalHit: 0
     ProjectileSize: 0

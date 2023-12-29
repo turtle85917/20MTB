@@ -5,8 +5,10 @@ public class SelectCharacterManager : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private TMP_Text WeaponName;
+    [SerializeField] private TMP_Text WeaponDesc;
     [SerializeField] private GameObject arrowDown;
     [SerializeField] private RuntimeAnimatorController[] animators;
+    [SerializeField] private WeaponData[] defaultWeapons;
     private readonly string[] defaultWeaponNames = new string[]{
         "왁초리",
         "마법봉",
@@ -24,6 +26,7 @@ public class SelectCharacterManager : MonoBehaviour
         animator.runtimeAnimatorController = animators[index];
         arrowDownPosition = new Vector2(-800 / 2 + ((RectTransform)slot.transform).anchoredPosition.x, -130);
         WeaponName.text = defaultWeaponNames[index];
+        WeaponDesc.text = defaultWeapons[index].playerDescription;
     }
 
     private void Start()
@@ -31,6 +34,7 @@ public class SelectCharacterManager : MonoBehaviour
         Camera.main.transparencySortAxis = new Vector3(0, 0, 1);
         animator.runtimeAnimatorController = animators[0];
         WeaponName.text = defaultWeaponNames[0];
+        WeaponDesc.text = defaultWeapons[0].playerDescription;
     }
 
     private void Update()

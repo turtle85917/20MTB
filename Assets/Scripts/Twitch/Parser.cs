@@ -21,15 +21,15 @@ public static class Parser
 
     private static void ParseBadges(Chat chat, string value)
     {
-        string[] chunk = value.Substring(1).Split(';');
-        foreach(string item in chunk)
+        MatchCollection chunk = new Regex("\\b(.+?)=(.*?);\\b").Matches(value);
+        for(int i = 0; i < chunk.Count; i++)
         {
-            string key = item.Substring(0, item.IndexOf('='));
-            string v = item.Substring(item.IndexOf('=') + 1);
-            switch(key)
+            string k = chunk[i].Groups[1].Value;
+            string v = chunk[i].Groups[2].Value;
+            switch(k)
             {
                 case "color":
-                    chat.color = string.IsNullOrEmpty(v) ? "#ffffff" : v;
+                    chat.color = v == string.Empty ? "#ffffff" : v;
                     break;
                 case "user-id":
                     chat.userId = v;

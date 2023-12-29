@@ -16,7 +16,7 @@ public class WeaponPanel : MonoBehaviour
         weapon = currentWeapon;
         Logo.sprite = weapon.weapon.logo;
         Name.text = weapon.name;
-        Level.text = "Level. " + (weapon.level + 1);
+        Level.text = "Level. " + (weapon.level + 1 == weapon.weapon.levels.Length ? "Max" : weapon.level + 1);
     }
 
     public void Locking(bool isLocked)

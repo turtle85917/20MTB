@@ -60,7 +60,6 @@ public class Game : MonoBehaviour
         maxPosition = new Vector2(Camera.main.orthographicSize * Camera.main.aspect, Camera.main.orthographicSize);
         Camera.main.transparencySortAxis = new Vector3(0, 1, 0);
         StartCoroutine(CheckTime());
-        StartCoroutine(FreeSpawnEnemy());
     }
 
     private void LateUpdate()
@@ -120,6 +119,7 @@ public class Game : MonoBehaviour
                 usableWeaponsPanel.PickupWeapons();
             }
             if(time > 0 && time % 120 == 0) spawnDelay *= decreaseSpawnDelay;
+            if(time == 5) StartCoroutine(FreeSpawnEnemy());
             SpawnEnemies();
             yield return new WaitForSeconds(1f);
             time += 1;
@@ -146,7 +146,7 @@ public class Game : MonoBehaviour
                 string GetRandomEnemy()
                 {
                     List<string> spawnableEnemies = new List<string>(){"Bat"};
-                    if(time >= 240) spawnableEnemies.Add("Panzee");
+                    if(time >= 60) spawnableEnemies.Add("Panzee");
                     if(time >= 500) spawnableEnemies.Add("Pigeon");
                     if(time >= 600) spawnableEnemies.Add("Fox");
                     return spawnableEnemies[Random.Range(0, spawnableEnemies.Count)];

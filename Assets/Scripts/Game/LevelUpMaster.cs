@@ -90,7 +90,7 @@ public class LevelUpMaster : MonoBehaviour
                 .ToArray()
             ;
             if(usableWeapons.Length == 0) decideWeapon = leftWeapons[Random.Range(0, leftWeapons.Count)];
-            else if(usableWeapons.Length == 6 || Random.value > random) decideWeapon = usableWeapons[Random.Range(0, usableWeapons.Length)];
+            else if(Player.playerData.weapons.Count == 6 || Random.value > random) decideWeapon = usableWeapons[Random.Range(0, usableWeapons.Length)];
             else decideWeapon = leftWeapons[Random.Range(0, leftWeapons.Count)];
         }
     }
