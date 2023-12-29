@@ -14,14 +14,19 @@ public class Game : MonoBehaviour
     public static bool isPaused {get; private set;}
     public static bool isGameOver {get; private set;}
     public static Game instance {get; private set;}
+
     [Header("Game")]
     [SerializeField] private Cycle cycle;
     public EnemyWeapons usableWeaponsPanel;
     public DonatedBox donatedBoxPanel;
     [Header("UI")]
     [SerializeField] private TMP_Text TimerText;
+
     private List<int> times;
     private int time = 0;
+    private float spawnDelay = 0.5f;
+
+    private readonly float decreaseSpawnDelay = 0.9f;
     private readonly int maxTime = 20 * 60; // 최대 시간 20분
     private readonly Vector2[] directions = new Vector2[]{
         Vector2.up,
@@ -55,6 +60,7 @@ public class Game : MonoBehaviour
         maxPosition = new Vector2(Camera.main.orthographicSize * Camera.main.aspect, Camera.main.orthographicSize);
         Camera.main.transparencySortAxis = new Vector3(0, 1, 0);
         StartCoroutine(CheckTime());
+        StartCoroutine(FreeSpawnEnemy());
     }
 
     private void LateUpdate()
@@ -113,47 +119,38 @@ public class Game : MonoBehaviour
             {
                 usableWeaponsPanel.PickupWeapons();
             }
-            if(time > 0 && time % 10 == 0 && Random.value <= 0.3f)
-            {
+            if(time > 0 && time % 120 == 0) spawnDelay *= decreaseSpawnDelay;
+            SpawnEnemies();
+            yield return new WaitForSeconds(1f);
+            time += 1;
+            TimerText.text = System.TimeSpan.FromSeconds(maxTime - time).ToString(@"mm\:ss");
+        }
+    }
+
+    private IEnumerator FreeSpawnEnemy()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(spawnDelay);
                 Vector2[] spawnableDirections = directions.Where(CheckSpawnablePosition).ToArray();
                 Vector2 direction = spawnableDirections[Random.Range(0, spawnableDirections.Length)];
-                string enemyId = EnemyManager.GetRandomEnemy();
-                int spawnCount = 5;
-                float range = 5f;
-                bool isNormalized = false;
-
-                switch(enemyId)
-                {
-                    case "Pigeon":
-                        spawnCount = 6;
-                        isNormalized = true;
-                        break;
-                    case "Bat":
-                        spawnCount = 7;
-                        break;
-                    case "Fox":
-                        if(time < 240) enemyId = "Panzee";
-                        break;
-                }
-
-                for(int i = 0; i < spawnCount; i++)
-                {
-                    GameObject enemy = EnemyManager.NewEnemy(enemyId);
-                    Vector2 newRange = Random.insideUnitCircle * range;
-                    if(isNormalized) newRange.Normalize();
-                    enemy.transform.position = (Vector2)Player.@object.transform.position + direction * 10f + newRange;
-                }
+                GameObject enemy = EnemyManager.NewEnemy(GetRandomEnemy());
+                enemy.transform.position = (Vector2)Player.@object.transform.position + direction * 10f + Random.insideUnitCircle * 4;
 
                 bool CheckSpawnablePosition(Vector2 direction)
                 {
                     Vector2 fixedPosition = (Vector2)Player.@object.transform.position + direction * 10f;
                     return GameUtils.maxPosition.x >= fixedPosition.x && GameUtils.maxPosition.y >= fixedPosition.y && GameUtils.minPosition.x <= fixedPosition.x && GameUtils.minPosition.y <= fixedPosition.y;
                 }
-            }
-            SpawnEnemies();
-            yield return new WaitForSeconds(1f);
-            time += 1;
-            TimerText.text = System.TimeSpan.FromSeconds(maxTime - time).ToString(@"mm\:ss");
+
+                string GetRandomEnemy()
+                {
+                    List<string> spawnableEnemies = new List<string>(){"Bat"};
+                    if(time >= 240) spawnableEnemies.Add("Panzee");
+                    if(time >= 500) spawnableEnemies.Add("Pigeon");
+                    if(time >= 600) spawnableEnemies.Add("Fox");
+                    return spawnableEnemies[Random.Range(0, spawnableEnemies.Count)];
+                }
         }
     }
 }

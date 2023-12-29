@@ -58,11 +58,6 @@ public class EnemyManager : MonoBehaviour
     {
         return instance.enemyPools.Find(item => item.twitchUserId == twitchUserId);
     }
-    public static string GetRandomEnemy()
-    {
-        EnemyData enemy = instance.enemies[UnityEngine.Random.Range(0, instance.enemies.Length)];
-        return enemy.enemyId;
-    }
 
     public static bool IsEnemyAlive(GameObject enemy) => GetEnemy(enemy) != null || GetEnemy(enemy)?.health <= 0;
 
