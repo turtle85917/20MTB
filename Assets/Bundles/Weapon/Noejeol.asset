@@ -30,4 +30,24 @@ MonoBehaviour:
     ProjectileSize: 0
     ProjectileSpeed: 0
     ProjectileCount: 0
+  - Power: 1
+    Cooldown: 0
+    Penetrate: 3
+    DecreasePower: 0
+    Range: 0
+    Life: 0
+    CriticalHit: 0
+    ProjectileSize: 0
+    ProjectileSpeed: 0
+    ProjectileCount: 0
+  - Power: 5
+    Cooldown: 0
+    Penetrate: 3
+    DecreasePower: 0
+    Range: 3
+    Life: 0
+    CriticalHit: 0
+    ProjectileSize: 0
+    ProjectileSpeed: 0
+    ProjectileCount: 0
   isFullLogo: 1

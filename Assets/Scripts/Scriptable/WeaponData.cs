@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaopnIncreaseStat
 {
     public int Power;
-    public int Cooldown;
+    public float Cooldown;
     public int Penetrate;
     public int DecreasePower;
     public int Range;

@@ -23,11 +23,11 @@ namespace _20MTB.Stats
     }
     #endregion
 
-    #region 플레이어 무기 스탯
+    #region 무기 스탯
     public class WeaponStats
     {
         public int Power;
-        public int Cooldown;
+        public float Cooldown;
         public int Penetrate;
         public int DecreasePower;
         public int Range;

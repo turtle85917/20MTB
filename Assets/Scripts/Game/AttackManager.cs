@@ -45,7 +45,7 @@ public static class AttackManager
             {
                 sourceEnemyPool = EnemyManager.GetEnemy(source);
                 // 치명타가 아닌 값으로 처리하기 위함
-                damage = Mathf.CeilToInt(GetCalcDamage(sourceEnemyPool.data.stats.Power, sourceEnemyPool.weapon.stats.Power, penetrate * sourceEnemyPool.weapon.stats.DecreasePower) * 0.25f);
+                damage = Mathf.CeilToInt(GetCalcDamage(sourceEnemyPool.data.stats.Power, sourceEnemyPool.weapon.stats.Power, penetrate * sourceEnemyPool.weapon.stats.DecreasePower) * 0.25f * parasocialWeapon.level);
                 if(damage > 0)
                 {
                     sourceEnemyPool.health -= damage;
@@ -82,7 +82,7 @@ public static class AttackManager
             Weapon parasocialWeapon = Player.playerData.weapons.Find(item => item.weapon.weaponId == "パラソーシャル");
             if(parasocialWeapon != null && UnityEngine.Random.value < 0.4f)
             {
-                attackerPool.health -= value * 0.25f;
+                attackerPool.health -= value * 0.25f * parasocialWeapon.level;
                 TextManager.WriteDamage(attackerPool.target, value, false);
             }
             else

@@ -121,7 +121,7 @@ public class WeaponBundle : MonoBehaviour
                 stats = new _20MTB.Stats.WeaponStats()
                 {
                     Power = (int)excelData["Power"],
-                    Cooldown = (int)excelData["Cooldown"],
+                    Cooldown = (float)excelData["Cooldown"],
                     Penetrate = (int)excelData["Penetrate"],
                     DecreasePower = (int)excelData["DecreasePower"],
                     Range = (int)excelData["Range"],
