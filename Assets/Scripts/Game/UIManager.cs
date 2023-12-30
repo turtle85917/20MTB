@@ -26,9 +26,9 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         if(Game.isGameOver) return;
-        HealthSlider.value = (float)Player.playerData.health / Player.playerData.data.stats.MaxHealth;
+        HealthSlider.value = (float)Player.playerData.health / Player.playerData.maxHealth;
         ExpSlider.value = (float)Player.playerData.exp / GameUtils.GetNeedExpFromLevel();
-        HealthText.text = Player.playerData.health + " / " + Player.playerData.data.stats.MaxHealth;
+        HealthText.text = Player.playerData.health + " / " + Player.playerData.maxHealth;
         LevelText.text = "Lv " + Player.playerData.level;
     }
 }

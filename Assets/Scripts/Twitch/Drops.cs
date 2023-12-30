@@ -22,7 +22,7 @@ public class Drops : MonoBehaviour
 
     private int dropCount;
 
-    private readonly int MAX_PARTICIPANT_COUNT = 1;
+    private readonly int MAX_PARTICIPANT_COUNT = 40;
 
     public void ShowContent()
     {}

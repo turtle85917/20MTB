@@ -28,6 +28,7 @@ public class Present : MonoBehaviour
             {
                 case PresentType.Exp:
                     Player.playerData.exp += exp;
+                    Player.playerData.hypeTrain.meter += 70 * Mathf.RoundToInt(exp * 0.7f);
                     break;
                 case PresentType.DonatedBox:
                     Game.instance.donatedBoxPanel.Open();

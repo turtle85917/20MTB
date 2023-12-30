@@ -35,6 +35,7 @@ public class Parachute : MonoBehaviour
                     icon = heart;
                     name = "체력 + " + value;
                     Player.playerData.health += value;
+                    Player.playerData.hypeTrain.meter += 100;
                     break;
                 case "enemy":
                     name = "적 + 2";
@@ -45,9 +46,10 @@ public class Parachute : MonoBehaviour
                     Weapon weapon = WeaponBundle.GetWeaponByName(weaponName);
                     icon = weapon.weapon.logo;
                     name = weapon.name;
+                    Player.playerData.hypeTrain.meter += 200;
 
                     Weapon playerWeapon = WeaponBundle.GetWeaponFromTarget(weapon.weapon.weaponId, Player.@object);
-                    if(playerWeapon == null) WeaponBundle.AddWeaponToTarget(Player.@object, playerWeapon.weapon.weaponId);
+                    if(playerWeapon == null) WeaponBundle.AddWeaponToTarget(Player.@object, weapon.weapon.weaponId);
                     else WeaponBundle.UpgradeTargetsWeapon(Player.@object, playerWeapon.weapon.weaponId);
                     break;
             }

@@ -141,6 +141,7 @@ public class Connect : MonoBehaviour
             switch(key)
             {
                 case "spawn":
+                    if(chunk.Length < 1) return;
                     string weaponName = string.Join(' ', chunk[1..]);
                     GameObject enemy = Game.instance.usableWeaponsPanel.SpawnEnemy(chat, weaponName);
                     if(enemy != null)
@@ -157,7 +158,7 @@ public class Connect : MonoBehaviour
                         string giftKey = giftTypes.FirstOrDefault(item => item.Key == giftType || item.Value == giftType).Key;
                         if(giftKey == "random") giftKey = giftTypes.Keys.ToArray()[Random.Range(1, giftTypes.Keys.Count)];
                         if(giftKey == "weapon" && (string.IsNullOrEmpty(chunk[2]) || chunk.Length < 2)) return;
-                        Game.instance.drops.SpawnDrop(giftKey, giftKey == "weapon" ? chunk[2] : null);
+                        Game.instance.drops.SpawnDrop(giftKey, giftKey == "weapon" ? string.Join(' ', chunk[2..]) : null);
                     }
                     break;
             }

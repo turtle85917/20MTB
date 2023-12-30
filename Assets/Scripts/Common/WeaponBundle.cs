@@ -32,7 +32,7 @@ public class WeaponBundle : MonoBehaviour
     }
     public static Weapon GetWeaponByName(string weaponName)
     {
-        return assets.Find(item => item.name.Equals(weaponName)) ?? GetWeapon(weaponName); // 이름을 구할 수 없을 경우, id로도 구해본다.
+        return assets.Find(item => item.name.Replace(" ", "") == weaponName) ?? GetWeapon(weaponName); // 이름을 구할 수 없을 경우, id로도 구해본다.
     }
 
     public static void AddWeaponToTarget(GameObject target, string weaponId)
