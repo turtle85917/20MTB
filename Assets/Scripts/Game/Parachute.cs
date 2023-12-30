@@ -47,7 +47,7 @@ public class Parachute : MonoBehaviour
                     name = weapon.name;
 
                     Weapon playerWeapon = WeaponBundle.GetWeaponFromTarget(weapon.weapon.weaponId, Player.@object);
-                    if(playerWeapon == null) WeaponBundle.AddWeaponToTarget(Player.@object, playerWeapon.weapon.weaponId);
+                    if(playerWeapon == null) WeaponBundle.AddWeaponToTarget(Player.@object, weapon.weapon.weaponId);
                     else WeaponBundle.UpgradeTargetsWeapon(Player.@object, playerWeapon.weapon.weaponId);
                     break;
             }
