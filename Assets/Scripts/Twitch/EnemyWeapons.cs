@@ -20,7 +20,7 @@ public class EnemyWeapons : MonoBehaviour
     private Level level;
     private new Animation animation;
 
-    private readonly int MAX_PARTICIPANT_COUNT = 1;
+    private readonly int MAX_PARTICIPANT_COUNT = 30;
     private readonly string UPGRADE_TEXT_TEMPLATE = "{0} <size=21>무기 업그레이드</size>\n<size=20>(<color=#BDBDBD>{1}</color> 님의 적)</size>";
 
     private enum Level
@@ -67,6 +67,7 @@ public class EnemyWeapons : MonoBehaviour
     public GameObject SpawnEnemy(Chat twitchUser, string weaponId)
     {
         Weapon weapon = WeaponBundle.GetWeaponByName(weaponId);
+        if(weapon == null) return null;
         if(spawners.Values.ToList().Exists(item => item.Exists(t => t.userId == twitchUser.userId))) return null;
         if(spawners.ContainsKey(weapon.weapon.weaponId))
         {
@@ -111,8 +112,8 @@ public class EnemyWeapons : MonoBehaviour
         Dictionary<string, Chat[]> filterdSpawners = spawners.Where(item => item.Value.Count > 0).ToDictionary(x => x.Key, x => x.Value.ToArray());
         int[] participantValues = spawners.Select(item => item.Value.Count).ToArray();
         // NOTE: 편차 구하여 편차가 1 이하일 경우 (값이 일정한 비율)
-        float averageValue = participantValues.Sum() / participantValues.Length;
-        float variance = participantValues.Aggregate(0f, (acc, curr) => acc + Mathf.Pow(curr - averageValue, 2f)) / participantValues.Length;
+        float average = participantValues.Sum() / participantValues.Length;
+        float variance = participantValues.Aggregate(0f, (acc, curr) => acc + Mathf.Pow(curr - average, 2f)) / participantValues.Length;
         string weaponId;
         Chat twitchUser;
         if(variance <= 1f)

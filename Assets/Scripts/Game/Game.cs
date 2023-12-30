@@ -17,6 +17,7 @@ public class Game : MonoBehaviour
 
     [Header("Game")]
     [SerializeField] private Cycle cycle;
+    public Drops drops;
     public EnemyWeapons usableWeaponsPanel;
     public DonatedBox donatedBoxPanel;
     [Header("UI")]
@@ -114,12 +115,10 @@ public class Game : MonoBehaviour
     {
         while(time < maxTime)
         {
-            if(time > 0 && time % 15 == 0)
-            {
-                usableWeaponsPanel.PickupWeapons();
-            }
-            if(time > 0 && time % 120 == 0) spawnDelay *= decreaseSpawnDelay;
             if(time == 5) StartCoroutine(FreeSpawnEnemy());
+            if(time > 0 && time % 10 == 0) drops.StartDrops();
+            if(time > 0 && time % 15 == 0) usableWeaponsPanel.PickupWeapons();
+            if(time > 0 && time % 120 == 0) spawnDelay *= decreaseSpawnDelay;
             SpawnEnemies();
             yield return new WaitForSeconds(1f);
             time += 1;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,10 +15,20 @@ public class Connect : MonoBehaviour
     private StreamReader reader;
     private StreamWriter writer;
     private float maxHeight;
+
     private readonly Dictionary<string, string[]> commands = new()
     {
-        {"spawn", new string[]{"spawn", "create", "생성"}},
-        {"drops", new string[]{"드롭스", "drops"}}
+        {"spawn", new string[]{"create", "생성"}},
+        {"drops", new string[]{"드롭스"}},
+        {"gift", new string[]{"보상", "선물"}}
+    };
+    private readonly Dictionary<string, string> giftTypes = new()
+    {
+        {"random", "랜덤"},
+        {"boom", "꽝"},
+        {"health", "체력"},
+        {"enemy", "적"},
+        {"weapon", "무기"}
     };
     private readonly Dictionary<Character, string> twitchChannelIds = new Dictionary<Character, string>()
     {
@@ -48,7 +57,7 @@ public class Connect : MonoBehaviour
             for(int i = 0; i < transform.childCount; i++)
                 transform.GetChild(i).gameObject.SetActive(false);
         }
-        twitchClient = new("irc.chat.twitch.tv", 6667);
+        twitchClient = new TcpClient("irc.chat.twitch.tv", 6667);
         reader = new(twitchClient.GetStream());
         writer = new(twitchClient.GetStream());
         Init();
@@ -59,7 +68,7 @@ public class Connect : MonoBehaviour
         writer.WriteLine("PASS " + oauth);
         writer.WriteLine("NICK " + nick);
         writer.WriteLine("USER " + username + " 8 * : " + username);
-        writer.WriteLine("JOIN #" + channelName);
+        writer.WriteLine("JOIN #" + "pulto__");
         writer.WriteLine("CAP REQ :twitch.tv/commands twitch.tv/tags");
         writer.Flush();
         Debug.Log("Connect twitch server");
@@ -128,7 +137,7 @@ public class Connect : MonoBehaviour
         if(chat.message.StartsWith("!"))
         {
             string[] chunk = chat.message.Substring(1).Split(' ');
-            string key = commands.FirstOrDefault(item => item.Value.Contains(chunk[0])).Key;
+            string key = commands.FirstOrDefault(item => item.Key == chunk[0] || item.Value.Contains(chunk[0])).Key;
             switch(key)
             {
                 case "spawn":
@@ -138,6 +147,18 @@ public class Connect : MonoBehaviour
                         TextManager.WriteTwitchNickname(enemy, chat);
                     break;
                 case "drops":
+                    Game.instance.drops.JoinDrops(chat);
+                    break;
+                case "gift":
+                    if(Game.instance.drops.dropsActivator == null) return;
+                    if(chat.userId == Game.instance.drops.dropsActivator.userId)
+                    {
+                        string giftType = chunk[1];
+                        string giftKey = giftTypes.FirstOrDefault(item => item.Key == giftType || item.Value == giftType).Key;
+                        if(giftKey == "random") giftKey = giftTypes.Keys.ToArray()[Random.Range(1, giftTypes.Keys.Count)];
+                        if(giftKey == "weapon" && (string.IsNullOrEmpty(chunk[2]) || chunk.Length < 2)) return;
+                        Game.instance.drops.SpawnDrop(giftKey, giftKey == "weapon" ? chunk[2] : null);
+                    }
                     break;
             }
         }
