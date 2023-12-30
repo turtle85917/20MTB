@@ -145,8 +145,9 @@ public class Game : MonoBehaviour
                 string GetRandomEnemy()
                 {
                     List<string> spawnableEnemies = new List<string>(){"Bat"};
+                    if(time >= 30) spawnableEnemies.Add("Pigeon");
                     if(time >= 60) spawnableEnemies.Add("Panzee");
-                    if(time >= 500) spawnableEnemies.Add("Pigeon");
+                    if(time >= 80) spawnableEnemies.Add("Leaf");
                     if(time >= 600) spawnableEnemies.Add("Fox");
                     return spawnableEnemies[Random.Range(0, spawnableEnemies.Count)];
                 }
