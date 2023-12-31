@@ -512,7 +512,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 609248525}
           m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
-          m_MethodName: OnStartBtnClick
+          m_MethodName: OnOpeningEnd
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

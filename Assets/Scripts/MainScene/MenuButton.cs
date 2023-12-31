@@ -3,13 +3,26 @@ using UnityEngine.SceneManagement;
 
 public class MenuButton : MonoBehaviour
 {
+    [SerializeField] private Alert alert;
+
+    public void OnOpeningEnd()
+    {
+        SceneManager.LoadScene("SelectCharacter");
+        PlayerPrefs.SetInt("showedOpening", 1);
+    }
+
     public void OnStartBtnClick()
     {
         if(GlobalSetting.instance.selectedChannel == -1)
         {
+            alert.ShowAlert("채널을 먼저 선택해주세요.");
             return;
         }
-        SceneManager.LoadScene("SelectCharacter");
+        SceneManager.LoadScene(
+            PlayerPrefs.GetInt("showedOpening") == 0
+            ? "Opening"
+            : "SelectCharacter"
+        );
     }
 
     public void OpenPanel(GameObject Panel)
