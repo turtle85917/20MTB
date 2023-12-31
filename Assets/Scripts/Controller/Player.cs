@@ -35,6 +35,7 @@ public class Player : BaseController
     [SerializeField] private PlayerData[] players;
     [Header("UI")]
     [SerializeField] private Image twitchAvatar;
+    [SerializeField] private Sprite[] avatars;
 
     protected override void Init()
     {
@@ -61,7 +62,7 @@ public class Player : BaseController
             data = data
         };
         animator.runtimeAnimatorController = data.controller;
-        twitchAvatar.sprite = data.twitchAvatar;
+        twitchAvatar.sprite = avatars[GlobalSetting.instance.selectedChannel];
         WeaponBundle.AddWeaponToTarget(gameObject, data.defaultWeapon);
     }
 

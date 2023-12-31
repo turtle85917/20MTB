@@ -5023,6 +5023,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b3fe73e5fd9232e44bf2399584a69b52, type: 2}
   - {fileID: 11400000, guid: d3c7dfac48d61d048b5a416452dd6444, type: 2}
   twitchAvatar: {fileID: 598048657}
+  avatars:
+  - {fileID: 21300000, guid: d22ad4fc89eb86a4bb1c6dd668c146be, type: 3}
+  - {fileID: 21300000, guid: df45479ac0aa10848a03f2054c557126, type: 3}
+  - {fileID: 21300000, guid: ecf8d45e74783bd40a75a2f3b98e0a4e, type: 3}
+  - {fileID: 21300000, guid: dc70d342c4dee3d43adf5d393de6acd6, type: 3}
+  - {fileID: 21300000, guid: 84b379643e6ef9f4bb3a605e0ed2e712, type: 3}
+  - {fileID: 21300000, guid: 7b65aaa03db324f4b8e025314da5ecd7, type: 3}
+  - {fileID: 21300000, guid: 5356c839ea1ed3349b48088be4fe694f, type: 3}
 --- !u!114 &1062170217
 MonoBehaviour:
   m_ObjectHideFlags: 0

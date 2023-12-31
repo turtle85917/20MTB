@@ -6,7 +6,6 @@ public class PlayerData : ScriptableObject
 {
     public string playerName;
     public string defaultWeapon;
-    public Sprite twitchAvatar;
     public RuntimeAnimatorController controller;
     public Stats stats;
 }

@@ -5,6 +5,10 @@ public class MenuButton : MonoBehaviour
 {
     public void OnStartBtnClick()
     {
+        if(GlobalSetting.instance.selectedChannel == -1)
+        {
+            return;
+        }
         SceneManager.LoadScene("SelectCharacter");
     }
 

@@ -31,6 +31,7 @@ public class DonatedBox : MonoBehaviour
     private readonly Color MeterColor = new Color(153f / 255f, 72f / 255f, 214f / 255f);
     private readonly string[] presentNames = new string[]{
         "체력",
+        "최대 체력",
         "경험치",
         "후원 열차 미터"
     };
@@ -150,7 +151,7 @@ public class DonatedBox : MonoBehaviour
                 }
                 break;
             case ItemType.Present:
-                int present = Random.Range(0, 3);
+                int present = Random.Range(0, 4);
                 int value = 0;
                 switch(present)
                 {
@@ -159,10 +160,14 @@ public class DonatedBox : MonoBehaviour
                         Player.playerData.health += Mathf.RoundToInt(value * GetValueRatio());
                         break;
                     case 1:
+                        value = 10;
+                        Player.playerData.maxHealth += 10;
+                        break;
+                    case 2:
                         value = Random.Range(20, 50);
                         Player.playerData.exp += Mathf.RoundToInt(value * GetValueRatio());
                         break;
-                    case 2:
+                    case 3:
                         value = Random.Range(100, 300);
                         Player.playerData.hypeTrain.meter += Mathf.RoundToInt(value * GetValueRatio());
                         break;

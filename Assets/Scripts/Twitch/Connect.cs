@@ -75,12 +75,6 @@ public class Connect : MonoBehaviour
         maxHeight = ((RectTransform)transform).sizeDelta.y;
     }
 
-    private void Start()
-    {
-        int index = PlayerPrefs.GetInt("SelectedChannel");
-        ReconnectChannel(index);
-    }
-
     private void Update()
     {
         if(twitchClient == null) return;

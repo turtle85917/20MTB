@@ -9,7 +9,6 @@ public class SelectChannel : MonoBehaviour
     private void Start()
     {
         ResetButtonImageColor();
-        buttons[PlayerPrefs.GetInt("SelectedChannel")].gameObject.GetComponent<Image>().color = selectedColor;
         for(int i = 0; i < buttons.Length; i++)
         {
             buttons[i].onClick.RemoveAllListeners();
@@ -23,6 +22,7 @@ public class SelectChannel : MonoBehaviour
         PlayerPrefs.SetInt("SelectedChannel", index);
         ResetButtonImageColor();
         buttons[index].gameObject.GetComponent<Image>().color = selectedColor;
+        GlobalSetting.instance.selectedChannel = index;
     }
 
     private void ResetButtonImageColor()
