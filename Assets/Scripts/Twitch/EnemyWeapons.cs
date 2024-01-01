@@ -68,6 +68,7 @@ public class EnemyWeapons : MonoBehaviour
     {
         Weapon weapon = WeaponBundle.GetWeaponByName(weaponId);
         if(weapon == null) return null;
+        if(weapons.Count == 0) return null;
         if(spawners.Values.ToList().Exists(item => item.Exists(t => t.userId == twitchUser.userId))) return null;
         if(spawners.ContainsKey(weapon.weapon.weaponId))
         {

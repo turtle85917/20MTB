@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Connect : MonoBehaviour
 {
@@ -46,7 +47,10 @@ public class Connect : MonoBehaviour
         channelName = twitchChannelIds.GetValueOrDefault((Character)character);
         ConnectTwitchServer();
     }
-
+    public void RemoveAllChats()
+    {
+        for(int i = 0; i < transform.childCount; i++) Destroy(transform.GetChild(i).gameObject);
+    }
     private void ConnectTwitchServer()
     {
         if(twitchClient?.Connected == true)
@@ -54,8 +58,7 @@ public class Connect : MonoBehaviour
             twitchClient.Close();
             reader.Close();
             writer.Close();
-            for(int i = 0; i < transform.childCount; i++)
-                transform.GetChild(i).gameObject.SetActive(false);
+            RemoveAllChats();
         }
         twitchClient = new TcpClient("irc.chat.twitch.tv", 6667);
         reader = new(twitchClient.GetStream());
@@ -68,11 +71,19 @@ public class Connect : MonoBehaviour
         writer.WriteLine("PASS " + oauth);
         writer.WriteLine("NICK " + nick);
         writer.WriteLine("USER " + username + " 8 * : " + username);
-        writer.WriteLine("JOIN #" + "pulto__");
+        writer.WriteLine("JOIN #" + channelName);
         writer.WriteLine("CAP REQ :twitch.tv/commands twitch.tv/tags");
         writer.Flush();
         Debug.Log("Connect twitch server");
         maxHeight = ((RectTransform)transform).sizeDelta.y;
+    }
+
+    private void Start()
+    {
+        if(GlobalSetting.instance.selectedChannel != -1)
+        {
+            ReconnectChannel(GlobalSetting.instance.selectedChannel);
+        }
     }
 
     private void Update()
@@ -101,8 +112,10 @@ public class Connect : MonoBehaviour
             Chat chat = Parser.GetMessage(message);
             if(chat != null)
             {
-                CreateChatObject(chat);
-                RunCommand(chat);
+                if(GlobalSetting.instance.showChatPanel)
+                    CreateChatObject(chat);
+                if(SceneManager.GetActiveScene().name == "Game")
+                    RunCommand(chat);
             }
         }
     }
@@ -125,7 +138,6 @@ public class Connect : MonoBehaviour
         ChatPanel script = chatObject.GetComponent<ChatPanel>();
         script.WriteContent(chat);
     }
-
     private void RunCommand(Chat chat)
     {
         if(chat.message.StartsWith("!"))

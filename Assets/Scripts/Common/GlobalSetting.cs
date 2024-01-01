@@ -4,9 +4,10 @@ public class GlobalSetting : MonoBehaviour
 {
     public Character playingCharacter;
     public int selectedChannel = -1;
-    public int masterVolume = 1;
-    public int bgmVolume = 1;
-    public int sfxVolume = 1;
+    public float masterVolume = 1;
+    public float bgmVolume = 1;
+    public float sfxVolume = 1;
+    public bool showChatPanel = true;
     public static GlobalSetting instance;
 
     public object this[string optionName]
@@ -24,5 +25,10 @@ public class GlobalSetting : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        showChatPanel = PlayerPrefs.GetInt("showChatPanel", 1) == 1;
     }
 }
