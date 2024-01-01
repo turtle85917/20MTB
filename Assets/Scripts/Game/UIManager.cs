@@ -8,14 +8,29 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance {get; private set;}
     public GameObject GameOverPanel;
+    [Header("게임 클리어 패널")]
+    [SerializeField] private Animator GameClearPanel;
+    [SerializeField] private TMP_Text KillEnemyCount;
+
+    [Header("플레이어 상태")]
     [SerializeField] private Slider HealthSlider;
     [SerializeField] private Slider ExpSlider;
     [SerializeField] private TMP_Text HealthText;
     [SerializeField] private TMP_Text LevelText;
 
+    private readonly string killCountMent = "{0}명의 적을 죽였습니다.";
+
     public void OnReturnBtnClick()
     {
+        Game.Resume();
         SceneManager.LoadScene("Main");
+    }
+
+    public void ShowGameClearPanel()
+    {
+        GameClearPanel.gameObject.SetActive(true);
+        GameClearPanel.SetTrigger("Show");
+        KillEnemyCount.text = string.Format(killCountMent, Player.playerData.killCount);
     }
 
     private void Awake()

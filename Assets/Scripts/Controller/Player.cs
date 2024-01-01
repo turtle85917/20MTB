@@ -11,6 +11,7 @@ public class PlayerStatus
     public int maxHealth;
     public int level;
     public int exp;
+    public int killCount;
     public MoveSpeedStats moveSpeed;
     public List<Weapon> weapons;
     public HypeTrain hypeTrain;
@@ -49,6 +50,7 @@ public class Player : BaseController
             health = data.stats.MaxHealth,
             maxHealth = data.stats.MaxHealth,
             level = 0, exp = 0,
+            killCount = 0,
             moveSpeed = new MoveSpeedStats(){
                 originMoveSpeed = data.stats.MoveSpeed,
                 otherMoveSpeed = 1
@@ -68,9 +70,9 @@ public class Player : BaseController
 
     public override void OnDie()
     {
+        Game.Pause();
         UIManager.instance.GameOverPanel.SetActive(true);
-        UIManager.instance.GameOverPanel.GetComponent<Animation>().Play("GameOverPanel_Show");
-        StartCoroutine(DelayedPause());
+        UIManager.instance.GameOverPanel.GetComponent<Animator>().SetTrigger("Show");
     }
 
     private void Update()
@@ -89,11 +91,5 @@ public class Player : BaseController
         {
             lastDirection = inputDirection;
         }
-    }
-
-    private IEnumerator DelayedPause()
-    {
-        yield return new WaitForSeconds(0.5f);
-        Game.Pause();
     }
 }

@@ -124,6 +124,8 @@ public class Game : MonoBehaviour
             time += 1;
             TimerText.text = System.TimeSpan.FromSeconds(maxTime - time).ToString(@"mm\:ss");
         }
+        Pause();
+        UIManager.instance.ShowGameClearPanel();
     }
 
     private IEnumerator FreeSpawnEnemy()

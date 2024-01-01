@@ -14,6 +14,7 @@ public class EnemyAIStruct : BaseController
         gameObject.SetActive(false);
         EnemyManager.RemoveEnemy(enemyPool);
         EnemyManager.DropPresent(enemyPool);
+        Player.playerData.killCount++;
     }
 
     protected override void Init()
