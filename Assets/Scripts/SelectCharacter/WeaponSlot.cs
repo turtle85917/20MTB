@@ -8,6 +8,7 @@ public class WeaponSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if(eventData.button != PointerEventData.InputButton.Left) return;
         GlobalSetting.instance.playingCharacter = (Character)transform.GetSiblingIndex();
         SceneManager.LoadScene("Game");
     }
