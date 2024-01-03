@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1052441552254157006
+--- !u!1001 &156050006277065201
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,33 +10,29 @@ PrefabInstance:
     - target: {fileID: 519316463553178335, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 22100000, guid: e30c55ab2982f624fbd18809c2e4219f, type: 2}
+      objectReference: {fileID: 22100000, guid: 64fd29bd1f99cbf40b66fc076ab6d5fe, type: 2}
     - target: {fileID: 1936404188700718766, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_Mass
-      value: 1
+      value: 1.294171
       objectReference: {fileID: 0}
     - target: {fileID: 2367642861835649063, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_Size.x
-      value: 2.132119
+      value: 1.6764269
       objectReference: {fileID: 0}
     - target: {fileID: 2367642861835649063, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_Size.y
-      value: 1.9203879
+      value: 0.8685512
       objectReference: {fileID: 0}
     - target: {fileID: 2367642861835649063, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_Offset.x
-      value: -0.26543987
+      value: 0.0026612345
       objectReference: {fileID: 0}
     - target: {fileID: 2367642861835649063, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_Offset.y
-      value: -0.026599538
+      value: -0.11683168
       objectReference: {fileID: 0}
     - target: {fileID: 2367642861835649063, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_Direction
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2367642861835649063, guid: 2629699363907f140ae8cde127294155, type: 3}
-      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3513722089968042373, guid: 2629699363907f140ae8cde127294155, type: 3}
@@ -97,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5172014127881138277, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_Size.x
-      value: 2.75
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5172014127881138277, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_Size.y
@@ -106,7 +102,7 @@ PrefabInstance:
     - target: {fileID: 5172014127881138277, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -42790328, guid: 4b01196b4368031418810ff20d3a3052, type: 3}
+      objectReference: {fileID: 1499668557, guid: 507da7b7faf2d18449f2a2b55c686e45, type: 3}
     - target: {fileID: 5172014127881138277, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -117,7 +113,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 90acdbda83ab580459c15c25f1846b8f, type: 2}
     - target: {fileID: 7269920893591983069, guid: 2629699363907f140ae8cde127294155, type: 3}
       propertyPath: m_Name
-      value: Lion
+      value: Butterfly
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2629699363907f140ae8cde127294155, type: 3}
