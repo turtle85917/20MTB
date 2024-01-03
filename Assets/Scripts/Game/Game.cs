@@ -61,6 +61,7 @@ public class Game : MonoBehaviour
         maxPosition = new Vector2(Camera.main.orthographicSize * Camera.main.aspect, Camera.main.orthographicSize);
         Camera.main.transparencySortAxis = new Vector3(0, 1, 0);
         StartCoroutine(CheckTime());
+        StartCoroutine(FreeSpawnEnemy());
     }
 
     private void LateUpdate()
@@ -115,7 +116,6 @@ public class Game : MonoBehaviour
     {
         while(time < maxTime)
         {
-            if(time == 5) StartCoroutine(FreeSpawnEnemy());
             if(time > 0 && time % 10 == 0) drops.StartDrops();
             if(time > 0 && time % 15 == 0) usableWeaponsPanel.PickupWeapons();
             if(time > 0 && time % 120 == 0) spawnDelay *= decreaseSpawnDelay;
@@ -133,10 +133,12 @@ public class Game : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(spawnDelay);
+            if(time > 5)
+            {
                 Vector2[] spawnableDirections = directions.Where(CheckSpawnablePosition).ToArray();
                 Vector2 direction = spawnableDirections[Random.Range(0, spawnableDirections.Length)];
                 GameObject enemy = EnemyManager.NewEnemy(GetRandomEnemy());
-                enemy.transform.position = (Vector2)Player.@object.transform.position + direction * 10f + Random.insideUnitCircle * 4;
+                enemy.transform.position = (Vector2)Player.@object.transform.position + direction * 10f + Random.insideUnitCircle * 6;
 
                 bool CheckSpawnablePosition(Vector2 direction)
                 {
@@ -153,6 +155,7 @@ public class Game : MonoBehaviour
                     if(time >= 600) spawnableEnemies.Add("Fox");
                     return spawnableEnemies[Random.Range(0, spawnableEnemies.Count)];
                 }
+            }
         }
     }
 }

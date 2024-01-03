@@ -50,6 +50,7 @@ public class Drops : MonoBehaviour
     public void StartDrops()
     {
         if(dropsActivator != null) return;
+        if(isDropsActive) return;
         ResetDrops();
         animation.Play("Panel_Show");
     }
