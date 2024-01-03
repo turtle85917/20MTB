@@ -5,6 +5,7 @@ using _20MTB.Utillity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class Game : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class Game : MonoBehaviour
     public DonatedBox donatedBoxPanel;
     [Header("UI")]
     [SerializeField] private TMP_Text TimerText;
+
+    private UniversalAdditionalCameraData cameraData;
 
     private List<int> times;
     private int time = 0;
@@ -53,13 +56,14 @@ public class Game : MonoBehaviour
         instance = this;
         times = new List<int>(){};
         cameraAgent = Camera.main.GetComponent<CameraAgent>();
+        cameraData = Camera.main.GetComponent<UniversalAdditionalCameraData>();
     }
 
     private void Start()
     {
         PoolManager = GameObject.FindWithTag("PoolManager");
         maxPosition = new Vector2(Camera.main.orthographicSize * Camera.main.aspect, Camera.main.orthographicSize);
-        Camera.main.transparencySortAxis = new Vector3(0, 1, 0);
+        cameraData.SetRenderer(1);
         StartCoroutine(CheckTime());
         StartCoroutine(FreeSpawnEnemy());
     }

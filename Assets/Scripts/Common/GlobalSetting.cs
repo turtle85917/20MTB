@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class GlobalSetting : MonoBehaviour
 {
@@ -30,5 +31,6 @@ public class GlobalSetting : MonoBehaviour
     private void Start()
     {
         showChatPanel = PlayerPrefs.GetInt("showChatPanel", 1) == 1;
+        Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
     }
 }

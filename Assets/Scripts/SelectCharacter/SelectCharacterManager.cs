@@ -31,7 +31,6 @@ public class SelectCharacterManager : MonoBehaviour
 
     private void Start()
     {
-        Camera.main.transparencySortAxis = new Vector3(0, 0, 1);
         animator.runtimeAnimatorController = animators[0];
         WeaponName.text = defaultWeaponNames[0];
         WeaponDesc.text = defaultWeapons[0].playerDescription;
