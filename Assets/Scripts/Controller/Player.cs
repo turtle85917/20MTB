@@ -31,9 +31,14 @@ public class Player : BaseController
     public static PlayerStatus playerData {get; private set;}
     public static GameObject @object;
     public static GameObject weapons;
+
     private Vector2 inputDirection;
+    private float chargedAt;
+
+
     [Header("플레이어 스크립터블")]
     [SerializeField] private PlayerData[] players;
+
     [Header("UI")]
     [SerializeField] private Image twitchAvatar;
     [SerializeField] private Sprite[] avatars;
@@ -44,6 +49,7 @@ public class Player : BaseController
         animator = GetComponent<Animator>();
         @object = gameObject;
         weapons = GameObject.FindWithTag("Weapons");
+
         PlayerData data = players[(int)GlobalSetting.instance.playingCharacter];
         playerData = new PlayerStatus(){
             health = data.stats.MaxHealth,
@@ -80,11 +86,21 @@ public class Player : BaseController
         inputDirection.y = Input.GetAxisRaw("Vertical");
         animator.SetBool("isWalk", inputDirection.magnitude != 0);
         transform.rotation = Quaternion.AngleAxis(lastDirection.x < 0 ? 180 : 0, Vector3.up);
+
+        if(playerData.health < playerData.maxHealth)
+        {
+            chargedAt += Time.unscaledDeltaTime;
+            if(chargedAt >= 10f)
+            {
+                playerData.health++;
+                chargedAt = 0;
+            }
+        }
     }
 
     private void FixedUpdate()
     {
-        // 플레이어는 어떠한 영향도 받을 수 없는 무적이다.
+        // NOTE: 플레이어는 어떠한 영향도 받을 수 없는 무적이다.
         rigid.MovePosition(GameUtils.MovePositionLimited(rigid.position + inputDirection * playerData.moveSpeed.value * Time.fixedDeltaTime));
         if(inputDirection.magnitude != 0)
         {

@@ -72,7 +72,11 @@ public class Connect : MonoBehaviour
         writer.WriteLine("PASS " + oauth);
         writer.WriteLine("NICK " + nick);
         writer.WriteLine("USER " + username + " 8 * : " + username);
-        writer.WriteLine("JOIN #" + "pulto__");
+    #if UNITY_EDITOR
+        writer.WriteLine("JOIN #pulto__");
+    #else
+        writer.WriteLine("JOIN #" + channelName);
+    #endif
         writer.WriteLine("CAP REQ :twitch.tv/commands twitch.tv/tags");
         writer.Flush();
         Debug.Log("Connect twitch server");
