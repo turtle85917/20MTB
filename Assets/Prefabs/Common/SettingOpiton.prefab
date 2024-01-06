@@ -53,6 +53,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionId: 
   slider: {fileID: 8861165238273020275}
+  prevArrow: {fileID: 0}
+  nextArrow: {fileID: 0}
+  valueName: {fileID: 0}
+  connect: {fileID: 0}
 --- !u!1 &8861165236367421377
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +488,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 8861165236367421378}
   m_HandleRect: {fileID: 8861165237507539124}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0.5

@@ -19,6 +19,7 @@ public class SettingOption : MonoBehaviour
     {
         PlayerPrefs.SetFloat(optionId, slider.value);
         GlobalSetting.instance[optionId] = slider.value;
+        ChangeAduioMixerGroupdB();
     }
 
     public void OnArrowClick(int isNext)
@@ -35,7 +36,6 @@ public class SettingOption : MonoBehaviour
             case "bgmVolume":
             case "sfxVolume":
                 slider.value = PlayerPrefs.GetFloat(optionId, 1f);
-                GlobalSetting.instance[optionId] = slider.value;
                 break;
             case "showChatPanel":
                 ChangeArrowOption(false);
@@ -43,6 +43,21 @@ public class SettingOption : MonoBehaviour
         }
     }
 
+    private void ChangeAduioMixerGroupdB()
+    {
+        switch(optionId)
+        {
+            case "masterVolume":
+                GlobalSetting.instance.audioMixer.SetFloat("Master", Mathf.Log10(slider.value) * 20f);
+                break;
+            case "bgmVolume":
+                GlobalSetting.instance.audioMixer.SetFloat("BGM", Mathf.Log10(slider.value) * 20f);
+                break;
+            case "sfxVolume":
+                GlobalSetting.instance.audioMixer.SetFloat("SFX", Mathf.Log10(slider.value) * 20f);
+                break;
+        }
+    }
     private void ChangeArrowOption(bool update)
     {
         GlobalSetting.instance.showChatPanel = PlayerPrefs.GetInt(optionId, 1) == 1;

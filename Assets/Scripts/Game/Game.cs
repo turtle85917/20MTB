@@ -70,6 +70,7 @@ public class Game : MonoBehaviour
         Resume();
         isGameOver = false;
         cameraData.SetRenderer(1);
+        AudioManager.instance.ChangeBgm(AudioManager.BGMClip.Game);
         StartCoroutine(CheckTime());
         StartCoroutine(FreeSpawnEnemy());
     }
