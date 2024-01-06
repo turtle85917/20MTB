@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7929751908928034715}
   - component: {fileID: 7099123634012935237}
   - component: {fileID: 82645485662036584}
+  - component: {fileID: 3002855061188087930}
   m_Layer: 0
   m_Name: Sledgehammer
   m_TagString: Untagged
@@ -97,5 +98,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810afaa9d7ead3844ad2b487d40f88fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 0
   Rock: {fileID: 155127273791832017, guid: bc614c6656fd7ae449cfcf881080cb25, type: 3}
+--- !u!70 &3002855061188087930
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797017387844556454}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0600986, y: 1.0306894}
+  m_Size: {x: 0.9467943, y: 0.5749145}
+  m_Direction: 1

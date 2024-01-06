@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class SelectCharacterManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class SelectCharacterManager : MonoBehaviour
     [SerializeField] private GameObject arrowDown;
     [SerializeField] private RuntimeAnimatorController[] animators;
     [SerializeField] private WeaponData[] defaultWeapons;
+    private UniversalAdditionalCameraData cameraData;
     private readonly string[] defaultWeaponNames = new string[]{
         "왁초리",
         "마법봉",
@@ -29,11 +31,17 @@ public class SelectCharacterManager : MonoBehaviour
         WeaponDesc.text = defaultWeapons[index].playerDescription;
     }
 
+    private void Awake()
+    {
+        cameraData = GetComponent<UniversalAdditionalCameraData>();
+    }
+
     private void Start()
     {
         animator.runtimeAnimatorController = animators[0];
         WeaponName.text = defaultWeaponNames[0];
         WeaponDesc.text = defaultWeapons[0].playerDescription;
+        cameraData.SetRenderer(1);
     }
 
     private void Update()

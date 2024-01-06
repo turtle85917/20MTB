@@ -7,6 +7,7 @@ public class Cex : BaseWeapon
     {
         base.Init();
         sprite.color = Color.white;
+        transform.localScale = Vector2.one * stats.Range;
     }
 
     private void Awake()

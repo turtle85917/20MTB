@@ -35,30 +35,10 @@ MonoBehaviour:
     ProjectileSpeed: 0
     ProjectileCount: 0
   - Power: 4
-    Cooldown: -0.3
+    Cooldown: -0.5
     Penetrate: 1
     DecreasePower: 0
-    Range: 0
-    Life: 0
-    CriticalHit: 0
-    ProjectileSize: 0
-    ProjectileSpeed: 0
-    ProjectileCount: 0
-  - Power: 0
-    Cooldown: -0.3
-    Penetrate: 1
-    DecreasePower: 0
-    Range: 0
-    Life: 0.5
-    CriticalHit: 0
-    ProjectileSize: 0
-    ProjectileSpeed: 0
-    ProjectileCount: 0
-  - Power: 0
-    Cooldown: 0.5
-    Penetrate: 1
-    DecreasePower: 0
-    Range: 0
+    Range: 1
     Life: 0
     CriticalHit: 0
     ProjectileSize: 0
@@ -66,9 +46,29 @@ MonoBehaviour:
     ProjectileCount: 0
   - Power: 0
     Cooldown: -0.5
+    Penetrate: 1
+    DecreasePower: 0
+    Range: 1
+    Life: 0.5
+    CriticalHit: 0
+    ProjectileSize: 0
+    ProjectileSpeed: 0
+    ProjectileCount: 0
+  - Power: 0
+    Cooldown: -0.5
+    Penetrate: 1
+    DecreasePower: 0
+    Range: 1
+    Life: 0
+    CriticalHit: 0
+    ProjectileSize: 0
+    ProjectileSpeed: 0
+    ProjectileCount: 0
+  - Power: 0
+    Cooldown: -1
     Penetrate: 2
     DecreasePower: -1
-    Range: 0
+    Range: 1
     Life: 1
     CriticalHit: 0
     ProjectileSize: 0

@@ -74,11 +74,12 @@ public abstract class BaseWeapon : MonoBehaviour
         StealEnemyWeapon();
     }
 
-    private void StealEnemyWeapon()
+    protected void StealEnemyWeapon()
     {
         if(weaponUser != null && weaponUser.CompareTag("Enemy"))
         {
             EnemyPool enemyPool = EnemyManager.GetEnemy(weaponUser);
+            if(enemyPool == null) return;
             enemyPool.weapon = null;
         }
     }
