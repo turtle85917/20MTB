@@ -13,7 +13,7 @@ public class EnemyWeapons : MonoBehaviour
     public TMP_Text upgradeText;
 
     public GameObject[] contents;
-    private WeaponItem[] weaponItems;
+    private VoteItem[] voteItems;
     public List<Weapon> weapons;
     private Dictionary<string, List<Chat>> spawners;
     private int participants;
@@ -53,14 +53,14 @@ public class EnemyWeapons : MonoBehaviour
         ShowContent(0);
         animation.Play("Panel_Show");
         Weapon[] useableWeapons = WeaponBundle.GetWeapons(item => item.type == "N");
-        foreach(WeaponItem weaponItem in weaponItems)
+        foreach(VoteItem voteItem in voteItems)
         {
             Weapon weapon;
             do weapon = useableWeapons[Random.Range(0, useableWeapons.Length)];
             while(weapons.Exists(item => item.weapon.weaponId == weapon.weapon.weaponId));
             weapons.Add(weapon);
             spawners.Add(weapon.weapon.weaponId, new List<Chat>(){});
-            weaponItem.UpdatePanel(weapon);
+            voteItem.UpdateWeaponPanel(weapon);
         }
     }
 
@@ -78,7 +78,7 @@ public class EnemyWeapons : MonoBehaviour
             participants++;
 
             int index = spawners.Keys.ToList().IndexOf(weapon.weapon.weaponId);
-            weaponItems[index].UpdateSlider(users.Count / participants);
+            voteItems[index].UpdateSlider(users.Count / participants);
             GameObject enemy = EnemyManager.NewEnemy("Panzee", twitchUser.userId);
             WeaponBundle.AddWeaponToTarget(enemy, weapon.weapon.weaponId);
             enemy.transform.position = GameUtils.MovePositionLimited(Player.@object.transform.position + (Vector3)Random.insideUnitCircle.normalized * 10);
@@ -91,7 +91,7 @@ public class EnemyWeapons : MonoBehaviour
     {
         weapons = new List<Weapon>();
         spawners = new Dictionary<string, List<Chat>>();
-        weaponItems = GetComponentsInChildren<WeaponItem>();
+        voteItems = GetComponentsInChildren<VoteItem>();
         animation = GetComponent<Animation>();
     }
 
@@ -108,14 +108,14 @@ public class EnemyWeapons : MonoBehaviour
         ShowContent(1);
         PlayActiveContentAnimated();
         level = Level.Result;
+        string weaponId;
         // NOTE: 가장 많이 쏠린 순서로 정렬 및 1회 이상 모인 것만 불러오기
         Dictionary<string, Chat[]> orderdSpawners = spawners.OrderBy(item => item.Value.Count).ToDictionary(x => x.Key, x => x.Value.ToArray());
         Dictionary<string, Chat[]> filterdSpawners = spawners.Where(item => item.Value.Count > 0).ToDictionary(x => x.Key, x => x.Value.ToArray());
         int[] participantValues = spawners.Select(item => item.Value.Count).ToArray();
         // NOTE: 편차 구하여 편차가 1 이하일 경우 (값이 일정한 비율)
         float average = participantValues.Sum() / participantValues.Length;
-        float variance = participantValues.Aggregate(0f, (acc, curr) => acc + Mathf.Pow(curr - average, 2f)) / participantValues.Length;
-        string weaponId;
+        float variance = participantValues.Aggregate(0f, (acc, curr) => acc + Mathf.Pow(curr - average, 2)) / participantValues.Length;
         Chat twitchUser;
         if(variance <= 1f)
         {

@@ -21,7 +21,8 @@ public class Connect : MonoBehaviour
     {
         {"spawn", new string[]{"create", "생성"}},
         {"drops", new string[]{"드롭스"}},
-        {"gift", new string[]{"보상", "선물"}}
+        {"gift", new string[]{"보상", "선물"}},
+        {"vote", new string[]{"투표", "보스", "boss"}}
     };
     private readonly Dictionary<string, string> giftTypes = new()
     {
@@ -71,7 +72,7 @@ public class Connect : MonoBehaviour
         writer.WriteLine("PASS " + oauth);
         writer.WriteLine("NICK " + nick);
         writer.WriteLine("USER " + username + " 8 * : " + username);
-        writer.WriteLine("JOIN #" + channelName);
+        writer.WriteLine("JOIN #" + "pulto__");
         writer.WriteLine("CAP REQ :twitch.tv/commands twitch.tv/tags");
         writer.Flush();
         Debug.Log("Connect twitch server");
@@ -166,6 +167,12 @@ public class Connect : MonoBehaviour
                         if(giftKey == "weapon" && (string.IsNullOrEmpty(chunk[2]) || chunk.Length < 2)) return;
                         Game.instance.drops.SpawnDrop(giftKey, giftKey == "weapon" ? string.Join(' ', chunk[2..]) : null);
                     }
+                    break;
+                case "vote":
+                    if(chunk.Length < 1) return;
+                    int.TryParse(chunk[1], out int index);
+                    if(index < 0 || index > 2) return;
+                    Game.instance.bossVote.OnVote(chat, index - 1);
                     break;
             }
         }

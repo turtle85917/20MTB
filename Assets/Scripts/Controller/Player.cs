@@ -45,8 +45,7 @@ public class Player : BaseController
         @object = gameObject;
         weapons = GameObject.FindWithTag("Weapons");
         PlayerData data = players[(int)GlobalSetting.instance.playingCharacter];
-        playerData = new PlayerStatus()
-        {
+        playerData = new PlayerStatus(){
             health = data.stats.MaxHealth,
             maxHealth = data.stats.MaxHealth,
             level = 0, exp = 0,

@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class CameraAgent : MonoBehaviour
 {
-    private Status status;
-    private enum Status
+    public Status status;
+    public enum Status
     {
         Idle,
-        Shaking
+        Shaking,
+        DieBoss
     }
 
     public void PlayPlayerDie()
@@ -38,7 +39,7 @@ public class CameraAgent : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(Game.isPaused || status == Status.Shaking) return;
+        if(Game.isPaused || status != Status.Idle) return;
         Camera.main.transform.position = GameUtils.FixedPosition();
     }
 

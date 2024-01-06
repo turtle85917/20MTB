@@ -29,6 +29,7 @@ public class EnemyAIStruct : BaseController
     {
         if(Game.isGameOver) return;
         if(isDied) return;
+        if(enemyPool == null) return;
         if(enemyPool.health <= 0 && !isDied)
         {
             isDied = true;
@@ -43,6 +44,7 @@ public class EnemyAIStruct : BaseController
     private void FixedUpdate()
     {
         if(Game.isGameOver) return;
+        if(Game.cameraAgent.status == CameraAgent.Status.DieBoss) return;
         if(!isDied && affecter.status == Affecter.Status.Idle)
         {
             Vector3 position = Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed.value * Time.fixedDeltaTime);

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d1362e8a2a5b04bbe4ecfb0c80bc0e, type: 3}
+  m_Name: Lion
+  m_EditorClassIdentifier: 
+  enemyId: Lion
+  Prefab: {fileID: 7672150851439678227, guid: b459102d44381af40b9011620a349f6d, type: 3}
+  stats:
+    MaxHealth: 4
+    Power: 12
+    MoveSpeed: 1.5
+    Exp: 0
+  bossName: "\uB290\uADF8\uC790"
+  bossSprite: {fileID: -42790328, guid: 4b01196b4368031418810ff20d3a3052, type: 3}

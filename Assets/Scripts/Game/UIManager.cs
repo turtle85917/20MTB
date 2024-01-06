@@ -1,3 +1,4 @@
+using System.Collections;
 using _20MTB.Utillity;
 using TMPro;
 using UnityEngine;
@@ -31,6 +32,7 @@ public class UIManager : MonoBehaviour
         GameClearPanel.gameObject.SetActive(true);
         GameClearPanel.SetTrigger("Show");
         KillEnemyCount.text = string.Format(killCountMent, Player.playerData.killCount);
+        StartCoroutine(IEHide());
     }
 
     private void Awake()
@@ -45,5 +47,11 @@ public class UIManager : MonoBehaviour
         ExpSlider.value = (float)Player.playerData.exp / GameUtils.GetNeedExpFromLevel();
         HealthText.text = Player.playerData.health + " / " + Player.playerData.maxHealth;
         LevelText.text = "Lv " + Player.playerData.level;
+    }
+
+    IEnumerator IEHide()
+    {
+        yield return new WaitForSeconds(0.3f);
+        Game.Pause();
     }
 }

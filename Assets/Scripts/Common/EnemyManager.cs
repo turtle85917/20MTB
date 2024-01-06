@@ -11,6 +11,7 @@ public class EnemyPool
     public string twitchUserId;
     public Weapon weapon;
     public EnemyData data;
+    public bool isBoss;
 }
 
 public enum PresentType
@@ -42,11 +43,30 @@ public class EnemyManager : MonoBehaviour
             },
             twitchUserId = twitchUserId,
             weapon = null,
-            data = enemyData
+            data = enemyData,
+            isBoss = false
         };
         enemy.GetComponent<EnemyAIStruct>().enemyPool = enemyPool;
         instance.enemyPools.Add(enemyPool);
         return enemy;
+    }
+    public static GameObject NewBoss(EnemyData bossData)
+    {
+        GameObject bossObject = Instantiate(bossData.Prefab, instance.Enemies.transform, false);
+        bossObject.name = bossData.Prefab.name;
+        EnemyPool enemyPool = new EnemyPool(){
+            target = bossObject,
+            health = bossData.stats.MaxHealth,
+            moveSpeed = new MoveSpeedStats(){
+                originMoveSpeed = bossData.stats.MoveSpeed,
+                otherMoveSpeed = 1
+            },
+            data = bossData,
+            isBoss = true
+        };
+        bossObject.GetComponent<EnemyAIStruct>().enemyPool = enemyPool;
+        instance.enemyPools.Add(enemyPool);
+        return bossObject;
     }
 
     public static EnemyPool GetEnemy(GameObject enemy)

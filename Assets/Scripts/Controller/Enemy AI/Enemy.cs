@@ -4,7 +4,7 @@ using UnityEngine;
 public class Enemy : EnemyAIStruct
 {
     [SerializeField] private bool isForceWalk;
-    private IEnumerator attackPlayerCoroutine;
+    private Coroutine attackPlayerCoroutine;
 
     protected new void Update()
     {
@@ -22,8 +22,7 @@ public class Enemy : EnemyAIStruct
         {
             if(affecter.status == Affecter.Status.Idle && other.CompareTag("Player"))
             {
-                attackPlayerCoroutine = AttackPlayer();
-                StartCoroutine(attackPlayerCoroutine);
+                attackPlayerCoroutine = StartCoroutine(AttackPlayer());
             }
         }
     }

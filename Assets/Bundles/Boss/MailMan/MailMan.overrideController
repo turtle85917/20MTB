@@ -9,7 +9,7 @@ AnimatorOverrideController:
   m_Name: MailMan
   m_Controller: {fileID: 9100000, guid: c818b9c22bcb1ee45a07690481be97bd, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: ddf0f15f0979e43478338533fd1d0e2f, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 378c38c102c196b47a936d068a971882, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 311cc1df73d520e4db07e2c0c91c7ebd, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 65a756ebf69c6c74db62ed27c45dddd7, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ddf0f15f0979e43478338533fd1d0e2f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 378c38c102c196b47a936d068a971882, type: 2}

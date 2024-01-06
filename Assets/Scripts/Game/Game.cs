@@ -19,6 +19,7 @@ public class Game : MonoBehaviour
     [Header("Game")]
     [SerializeField] private Cycle cycle;
     public Drops drops;
+    public BossVote bossVote;
     public EnemyWeapons usableWeaponsPanel;
     public DonatedBox donatedBoxPanel;
     [Header("UI")]
@@ -27,11 +28,11 @@ public class Game : MonoBehaviour
     private UniversalAdditionalCameraData cameraData;
 
     private List<int> times;
-    private int time = 0;
+    private int time = 19 * 60 - 2;
     private float spawnDelay = 0.5f;
 
     private readonly float decreaseSpawnDelay = 0.9f;
-    private readonly int maxTime = 20 * 60; // 최대 시간 20분
+    private readonly int maxTime = 19 * 60 + 31; // 최대 시간 20분
     private readonly Vector2[] directions = new Vector2[]{
         Vector2.up,
         Vector2.down,
@@ -123,13 +124,13 @@ public class Game : MonoBehaviour
             if(time > 0 && time % 10 == 0) drops.StartDrops();
             if(time > 0 && time % 15 == 0) usableWeaponsPanel.PickupWeapons();
             if(time > 0 && time % 120 == 0) spawnDelay *= decreaseSpawnDelay;
+            if(time == 19 * 60) bossVote.StartVoting();
             SpawnEnemies();
             yield return new WaitForSeconds(1f);
             time += 1;
             TimerText.text = System.TimeSpan.FromSeconds(maxTime - time).ToString(@"mm\:ss");
         }
-        Pause();
-        UIManager.instance.ShowGameClearPanel();
+        bossVote.SpawnBoss();
     }
 
     private IEnumerator FreeSpawnEnemy()
