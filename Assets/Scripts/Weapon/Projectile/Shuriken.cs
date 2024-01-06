@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class Shuriken : BaseWeapon
 {
+    public new void Init()
+    {
+        base.Init();
+        isHide_MaxPentrate = true;
+    }
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();

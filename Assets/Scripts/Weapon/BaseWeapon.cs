@@ -25,7 +25,7 @@ public abstract class BaseWeapon : MonoBehaviour
             }
             else
             {
-                if(_penetrate == stats.Penetrate && weaponStatus == WeaponStatus.Idle)
+                if(!isHide_MaxPentrate && _penetrate == stats.Penetrate && weaponStatus == WeaponStatus.Idle)
                 {
                     gameObject.SetActive(false);
                 }
@@ -47,10 +47,14 @@ public abstract class BaseWeapon : MonoBehaviour
             }
         }
     }
+
     protected WeaponStatus weaponStatus;
     protected Rigidbody2D rigid;
     protected new Animation animation;
     protected SpriteRenderer sprite;
+
+    protected bool isHide_MaxPentrate;
+
     private int _penetrate;
     private int _count;
 

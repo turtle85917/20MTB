@@ -30,6 +30,6 @@ public class SpinManager : BaseWeapon
     private void Update()
     {
         transform.position = weaponUser.transform.position;
-        transform.Rotate(0, 0, stats.ProjectileSpeed, Space.Self);
+        transform.Rotate(0, 0, stats.ProjectileSpeed);
     }
 }

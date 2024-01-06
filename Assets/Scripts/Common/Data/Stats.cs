@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace _20MTB.Stats
 {
@@ -49,7 +50,7 @@ namespace _20MTB.Stats
         {
             get
             {
-                return originMoveSpeed * otherMoveSpeed;
+                return originMoveSpeed * Mathf.Max(0.04f, otherMoveSpeed);
             }
         }
     }

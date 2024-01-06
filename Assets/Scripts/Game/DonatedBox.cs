@@ -99,10 +99,15 @@ public class DonatedBox : MonoBehaviour
     private void CheckLevelUp()
     {
         int maxMeter = GetMaxHypeTrainMeter();
-        if(Player.playerData.hypeTrain.meter >= maxMeter)
+        bool isLevelUp = false;
+        while(Player.playerData.hypeTrain.meter >= maxMeter)
         {
             Player.playerData.hypeTrain.meter -= maxMeter;
             Player.playerData.hypeTrain.level++;
+            isLevelUp = true;
+        }
+        if(isLevelUp)
+        {
             HypeTrainLevelUpPanel.gameObject.SetActive(true);
             HypeTrainLevelUpPanel.SetTrigger("LevelUp");
         }

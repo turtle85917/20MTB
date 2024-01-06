@@ -89,6 +89,11 @@ public class LevelUpMaster : MonoBehaviour
                 .Where(item => item.weapon.levels.Length > item.level)
                 .ToArray()
             ;
+
+             // NOTE: 플레이어가 가진 무기에 따라 추가 확률을 감산함.
+            if(Player.playerData.weapons.Count < 4) random += 0.4f;
+            if(Player.playerData.weapons.Count == 5) random += 0.25f;
+
             if(usableWeapons.Length == 0) decideWeapon = leftWeapons[Random.Range(0, leftWeapons.Count)];
             else if(Player.playerData.weapons.Count == 6 || Random.value > random) decideWeapon = usableWeapons[Random.Range(0, usableWeapons.Length)];
             else decideWeapon = leftWeapons[Random.Range(0, leftWeapons.Count)];

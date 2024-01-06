@@ -29,6 +29,7 @@ public class Enemy : EnemyAIStruct
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        if(isDied) return;
         // 진희가 어느 편이든 무시하기
         if(other.name != "Jinhe")
         {
@@ -41,10 +42,11 @@ public class Enemy : EnemyAIStruct
 
     private IEnumerator AttackPlayer()
     {
-        while(true)
+        while(!isDied)
         {
             yield return new WaitForSeconds(0.3f);
             AttackManager.AttackTarget(2, Player.@object, enemyPool);
         }
+        yield break;
     }
 }

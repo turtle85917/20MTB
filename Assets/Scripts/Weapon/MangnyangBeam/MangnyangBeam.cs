@@ -7,6 +7,8 @@ public class MangnyangBeam : BaseWeapon
     {
         base.Init();
         animation.Play("Idle");
+        isHide_MaxPentrate = true;
+
         float size = (GetScreenWallPos() - (Vector2)weaponUser.transform.position).magnitude;
         transform.localScale = new Vector3(1, size, 1);
         transform.localPosition = transform.up * size;

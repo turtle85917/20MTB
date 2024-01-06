@@ -5,6 +5,8 @@ using UnityEngine;
 public class Pigeon : EnemyAIStruct
 {
     private GameObject @object;
+    private GameObject lastObject;
+
     private float findedAt;
 
     protected new void Update()
@@ -12,9 +14,10 @@ public class Pigeon : EnemyAIStruct
         if(Game.isGameOver) return;
         if(isDied) return;
         base.Update();
-        if(@object?.activeSelf != true) @object = null;
-        if(@object != null && Vector2.Distance(@object.transform.position, transform.position) > 5f) @object = null;
-        if(@object == null || Time.time - findedAt > 1f)
+        if(@object?.activeSelf == false) @object = null;
+        if(lastObject?.activeSelf == false) lastObject = null;
+        if(@object != null && Vector2.Distance(@object.transform.position, transform.position) > 3f) @object = null;
+        if(@object == null || Time.time - findedAt < 10f)
         {
             CastLayerdObject();
             findedAt = Time.time;
@@ -22,10 +25,9 @@ public class Pigeon : EnemyAIStruct
         transform.rotation = Quaternion.AngleAxis(@object?.transform.position.x < transform.position.x ? 180 : 0, Vector3.up);
         animator.SetBool("isWalk", affecter.status == Affecter.Status.Idle && @object != null);
 
-        if(@object && Scanner.IsAnyTargetAround(transform.position, 5f * @object.transform.localScale.magnitude, @object))
+        if(@object && Scanner.IsAnyTargetAround(transform.position, 5f, @object))
         {
             @object = null;
-            findedAt = Time.time - 10f;
             AttackManager.AttackTarget(2, @object, enemyPool);
         }
     }
@@ -60,6 +62,7 @@ public class Pigeon : EnemyAIStruct
         foreach(RaycastHit2D raycast in raycasts)
         {
             if(raycast.collider.name == "Pigeon") continue;
+            if(lastObject?.Equals(raycast.collider.gameObject) == true) return;
             float distance = Vector3.Distance(transform.position, raycast.transform.position);
             if(raycast.collider.gameObject.CompareTag("Player"))
             {
@@ -73,5 +76,6 @@ public class Pigeon : EnemyAIStruct
             }
         }
         @object = result;
+        if(result != null) lastObject = result;
     }
 }

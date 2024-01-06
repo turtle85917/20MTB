@@ -32,7 +32,7 @@ public class Game : MonoBehaviour
 
     private List<int> times;
     private int time = 0;
-    private float spawnDelay = 1f;
+    private float spawnDelay = 0.8f;
 
     private readonly float decreaseSpawnDelay = 0.9f;
     private readonly int maxTime = 20 * 60; // 최대 시간 20분

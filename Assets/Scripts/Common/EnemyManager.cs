@@ -97,12 +97,12 @@ public class EnemyManager : MonoBehaviour
         if(instance.killStack >= 4)
         {
             instance.killStack = 0;
-            if(UnityEngine.Random.value < 0.1f)
+            if(UnityEngine.Random.value < 0.07f)
             {
                 instance.DropPresent(enemyPool, PresentType.DonatedBox);
             }
         }
-        else if(UnityEngine.Random.value < 0.7f)
+        else if(UnityEngine.Random.value < 0.8f)
             instance.DropPresent(enemyPool, PresentType.Exp);
     }
 

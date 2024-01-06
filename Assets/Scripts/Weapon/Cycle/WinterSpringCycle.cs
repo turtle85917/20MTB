@@ -1,5 +1,4 @@
 using System.Collections;
-using _20MTB.Utillity;
 using UnityEngine;
 
 public class WinterSpringCycle : BaseCycle
@@ -8,7 +7,8 @@ public class WinterSpringCycle : BaseCycle
     {
         while(true)
         {
-            Weapon weapon = WeaponBundle.GetWeapon("WinterSpring");
+            Weapon weapon = WeaponBundle.GetWeaponFromTarget("WinterFlower", weaponUser);
+            if(weapon == null) yield break;
             yield return new WaitForSeconds(weapon.stats.Cooldown);
             GameObject winterFlower = ObjectPool.Get(Game.PoolManager, "WinterFlower", (GameObject)weapon.weapon.resources[0]);
             winterFlower.transform.position = weaponUser.transform.position + (Vector3)Random.insideUnitCircle * 5f;

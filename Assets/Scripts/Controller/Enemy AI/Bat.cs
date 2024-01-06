@@ -15,7 +15,7 @@ public class Bat : EnemyAIStruct
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player") && Random.value < 0.01f)
+        if(other.CompareTag("Player") && Random.value < 0.45f)
         {
             AttackManager.AttackTarget(1, other.gameObject, enemyPool);
             AttackManager.AttackTarget(-++stack * 2, gameObject, null);
