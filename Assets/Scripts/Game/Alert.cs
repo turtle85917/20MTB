@@ -11,6 +11,7 @@ public class Alert : MonoBehaviour
     {
         AlertContent.text = content;
         gameObject.SetActive(true);
+        animation.Stop();
         animation.Play("Alert_Show");
         StartCoroutine(DelayedHide());
     }

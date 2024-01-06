@@ -17,5 +17,7 @@ MonoBehaviour:
   stats:
     MaxHealth: 4
     Power: 8
-    MoveSpeed: 1.4
+    MoveSpeed: 0.9
     Exp: 6
+  bossName: 
+  bossSprite: {fileID: 0}

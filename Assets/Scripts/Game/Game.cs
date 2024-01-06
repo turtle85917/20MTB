@@ -27,12 +27,15 @@ public class Game : MonoBehaviour
 
     private UniversalAdditionalCameraData cameraData;
 
+    private int stage;
+    private string lastEnemyId;
+
     private List<int> times;
-    private int time = 19 * 60 - 2;
-    private float spawnDelay = 0.5f;
+    private int time = 0;
+    private float spawnDelay = 1f;
 
     private readonly float decreaseSpawnDelay = 0.9f;
-    private readonly int maxTime = 19 * 60 + 31; // 최대 시간 20분
+    private readonly int maxTime = 20 * 60; // 최대 시간 20분
     private readonly Vector2[] directions = new Vector2[]{
         Vector2.up,
         Vector2.down,
@@ -64,6 +67,8 @@ public class Game : MonoBehaviour
     {
         PoolManager = GameObject.FindWithTag("PoolManager");
         maxPosition = new Vector2(Camera.main.orthographicSize * Camera.main.aspect, Camera.main.orthographicSize);
+        Resume();
+        isGameOver = false;
         cameraData.SetRenderer(1);
         StartCoroutine(CheckTime());
         StartCoroutine(FreeSpawnEnemy());
@@ -142,7 +147,11 @@ public class Game : MonoBehaviour
             {
                 Vector2[] spawnableDirections = directions.Where(CheckSpawnablePosition).ToArray();
                 Vector2 direction = spawnableDirections[Random.Range(0, spawnableDirections.Length)];
-                GameObject enemy = EnemyManager.NewEnemy(GetRandomEnemy());
+                string enemyId = GetRandomEnemy();
+                stage++;
+                if(lastEnemyId != null && stage < 5) enemyId = lastEnemyId;
+                else lastEnemyId = enemyId;
+                GameObject enemy = EnemyManager.NewEnemy(enemyId);
                 enemy.transform.position = (Vector2)Player.@object.transform.position + direction * 10f + Random.insideUnitCircle * 6;
 
                 bool CheckSpawnablePosition(Vector2 direction)
@@ -154,9 +163,9 @@ public class Game : MonoBehaviour
                 string GetRandomEnemy()
                 {
                     List<string> spawnableEnemies = new List<string>(){"Bat"};
-                    if(time >= 30) spawnableEnemies.Add("Pigeon");
-                    if(time >= 60) spawnableEnemies.Add("Panzee");
-                    if(time >= 80) spawnableEnemies.Add("Leaf");
+                    if(time >= 20) spawnableEnemies.Add("Pigeon");
+                    if(time >= 40) spawnableEnemies.Add("Panzee");
+                    if(time >= 100) spawnableEnemies.Add("Leaf");
                     if(time >= 600) spawnableEnemies.Add("Fox");
                     return spawnableEnemies[Random.Range(0, spawnableEnemies.Count)];
                 }
