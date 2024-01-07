@@ -29,7 +29,7 @@ public class Pigeon : EnemyAIStruct
         {
             if((@object.CompareTag("Player") || @object.CompareTag("Enemy")) && Time.time - findedAt > Random.Range(2f, 3f))
             {
-                AttackManager.AttackTarget(2, @object, enemyPool);
+                AttackManager.AttackTarget(4, @object, enemyPool);
                 @object = null;
             }
         }
