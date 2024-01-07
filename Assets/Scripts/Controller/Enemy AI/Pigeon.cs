@@ -17,7 +17,7 @@ public class Pigeon : EnemyAIStruct
         if(@object?.activeSelf == false) @object = null;
         if(lastObject?.activeSelf == false) lastObject = null;
         if(@object != null && Vector2.Distance(@object.transform.position, transform.position) > 3f) @object = null;
-        if(@object == null || Time.time - findedAt > 10f)
+        if(@object == null || Time.time - findedAt > 5f)
         {
             CastLayerdObject();
             findedAt = Time.time;
@@ -25,10 +25,13 @@ public class Pigeon : EnemyAIStruct
         transform.rotation = Quaternion.AngleAxis(@object?.transform.position.x < transform.position.x ? 180 : 0, Vector3.up);
         animator.SetBool("isWalk", affecter.status == Affecter.Status.Idle && @object != null);
 
-        if(@object && Scanner.IsAnyTargetAround(transform.position, 5f, @object))
+        if(@object != null && Scanner.IsAnyTargetAround(transform.position, 3f, @object))
         {
-            @object = null;
-            AttackManager.AttackTarget(2, @object, enemyPool);
+            if(@object.CompareTag("Player") || @object.CompareTag("Enemy") && Time.time - findedAt > Random.Range(2f, 3f))
+            {
+                AttackManager.AttackTarget(2, @object, enemyPool);
+                @object = null;
+            }
         }
     }
 

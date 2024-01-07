@@ -6,7 +6,7 @@ using UnityEngine;
 public static class Scanner
 {
     public static bool IsAnyTargetAround(Vector2 origin, float radius, string tag) => Physics2D.CircleCastAll(origin, radius, Vector2.right).Where(item => item.collider.CompareTag(tag)).ToArray().Length > 0;
-    public static bool IsAnyTargetAround(Vector2 origin, float radius, GameObject target) => Physics2D.CircleCastAll(origin, radius, Vector2.right).ToList().Exists(item => item.collider.Equals(target));
+    public static bool IsAnyTargetAround(Vector2 origin, float radius, GameObject target) => Physics2D.CircleCastAll(origin, radius, Vector2.right).ToList().Exists(item => item.collider.gameObject.Equals(target));
 
     public static GameObject[] ScanAll(Vector2 origin, float radius, string tag, int limit = 0)
     {
