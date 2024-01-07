@@ -11,23 +11,18 @@ public class EnemyWeapons : MonoBehaviour
     [Header("Conent 2 관련")]
     public Image logo;
     public TMP_Text upgradeText;
-
     public GameObject[] contents;
     private VoteItem[] voteItems;
     public List<Weapon> weapons;
+    [HideInInspector] public bool isInitial = true;
+    private float startedAt;
     private Dictionary<string, List<Chat>> spawners;
     private int participants;
-    private Level level;
+    private bool isVoting;
     private new Animation animation;
 
     private readonly int MAX_PARTICIPANT_COUNT = 30;
     private readonly string UPGRADE_TEXT_TEMPLATE = "{0} <size=21>무기 업그레이드</size>\n<size=20>(<color=#BDBDBD>{1}</color> 님의 적)</size>";
-
-    private enum Level
-    {
-        Voting,
-        Result
-    }
 
     public void ShowContent(int index)
     {
@@ -48,8 +43,9 @@ public class EnemyWeapons : MonoBehaviour
 
     public void PickupWeapons()
     {
-        if(spawners.Count > 0) return;
-        level = Level.Voting;
+        if(isVoting) return;
+        startedAt = Time.time;
+        isVoting = true;
         ShowContent(0);
         animation.Play("Panel_Show");
         Weapon[] useableWeapons = WeaponBundle.GetWeapons(item => item.type == "N");
@@ -62,6 +58,7 @@ public class EnemyWeapons : MonoBehaviour
             spawners.Add(weapon.weapon.weaponId, new List<Chat>(){});
             voteItem.UpdateWeaponPanel(weapon);
         }
+        if(isInitial) isInitial = false;
     }
 
     public GameObject SpawnEnemy(Chat twitchUser, string weaponId)
@@ -97,17 +94,20 @@ public class EnemyWeapons : MonoBehaviour
 
     private void Update()
     {
-        if(participants == MAX_PARTICIPANT_COUNT && level == Level.Voting)
+        if((Time.time - startedAt > 50f || participants == MAX_PARTICIPANT_COUNT) && isVoting)
         {
+            isVoting = false;
             UpgradeRandomEnemyWeapon();
         }
     }
 
-    private void UpgradeRandomEnemyWeapon()
+    private void UpgradeRandomEnemyWeapon() 
     {
-        ShowContent(1);
-        PlayActiveContentAnimated();
-        level = Level.Result;
+        if(participants == 0)
+        {
+            animation.Play("Panel_Hide");
+            return;
+        }
         string weaponId;
         // NOTE: 가장 많이 쏠린 순서로 정렬 및 1회 이상 모인 것만 불러오기
         Dictionary<string, Chat[]> orderdSpawners = spawners.OrderBy(item => item.Value.Count).ToDictionary(x => x.Key, x => x.Value.ToArray());
@@ -131,6 +131,11 @@ public class EnemyWeapons : MonoBehaviour
         }
         // NOTE: 적의 무기 업그레이드
         EnemyPool target = EnemyManager.GetEnemy(twitchUser.userId);
+        if(target == null || target.weapon == null)
+        {
+            animation.Play("Panel_Hide");
+            return;
+        }
         Weapon weapon = WeaponBundle.GetWeapon(weaponId);
         // NOTE: 무기가 만렙일 경우, 컷
         WeaponBundle.UpgradeTargetsWeapon(target.target, weaponId);
@@ -140,6 +145,9 @@ public class EnemyWeapons : MonoBehaviour
         weapons = new List<Weapon>();
         spawners = new Dictionary<string, List<Chat>>();
         participants = 0;
+        // NOTE: 판넬 보이기
+        ShowContent(1);
+        PlayActiveContentAnimated();
         // NOTE: 대기 후, 판넬 숨기기
         StartCoroutine(HidePanel());
     }

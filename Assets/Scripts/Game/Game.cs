@@ -26,6 +26,8 @@ public class Game : MonoBehaviour
     [SerializeField] private TMP_Text TimerText;
 
     private UniversalAdditionalCameraData cameraData;
+    private int enemyWeaponsCooldown;
+    private int dropsCooldown;
 
     private int stage;
     private string lastEnemyId;
@@ -70,9 +72,17 @@ public class Game : MonoBehaviour
         Resume();
         isGameOver = false;
         cameraData.SetRenderer(1);
+        dropsCooldown = 20;
+        enemyWeaponsCooldown = 10;
         AudioManager.instance.PauseBgm();
         StartCoroutine(CheckTime());
         StartCoroutine(FreeSpawnEnemy());
+    }
+
+    private void Update()
+    {
+        dropsCooldown = drops.isInitial ? 20 : 30;
+        enemyWeaponsCooldown = usableWeaponsPanel.isInitial ? 10 : 45;
     }
 
     private void LateUpdate()
@@ -127,8 +137,8 @@ public class Game : MonoBehaviour
     {
         while(time < maxTime)
         {
-            if(time > 0 && time % 10 == 0) drops.StartDrops();
-            if(time > 0 && time % 15 == 0) usableWeaponsPanel.PickupWeapons();
+            if(time > 0 && time % dropsCooldown == 0) drops.StartDrops();
+            if(time > 0 && time % enemyWeaponsCooldown == 0) usableWeaponsPanel.PickupWeapons();
             if(time > 0 && time % 120 == 0) spawnDelay *= decreaseSpawnDelay;
             if(time == 19 * 60) bossVote.StartVoting();
             SpawnEnemies();
@@ -138,7 +148,6 @@ public class Game : MonoBehaviour
         }
         bossVote.SpawnBoss();
     }
-
     private IEnumerator FreeSpawnEnemy()
     {
         while(true)

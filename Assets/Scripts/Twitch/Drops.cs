@@ -9,6 +9,7 @@ public class Drops : MonoBehaviour
     public Animation ParachutePanel;
     public Image Icon;
     public TMP_Text Name;
+    [HideInInspector] public bool isInitial = true;
 
     [HideInInspector] public Chat dropsActivator;
     [SerializeField] private TMP_Text DropsActivator;
@@ -21,6 +22,7 @@ public class Drops : MonoBehaviour
     private bool isDropsActive;
 
     private int dropCount;
+    private float startedAt;
 
     private readonly int MAX_PARTICIPANT_COUNT = 40;
 
@@ -53,6 +55,8 @@ public class Drops : MonoBehaviour
         if(isDropsActive) return;
         ResetDrops();
         animation.Play("Panel_Show");
+        startedAt = Time.time;
+        if(isInitial) isInitial = false;
     }
 
     public void HideParachutePanel()
@@ -67,7 +71,7 @@ public class Drops : MonoBehaviour
 
     private void Update()
     {
-        if(isDropsActive && participants.Count == MAX_PARTICIPANT_COUNT)
+        if(isDropsActive && (Time.time - startedAt > 40f || participants.Count == MAX_PARTICIPANT_COUNT))
         {
             isDropsActive = false;
             GetDropsActivator();
@@ -90,11 +94,12 @@ public class Drops : MonoBehaviour
 
     private void GetDropsActivator()
     {
+        animation.Play("Panel_Hide");
+        if(participants.Count == 0) return;
         Chat activator = participants[Random.Range(0, participants.Count)];
         dropsActivator = activator;
         DropsActivator.text = $"드롭스 보상자 : {activator.userName}";
         DropsActivator.gameObject.SetActive(true);
-        animation.Play("Panel_Hide");
     }
 
     public IEnumerator IEHide()
