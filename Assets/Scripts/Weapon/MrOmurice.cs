@@ -3,17 +3,15 @@ using UnityEngine;
 public class MrOmurice : BaseWeapon
 {
     private Animator animator;
-    private AudioSource audioSource;
 
     public new void Init()
     {
-        audioSource.Play();
+        AudioManager.instance.PlaySound(AudioManager.SFXClip.WeaponOmurice);
         animator.SetTrigger("Show");
     }
 
     public void AttackEnemies()
     {
-        AudioManager.instance.PlaySound(AudioManager.SFXClip.WeaponOmurice);
         GameObject[] enemies = Scanner.ScanAll(transform.position, stats.Range, "Enemy");
         foreach(GameObject enemy in enemies)
         {
@@ -27,7 +25,6 @@ public class MrOmurice : BaseWeapon
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        audioSource = GetComponentInChildren<AudioSource>();
     }
 
     private void Update()

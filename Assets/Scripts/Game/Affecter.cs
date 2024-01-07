@@ -69,9 +69,9 @@ public class Affecter : MonoBehaviour
         Vector2 direction = (transform.position - source.transform.position).normalized;
         StartCoroutine(ComboKnockback(direction, 0, source));
         yield return new WaitForSeconds(0.2f); // 공격 딜레이
-        StartCoroutine(ComboKnockback(direction, 1, source));
+        StartCoroutine(ComboKnockback(direction, 0, source));
         yield return new WaitForSeconds(0.2f); // 공격 딜레이
-        StartCoroutine(ComboKnockback(direction, 2, source));
+        StartCoroutine(ComboKnockback(direction, 0, source));
         yield return new WaitForSeconds(0.2f); // 공격 딜레이
         CheckCurrentStatus(Status.Knockback);
     }

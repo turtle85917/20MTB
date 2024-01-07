@@ -17,7 +17,7 @@ public class Pigeon : EnemyAIStruct
         if(@object?.activeSelf == false) @object = null;
         if(lastObject?.activeSelf == false) lastObject = null;
         if(@object != null && Vector2.Distance(@object.transform.position, transform.position) > 3f) @object = null;
-        if(@object == null || Time.time - findedAt < 10f)
+        if(@object == null || Time.time - findedAt > 10f)
         {
             CastLayerdObject();
             findedAt = Time.time;
@@ -46,7 +46,6 @@ public class Pigeon : EnemyAIStruct
     {
         base.OnEnable();
         @object = null;
-        findedAt = Time.time;
     }
 
     private void CastLayerdObject()
