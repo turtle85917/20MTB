@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyId: MailMan
   Prefab: {fileID: 4989529698238447806, guid: 4f77a080be4bf3e4ebf6c2fb3b0267dc, type: 3}
   stats:
-    MaxHealth: 4
+    MaxHealth: 510
     Power: 0
     MoveSpeed: 1.22
     Exp: 0

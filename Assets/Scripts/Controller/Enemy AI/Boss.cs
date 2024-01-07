@@ -27,6 +27,14 @@ public class Boss : EnemyAIStruct
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            AttackManager.AttackTarget(7, Player.@object, null);
+        }
+    }
+
     IEnumerator IECameraManage()
     {
         GetComponent<SortingGroup>().enabled = false;

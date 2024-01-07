@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyId: Lion
   Prefab: {fileID: 7672150851439678227, guid: b459102d44381af40b9011620a349f6d, type: 3}
   stats:
-    MaxHealth: 4
+    MaxHealth: 540
     Power: 12
     MoveSpeed: 1.5
     Exp: 0

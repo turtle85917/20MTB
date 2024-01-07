@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyId: Butterfly
   Prefab: {fileID: 7406613994203126316, guid: 64ea09ca49d7aae4297a17c3ecc219b5, type: 3}
   stats:
-    MaxHealth: 4
+    MaxHealth: 460
     Power: 5
     MoveSpeed: 1
     Exp: 0

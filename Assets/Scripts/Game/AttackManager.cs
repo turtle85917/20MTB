@@ -80,7 +80,7 @@ public static class AttackManager
         if(target.CompareTag("Player"))
         {
             Weapon parasocialWeapon = Player.playerData.weapons.Find(item => item.weapon.weaponId == "パラソーシャル");
-            if(parasocialWeapon != null && UnityEngine.Random.value < 0.4f)
+            if(attackerPool != null && parasocialWeapon != null && UnityEngine.Random.value < 0.4f)
             {
                 attackerPool.health -= value * 0.25f * parasocialWeapon.level;
                 TextManager.WriteDamage(attackerPool.target, value, false);

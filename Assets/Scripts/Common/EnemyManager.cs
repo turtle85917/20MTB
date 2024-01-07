@@ -34,9 +34,15 @@ public class EnemyManager : MonoBehaviour
     {
         EnemyData enemyData = Array.Find(instance.enemies, item => item.enemyId == enemyId);
         GameObject enemy = ObjectPool.Get(instance.Enemies, enemyData.Prefab.name, enemyData.Prefab);
+        float damageRatio = 1;
+        if(Game.instance.time > 1140) damageRatio = 2f;
+        else if(Game.instance.time > 1050) damageRatio = 1.9f;
+        else if(Game.instance.time > 720) damageRatio = 1.7f;
+        else if(Game.instance.time > 600) damageRatio = 1.5f;
+        if(Game.instance.time > 300) damageRatio = 1.2f;
         EnemyPool enemyPool = new EnemyPool(){
             target = enemy,
-            health = enemyData.stats.MaxHealth,
+            health = enemyData.stats.MaxHealth * damageRatio,
             moveSpeed = new MoveSpeedStats(){
                 originMoveSpeed = enemyData.stats.MoveSpeed * (UnityEngine.Random.value * 0.5f + 1),
                 otherMoveSpeed = 1

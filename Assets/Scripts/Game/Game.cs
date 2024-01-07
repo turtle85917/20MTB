@@ -43,7 +43,7 @@ public class Game : MonoBehaviour
         Vector2.down,
         Vector2.right,
         Vector2.left
-    };  
+    };
 
     public static void Pause()
     {
@@ -146,6 +146,7 @@ public class Game : MonoBehaviour
             time += 1;
             TimerText.text = System.TimeSpan.FromSeconds(maxTime - time).ToString(@"mm\:ss");
         }
+        spawnDelay = 0.45f;
         bossVote.SpawnBoss();
     }
     private IEnumerator FreeSpawnEnemy()
