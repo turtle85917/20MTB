@@ -18,7 +18,7 @@ MonoBehaviour:
   enemyDescription: "\uD654\uBA74 \uB05D\uC5D0 \uB2FF\uC744 \uC2DC, \uC544\uBB34
     \uACF3\uC73C\uB85C \uD295\uACA8\uC9C0\uB294 \uBA38\uB9AC\uD540\uC774 \uB098\uC635\uB2C8\uB2E4."
   logo: {fileID: 302606900, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
-  weaponCycleScriptFile: {fileID: 11500000, guid: 14616fc0d9712d84a85093f5fdfacf31, type: 3}
+  weaponCycleName: HeadpinCycle
   resources:
   - {fileID: 5019590825961031447, guid: 63e51989fa92a4943b1285c9cabe67c8, type: 3}
   levels:

@@ -21,7 +21,7 @@ MonoBehaviour:
     \uBB34\uAE30\uB4E4 \uC911 \uC544\uBB34\uAC70\uB098 \uD558\uB098\uB97C \uC0AC\uC6A9\uD558\uB294
     \uC9C4\uD76C\uB97C \uC18C\uD658\uD569\uB2C8\uB2E4."
   logo: {fileID: -139995169, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
-  weaponCycleScriptFile: {fileID: 11500000, guid: c85c93af1b4bbb943b8ac2a439406374, type: 3}
+  weaponCycleName: KettleCycle
   resources:
   - {fileID: 3179883981209954396, guid: 11301fbcb5783254c85217118e321243, type: 3}
   levels:

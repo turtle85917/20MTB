@@ -18,7 +18,7 @@ MonoBehaviour:
   enemyDescription: "\uC801\uACFC \uB2FF\uC744 \uC2DC \uD295\uACA8\uC9C0\uB294 \uBD80\uBA54\uB791
     \uD22C\uC0AC\uCCB4\uB97C \uC18C\uD658\uD569\uB2C8\uB2E4."
   logo: {fileID: 130066094, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
-  weaponCycleScriptFile: {fileID: 11500000, guid: 9498ee269d692dc4b9d476bfc7cc2eb8, type: 3}
+  weaponCycleName: NinjaShurikenCycle
   resources:
   - {fileID: 3623990329892760410, guid: 4f4b6dd6a5bbe3c40bbd0f8ae47ad7d9, type: 3}
   levels:

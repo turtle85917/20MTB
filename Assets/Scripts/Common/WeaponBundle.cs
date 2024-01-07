@@ -43,7 +43,7 @@ public class WeaponBundle : MonoBehaviour
             Debug.Log("Not found weapon");
             return;
         }
-        Type monoscript = weapon.weapon.weaponCycleScriptFile ? weapon.weapon.weaponCycleScriptFile.GetClass() : null;
+        Type monoscript = string.IsNullOrEmpty(weapon.weapon.weaponCycleName) ? null : Type.GetType(weapon.weapon.weaponCycleName);
         if(target.CompareTag("Player"))
         {
             if(Player.playerData.weapons.Count == 6) return; // 무기 최대 6개까지 소지 가능

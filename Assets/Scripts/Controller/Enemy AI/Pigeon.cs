@@ -25,13 +25,13 @@ public class Pigeon : EnemyAIStruct
         transform.rotation = Quaternion.AngleAxis(@object?.transform.position.x < transform.position.x ? 180 : 0, Vector3.up);
         animator.SetBool("isWalk", affecter.status == Affecter.Status.Idle && @object != null);
 
-        if(@object != null && Scanner.IsAnyTargetAround(transform.position, 3f, @object))
+        if(@object != null && Scanner.IsAnyTargetAround(transform.position, 2f, @object))
         {
-            if((@object.CompareTag("Player") || @object.CompareTag("Enemy")) && Time.time - findedAt > Random.Range(2f, 3f))
+            if((@object.CompareTag("Player") || @object.CompareTag("Enemy")) && Time.time - findedAt > 1f)
             {
                 AttackManager.AttackTarget(4, @object, enemyPool);
-                @object = null;
             }
+            @object = null;
         }
     }
 
@@ -66,11 +66,6 @@ public class Pigeon : EnemyAIStruct
             if(raycast.collider.name == "Pigeon") continue;
             if(lastObject?.Equals(raycast.collider.gameObject) == true) return;
             float distance = Vector3.Distance(transform.position, raycast.transform.position);
-            if(raycast.collider.gameObject.CompareTag("Player"))
-            {
-                result = raycast.collider.gameObject;
-                break;
-            }
             if(minDistance == 0 || distance < minDistance)
             {
                 result = raycast.collider.gameObject;

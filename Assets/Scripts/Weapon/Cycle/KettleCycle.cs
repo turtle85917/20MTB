@@ -44,7 +44,7 @@ public class KettleCycle : BaseCycle
                 script.weaponOwner = selectEnemyPool;
                 script.targetTag = GameUtils.GetTargetTag(weaponUser);
                 script.Init();
-                System.Type monoscript = selectWeapon.weapon.weaponCycleScriptFile.GetClass();
+                System.Type monoscript = System.Type.GetType(weapon.weapon.weaponCycleName);
                 BaseCycle baseCycle = System.Activator.CreateInstance(monoscript) as BaseCycle;
                 script.StartCoroutine(baseCycle.Cycle(jinhe));
             }

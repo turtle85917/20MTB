@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 
 [System.Serializable]
@@ -23,7 +22,7 @@ public class WeaponData : ScriptableObject
     [TextArea] public string playerDescription;
     [TextArea] public string enemyDescription;
     public Sprite logo;
-    public MonoScript weaponCycleScriptFile;
+    public string weaponCycleName;
     public Object[] resources;
     public WeaopnIncreaseStat[] levels;
     public bool isFullLogo;
