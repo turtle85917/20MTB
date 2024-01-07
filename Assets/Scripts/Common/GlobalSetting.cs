@@ -10,7 +10,6 @@ public class GlobalSetting : MonoBehaviour
     public float bgmVolume = 1;
     public float sfxVolume = 1;
     public bool showChatPanel = true;
-    public AudioMixer audioMixer;
     public static GlobalSetting instance;
 
     public object this[string optionName]
@@ -37,9 +36,9 @@ public class GlobalSetting : MonoBehaviour
         masterVolume = PlayerPrefs.GetFloat("masterVolume", 1f);
         bgmVolume = PlayerPrefs.GetFloat("bgmVolume", 1f);
         sfxVolume = PlayerPrefs.GetFloat("sfxVolume", 1f);
-        audioMixer.SetFloat("Master", Mathf.Log10(masterVolume) * 20f);
-        audioMixer.SetFloat("BGM", Mathf.Log10(bgmVolume) * 20f);
-        audioMixer.SetFloat("SFX", Mathf.Log10(sfxVolume) * 20f);
+        AudioManager.instance.audioMixer.SetFloat("Master", Mathf.Log10(masterVolume) * 20f);
+        AudioManager.instance.audioMixer.SetFloat("BGM", Mathf.Log10(bgmVolume) * 20f);
+        AudioManager.instance.audioMixer.SetFloat("SFX", Mathf.Log10(sfxVolume) * 20f);
     #endregion
         AudioManager.instance.ChangeBgm(AudioManager.BGMClip.Main);
         Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);

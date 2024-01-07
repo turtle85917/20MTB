@@ -13,7 +13,7 @@ public class Present : MonoBehaviour
 
     private void Update()
     {
-        if(Scanner.Scan(transform.position, 1.4f, "Player")?.Equals(Player.@object) == true)
+        if(Scanner.Scan(transform.position, 1.8f, "Player")?.Equals(Player.@object) == true)
         {
             rigid.MovePosition(Vector3.MoveTowards(rigid.position, Player.@object.transform.position, 40 * Time.deltaTime));
         }

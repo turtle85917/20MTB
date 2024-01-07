@@ -14,12 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmClips:
   - clip: {fileID: 8300000, guid: 8780505a6d5b66c499c47ee51db637eb, type: 3}
-    volume: 0.8
-    isLoop: 1
-  - clip: {fileID: 8300000, guid: c5d52b8237a29ba4fb3a208c1a4fd139, type: 3}
     volume: 0.7
-    isLoop: 1
   sfxClips:
-  - clip: {fileID: 8300000, guid: 44417a63adf6b6d4b960374ef22c4c4d, type: 3}
-    volume: 0.7
-    isLoop: 0
+  - clip: {fileID: 8300000, guid: fd0aa25f415eed4479cd87d8be5c32bf, type: 3}
+    volume: 0.1
+  - clip: {fileID: 8300000, guid: a70bea0af49b86e4d8b718fe60605c7b, type: 3}
+    volume: 0.3

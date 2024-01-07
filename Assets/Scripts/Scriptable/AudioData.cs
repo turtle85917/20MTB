@@ -12,6 +12,5 @@ public class AudioData : ScriptableObject
     {
         public AudioClip clip;
         [Range(0, 1)] public float volume = 1f;
-        public bool isLoop;
     }
 }

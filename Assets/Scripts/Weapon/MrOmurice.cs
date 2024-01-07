@@ -13,6 +13,7 @@ public class MrOmurice : BaseWeapon
 
     public void AttackEnemies()
     {
+        AudioManager.instance.PlaySound(AudioManager.SFXClip.WeaponOmurice);
         GameObject[] enemies = Scanner.ScanAll(transform.position, stats.Range, "Enemy");
         foreach(GameObject enemy in enemies)
         {

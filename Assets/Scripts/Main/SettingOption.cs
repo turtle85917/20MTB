@@ -48,13 +48,13 @@ public class SettingOption : MonoBehaviour
         switch(optionId)
         {
             case "masterVolume":
-                GlobalSetting.instance.audioMixer.SetFloat("Master", Mathf.Log10(slider.value) * 20f);
+                AudioManager.instance.audioMixer.SetFloat("Master", Mathf.Log10(slider.value) * 20f);
                 break;
             case "bgmVolume":
-                GlobalSetting.instance.audioMixer.SetFloat("BGM", Mathf.Log10(slider.value) * 20f);
+                AudioManager.instance.audioMixer.SetFloat("BGM", Mathf.Log10(slider.value) * 20f);
                 break;
             case "sfxVolume":
-                GlobalSetting.instance.audioMixer.SetFloat("SFX", Mathf.Log10(slider.value) * 20f);
+                AudioManager.instance.audioMixer.SetFloat("SFX", Mathf.Log10(slider.value) * 20f);
                 break;
         }
     }

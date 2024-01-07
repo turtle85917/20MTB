@@ -36,10 +36,11 @@ public class WeaponAnimationEvents : MonoBehaviour
     public void MuayThai()
     {
         Weapon weapon = WeaponBundle.GetWeapon("MuayThai");
-        var enemies = Scanner.ScanAll(Player.@object.transform.position, 10, "Enemy").OrderBy(item => Vector3.Distance(item.transform.position, Player.@object.transform.position)).ToList();
+        AudioManager.instance.PlaySound(AudioManager.SFXClip.WeaponMuayThai);
+        GameObject[] enemies = Scanner.ScanAll(Player.@object.transform.position, 2f, "Enemy").OrderBy(item => Vector3.Distance(item.transform.position, Player.@object.transform.position)).ToArray();
         for(int i = 0; i < weapon.stats.Penetrate; i++)
         {
-            if(enemies.Count <= i) break;
+            if(enemies.Length <= i) break;
             EnemyPool enemyPool = EnemyManager.GetEnemy(enemies[i]);
             AttackManager.AttackTarget(weapon.weapon.weaponId, enemies[i], i);
         }

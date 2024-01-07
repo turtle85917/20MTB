@@ -4186,7 +4186,6 @@ MonoBehaviour:
   bgmVolume: 1
   sfxVolume: 1
   showChatPanel: 1
-  audioMixer: {fileID: 24100000, guid: d2468b9a513f60d4db998e4a21a4c292, type: 2}
 --- !u!4 &1061204207
 Transform:
   m_ObjectHideFlags: 0
@@ -11767,8 +11766,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a222edf1a27ea674780c57b75c0283f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: d2468b9a513f60d4db998e4a21a4c292, type: 2}
   bgmAudioSource: {fileID: 2056026027}
   audioData: {fileID: 11400000, guid: 5128726d9533bbf4fab5c9d0ed6e3b1f, type: 2}
+  sfxGroup: {fileID: -766740557581776737, guid: d2468b9a513f60d4db998e4a21a4c292, type: 2}
 --- !u!114 &2089332749 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8861165238273020275, guid: 54605d7d906a5e644b6cd7929f5b1c41, type: 3}

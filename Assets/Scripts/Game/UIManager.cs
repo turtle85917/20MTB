@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
 
     public void OnReturnBtnClick()
     {
-        Game.Resume();
+        AudioManager.instance.ResumeBgm();
         SceneManager.LoadScene("Main");
     }
 
