@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Connect : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Connect : MonoBehaviour
     private StreamWriter writer;
     private float maxHeight;
 
+    private readonly Color developerColor = new Color(1, 0.94f, 0, 0.15f);
     private readonly Dictionary<string, string[]> commands = new()
     {
         {"spawn", new string[]{"create", "생성"}},
@@ -129,6 +131,7 @@ public class Connect : MonoBehaviour
     {
         GameObject chatObject = ObjectPool.Get(gameObject, "Chat", Chat);
         ((RectTransform)chatObject.transform).anchoredPosition = new Vector2(0, -40);
+        chatObject.GetComponent<Image>().color = chat.userId == "798306645" ? developerColor : new Color(0, 0, 0, 0);
         for(int i = 0; i < transform.childCount; i++)
         {
             GameObject child = transform.GetChild(i).gameObject;
