@@ -6148,6 +6148,7 @@ MonoBehaviour:
   ParachutePanel: {fileID: 475459273}
   Icon: {fileID: 55315689}
   Name: {fileID: 1945521125}
+  isInitial: 1
   DropsActivator: {fileID: 1348513127}
   slider: {fileID: 1730701943}
   Parachute: {fileID: 1293844884076371935, guid: 26d0eb7fff962f043a61d3cda09828ce, type: 3}
@@ -9250,6 +9251,7 @@ MonoBehaviour:
   contents:
   - {fileID: 2016315742}
   - {fileID: 338517942}
+  isInitial: 1
 --- !u!111 &1578178854
 Animation:
   m_ObjectHideFlags: 0

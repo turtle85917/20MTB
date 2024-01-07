@@ -26,7 +26,7 @@ public class Affecter : MonoBehaviour
     private SpriteRenderer sprite;
     private Status _status = Status.Idle;
     private Status lastStatus;
-    private readonly int forcePower = 10;
+    private readonly int forcePower = 5;
     public enum Status
     {
         Idle,
@@ -94,7 +94,7 @@ public class Affecter : MonoBehaviour
 
     private IEnumerator ComboKnockback(Vector2 direction, int i, GameObject source)
     {
-        rigid.AddForce(direction * (forcePower - i * 4), ForceMode2D.Impulse);
+        rigid.AddForce(direction * (forcePower - i * 2), ForceMode2D.Impulse);
         AttackManager.AttackTarget("Cex", gameObject, i, source:source);
         yield return new WaitForSeconds(0.2f);
         rigid.velocity = Vector2.zero;

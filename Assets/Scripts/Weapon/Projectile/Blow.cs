@@ -7,7 +7,9 @@ public class Blow : BaseWeapon
         base.Init();
         animation.Play("Show");
         sprite.flipX = Player.lastDirection.x < 0;
-        transform.localPosition = Player.@object.transform.position + Vector3.right * Player.lastDirection.x * 1.2f;
+        int direction = (int)Player.lastDirection.x;
+        if(direction == 0) direction = 1;
+        transform.localPosition = Player.@object.transform.position + Vector3.right * direction * 1.2f;
     }
 
     private void Awake()

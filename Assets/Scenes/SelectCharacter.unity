@@ -222,6 +222,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -948199591, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
+    - target: {fileID: 8654172381875693431, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
 --- !u!224 &127593527 stripped
@@ -973,6 +977,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1957048752, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
+    - target: {fileID: 8654172381875693431, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
 --- !u!224 &383697012 stripped
@@ -1349,6 +1357,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 694369025, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
+    - target: {fileID: 8654172381875693431, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
 --- !u!224 &965080732 stripped
@@ -1531,6 +1543,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -144393823, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
+    - target: {fileID: 8654172381875693431, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
 --- !u!224 &1136371497 stripped
@@ -1705,6 +1721,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 302606900, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
+    - target: {fileID: 8654172381875693431, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
 --- !u!224 &1292106478 stripped
@@ -1806,6 +1826,10 @@ PrefabInstance:
     - target: {fileID: 6216582016864394770, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
       propertyPath: m_Name
       value: WeaponSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654172381875693431, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
@@ -2675,6 +2699,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 584060054, guid: fa2d354d844094247bc9be384e13bcfe, type: 3}
+    - target: {fileID: 8654172381875693431, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 757a86fa3c26efc4fb4a64c3f28bcc98, type: 3}
 --- !u!224 &1843364176 stripped

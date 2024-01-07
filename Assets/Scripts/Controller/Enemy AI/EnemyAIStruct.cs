@@ -45,7 +45,8 @@ public class EnemyAIStruct : BaseController
     {
         if(Game.isGameOver) return;
         if(Game.cameraAgent.status == CameraAgent.Status.DieBoss) return;
-        if(!isDied && affecter.status == Affecter.Status.Idle)
+        if(affecter.status != Affecter.Status.Idle) return;
+        if(!isDied)
         {
             Vector3 position = Vector3.MoveTowards(rigid.position, Player.@object.transform.position, enemyPool.moveSpeed.value * Time.fixedDeltaTime);
             rigid.MovePosition(GameUtils.MovePositionLimited(position));

@@ -15,7 +15,7 @@ public class SelectCharacterManager : MonoBehaviour
         "왁초리",
         "마법봉",
         "무에타이",
-        "비명",
+        "릴파아아아",
         "도장 쿵",
         "십자 머리핀",
         "다이아 검"

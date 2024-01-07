@@ -33,7 +33,7 @@ public class Game : MonoBehaviour
     private string lastEnemyId;
 
     private List<int> times;
-    private int time = 0;
+    public int time {get; private set;}
     private float spawnDelay = 0.8f;
 
     private readonly float decreaseSpawnDelay = 0.9f;
@@ -43,7 +43,7 @@ public class Game : MonoBehaviour
         Vector2.down,
         Vector2.right,
         Vector2.left
-    };
+    };  
 
     public static void Pause()
     {

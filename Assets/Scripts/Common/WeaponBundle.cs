@@ -3,6 +3,7 @@ using UnityEngine;
 using _20MTB.Utillity;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 public class WeaponBundle : MonoBehaviour
 {
@@ -58,6 +59,7 @@ public class WeaponBundle : MonoBehaviour
             }
             GameObject weaponSlot = Instantiate(instance.SlotPrefab, slot.transform, false);
             weaponSlot.name = "Logo";
+            weaponSlot.GetComponentInChildren<TMP_Text>().text = "Lv 1";
             Image image = weaponSlot.GetComponent<Image>();
             image.sprite = weapon.weapon.logo;
             image.maskable = weapon.weapon.isFullLogo;
@@ -90,6 +92,10 @@ public class WeaponBundle : MonoBehaviour
             Debug.Log("Target's weapon is max level");
             return;
         }
+        int index = Player.playerData.weapons.FindIndex(item => item.weapon.weaponId == weaponId);
+        string ment = "Lv " + (weapon.level + 1);
+        if(weapon.level + 1 == weapon.weapon.levels.Length) ment = "MAX";
+        instance.Slots[index].GetComponentInChildren<TMP_Text>().text = ment;
         WeaopnIncreaseStat weaopnIncreaseStat = weapon.weapon.levels[weapon.level++];
         foreach(var field in weaopnIncreaseStat.GetType().GetFields())
         {

@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
 
     public void OnReturnBtnClick()
     {
+        Time.timeScale = 1;
         AudioManager.instance.ResumeBgm();
         SceneManager.LoadScene("Main");
     }
