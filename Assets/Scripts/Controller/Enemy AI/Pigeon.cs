@@ -27,7 +27,7 @@ public class Pigeon : EnemyAIStruct
 
         if(@object != null && Scanner.IsAnyTargetAround(transform.position, 3f, @object))
         {
-            if(@object.CompareTag("Player") || @object.CompareTag("Enemy") && Time.time - findedAt > Random.Range(2f, 3f))
+            if((@object.CompareTag("Player") || @object.CompareTag("Enemy")) && Time.time - findedAt > Random.Range(2f, 3f))
             {
                 AttackManager.AttackTarget(2, @object, enemyPool);
                 @object = null;
